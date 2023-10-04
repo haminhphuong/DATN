@@ -1,0 +1,19 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+$templateId = $block->getRequest()->getParam('template');
+?>
+<div class="slider-pro-example-switcher" style="display: inline-flex;">
+    <ul class="slider-pro-example">
+        <?php for ($i = 1; $i <= 5; $i++): ?>
+            <li class="admin__page-nav-item <?= $block->escapeHtmlAttr((($templateId == $i) ? 'active' : '')) ?>">
+                <a href="<?= $block->escapeUrl($block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => ['template' => $i]])) ?>"
+                   title="<?= $block->escapeHtml(__('Example %1', $i)) ?>"
+                >
+                    <img
+                        src="<?= $block->escapeUrl($block->getViewFileUrl(sprintf('Ecommage_BannerManager::images/example%s.png', $i))) ?>"
+                        alt="<?= $block->escapeHtml(__('Example %1', $i)) ?>">
+                </a>
+            </li>
+        <?php endfor; ?>
+    </ul>
+</div>

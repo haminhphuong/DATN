@@ -1,0 +1,41 @@
+<?php
+// @codingStandardsIgnoreStart
+?>
+<!-- <div class="customjs" data-mage-init='{"themeCustomJs":{}}'></div> -->
+<?php
+/** @var \Ecommage\CustomTheme\Helper\Data $helper */
+$helper = $this->helper('\Ecommage\CustomTheme\Helper\Data');// @codingStandardsIgnoreLine
+?>
+<?php echo file_get_contents($helper->getImageFullPath()); ?>
+<script>
+	require(['jquery','domReady!'],function($){
+     $(".amblog-index-post .amblog-content img").each(function(){
+         var attr = $(this).attr('style');
+
+        if (typeof attr !== 'undefined' && attr !== false) {
+            var widhtImg = $(this).attr("style");
+                var h_e_img = widhtImg.indexOf(";");
+                var w_s_img = widhtImg.lastIndexOf(":");
+                var w_e_img = widhtImg.lastIndexOf("x");
+                var height_img = widhtImg.slice(7, h_e_img);
+                var widht_img = widhtImg.slice(w_s_img + 1, w_e_img + 1);
+                $(this).css({"max-width": widht_img, "max-height": height_img, "width":"100%", "height": "auto"});
+        }
+
+     });
+        if($(".amlocator-index-index .page-main .widget-locator-store .store-heading").length){
+            $(".amlocator-index-index .page-main .widget-locator-store .store-heading").click(function () {
+                $(this).next('.store-item-wrap').slideToggle(300);
+                $(this).toggleClass('active');
+            });
+        }
+        $("body").each(function() {
+            if ($('body').hasClass('ambrand-index-index')){
+                $(this).addClass('catalog-category-view');
+            }
+        });
+	})
+</script>
+
+
+    

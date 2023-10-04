@@ -1,0 +1,58 @@
+//
+//  Form Variables
+//  ---------------------------------------------
+
+//  Base
+@form-field__vertical-indent__desktop: @indent__l;
+@form-calendar-icon__color: @amtheme__text-primary__color;
+@form__color__error: @amtheme__error-text__color;
+
+//  Choice
+@form-element-choice__padding-left: @form-element-choice__width + @indent__s;
+@form-element-choice__width: 15px;
+@form-element-choice__height: @form-element-choice__width;
+@form-element-choice__border: @amtheme__border;
+@form-element-choice__hover__border-color: @amtheme__secondary__color;
+@form-element-choice__focus__border-color: @amtheme__border__active__color;
+@form-element-choice__background: @amtheme__background-secondary__color;
+@form-element-choice__line-height: 1.2;
+
+//  Checkbox
+@form-element-checkbox__border-radius: 2px;
+@form-element-checkbox-icon__height: 10px;
+@form-element-checkbox__active__background: @amtheme__secondary__color;
+@form-element-checkbox__checked__background-image: ~'url("../svg/@{amtheme__icons__color-mode-prefix}/@{amtheme__icons__mode}/complete.svg")';
+
+//  Radio
+@form-element-radio-after__active__width: floor(@form-element-choice__width / 2);
+@form-element-radio-after__active__height: @form-element-radio-after__active__width;
+@form-element-radio-after__active__top: floor((@form-element-choice__width - @form-element-radio-after__active__width) / 2);
+@form-element-radio-after__active__left: @form-element-radio-after__active__top;
+@form-element-radio-after__active__background: linear-gradient(180deg, @color-white 0%, #e9eedd 100%, @color-main 100%);
+// @form-element-radio-before__active__left: @amtheme__secondary__color;
+@form-element-radio-before__active__left: @color-main;
+
+
+// Input text\password\url\tel\search\number\datetime\email\textarea\select
+@form-element-input__border-radius: @amtheme__border-radius__s;
+@form-element-input__height: 4rem;
+@form-element-input__background: @amtheme__background-primary__color;
+@form-element-input__padding: @indent__s 20px;
+@form-element-input-select__padding: @indent__s @form-element-input__height @indent__s @indent__s;
+@form-element-input-select__background: ~'url("../svg/@{amtheme__icons__color-mode-prefix}/@{amtheme__icons__mode}/arrow-bottom.svg") center / 20px no-repeat';
+@form-element-input-select__background: url('@{baseDir}svg/@{amtheme__icons__color-mode-prefix}/@{amtheme__icons__mode}/arrow-select.svg') no-repeat right 15px center / 14px;
+
+// Fields
+@form__gap__l: 30px;
+@form__gap__m: 20px;
+
+// Range field divider
+@form-range-divider__width: 20px;
+@form-range-divider__gap: 5px;
+@form-range-divider__height: 2px;
+
+// Customer form
+@form-customer__s__max-width: 430px;
+@form-customer__m__max-width: 440px;
+@form-customer__l__max-width: 600px;
+@form-customer__gap: 30px;

@@ -1,0 +1,1335 @@
+.mixin-actions() {
+	.actions-toolbar {
+		.mt(25px);
+		justify-content: center;
+
+		.primary .action {
+			.mr(0);
+			width: 200px;
+			background: @color-main;
+			border-color: @color-main;
+			color: @color-white;
+		}
+
+		.secondary {
+			display: none;
+		}
+
+	}
+
+}
+
+.mixin-label {
+	label {
+		.mb(7px);
+		.size(12px);
+		.font(@font-weight__heavier);
+	}
+
+}
+
+& when (@media-common = true) {
+	.field.sparsh-mobile-number-login-option {
+		position: relative;
+		overflow: hidden;
+		.border-radius(30px);
+
+		label{
+			> input[type='radio']{
+				+ span:first-of-type{
+					&::before{
+						background: @color-main;
+						width: 100%;
+						height: 100%;
+						top: 0;
+						left: 0;
+						margin: 0;
+						z-index: -1;
+						position: absolute;
+						.transition(0.25s);
+						.border-radius(30px);
+					}
+				}
+			}
+
+			> input[type='radio']:checked{
+				+ span:first-of-type{
+					z-index: 4;
+					&::before{
+						background: @color-main;
+						width: 100%;
+						height: 100%;
+						top: 0;
+						left: 0;
+						margin: 0;
+						z-index: -1;
+						.border-radius(30px);
+					}
+
+					&::after{
+						display: none;
+					}
+				}
+			}
+		}
+
+		input{
+			position: absolute;
+
+			&#mobile_number_user:checked + span::before,
+			&#email_user:checked + span::before,
+			&#mobile_number_user_login:checked + span::before{
+				transform: translateX(0);
+			}
+			
+			.lib-visually-hidden();
+		}
+
+		span{
+			display: block;
+			z-index: 3;
+			position: relative;
+			.transition(0.25s);
+			.border-radius(30px);
+		}
+
+		#email_user + span::before{
+			transform: translateX(100%);
+		}
+
+		#mobile_number_user + span::before,
+		#mobile_number_user_login + span::before,
+		#email_user_login + span::before{
+			transform: translateX(-100%);
+		}
+	}
+	.sms-account-verifyotplogin{
+		.page-wrapper{
+			.amsl-popup-block{
+				.field.password{
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+	.customer-account-login, .customer-account-create, .customer-account-forgotpassword {
+		.page-wrapper .page-title-wrapper {
+			display: block;
+			border-bottom: 1px solid @color-gw-gray;
+			text-align: center;
+			.mb(15px);
+			.mt(11px);
+
+			h1 {
+				.mt(0);
+				.mb(0);
+				.font(@font-weight__semibold);
+				.pb(5px);
+				letter-spacing: 0.05em;
+				display: inline-block;
+				text-align: center;
+				border-bottom: 3px solid @color-main;
+				text-transform: uppercase;
+				line-height: 1.8;
+			}
+
+		}
+
+		.column.main {
+			.form-login,fieldset.login {
+				.actions-toolbar {
+					justify-content: space-between;
+
+					> * {
+						max-width: ~"calc(50% - 5px)";
+					}
+
+				}
+
+			}
+
+			.actions-toolbar {
+				button {
+					&:hover {
+						background: @color-hover-button;
+						border-color: @color-hover-button;
+					}
+
+					&.action.primary:hover {
+						font-weight: @font-weight__heavier;
+						background: @color-hover-button;
+						border-color: @color-hover-button;
+					}
+
+				}
+
+			}
+
+			.form.password.forget {
+				padding: 30px 40px;
+			}
+
+			a {
+				&:hover {
+					color: @color-main;
+				}
+
+				&.action.remind {
+					padding: 0;
+
+					&:hover {
+						color: @color-main;
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	body {
+		.page-wrapper {
+			.amsl-popup-overlay {
+				padding: 20px;
+			}
+
+			.amsl-social-wrapper {
+				.amsl-buttons {
+					justify-content: space-between;
+				}
+
+			}
+
+			.amsl-button-wrapper.with-label.-rectangular {
+				.amsl-button {
+					border-radius: 25px;
+					justify-content: center;
+				}
+
+			}
+
+			.amsl-popup-block {
+				//padding-bottom: 25px;
+				max-width: 440px;
+				margin: auto;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+				max-height: ~"calc(100vh - 100px)";
+				overflow: auto;
+				.scrollbar();
+
+				.fieldset.login {
+					border:0;
+					padding-bottom: 30px;
+					border-bottom: 1px solid @color-gw-gray;
+					.field:not(.sparsh-mobile-number-login-option){
+						text-align: left;
+					}
+				}
+
+				.actions-toolbar {
+					button {
+						&:hover {
+							background: @color-hover-button;
+							border-color: @color-hover-button;
+						}
+
+						&.action.primary {
+							font-weight: @font-weight__heavier;
+
+							&:hover {
+								background: @color-hover-button;
+								border-color: @color-hover-button;
+							}
+
+						}
+
+					}
+
+				}
+
+				a {
+					&:hover {
+						color: @color-main;
+					}
+
+					&.action.remind {
+						&:hover {
+							color: @color-main;
+						}
+
+					}
+
+				}
+
+				.amsl-tabs-wrapper {
+					padding-bottom: 20px;
+
+					&.-forgot {
+						padding-bottom: 0;
+					}
+
+				}
+
+				.form-create-account {
+					.mb(20px);
+
+					.actions-toolbar {
+						> .primary {
+							text-align: center;
+
+							.action.submit {
+								font-size: 14px;
+								padding: 0;
+								border-radius: 20px;
+							}
+
+						}
+
+					}
+
+					.field {
+						&.choice {
+							label.label {
+								line-height: 1.8;
+							}
+
+						}
+
+						label {
+							font-weight: @font-weight__heavier;
+						}
+
+					}
+
+					.fieldset.create.account {
+						margin-bottom: 0;
+					}
+
+				}
+
+				.amsl-register-content {
+					.amsl-tabs-wrapper {
+						padding-bottom: 40px;
+					}
+
+					.field.choice:not(.assistance) {
+						label.label {
+							line-height: 1.8;
+						}
+
+					}
+
+					.amsl-buttons {
+						padding: 0 40px;
+
+						.amsl-button-wrapper.with-label.-rectangular {
+							margin: 0;
+						}
+
+					}
+
+					.field-name-firstname.required.field {
+						margin-top: 0;
+					}
+
+					.show-password.label {
+						line-height: 1.7;
+						margin-bottom: 0;
+					}
+
+					.form-create-account {
+						border-bottom: 1px solid @color-gw-gray;
+						padding-bottom: 20px;
+					}
+
+				}
+
+				.form.forget {
+					margin-bottom: 0;
+
+					.fieldset.login {
+						margin-bottom: 0;
+					}
+
+					.field.sparsh-email {
+						margin-bottom: 0;
+					}
+
+					.actions-toolbar {
+						margin-top: 25px;
+						margin-bottom: 10px;
+						flex-direction: row-reverse;
+
+						.action.submit.primary {
+							font-size: 14px;
+							border-radius: 20px;
+							float: right;
+						}
+
+						.secondary {
+							margin-left: 0;
+						}
+
+						.action.back {
+							margin-top: 0;
+							padding-left: 10px;
+							display: block;
+							position: relative;
+							color: @color-black;
+							font-size: 12px;
+
+							&:hover {
+								color: @color-main;
+							}
+
+							&:before {
+							    position: absolute;
+							    bottom: 4px;
+							    left: -2px;
+							    content: '';
+							    width: 12px;
+							    height: 12px;
+							    .mask-image(icon-theme-arr-left-view,@color-black);
+							}
+
+						}
+
+					}
+
+				}
+
+				.iti__selected-flag {
+					height: 30px;
+					border-radius: 20px 0 0 20px;
+				}
+
+				.label[for="assistance_allowed_checkbox"] {
+					.pt(3px);
+				}
+
+				.iti__active, .iti__country {
+					margin: 0;
+				}
+
+				.amsl-separator {
+					.lib-visually-hidden();
+				}
+
+				ul.amsl-tablist {
+					text-align: center;
+				}
+
+				.amsl-login-content {
+					flex-direction: column;
+					.pb(0);
+				}
+
+				input {
+					border-radius: 20px;
+					border: 1px solid @color-gw-gray;
+					background: @color-white;
+					font-size: 12px;
+				}
+
+				.form-login,fieldset.login {
+					.action {
+						&.login {
+							height: 40px;
+							border-radius: 20px;
+							font-size: 14px;
+						}
+
+						&.remind {
+							color: @color-black;
+							text-decoration: underline;
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	.customer-account-create {
+		.column.main {
+			text-align: center;
+
+			.form-create-account {
+				margin: 15px auto 15px;
+
+				.actions-toolbar {
+					border-bottom: 1px solid @color-gw-gray;
+					padding-bottom: 20px;
+				}
+
+			}
+
+			.form.create.form-create-account {
+				> fieldset {
+					.mb(20px);
+					.pb(20px);
+
+					&:last-of-type {
+						.pb(0);
+					}
+
+				}
+
+			}
+
+		}
+
+		.page-main {
+			.mb(0);
+		}
+
+	}
+
+	.customer-account-forgotpassword {
+		.form.password.forget {
+			input {
+				height: 30px;
+				font-size: 12px;
+			}
+			.sparsh-mobile-number .iti__selected-flag{
+				border-radius:20px 0 0 20px;
+			}
+
+			.mixin-actions();
+			.mixin-label();
+
+			.field[class*="sparsh-user"] {
+				margin-bottom: 0;
+			}
+
+			.actions-toolbar {
+				flex-direction: row-reverse;
+
+				.action.submit.primary {
+					float: right;
+				}
+
+				.secondary {
+					margin-left: 0;
+					display: block;
+				}
+
+				.action.back {
+					margin-top: 0;
+					padding-left: 10px;
+					display: block;
+					position: relative;
+					font-size: 12px;
+					color: @color-black;
+					&:hover {
+						color: @color-main;
+					}
+
+					&:before {
+						position: absolute;
+					    bottom: 4px;
+						left: -2px;
+					    content: '';
+					    width: 12px;
+					    height: 12px;
+						.mask-image(icon-theme-arr-left-view,@color-black);
+					}
+
+				}
+
+			}
+
+		}
+
+		.column.main {
+			text-align: center;
+		}
+
+	}
+
+	.column.main {
+		.form-create-account {
+			.box-shadow(0px 0px 20px rgba(0, 0, 0, 0.15));
+			padding: 30px 40px 40px;
+			display: inline-block;
+		}
+
+	}
+
+	.form-create-account {
+		.field {
+			&:not(:last-child) {
+				.mb(21px);
+			}
+
+			input, select, .iti__selected-flag {
+				height: 30px;
+				font-size: 12px;
+			}
+
+			#gender {
+				background-position: right 15px center;
+				padding: 0 30px 0 10px;
+				font-size: 12px;
+			}
+
+			.mixin-label();
+		}
+
+		.mixin-actions();
+
+		.field-dob {
+			button.ui-datepicker-trigger {
+				height: 3rem;
+				right: 5px;
+				background-size: 16px;
+			}
+
+		}
+
+		.field.mobile-number {
+			.iti--allow-dropdown {
+				width: 100%;
+			}
+
+		}
+
+	}
+
+	.form.password.reset, .form.send.confirmation, .form.password.forget, .form.create.account, .block.block-customer-login {
+		max-width: 100%;
+	}
+
+	.container-wrap, .customer-account-forgotpassword {
+		.field.note {
+			text-align: center;
+			max-width: 440px;
+			margin: auto;
+		}
+
+	}
+
+	.login-container, .column.main .form.password.forget {
+		max-width: 440px;
+		.box-shadow(0px 0px 20px rgba(0, 0, 0, 0.15));
+		padding: 25px 40px 40px;
+		margin: 40px auto 0;
+
+		#block-new-customer-heading {
+			.font(@font-weight__semibold);
+			.size(16px);
+			text-transform: uppercase;
+		}
+
+		.block.block-customer-login {
+			.pb(30px);
+
+			.iti__selected-flag {
+				height: 30px;
+			}
+
+			.iti__active, .iti__country {
+				margin: 0;
+			}
+
+		}
+
+		.block.block-new-customer {
+			.mt(19px);
+
+			>.block-title {
+				text-align: center;
+			}
+
+			>.block-content {
+				text-align: center;
+
+				> a {
+					font-weight: @font-weight__regular;
+					text-decoration: underline;
+				}
+
+			}
+
+		}
+
+	}
+
+	.block.block-customer-login {
+		.block-content {
+			max-width: 440px;
+			margin: 0 auto;
+			text-align: center;
+
+			.sparsh-mobile-number-login-option {
+				.mb(25px);
+				border-radius: 20px;
+				justify-content: center;
+				display: inline-flex;
+				align-items: center;
+				.box-shadow(0px 0px 20px rgba(0, 0, 0, 0.15));
+
+				.label {
+					margin: 0;
+				}
+
+				.sparsh-email-user {
+					margin-right: 0 !important;
+				}
+
+			}
+
+			.actions-toolbar {
+				> .primary {
+					flex: 1;
+				}
+
+				.action {
+					&.primary {
+						background: @color-main;
+						border-color: @color-main;
+						color: @color-white;
+						padding: 9px 23px;
+					}
+
+					&.remind {
+						.mt(0);
+						font-weight: @font-weight__regular;
+						text-decoration: underline;
+					}
+
+				}
+
+			}
+
+			.field:not(.sparsh-mobile-number-login-option) {
+				.label {
+					.mb(8px);
+
+					span {
+						.size(12px);
+						.font(@font-weight__heavier);
+					}
+
+				}
+
+				input {
+					height: 30px;
+					text-align: left;
+					font-size: 12px;
+				}
+
+				.iti.iti--allow-dropdown.iti--separate-dial-code {
+					width: 100%;
+				}
+
+			}
+
+			label.label > input[type='radio'] {
+				&:checked + span:first-of-type {
+					// background: @color-main;
+					color: @color-white;
+					.font(@font-weight__semibold);
+				}
+
+				&+ span:first-of-type {
+					height: 40px;
+					display: flex;
+					align-items: center;
+					border-radius: 20px;
+					padding: 10px 20px;
+					font-size: 14px;
+
+					&:before {
+						// content: none;
+					}
+
+					&:after {
+						// content: none;
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	//My returns
+	.amasty_rma-account-history{
+		.amreturns-order-select{	
+			margin-bottom: 15px;
+			border: 1px solid @color-black;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+
+			.amreturn-btn{
+				flex-shrink: 0;
+				border: 1px solid @color-main;
+				background: @color-main;
+			}
+		}
+	}
+
+	.amrma-status{
+		background: @color-main !important;
+	}
+
+	.amrma-link-cancel{
+		color: @color-main;
+
+		&:visited{
+			color: @color-main;
+		}
+	}
+
+	.amrma-title{
+		color: @color-main;
+		font-weight: @font-weight__bold;
+	}
+
+	.amasty_rma-account-newreturn {
+		.amrma-customer-information{
+			gap: 0 10px;
+		}
+
+		.amrma-message-container{
+			.amrma-title{
+				font-weight: normal;
+				color: @color-black;
+			}
+
+			.amrma-return-qty{
+				margin-bottom: 5px;
+			}
+
+			.amrma-select{
+				height: 30px;
+				padding: 5px;
+				padding-left: 12px;
+			} 
+
+			.amrma-return-select{
+				margin-bottom: 10px;
+			}
+		}
+
+		.amrma-comment-block{
+			.amrma-title{
+				margin-bottom: 10px;
+			}
+
+			.amrma-img-text{
+				margin-bottom: 15px;
+			}
+		}
+	}
+
+	.amasty_rma-account-view{
+		.amrma-show{
+			border: 2px solid @color-main;
+
+			&::before{
+				border-top: 1px solid @color-main;
+				border-left: 1px solid @color-main;
+			}
+		}
+
+		.amrma-send{
+			background: @color-main;
+
+			&:focus,
+			&:active{
+				border: 0;
+				color: @color-white;
+			}
+		}
+
+		.amrma-table-container{
+			.amrma-status{
+				background: transparent !important;
+			}
+
+			.amrma-row{
+				padding-top: 10px;
+			}
+		}
+	}
+
+	.amrma-attach-file{
+		.amrma-label {
+			color: @color-main;
+		}
+		
+		.amrma-file{
+			color: @color-main;
+		}
+	}
+
+	.amrma-chat-send{
+		.amrma-attach-file{
+			.amrma-label{
+				&::before{
+					background: url("../images/attach-file.svg") center center / cover;
+				}
+			}
+		}
+	}
+
+	.amrma-comment-block{
+		.amrma-chat-file{
+			&::before{
+				background: url("../images/attach-file.svg") center center / cover;
+			}
+		}
+	}
+
+	.amrma-chat-file.-preview{
+		&::before{
+			background: url("../images/attach-file.svg") center center / cover;
+		}
+	}
+
+	.amrma-instructions-title{
+		border-bottom: 2px solid @color-main;
+	}
+
+	.amrma-instructions:checked ~ .amrma-instruction-block{
+		background: #eee;
+	}
+
+	.amrma-stars-container{
+		border: 1px solid @color-main;
+	}
+
+	.amrma-delete{
+		.mask-image(icon-close-view, @color-main);
+	}
+
+	.amreturn-btn{
+		background: @color-main;
+
+		&:hover{
+			background: @color-main;
+		}
+
+		&:active,
+		&:focus{
+			background: @color-main;
+			color: @color-white;
+		}
+	}
+
+	.amrma-checkbox-container {
+		.amrma-checkbox:checked + .amrma-label,
+        .amrma-checkbox:checked + .amrma-label-container .amrma-label {
+			background: @color-main;
+
+			&::before{
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				.mask-image(icon-check-white-view, @color-white);
+				width: 9px;
+				height: 9px;
+				margin: 0;
+			}
+		}
+	}
+
+	.amrma-table-container{
+		.table-wrapper{
+			> .amrma-table{
+				.amrma-tbody{
+					> .amrma-row{
+						> .col{
+							&:last-child{
+								padding-bottom: 10px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.amrma-chat-container{
+		.amrma-chat-message{
+			.amrma-chat-file{
+				padding: 0;
+			}
+		}
+	}
+
+	.amrma-tracking-information{
+		.amrma-items-table{
+			a{
+				font-weight: @font-weight__semibold;
+			}
+		}
+	}
+	//End My Returns
+}
+
+& when (@media-target ='mobile'), (@media-target ='all') {
+	@media only screen and (max-width:(@screen__m - 1)) {
+		body .page-wrapper {
+			.amsl-tabs-wrapper * {
+				margin-left: 0;
+				margin-right: 0;
+			}
+
+			.amsl-popup-block {
+				.amsl-button-wrapper {
+					margin: 0;
+				}
+
+				div.amsl-register-content .amsl-buttons {
+					padding: 0;
+				}
+
+			}
+
+			.column.main {
+				.amsl-social-login {
+					flex-direction: unset;
+					width: 100%;
+
+					.amsl-button-wrapper {
+						margin-bottom: 0;
+						width: ~"calc(50% - 10px)";
+					}
+
+				}
+
+				.form-create-account {
+					padding: 30px 20px 40px;
+				}
+
+				.login-container {
+					padding: 25px 20px 40px;
+
+					.actions-toolbar {
+						flex-direction: unset;
+						margin-bottom: 20px;
+
+						.secondary {
+							.mt(0);
+							padding: 0;
+						}
+
+					}
+
+				}
+
+				.form.forget.password {
+					padding: 30px 20px;
+					margin-top: 20px;
+				}
+
+			}
+
+		}
+
+		.login-container div.block.block-customer-login {
+			.pb(10px);
+		}
+
+		.customer-account-forgotpassword {
+			.form.password.forget {
+				.actions-toolbar .secondary {
+					margin-top: 0;
+
+					.action.back {
+						padding: 0 10px 0 10px;
+					}
+
+				}
+
+			}
+
+		}
+
+		.amsl-popup-block {
+			padding: 20px;
+
+			.amsl-button-wrapper.with-label.-rectangular {
+				margin-bottom: 0;
+				width: ~"calc(50% - 10px)";
+			}
+
+			.amsl-login-content {
+				.secondary {
+					text-align: center;
+					float: right;
+					width: ~"calc(50% - 5px)";
+				}
+
+				.amsl-title {
+					margin-left: auto;
+					margin-right: auto;
+				}
+
+				.amsl-form {
+					margin: 0 0 30px;
+				}
+
+				.field.sparsh-mobile-number {
+					.mb(20px);
+				}
+
+				fieldset.login,.form-login{
+					.actions-toolbar {
+						margin-top: 0;
+						width: ~"calc(50% - 5px)";
+					}
+				}
+
+			}
+
+			.amsl-forgot-content {
+				.amsl-form {
+					margin-bottom: 0px;
+				}
+
+			}
+
+			.forget.form {
+				.actions-toolbar .secondary {
+					padding: 0;
+					margin-top: 0;
+
+					.action.back {
+						padding: 0 10px 0 10px;
+					}
+
+				}
+
+				.field.sparsh-mobile-number {
+					margin-bottom: 0;
+				}
+
+			}
+
+			.amsl-register-content {
+				.amsl-form {
+					margin: 0 0 20px;
+				}
+
+				.amsl-title {
+					margin-left: auto;
+					margin-right: auto;
+				}
+
+				.form-create-account {
+					.fieldset .field.date.field-dob.required {
+						margin-top: 20px;
+					}
+
+				}
+
+			}
+
+		}
+
+		.account{
+			.page-main{
+				max-width: 100%;
+			}
+		}
+
+		//My returns
+		.amasty_rma-account-history{
+			.amreturns-order-select{	
+				.amreturn-select{
+					font-size: 13px;
+				}
+
+				.amreturn-btn{
+					font-size: 13px;
+				}
+			}
+		}
+		//End My returns
+	}
+
+	@media only screen and (min-width: @screen__m) {
+		.amasty_rma-account-history{
+			.amreturns-order-select{
+				.amreturns-title-container{
+					flex-basis: 100%;
+					margin-bottom: 10px;
+				}
+
+				.amreturns-orders-container{
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+
+	@media only screen and (max-width: (@screen__l - 1)) {
+		.amasty_rma-account-view{
+			.amrma-table-container{
+				
+			}
+		}
+
+		.amrma-status{
+			display: block;
+			width: max-content;
+		}
+	}
+
+	@media only screen and (max-width: 639px) {
+		.amasty_rma-account-view{
+			.page-main{
+				.amrma-table-container{
+					.amrma-items-table{
+						.amrma-table{
+							.amrma-tbody{
+								.amrma-row{
+									.col{
+										font-size: 12px;
+
+										&::before{
+											width: auto;
+											font-weight: @font-weight__bold;
+											font-size: 13px;
+										}
+
+										&:not(:last-child){
+											margin-bottom: 10px;
+										}
+			
+										&.status{
+											display: flex;
+											flex-wrap: wrap;
+										}
+									}
+									
+									.amrma-status{
+										padding-left: 0;
+										font-size: 12px;
+
+										&::before{
+											padding-right: 8px;
+										}
+									}
+	
+									strong{
+										font-weight: @font-weight__semibold;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+& when (@media-target ='desktop'), (@media-target ='all') {
+	@media only screen and (min-width: @screen__l) {
+		.amrma-product-item,
+		.amrma-tracking-add,
+		.amrma-return-number{
+			flex-direction: row;
+		}
+
+		.amrma-tracking-add{
+			.amrma-input{
+				margin: 0 20px;
+			}
+		}
+	}
+
+	@media only screen and (min-width: 640px) and (max-width: (@screen__l - 1)) {
+		.amrma-table-container{	
+			.amrma-items-table{
+				table{
+					thead{
+						.col{
+							min-width: 200px;
+		
+							&.img{
+								min-width: unset;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum ='min') and (@break = @screen__m) {
+	.customer-account-login .column.main {
+		.mb(80px);
+	}
+
+	.customer-account-login, .customer-account-create, .customer-account-forgotpassword {
+		.column.main {
+			.amsl-login-page, .amsl-registration-page {
+				margin-top: 25px;
+			}
+
+		}
+
+	}
+
+	body {
+		.page-wrapper {
+			.amsl-button-wrapper.with-label.-rectangular {
+				width: ~"calc(50% - 10px)";
+			}
+
+			.amsl-popup-block {
+				.field.sparsh-mobile-number {
+					.mb(0);
+				}
+
+			}
+
+			.amsl-popup-block {
+				.form-login,fieldset.login {
+					.secondary {
+						.mt(40px);
+						float: right;
+					}
+
+					.actions-toolbar {
+						float: left;
+						margin-top: 30px;
+					}
+
+					.field.sparsh-mobile-number {
+						.mb(0);
+					}
+
+				}
+
+				.amsl-register-content, .amsl-forgot-content {
+					padding-bottom: 20px;
+				}
+			}
+		}
+	}
+
+	.amasty_rma-account-newreturn{
+		.amrma-products-block{
+			.amrma-product{
+				margin-bottom: 10px;
+			}
+		}
+	}
+}

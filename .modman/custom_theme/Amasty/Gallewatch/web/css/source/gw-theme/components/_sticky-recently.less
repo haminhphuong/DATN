@@ -1,0 +1,104 @@
+& when (@media-common = true) {
+	.nicefornow-recently-viewed-product{
+		.clear-url-block{
+			font-size: 14px;
+			margin-left: 15px;
+    		text-transform: none;
+			strong{
+				font-weight: @font-weight__regular;
+				border-bottom: 1px solid @color-main;
+				color:@color-main;
+			}
+		}
+		.block-products-list{
+			max-width: @layout__max-width;
+			.mr-auto;
+			width: 100%;
+			.block-title{
+				text-align: left !important;
+				font-weight: @font-weight__semibold;
+			}
+			.text_line{
+				letter-spacing: 0.15rem;
+			}
+		}
+		.product-items{
+			list-style: none;
+			padding: 0;
+			.product-item-inner,
+			.price-box{
+				display: none;
+			}
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	.product-item .product-item-details>*:not(:last-child){
+		margin-bottom: 0;
+	}
+	.nicefornow-recently-viewed-product{
+		margin-bottom: 10px;
+		.product-item-link{
+			font-size: 9px;
+		}
+		.block-products-list{
+			.block-title{
+				margin-bottom: 10px
+			}
+		}
+		.product-item{
+			width: 25%!important;
+			margin: 0 !important;
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+	.nicefornow-recently-viewed-product{
+		margin-bottom: 16px;
+		.block-products-list{
+			.block-title{
+				margin-bottom: 30px
+			}
+			.text_line{
+				padding-bottom: 10px;
+			}
+		}
+		.block-content{
+			margin: 0 -5px;
+		}
+		.product-item-link{
+			font-size: 12px;
+		}
+		.products-grid{
+			.product-item-details{
+				margin-top: 25px;
+			}
+		}
+		.product-items .product-item{
+			width: 16.667%!important;
+			margin: 0 !important;
+			padding: 0 5px !important;
+			.product-item-info{
+				border: none;
+			}
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+	.nicefornow-recently-viewed-product{
+		.product-items .product-item{
+			width: 12.5%!important;
+			margin: 0 !important;
+		}
+	}
+}
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__l - 1)) {
+    	.nicefornow-recently-viewed-product{
+			.product-items{
+				overflow-x: scroll !important;
+				flex-wrap:nowrap !important;
+			}
+    	}
+   	}
+}

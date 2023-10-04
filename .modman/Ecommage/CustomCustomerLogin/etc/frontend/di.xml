@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Customer\Controller\Account\CreatePost" type="Ecommage\CustomCustomerLogin\Plugin\Customer\Controller\CreateAccount" />
+    <preference for="Amasty\SocialLogin\Controller\Account\CreatePost" type="Ecommage\CustomCustomerLogin\Plugin\SocialLogin\Controller\Account\CreatePost" />
+    <type name="Magento\Customer\Model\Metadata\Form">
+        <plugin name="Ecommage_Customer::customer_attribute" type="Ecommage\CustomCustomerLogin\Plugin\Model\Metadata\Form" />
+    </type>
+    <type name="Sparsh\MobileNumberLogin\Observer\AuthenticateMobileNumber">
+        <plugin name="Ecommage_CustomCustomerLogin::vn" type="Ecommage\CustomCustomerLogin\Plugin\Observer\AuthenticateMobileNumber" sortOrder="0" />
+    </type>
+    <type name="Sparsh\MobileNumberLogin\Observer\AuthenticateAjaxMobileNumber">
+        <plugin name="Ecommage_CustomCustomerLogin::ajax_vn" type="Ecommage\CustomCustomerLogin\Plugin\Observer\AuthenticateAjaxMobileNumber" sortOrder="0" />
+    </type>
+    <type name="Magento\Customer\Api\AccountManagementInterface">
+        <plugin name="Ecommage_CustomCustomerLogin::vn_custom" type="Ecommage\CustomCustomerLogin\Plugin\Model\AccountManagement" sortOrder="0" />
+    </type>
+    <type name="Magento\Customer\Helper\View">
+        <plugin name="Ecommage_CustomCustomerLogin::edit_name_as_vn" type="Ecommage\CustomCustomerLogin\Plugin\Helper\View"/>
+    </type>
+</config>

@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var GetPost $block
+ */
+
+use Ecommage\Testimonials\Block\GetPost;
+
+$testimonials = $block->getPostCollection();
+?>
+<?php if (count($testimonials)): ?>
+    <div class="testi__wrapper">
+        <ul class="unstyled testi-items">
+            <?php foreach ($testimonials as $item) : ?>
+                <li class="testi-item">
+                    <div class="testi-avatar">
+                        <img src="<?= $block->escapeUrl($block->getImage($item->getImage())) ?>"
+                            title="<?= $block->escapeUrl($item->getImage()) ?>"
+                            alt="<?= $block->escapeUrl($item->getImage()) ?>">
+                    </div>
+                    <div class="testi-detail">
+                        <div class="cus-review">
+                            <p><?= $block->escapeHtml($item->getDescription()) ?></p>
+                        </div>
+                        <div class="customer-detail">
+                            <?php if ($item->getSub()): ?>
+                            <p class="customer-sub"><?= $block->escapeHtml($item->getSub()) ?></p>
+                            <?php endif; ?>
+                            <?php if ($item->getSub()): ?>
+                                <strong class="customer-name"><?= $block->escapeHtml($item->getName()) ?></strong>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?= $block->getToolbarHtml(); ?>
+<?php endif; ?>
+

@@ -1,0 +1,8 @@
+
+<?php
+                    $isBothOptionAvailable = $block->getLoginMode();
+                    $note = $isBothOptionAvailable ?
+                        'If you have an account, sign in with your email address or mobile number.'
+                        : 'If you have an account, sign in with your mobile number.';
+        ?>
+        <div class="field note"><?= $block->escapeHtml(__($note)) ?></div>

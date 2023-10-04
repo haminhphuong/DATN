@@ -1,0 +1,33 @@
+@light: @font-weight__light;
+@normal: @font-weight__regular;
+@semibold: @font-weight__semibold;
+@bold: @font-weight__bold;
+
+//
+//  Headings
+//  ---------------------------------------------
+
+@heading__font-family__base: false;
+@heading__font-weight__base: @font-weight__semibold;
+@heading__line-height__base: 1.25;
+@heading__color__base: false;
+@heading__font-style__base: false;
+@heading__margin-top__base: 0;
+@heading__margin-bottom__base: 10px;
+
+@h2__letter-spacing: 0.05em;
+@h2__font-size-desktop: ceil((@font-size__base * 1.71)); //24px
+@h2__line-height: @heading__line-height__base;
+@h2__margin-top: @heading__margin-top__base;
+
+& when (@media-common = true) {
+    h2{
+        letter-spacing: @h2__letter-spacing;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    h2{
+        .lib-font-size(@h2__font-size-desktop);
+    }
+}

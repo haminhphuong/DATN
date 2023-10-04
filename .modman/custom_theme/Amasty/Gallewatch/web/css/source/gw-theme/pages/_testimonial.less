@@ -1,0 +1,291 @@
+& when (@media-common = true) {
+    .testimonial-post-index{
+        .page-main{
+            margin-top: 10px;
+        }
+
+        .column.main{
+            padding-bottom: 0;
+        }
+        
+        .page-title-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 70px;
+
+            .page-title{
+                text-transform: uppercase;
+            }
+        }
+
+        .amblog-pager-container .amblog-link{
+            &:not(.-disabled){
+                background-color: @color-main;
+            }
+            
+            &:hover{
+                background-color: @color-hover-button;
+            }
+        }
+
+        .amblog-pagination{
+            font-size: 12px;
+            font-weight: 500;
+            color: @color-black;
+        }
+    }
+
+    .testi__wrapper{
+        .testi-detail{
+            background-color: @color-white;
+            .box-shadow(0px 0px 20px rgba(0, 0, 0, 0.15));
+            padding: 20px;
+            padding-top: 70px;
+            width: 100%;
+            height: 100%;
+            line-height: 1;
+            display: flex;
+            flex-direction: column;
+
+            p{
+                line-height: 20px;
+                .line-clamp(4); 
+            }
+
+            strong{
+                line-height: 20px;
+            }
+        }
+
+        .testi-item{
+            display: flex;
+            gap: 0 20px;
+            .mb(90px);
+        }
+
+        .testi-avatar{
+            width: 30.52632%;
+            flex-shrink: 0;
+            border-radius: 50%;
+            height: 110px;
+            width: 110px;
+
+            img{
+                border-radius: inherit;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .cus-review{
+            p{
+                margin-bottom: 14px;
+            }
+        }
+
+        .customer-sub{
+            margin-bottom: 0;
+            font-size: 11px;
+        }
+
+        .customer-name{
+            font-size: 11px;
+            color: @color-main;
+            font-weight: @font-weight__semibold;
+        }
+
+        .customer-detail{
+            position: relative;
+            margin-top: auto;
+
+            &::before{
+                position: absolute;
+                content: '';
+                width: 38px;
+                height: 38px;
+                right: 5px;
+                bottom: 0;
+                opacity: 0.3;
+                .mask-image(icon-theme-comma-view,@color-main);
+            }
+        }
+
+        .field.limiter{
+            display: none;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .testimonial-post-index{
+        .page-title{
+            font-size: 13px;
+            line-height: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid @color-main;
+        }
+    }
+    .testi__wrapper{
+        .testi-detail{
+            width: 100%;
+        }
+
+        .testi-item{
+            margin-bottom: 90px;
+
+            &:last-child{
+                margin-bottom: 30px;
+            }
+        }
+
+        .cus-review{
+            p{
+                font-size: 11px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .testi__wrapper{
+        .customer-name,
+        .customer-sub{
+            font-size: 14px;
+        }
+    }
+
+    .testimonial-post-index{
+        .page-title-wrapper {
+            border-bottom: 1px solid @color-galle-boder;
+        }
+
+        .page-title{
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0;
+
+            &::before{
+                position: absolute;
+                content: '';
+                width: 100%;
+                height: 3px;
+                bottom: -1px;
+                left: 0;
+                background-color: @color-main;
+                z-index: 2;
+            }
+        }
+        
+        .amblog-link {
+            background-color: @color-main;
+        }
+
+        .amblog-pagination{
+            font-size: 14px;
+        }
+    }
+}
+
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__l - 1)) {
+        .testi__wrapper{
+            .testi-item{
+                position: relative;
+            }
+
+            .testi-detail{
+                padding-top: 70px;
+            }
+
+            .testi-avatar{
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translate(-50%,-50%);
+            }
+        }
+    }
+
+    @media only screen and (min-width: @screen__m) and (max-width: (@screen__l - 1)) {
+        .testimonial-post-index{
+            .page-main{
+                margin-bottom: 0;
+            }
+
+            .amblog-pager-container{
+                margin-top: -60px;
+            }
+        }
+
+        .testi__wrapper{
+            .testi-items{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0 30px;
+            }
+
+            .testi-item{
+                width: ~"calc(50% - 15px)";
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .testimonial-post-index{
+        .page-title-wrapper {
+            margin-bottom: 40px;
+        }
+
+        .amblog-pager-container{
+            margin: 0 auto;
+        }
+    }
+
+    .testi__wrapper{
+        .testi-items{
+            .flex-wrap();
+            gap: 0 20px;
+            margin-bottom: 0;
+        }
+
+        .testi-item{
+            width: ~"calc(50% - 10px)";
+            .mb(30px);
+        }
+        .testi-detail{
+            width: 69.47368%;
+            padding-top: 20px;
+        }
+
+        .testi-avatar{
+            width: 174px;
+            height: 174px;
+        }
+    }
+}
+
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl){
+    .testimonial-post-index{
+        .amblog-pager-container{
+            margin-top: -5px;
+        }
+    }
+    
+    .testi__wrapper{
+        .testi-items{
+            .flex-wrap();
+            gap: 0 60px;
+        }
+
+        .testi-item{
+            width: ~"calc(50% - 30px)";
+            .mb(60px);
+        }
+    }
+}

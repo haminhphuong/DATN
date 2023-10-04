@@ -1,0 +1,174 @@
+& when (@media-common = true) {
+    .catalog-product-view{
+        &.page-layout-product-full-width {
+            .block{
+                &.related{
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+    .block {
+        &.related{
+            border-top: 1px solid @color-galle-boder;
+            padding-top: 12px;
+            .title__wrapper {
+                font-size: 12px;
+                font-weight: @font-weight__semibold;
+                text-align: center;
+                letter-spacing: .5px;
+                margin-bottom: 5px;
+                > span{
+                    border: 0;
+                }
+            }
+            .products.grid {
+                > .product-items{
+                    margin: 0 -14px !important;
+                    width: auto;
+                }
+                .product-item{
+                    margin: 0 !important;
+                    padding: 0 10px !important;
+                    width: 25% !important;
+                    .product-item-photo{
+                        padding: 0;
+                        background: transparent;
+                    }
+                    .product-item-link{
+                        font-size: 10px;
+                        line-height: 13px;
+                    }
+                    .product-item-details{
+                        margin-top: 9px;
+                        padding: 0;
+                    }
+
+                    .product-item-info:hover {
+                        .product-item-details{
+                            transform: none !important;
+                        }
+                    }
+                }
+            }
+            .amlabel-position-wrapper{
+                display: none !important;
+            }
+        }
+        &.crosssell{
+            .amtheme-products-secondary{
+                overflow: hidden;
+                .product-item{
+                    margin: 0 0 15px 0 !important;
+                }
+            }
+            .block-title{
+                // margin-bottom: 38px;
+                font-weight: @font-weight__semibold;
+                .text_line{
+                    padding-bottom: 10px;
+                }
+            }
+            .pagebuilder-button-link{
+                .bt-all-link();
+                span{
+                    line-height: 14px;
+                    padding: 12px 50px 12px 20px;
+                }
+            }		
+        }
+    }
+    .products-grid .product-item {
+        .product-item-info .product-photo-wrapper{
+            a.tocompare,a.towishlist{
+                &:before{
+                    .lib-visually-hidden();
+                }
+            }
+        }    
+    }
+    
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .block{
+        &.crosssell{
+            margin-bottom: 20px;
+            .amtheme-products-secondary{
+                .item.product-item{
+                    width: 50% ;
+                    margin: 0 ;
+                }
+                .product-item-photo{
+                    padding: 0;
+                    background: @color-white;
+                }
+            }
+            .map-old-price{
+                font-size: 11px;
+            }
+            .price-box.price-final_price{
+                margin-bottom: 0 !important;
+            }
+            .product-items{
+                flex-wrap: nowrap !important;
+                overflow-x: scroll !important;
+                overflow-y: hidden;
+            }
+            .block-title{
+                margin-bottom: 20px;
+            }
+        }
+    } 
+    .page-wrapper{
+        padding-bottom: 80px;
+        .sticky_footer{
+            z-index: 99;
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .block.crosssell{
+        margin-bottom: 45px;
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .block{
+        &.related{
+            padding-top: 19px;
+            .title__wrapper{
+                margin-bottom: 14px;
+            }
+        }
+        &.crosssell{
+            margin-bottom: 20px;
+            .amtheme-products-secondary{
+                flex-wrap: nowrap;
+                .product-item{
+                    max-width: 100%;
+                    width: 25%;
+                }
+            }
+            .block-title{
+                margin-bottom: 15px;
+            }
+            .normal-price{
+                .price-container{
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl){
+    .block{
+        &.crosssell{
+            .block-title{
+                margin-bottom: 38px;
+            }
+            .button-link{
+                margin-top: 27px;
+            }
+        }
+    }
+}

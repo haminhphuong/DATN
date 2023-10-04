@@ -1,0 +1,97 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/**
+ * Product additional attributes template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Attributes
+ * @var $helperProduct \Ecommage\CustomFormProduct\Helper\Data
+ */
+?>
+<?php
+$_helper = $this->helper(Magento\Catalog\Helper\Output::class);// @codingStandardsIgnoreLine
+$_product = $block->getProduct();
+$helperProduct = $this->helper(\Ecommage\CustomFormProduct\Helper\Data::class);// @codingStandardsIgnoreLine
+
+// get policy of brand
+$brandId = $_product->getBrand();
+$brandPolicy = $helperProduct->getUserManualAndInsuranceBrand($brandId);
+//get policy of sku
+$userManual = $_product->getUsermanual();
+$insurance = $_product->getGuarantee();
+
+if (!$userManual) {
+    $userManual = $brandPolicy->getUserManual();
+}
+if (!$insurance) {
+    $insurance = $brandPolicy->getInsurance();
+}
+?>
+<?php if ($_additional = $block->getAdditionalData()) : ?>
+    <div class="additional-attributes-wrapper table-wrapper">
+        <table class="data table additional-attributes <?= count($_additional) > 9 ? 'greater' : 'less' ?>" id="product-attribute-specs-table">
+            <caption class="table-caption"><?= $block->escapeHtml(__('More Information')) ?></caption>
+            <tbody>
+            <?php $i=0; foreach ($_additional as $_data) :  ?>
+            
+                <tr>
+                    
+                    <th class="col label" scope="row"><?= $block->escapeHtml($_data['label']) ?></th>
+                    <td class="col data" data-th="<?= $block->escapeHtmlAttr($_data['label']) ?>"><?= /* @noEscape */
+                        $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+                </tr>
+                <?php if(count($_additional) > 9 && $i == count($_additional) - 1)  :?>
+                <tr class="viewmore mobile">
+                    <th><?= $block->escapeHtml(__('Show more')) ?>
+                        <svg>
+                            <use xlink:href="#icon-theme-arr-up"></use>
+                        </svg>
+                    </th>
+                </tr>
+                <tr class="viewless mobile">
+                    <th><?= $block->escapeHtml(__('Show less')) ?>
+                        <svg>
+                            <use xlink:href="#icon-theme-arr-up"></use>
+                        </svg>
+                    </th>
+                </tr>
+            <?php endif; ?>
+            <?php $i++;  endforeach;?>
+            <tr class="show-always">
+                <th class="col label instructions" scope="row" colspan="2">
+                    <a href="javascript:void(0)" style="text-decoration: underline">
+                        <?= $block->escapeHtmlAttr(__("User Manual")) ?>
+                    </a>
+                </th>
+            </tr>
+            <tr class="show-always">
+                <th class="col label insurance" scope="row" colspan="2">
+                    <a style="text-decoration: underline"
+                       href="javascript:void(0)"><?= $block->escapeHtmlAttr(__("Insurance")) ?></a>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+        <div id='popup-userManual' style="display:none">
+            <?= /* @noEscape */
+            $userManual ?>
+        </div>
+        <div id='popup-insurance' style="display:none">
+            <?= /* @noEscape */
+            $insurance ?>
+        </div>
+    </div>
+
+
+<?php endif; ?>
+<script>
+    require(['jquery'],function($){
+
+        $('body').on('click','.additional-attributes .viewmore,.additional-attributes .viewless',function(){
+            $(this).closest('.additional-attributes').toggleClass('greater');
+        })
+    })
+</script>
+

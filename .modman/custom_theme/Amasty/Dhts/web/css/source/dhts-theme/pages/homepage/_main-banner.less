@@ -1,0 +1,50 @@
+& when (@media-common = true) {
+    .amasty-jet-theme, .cms-index-index{
+        .pagebuilder-slide-wrapper{
+            .pagebuilder-overlay.pagebuilder-poster-overlay{
+                pointer-events: none !important;
+            }
+            &.jarallax [id*='jarallax-container']{
+                > img{
+                    pointer-events: none !important;
+                }
+                video, iframe{
+                    visibility: visible !important;
+                    z-index: 9 !important;
+                }
+            }
+        }
+        .pagebuilder-slider.slick-initialized.slick-slider::before{
+            pointer-events: none;
+        }
+
+    }
+}
+
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__l - 1)) {
+
+    }
+    @media only screen and (min-width: @screen__m) and (max-width: (@screen__l - 1)) {
+
+    }
+    @media only screen and (min-width: @screen__l) and (max-width: (@screen__xl - 1)) {
+    }
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl){
+
+}

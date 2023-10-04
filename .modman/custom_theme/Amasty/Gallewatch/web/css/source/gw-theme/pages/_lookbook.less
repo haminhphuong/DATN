@@ -1,0 +1,291 @@
+@import "./lookbook/_lookbook-detail-banner";
+@import "./lookbook/_lookboook-detail-feature";
+@import "./lookbook/_lookbook-detail-collection";
+@import "./lookbook/_lookbook-detail-info";
+@import 'lookbook/_lb-detail';
+
+& when (@media-common = true) {
+	.cms-lookbook{
+		.page-title-wrapper{
+			.page-title{
+				margin-bottom: 0;
+			}
+		}
+	}
+	.lookbook__title{
+		background-size: cover;
+		color: @color-white;
+		text-align: center;
+		margin-bottom: 25px;
+		padding: 30px 20px 20px;
+		.no-webp &{
+			background-image: url('@{baseDir}images/blog-title.png')
+		}
+		.webp &{
+			background-image: url('@{baseDir}images/blog-title.webp')
+		}
+		.page-title-wrapper {
+			.page-title{
+				font-size: 2rem;
+				font-weight: @font-weight__semibold;
+				text-transform: uppercase;
+				line-height: 1.8;
+				margin: 0 0 15px;
+				padding: 0;
+			}
+		}
+		.breadcrumbs {
+			.layout-reset;
+			.breadcrumbs-white();
+			margin: 0;
+		}
+	}
+	.cms-lookbook{
+		.page-main{
+			margin-bottom: 0;
+		}
+		.page-header.ammenu-header-container{
+			margin-bottom: 0;
+		}
+	}
+	.page__lookbook{
+		.slick-slider{
+			padding: 0;
+			button.slick-arrow{
+				opacity: 1;
+				visibility:visible;
+				background-image: none !important;
+				width: 30px;
+				height: 30px;
+				background: @color-white !important;
+				box-shadow: 0px 0px 15px rgba(0, 0, 0, .1);
+				border-radius: 10px;
+				&:before{
+					content:"";
+					display: block;
+					width: 10px;
+					height: 15px;
+					.bg-sprites();
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					transform: translate(-50%,-50%);
+					background-position: -375px 0;
+				}
+				&.slick-disabled{
+					opacity:0.5;
+				}
+			}
+		}
+	}
+	.ecommage-header-text-lookbook{
+		font-size: 20px;
+	}
+	.ecommage-widget-container-lookbook{
+		.ecommage-widget-container-lookbook-item{
+			display: flex;
+			flex-wrap: wrap;
+			//margin: 0 -15px;
+		}
+		.ecommage-lookbook-category-wrap{
+			position: relative;
+		}
+		.ecommage-title-post-lookbook{
+			position: absolute;
+			font-weight: @font-weight__medium;
+			a{
+				color: @color-white;
+				text-transform: uppercase;
+			}
+		}
+		.pagebuilder-button-link-all{
+			width: 100%;
+			display: flex;
+			a{
+				font-size: 14px;
+				font-weight: @font-weight__medium;
+				text-align: center;
+				color: @color-main;
+				border-bottom: 1px solid @color-main;
+				position: relative;
+				text-transform: uppercase;
+				margin: auto;
+				&:before{
+					position: absolute;
+					.bg-sprites();
+					content: "";
+					display: block;
+					width: 9px;
+					height: 11px;
+					background-position: -376px -2px;
+					right: -12px;
+					top: 50%;
+					transform: translateY(-50%);
+				}
+			}
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	.page__lookbook{
+		.pagebuilder-slider{
+			.pagebuilder-slide-wrapper, .pagebuilder-overlay{
+				min-height: 150px !important;
+			}
+		}
+		.pagebuilder-slider.slick-slider{
+			padding: 0;
+		}
+		.slick-slider button.slick-arrow{
+			&.slick-prev{
+				left: -15px;
+			}
+			&.slick-next{
+				right: -15px;
+			}
+		}
+	}
+	.ecommage-widget-container-lookbook{
+		.ecommage-title-post-lookbook{
+			right: 30px;
+			font-size: 12px;
+			top: ~"calc(100% - 50px)";;
+			left: 30px;
+		}
+		.ecommage-lookbook-category-wrap{
+			//padding: 0 15px;
+			margin-bottom: 20px;
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+	.ecommage-widget-container-lookbook{
+		.ecommage-title-post-lookbook{
+			font-size: 18px;
+			left: 52px;
+		}
+		.ecommage-lookbook-category-wrap{
+			//padding: 0 15px;
+			margin-bottom: 34px;
+		}
+	}
+	.page__lookbook{
+		&[data-content-type='row'][data-appearance='full-width'] > .row-full-width-inner{
+            padding-left: 0;
+            padding-right: 0;
+        }
+	}
+}
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+	@media only screen and (max-width: 1023px){
+		.page__lookbook{
+			.pagebuilder-slide-wrapper, .pagebuilder-overlay{
+				min-height: 310px !important;
+			}
+		}
+	}
+	@media only screen and (max-width: (@screen__l - 1)) {
+		.ecommage-widget-container-lookbook{
+			.ecommage-widget-container-lookbook-item{
+				margin: 0 -5px;
+			}
+			.ecommage-lookbook-category-wrap{
+				width: 50%;
+				padding: 0 5px;
+			}
+		}
+	}
+	@media only screen and (min-width:@screen__l)  and (max-width:(@screen__xl - 1)){
+		.page__lookbook{
+			.pagebuilder-slide-wrapper, .pagebuilder-overlay{
+				min-height: 420px !important;
+			}
+		}
+	}
+	@media only screen and (min-width:@screen__m)  and (max-width:(@screen__l)){
+		.page__lookbook{
+			.ecommage-widget-container-lookbook{
+				.ecommage-title-post-lookbook{
+					right: 52px;
+					top: ~"calc(100% - 70px)";
+				}
+			}
+			.ecommage-element-lookbook-block{
+				margin-top: 40px;
+			}
+			pagebuilder-slider{
+				padding: 0;
+			}
+		}
+	}
+	@media only screen and (min-width: @screen__m){
+		.page__lookbook{
+			.slick-slider button.slick-arrow{
+				&.slick-prev{
+					left: -15px;
+				}
+				&.slick-next{
+					right: -15px;
+				}
+			}
+		}
+	}
+	@media only screen and (min-width: 1400px){
+		.page__lookbook{
+			.slick-slider button.slick-arrow{
+				&.slick-prev{
+					left: -58px;
+				}
+				&.slick-next{
+					right: -58px;
+				}
+			}
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+	.lookbook__title{
+		margin-bottom: 50px;
+		padding: 91px 20px 38.5px;
+	}
+	// .cms-lookbook{
+	//   .page-main{
+	//     max-width: 100%;
+	//     padding: 0;
+	//   }
+	// }
+	.page__lookbook{
+		.ecommage-widget-container-lookbook{
+			.ecommage-title-post-lookbook{
+				top: ~"calc(100% - 100px)";
+				max-width: 185px;
+			}
+			.ecommage-widget-container-lookbook-item{
+				margin: 0 -15px;
+			}
+			.ecommage-lookbook-category-wrap{
+				width: 33.333%;
+				padding: 0 15px;
+			}
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl){
+	.cms-lookbook{
+		.page-main{
+			margin-bottom: 30px;
+		}
+	}
+	.page__lookbook{
+		.ecommage-element-lookbook-block{
+			margin-top: 40px;
+		}
+	}
+	.ecommage-widget-container-lookbook{
+		.ecommage-title-post-lookbook{
+			bottom: 42px;
+			font-size: 24px;
+			line-height: 29px;
+		}
+	}
+}

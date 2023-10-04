@@ -1,0 +1,139 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magento\Catalog\Model\Product\Option;
+
+/**
+ * @var $block \Magento\Catalog\Block\Product\View\Options\Type\Select\Checkable
+ */
+$priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');// @codingStandardsIgnoreLine
+$option = $block->getOption();
+if ($option) : ?>
+    <?php
+    $configValue = $block->getPreconfiguredValue($option);
+    $optionType = $option->getType();
+    $arraySign = $optionType === Option::OPTION_TYPE_CHECKBOX ? '[]' : '';
+    $count = 1;
+    ?>
+
+    <div class="mobile selected-radio-option-<?= $block->escapeHtmlAttr($option->getId()) ?>" style="opacity: 0"></div>
+    <div class="options-list nested" id="options-<?= $block->escapeHtmlAttr($option->getId()) ?>-list">
+        <?php if ($optionType === Option::OPTION_TYPE_RADIO && !$option->getIsRequire()) :?>
+            <div class="field abc choice admin__field admin__field-option">
+                <input type="radio"
+                       id="options_<?= $block->escapeHtmlAttr($option->getId()) ?>"
+                       class="radio admin__control-radio product-custom-option"
+                       name="options[<?= $block->escapeHtmlAttr($option->getId()) ?>]"
+                       data-selector="options[<?= $block->escapeHtmlAttr($option->getId()) ?>]"
+                       onclick="<?= $block->getSkipJsReloadPrice() ? '' : 'opConfig.reloadPrice()' ?>"
+                       value=""
+                       checked="checked"
+                />
+                <label class="label admin__field-label" for="options_<?= $block->escapeHtmlAttr($option->getId()) ?>">
+                        <span>
+                            <?= $block->escapeHtml(__('None'))  ?>
+                        </span>
+                </label>
+            </div>
+        <?php endif; ?>
+
+        <?php foreach ($option->getValues() as $value) : ?>
+            <?php
+            $checked = '';
+            $count++;
+            if ($arraySign) {
+                $checked = is_array($configValue) && in_array($value->getOptionTypeId(), $configValue) ? 'checked' : '';
+            } else {
+                $checked = $configValue == $value->getOptionTypeId() ? 'checked' : '';
+            }
+            $dataSelector = 'options[' . $option->getId() . ']';
+            if ($arraySign) {
+                $dataSelector .= '[' . $value->getOptionTypeId() . ']';
+            }
+            ?>
+
+            <div class="field choice admin__field admin__field-option <?= /* @noEscape */ $option->getIsRequire() ? 'required': '' ?>" id="parent_<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>">
+                <?php if ($value->getImage()): ?>
+                    <label class="label swatch-option-image" for="options_<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>">
+                        <img class="option-preview-image" data-id="<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>" id="preview-<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>" width="50" height="50" src="<?= $block->escapeUrl($block->getImageUrl($value->getImage())) ?>" alt="<?= $block->escapeUrl($block->getImageUrl($value->getImage())) ?>"/>
+                    </label>
+                <?php endif; ?>
+                <div class="option-item-bottom <?= $optionType === Option::OPTION_TYPE_RADIO ? 'radio-type' : 'checkbox-type'?> ">
+                    <div class="swatch-option-detail">
+                        <label class="label swatch-option-label admin__field-label <?= $optionType === Option::OPTION_TYPE_RADIO ? 'radio-type-label' : 'checkbox-type-label' ?>"
+                               for="options_<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>">
+                            <span class="<?= /* @noEscape */ $optionType ?>-custom-option-option-value-title <?= /* @noEscape */ $optionType ?>-value-title-radio-<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>" >
+                                <?= $block->escapeHtml($value->getTitle()) ?>
+                            </span>
+                        </label>
+                        <label class="label swatch-option-price" for="options_<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>">
+                            <span class="swatch-option-price">
+                                <?= /* @noEscape */ number_format($value->getPrice()) . ' VNĐ' ?>
+                            </span>
+                        </label>
+                    </div>
+                <?php if ($value->getImage()): ?>
+                    <div class="check-detail-custom-option mobile" id="check-detail-custom-option-<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>"><a href="javascript:void(0)"></a></div>
+                <?php endif; ?>
+                <input type="<?= $block->escapeHtmlAttr($optionType) ?>"
+                       class="<?= $optionType === Option::OPTION_TYPE_RADIO
+                           ? 'radio admin__control-radio'
+                           : 'checkbox admin__control-checkbox ' ?> <?= $option->getIsRequire()
+                           ? 'required': '' ?>
+                       product-custom-option
+                        <?= $block->getSkipJsReloadPrice() ? '' : 'opConfig.reloadPrice()' ?>"
+                       name="options[<?= $block->escapeHtmlAttr($option->getId()) ?>]<?= /* @noEscape */ $arraySign ?>"
+                       id="options_<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>"
+                       value="<?= $block->escapeHtmlAttr($value->getOptionTypeId()) ?>"
+                    <?= $block->escapeHtml($checked) ?>
+                       data-selector="<?= $block->escapeHtmlAttr($dataSelector) ?>"
+                       price="<?= $block->escapeHtmlAttr($value->getPrice()) ?>"
+                />
+
+               <?php if ($value->getImage()): ?>
+                <div class="custom-option-tooltip  swatch-option-tooltip-<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>" style="display: none">
+                    <div class="description-column">
+
+                            <?php if ($value->getTitle()): ?>
+                                <span class="title"><?= $block->escapeHtml($value->getTitle()) ?></span>
+                                <span class="price"><?= /* @noEscape */ $block->formatPrice($value) ?></span>
+                            <?php endif; ?>
+
+                        <div class="description">
+                            <?php if ($value->getDescription()): ?>
+                                <span><?= $block->escapeHtml($value->getDescription()) ?></span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="image-column">
+                        <div class="image">
+                            <?php if ($value->getImage()): ?>
+                                <img class="option-preview-image-tooltip" id="preview-tooltip-<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>" src="<?= $block->escapeUrl($block->getImageUrl($value->getImage())) ?>" alt="<?= $block->escapeUrl($block->getImageUrl($value->getImage())) ?>"/>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="action-close"></div>
+                </div>
+            <?php endif; ?>
+                </div>
+                <script>
+                    require([
+                        'jquery'
+                    ], function($){
+                        $(document).ready(function(){
+                            $('#parent_<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>').click(function(){
+                                $('#options_<?= $block->escapeHtmlAttr($option->getId() . '_' . $count) ?>').change();
+                            });
+                        });
+                    });
+                </script>
+
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+<?php endif; ?>
+

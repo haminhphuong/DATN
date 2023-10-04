@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="booking_view_product">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Email"/>
+        <column xsi:type="varchar" name="telephone" nullable="false" length="255" comment="Phone Number"/>
+        <column xsi:type="timestamp" name="time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Time"/>
+        <column xsi:type="text" name="notes" nullable="false" comment="Note"/>
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false" padding="10" comment="Product Id"/>
+        <column xsi:type="int" name="location_id" unsigned="true" nullable="false" padding="10" default="0" comment="Location Id"/>
+        <column xsi:type="smallint" name="booking_type" padding="5" unsigned="true" nullable="true" default="1" identity="false" comment="Booking Type"/>
+        <column xsi:type="smallint" name="status" padding="5" unsigned="true" nullable="true" default="1" identity="false" comment="Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="BOOKING_VIEW_PRODUCT_LOCATION_ID" indexType="btree">
+            <column name="location_id"/>
+        </index>
+        <index referenceId="BOOKING_VIEW_PRODUCT_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="BOOKING_VIEW_PRODUCT_LOCATION_ID_AMASTY_AMLOCATOR_LOCATION_ID" table="booking_view_product"
+                    column="location_id" referenceTable="amasty_amlocator_location" referenceColumn="id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="BOOKING_VIEW_PRODUCT_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID" table="booking_view_product"
+                    column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+    </table>
+</schema>

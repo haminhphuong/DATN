@@ -1,0 +1,156 @@
+<?php
+/** @var \Magento\Customer\Block\Address\Book $block */
+
+$dataHelper=$this->helper('Ecommage\CustomCustomerLogin\Helper\Data');// @codingStandardsIgnoreLine
+$customerAddressView = $block->getData('customer_address');
+// 2.3.0 compatibility fix. Replace when 2.3.0 support ends
+$pAddsses = $block->getAdditionalAddresses();
+
+?>
+
+<div class="amtheme-addresses-block -addresses-grid">
+    <div class="amtheme-heading">
+        <h3 class="amtheme-title">
+            <?= $block->escapeHtml(__('Additional Address')) ?>
+        </h3>
+        <button type="button"
+                role="add-address"
+                aria-label="<?= $block->escapeHtmlAttr(__('Add New Address')) ?>"
+                title="<?= $block->escapeHtmlAttr(__('Add New Address')) ?>"
+                class="action button-as-link add">
+            <?= $block->escapeHtml(__('Add New')) ?>
+        </button>
+    </div>
+    <?php if ($pAddsses): ?>
+        <div class="additional-addresses history" id="additional-addresses-table">
+            <?php foreach ($pAddsses as $address): ?>
+                <div class="amtheme-card-wrap">
+                    <div class="amtheme-address-card">
+                        <div class="amtheme-row firstname">
+                            <span class="amtheme-title">
+                                <?= $block->escapeHtml(__('First Name')) ?>
+                            </span>
+                            <span class="amtheme-content">
+                                <?= $block->escapeHtml($address->getFirstname()) ?>
+                            </span>
+                        </div>
+                        <div class="amtheme-row lastname">
+                            <span class="amtheme-title">
+                                <?= $block->escapeHtml(__('Last Name')) ?>
+                            </span>
+                            <span class="amtheme-content">
+                                <?= $block->escapeHtml($address->getLastname()) ?>
+                            </span>
+                        </div>
+
+                        <?php if ($dataHelper->getStreetAddress($address->getStreet())): ?>
+                            <div class="amtheme-row streetaddress">
+                                <span class="amtheme-title">
+                                    <?= $block->escapeHtml(__('Street Address')) ?>
+                                </span>
+                                <span class="amtheme-content">
+                                    <?= $block->escapeHtml($dataHelper->getStreetAddress($address->getStreet())) ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($address->getCity()): ?>
+                            <div class="amtheme-row city">
+                                <span class="amtheme-title">
+                                    <?= $block->escapeHtml(__('City')) ?>
+                                </span>
+                                <span class="amtheme-content">
+                                    <?= $block->escapeHtml($address->getCity()) ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($block->getCountryByCode($address->getCountryId())): ?>
+                            <div class="amtheme-row country">
+                                <span class="amtheme-title">
+                                    <?= $block->escapeHtml(__('Country')) ?>
+                                </span>
+                                <span class="amtheme-content">
+                                    <?= $block->escapeHtml($block->getCountryByCode($address->getCountryId())) ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($address->getRegion()->getRegion()): ?>
+                            <div class="amtheme-row state">
+                                <span class="amtheme-title">
+                                    <?= $block->escapeHtml(__('State')) ?>
+                                </span>
+                                <span class="amtheme-content">
+                                     <?= $block->escapeHtml($address->getRegion()->getRegion()) ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($address->getPostcode()): ?>
+                            <div class="amtheme-row zip">
+                                <span class="amtheme-title">
+                                    <?= $block->escapeHtml(__('Zip/Postal Code')) ?>
+                                </span>
+                                <span class="amtheme-content">
+                                    <?= $block->escapeHtml($address->getPostcode()) ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($address->getTelephone()): ?>
+                            <div class="amtheme-row phone">
+                                <span class="amtheme-title">
+                                    <?= $block->escapeHtml(__('Phone')) ?>
+                                </span>
+                                <span class="amtheme-content">
+                                    <?= $block->escapeHtml($address->getTelephone()) ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="amtheme-actions">
+                        <a class="action delete"
+                           href="#"
+                           role="delete-address"
+                           title="<?= $block->escapeHtml(__('Delete Address')) ?>"
+                           data-address="<?= $block->escapeHtmlAttr($address->getId()) ?>">
+                            <?= $block->escapeHtml(__('Delete')) ?>
+                        </a>
+                        <a class="action edit"
+                           title="<?= $block->escapeHtml(__('Edit Address')) ?>"
+                           href="<?= $block->escapeUrl($block->getUrl('customer/address/edit', ['id' => $address->getId()])) ?>">
+                            <?= $block->escapeHtml(__('Edit')) ?>
+                        </a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <?php if ($block->getChildHtml('pager')): ?>
+            <div class="customer-addresses-toolbar toolbar bottom">
+                <?= $block->getChildHtml('pager') ?>
+            </div>
+        <?php endif ?>
+    <?php else: ?>
+        <p class="empty">
+            <?= $block->escapeHtml(__('You have no other address entries in your address book.')) ?>
+        </p>
+    <?php endif ?>
+</div>
+
+<div class="actions-toolbar">
+    <div class="secondary">
+        <a class="action back"
+           title="<?= $block->escapeHtml(__('Back')) ?>"
+           href="<?= $block->escapeUrl($block->getUrl('customer/account')) ?>">
+            <?= $block->escapeHtml(__('Back')) ?>
+        </a>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        ".page-main": {
+            "address": {
+                "deleteAddress": "a[role='delete-address']",
+                "deleteUrlPrefix": "<?= $block->escapeJs($block->escapeUrl($block->getDeleteUrl())) ?>id/",
+                "addAddress": "button[role='add-address']",
+                "addAddressLocation": "<?= $block->escapeJs($block->escapeUrl($block->getAddAddressUrl())) ?>"
+            }
+        }
+    }
+</script>

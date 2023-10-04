@@ -1,0 +1,302 @@
+@fb__height-form: 30px;
+
+.fb-font-style(@x: 12px, @y: @medium) {
+  .size(@x);
+  .font(@y);
+}
+
+& when (@media-common = true) {
+  .input-text-small {
+    &,
+    &.input-text {
+      height: @fb__height-form;
+      .py(5px);
+    }
+  }
+  .fb_right-left {
+    > [data-content-type="text"] {
+      padding: 20px;
+      .box-theme;
+      height: 100%;
+      > p {
+        margin-bottom: 15px;
+        &:first-child {
+          margin-bottom: 20px;
+          line-height: 1.2;
+        }
+      }
+    }
+    [style*="color:"] {
+      font-weight: @font-weight__semibold;
+    }
+  }
+
+  .fb-legend {
+    span {
+      font-weight: @font-weight__bold;
+      display: inline-block;
+      .mb(10px);
+    }
+  }
+  .fb_right-top {
+    > p {
+      &:last-child {
+        [style*="color:"] {
+          font-weight: @font-weight__semibold;
+        }
+      }
+      &:not(:last-child) {
+        a[style*="color:"] {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .fb_right-top[data-content-type="text"] {
+    border-bottom: 1px solid @color-custom-gray2;
+    .mb(40px);
+    > p {
+      > strong {
+        &:before {
+          .mask-image(icon-theme-mail-view,@color-main);
+          content: "";
+          display: inline-block;
+          background: @color-main;
+        }
+      }
+      &:last-child {
+        margin-top: 15px;
+        margin-bottom: 13px;
+      }
+      &:first-child {
+        margin-bottom: 14px;
+      }
+    }
+  }
+  .form-feedback {
+    .box-theme;
+    padding: 20px;
+    .field.required:not(.choice) > label:after,
+    .fieldset-product-options-inner.required > .legend:after {
+      margin-right: 3px;
+    }
+    .input-text-small {
+      .fb-font-style;
+    }
+    select.input-text-small {
+      background-position: right 20px center;
+      padding-left: 20px;
+    }
+
+    .field {
+      .label {
+        .fb-font-style;
+      }
+      &.field-content {
+        .label {
+          padding-top: 0;
+        }
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: none;
+        padding: 10px 20px;
+      }
+    }
+
+    .action-toolbar {
+      .pt(30px);
+
+      .action {
+        .fb-font-style;
+        .py(5px);
+        height: @fb__height-form;
+        width: 100%;
+      }
+    }
+  }
+  .more-info {
+    div[data-content-type="row"] {
+      padding: 0;
+    }
+    > [data-content-type="text"] {
+      > p {
+        display: none;
+      }
+    }
+  }
+  .cms-fb {
+    .page.messages {
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    .page-title-wrapper {
+      margin-top: 8px;
+      border-bottom: 1px solid @color-custom-gray2;
+      text-align: center;
+      .page-title {
+        .mb(0);
+        .pb(5px);
+        text-align: center;
+        display: inline-block;
+        border-bottom: 3px solid @color-main;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+  @media only screen and (min-width: @screen__m) {
+    .fb-colum-group {
+      display: flex;
+      gap: 40px;
+    }
+
+    .fb_right-right {
+      .pl(40px);
+      > [data-content-type="html"] {
+        display: flex;
+      }
+    }
+    .fb_right-left {
+      .pr(0px);
+    }
+    .cms-fb {
+      .page-title-wrapper {
+        .mb(45px);
+      }
+      .column.main {
+        .pb(0px);
+      }
+      .page-main {
+        .mb(40px);
+      }
+    }
+    .fb_right-top > p > strong {
+      &:before {
+        .mr(10px);
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    .form-feedback {
+      .field {
+        flex-direction: row;
+        .label {
+          text-align: right;
+          .mb;
+          .pr(5px);
+          .pt(5px);
+          width: 24.5%;
+          &[for="phone_field"] {
+            // display: inline-flex;
+            justify-content: space-between;
+          }
+        }
+        .control {
+          width: 75.5%;
+        }
+      }
+
+      .action-toolbar {
+        position: relative;
+        bottom: -30px;
+        .pt;
+        margin-left: -10px;
+        margin-right: -10px;
+      }
+    }
+  }
+  @media only screen and (min-width: @screen__l) {
+    body#html-body {
+      .fb-form-wrapper {
+        width: 36.5%;
+      }
+
+      .more-info {
+        width: 60.2%;
+      }
+    }
+    .fb-colum-group .pagebuilder-column-group {
+      justify-content: space-between;
+    }
+    .fb_right-top {
+      .pt(0px);
+    }
+    .fb-legend {
+      display: flex;
+      align-items: baseline;
+      .theme-icon {
+        width: 11px;
+        height: 11px;
+        margin-right: 11px;
+      }
+    }
+  }
+}
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+  @media only screen and (max-width: (@screen__m - 1)) {
+    .fb_right-top {
+      .mt(20px);
+    }
+    .pagebuilder-column.fb_right-right {
+      .mt(30px);
+    }
+  }
+
+  @media only screen and (max-width: (@screen__l - 1)) {
+    .fb-colum-group {
+      flex-direction: column;
+    }
+    .fb-legend {
+      display: flex;
+      gap: 15px;
+      .theme-icon {
+        width: 16px;
+        height: 16px;
+        margin-top: 2px;
+      }
+    }
+    body#html-body {
+      .fb-colum-group {
+        > .pagebuilder-column-group {
+          flex-direction: column;
+        }
+      }
+      .fb-form-wrapper,
+      .more-info {
+        width: 100%;
+      }
+    }
+    .fb_right-top {
+      > p {
+        &:first-child {
+          line-height: 1;
+        }
+        > strong {
+          .pl(30px);
+          position: relative;
+          line-height: 1.2;
+          &:before {
+            position: absolute;
+            left: 0;
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+    .cms-fb {
+      .page-title-wrapper {
+        .mb(30px);
+      }
+      .fb_right-top[data-content-type="text"] {
+        margin-bottom: 30px;
+        margin-top: 40px;
+      }
+    }
+  }
+}

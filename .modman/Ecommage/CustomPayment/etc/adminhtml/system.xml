@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="alepay" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                <field id="comments" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label" type="editor">
+                    <label>Comments</label>
+                    <frontend_model>Ecommage\CustomPayment\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+            </group>
+            <group id="cashondelivery" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="comments" translate="label" type="editor" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Comments</label>
+                    <frontend_model>Ecommage\CustomPayment\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+            </group>
+            <group id="banktransfer" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="comments" translate="label" type="editor" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Comments</label>
+                    <frontend_model>Ecommage\CustomPayment\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+            </group>
+            <group id="momo" translate="label" type="text" sortOrder="88" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="comments" translate="label" type="editor" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Comments</label>
+                    <frontend_model>Ecommage\CustomPayment\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

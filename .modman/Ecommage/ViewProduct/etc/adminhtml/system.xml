@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="fake_view" translate="label" type="text" sortOrder="012120" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Ecommage_CustomCatalog::config</resource>
+            <class>separator-top</class>
+            <label>Fake View</label>
+            <tab>ecommage</tab>
+            <group id="configuration" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration</label>
+                <field id="multiplier" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Multiplier</label>
+                    <validate>required-entry validate-number</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

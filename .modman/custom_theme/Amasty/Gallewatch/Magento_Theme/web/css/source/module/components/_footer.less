@@ -1,0 +1,53 @@
+//
+//  Footer styles
+//  _____________________________________________
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {}
+
+//
+//  Mobile
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-footer {
+        .amtheme-footer-section {
+            flex-direction: column;
+        }
+
+        .amtheme-socials-list {
+            order: 1;
+        }
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-footer {
+        .logo-image {
+            max-height: 55px;
+        }
+
+        .content > .links:not(.footer) {
+            max-width: 300px;
+        }
+
+        .content .amtheme-newsletter-block {
+            flex-basis: 100%;
+        }
+
+        .amtheme-socials-list {
+            align-items: center;
+        }
+
+        .amtheme-footer-section .footer.links {
+            max-width: 67%;
+        }
+    }
+}

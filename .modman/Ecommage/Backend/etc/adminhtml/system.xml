@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="schedule_allow_attribute" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Schedule Product Attribute Export</label>
+			<tab>ecommage</tab>
+			<resource>Ecommage_Backend::config_ecommage_schedule_allow_attribute</resource>
+			<group id="configuration" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Configuration</label>
+				<field id="attribute" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="multiselect">
+					<label>Allowed Atrributes</label>
+					<source_model>Ecommage\Backend\Model\Config\Source\Allowedattribute</source_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

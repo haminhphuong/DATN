@@ -1,0 +1,78 @@
+& when (@media-common = true) {
+    .catalog-product-view{
+        // .fancybox-slide .fancybox-image-wrap{
+        //     transform: translate(-50%, -50%) !important;
+        //     left: 50%;
+        //     top: 50%;
+        // }
+
+        .fancybox-container .fancybox-image{
+            max-width: none;
+            // transform: none;
+        }
+
+        .product.media{
+            .action.towishlist{
+                color: transparent;
+                &:before{
+                    content: "";
+                    display: block;
+                    width: 30px;
+                    height: 25px;
+                    .bg-sprites();
+                    position:absolute;
+                    top: 15px;
+                    right: 15px;
+                    background-position: -126px 0;
+                }
+            }
+        }
+        .amtheme-add-form-bottom{
+            .product-options-bottom{
+                .actions{
+                    display: flex !important;
+                }
+                .action.primary.tocart{
+                    padding: 15px 10px;
+                }
+            }
+        }
+        .amtheme-product-info{
+            .product.attribute.overview{
+                margin-bottom: 10px;
+            }
+            .box-tocart{
+                margin: 10px 0;
+            }
+            .product-info-price{
+                margin: 10px 0 !important;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .catalog-product-view{
+         .amtheme-product-info{
+            .box-tocart{
+                .tocart,.buynow{
+                    width: 50%;
+                    margin: 0 5px;
+                }
+             }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+        .catalog-product-view{
+         .amtheme-product-info{
+            .box-tocart{
+                .tocart,.buynow{
+                   min-width: 100px !important;
+                    margin: 0 5px;
+                }
+             }
+        }
+    }
+}

@@ -1,0 +1,87 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Email Product Contact"}} @-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Sleep Trial request</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #666;
+        }
+
+        a {
+            color: #105995;
+        }
+
+        th {
+            font-size: 16px;
+            padding: 5px;
+            color: #105995;
+        }
+
+        .inner td {
+            font-size: 12px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+{{template config_path="design/email/header_template"}}
+
+    <table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
+        <tr>
+            <td style="border:1px solid #ccc">
+                <table width="800" border="0" cellspacing="0" cellpadding="0" class="inner">
+                    <tr>
+                        <th colspan="2" align="left">Booking Information</th>
+                    </tr>
+                    <tr>
+                        <td width="25%"><strong>Name:</strong></td>
+                        <td width="75%">{{var data.name}}</td>
+                    </tr>
+                    <tr>
+                        <td width="25%"><strong>Email:</strong></td>
+                        <td width="75%">{{var data.email}}</td>
+                    </tr>
+                    <tr>
+                        <td width="25%"><strong>Telephone:</strong></td>
+                        <td width="75%">{{var data.telephone}}</td>
+                    </tr>
+                    <tr>
+                        <td width="25%"><strong>Product:</strong></td>
+                        <td width="75%">{{var data.product_name}}</td>
+                    </tr>
+                    <tr>
+                        <td width="25%"><strong>Booking Type:</strong></td>
+                        <td width="75%">{{var data.booking_type}}</td>
+                    </tr>
+                    <tr>
+                        <td width="25%"><strong>Location Name:</strong></td>
+                        <td width="75%">{{var data.location_name}}</td>
+                    </tr>
+                    <tr>
+                        <td width="25%"><strong>Time:</strong></td>
+                        <td width="75%">{{var data.time}}</td>
+                    </tr>
+                    <tr>
+                        <td width="25%"><strong>Notes:</strong></td>
+                        <td width="75%">{{var data.notes}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+{{template config_path="design/email/footer_template"}}
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /* @var $block \Magento\Catalog\Block\Product\View\Options\Type\Select */ ?>
+<?php
+$_option = $block->getOption();
+$class = ($_option->getIsRequire()) ? ' required' : '';
+?>
+<div class="field<?= /* @escapeNotVerified */ $class ?>">
+    <label class="label" for="select_<?= /* @escapeNotVerified */ $_option->getId() ?>">
+        <strong><span><?= $block->escapeHtml($_option->getOptionTitle() ? $_option->getOptionTitle() : $_option->getTitle()) ?></span></strong>
+    </label>
+    <?php if ($_option->getOptionDescription()): ?>
+        <p class="option-description"><?= $block->escapeHtml(__($_option->getOptionDescription())) ?></p>
+    <?php endif; ?>
+    <div class="control">
+        <?= $block->getValuesHtml() ?>
+        <?php if ($_option->getIsRequire()): ?>
+            <?php if ($_option->getType() == \Magento\Catalog\Api\Data\ProductCustomOptionInterface::OPTION_TYPE_RADIO || $_option->getType() == \Magento\Catalog\Api\Data\ProductCustomOptionInterface::OPTION_TYPE_CHECKBOX): ?>
+                <span id="options-<?= /* @escapeNotVerified */ $_option->getId() ?>-container"></span>
+            <?php endif; ?>
+        <?php endif;?>
+    </div>
+</div>

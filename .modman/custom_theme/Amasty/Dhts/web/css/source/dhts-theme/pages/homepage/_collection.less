@@ -1,0 +1,261 @@
+& when (@media-common = true) {
+    .row-home-collections{
+        .pt(21px);
+
+        div[data-content-type='text']{
+            > p:first-child{
+                .mb;
+            }
+        }
+        .heading-style{
+            font-weight: @font-weight__semibold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .collection-section {
+        .mt(5px);
+
+        .slider-content__wrap{
+            position: relative;
+
+            .slider-left{
+                .pl;
+            }
+        }
+
+        .slider-left{
+            background: transparent;
+            color: @color-white;
+
+            .subtitle-silder{
+                .lib-visually-hidden();
+            }
+            
+            .title-silder{
+                color: @color-white;
+                .mb(13px);
+                .max-w(none);
+                text-transform: uppercase;
+                overflow: hidden;
+                .max-h(50px);
+                font-weight: @font-weight__semibold;
+                line-height: 1.25;
+                font-size: 20px;
+            }
+
+            h3{
+                display: none;
+            }
+
+            .view-detail{
+                .border-radius(@button__border-radius);
+                .lib-button-ter();
+                height: 34px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 5px 10px;
+            }
+
+            .collection-des{
+                .mb(13px);
+                .max-h(80px);
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+            }
+        }
+
+        .slider-right{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            max-width: none;
+            z-index: -1;
+
+            img{
+                .h(100%);
+                .min-h(0);
+                object-fit: unset;
+            }
+
+            &:before {
+                content: "";
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .watch-image {
+            img{
+                left: auto;
+                top: auto !important;
+                bottom: -100px;
+                .m;
+            }
+        }
+
+        .slick-current.slick-active {
+            .watch-image{
+                img{
+                    bottom: -19px !important;
+                }
+            }
+        }
+
+        .slick-slider {
+            .slick-dots {
+                position: absolute;
+                left: 0;
+                transform: none;
+                max-width: @layout__max-width;
+                .px(@layout-indent__width);
+                margin: 0 auto;
+                text-align: left;
+                bottom: 30px;
+                right: 0;
+
+                li{
+                    .h(3px);
+                    .w(30px);
+                    margin: 0 20px 0 0;
+
+                    button{
+                        background: @color-white;
+                        border-radius: 0;
+                        .h(100%);
+                        .w(100%);
+
+                        &:before{
+                            display: none;
+                        }
+                    }
+
+                    &:not(.slick-active){
+                        button{
+                            .opacity(.5);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .row-home-collections{
+        position: relative;
+
+        .heading-style{
+            .pl(20px);
+        }
+
+        .plink-top-xs{
+            top: 26px;
+        }
+    }
+    .collection-des{
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+    }
+
+    .collection-section {
+        .slider-content__wrap{
+            .min-h(220px);
+        }
+
+        .slick-slider {
+            .slick-dots{
+                display: none !important;
+            }
+        }
+
+        .slider-collection {
+            .slider-left{
+                padding: 60px 160px 60px 0;
+
+                .view-detail{
+                    display: inline-flex;
+                }
+            }
+
+            .slider-right img{
+                // object-fit: contain !important;
+                // height: 100% !important;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .collection-section {
+        .mt(20px);
+
+        .slider-left{
+            .py(89px);
+
+            .title-silder{
+                letter-spacing: 0.093em;
+                .size(36px);
+                .max-h(90px);
+            } 
+
+            .collection-des{
+                max-width: 370px;
+                letter-spacing: 0.05em;
+            }
+        }
+
+        .slider-content__wrap{
+            .min-h(480px);
+        }
+
+        .watch-image {
+            img{
+                max-width: 280px;
+                max-height: 422px;
+            }
+        }
+    }  
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .collection-section {
+        .mt(36px);
+
+        .slider-left{
+            .view-detail{
+                .min-w(212px);
+                .px(20px);
+                .h(40px);
+            }
+        }
+
+        .slick-slider {
+            .slick-dots{
+                bottom: 63px;
+            }
+        }
+    }
+    .row-home-collections .heading-style{
+        font-size: 24px;
+    }
+}
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (min-width: 1440px) and (max-width: 1919px) {
+        .collection-section .slider-right{
+            height: auto;
+        }
+    }
+}

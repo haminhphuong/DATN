@@ -1,0 +1,41 @@
+<a data-bind="
+    attr: {
+        class: 'ammenu-link',
+        href: item.url
+    },
+    css: { '-current': item.current },
+    style: {
+        color: item.color() ? item.color() : ''
+    },
+    event: {
+        click: function() {
+            if (item.isSubmenuVisible && item.isSubmenuVisible()) {
+                
+
+                
+            }
+
+            return true;
+        }
+    }">
+
+    <!-- ko if: uiClass.is_icons_available -->
+        <!-- ko template: { name: uiClass.root_templates.icon, data: { item: item } } --><!-- /ko-->
+    <!-- /ko -->
+
+    <p class="ammenu-text-block">
+        <span class="ammenu-text" data-bind="i18n: item.name"></span>
+
+        <span class="ammenu-label" if="item.label" data-bind="
+                   style: {
+                        'background-color': item.label.label_background_color || '',
+                        'color': item.label.label_text_color || ''
+                   },
+                   i18n: item.label.label">
+        </span>
+    </p>
+
+    <!-- ko if: item.isSubmenuVisible -->
+        <!-- ko template: { name: uiClass.templates.toggleButton, data: $data } --><!-- /ko -->
+    <!-- /ko -->
+</a>

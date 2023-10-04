@@ -1,0 +1,15 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_JetTheme
+ */
+?>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+
+<div class="block-user-img">
+    <img class="user-img" src="<?= $block->escapeUrl($block->getViewFileUrl("images/user.svg")) ?>" alt="<?= $block->escapeHtml(__('My Account')) ?>">
+    <img class="user-img has-fixed" src="<?= $block->escapeUrl($block->getViewFileUrl("images/user-dark.svg")) ?>" alt="<?= $block->escapeHtml(__('My Account')) ?>">
+</div>

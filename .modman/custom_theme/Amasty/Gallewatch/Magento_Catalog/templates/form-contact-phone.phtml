@@ -1,0 +1,56 @@
+<?php
+/**
+ * @var $block \Magento\Catalog\Block\Product\AbstractProduct;
+ */
+$id_product = $block->getProduct()->getId();
+
+?>
+<form class="form-contact-phone" method="POST" data-role="contact-form">
+    <label class="label label-phone"><span><?= $block->escapeHtml(__('Leave a phone number for consultation')) ?></span></label>
+    <fieldset class="fieldset">
+        <div class="field telephone">
+            <div class="control" id="control-phone">
+                <input name="telephone"
+                       id="telephone"
+                       title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
+                       value=""
+                       class="input-text"
+                       type="number"
+                       placeholder="<?= $block->escapeHtmlAttr(__('Customer phone number')) ?>"
+                />
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions__toolbar">
+        <div class="primary">
+            <input type="hidden" name="hideit" id="hideit" value=""/>
+            <button id="send-telephone" type="button" title="<?= $block->escapeHtmlAttr(__('Send')) ?>"
+                    class="action send primary">
+                <span><?= $block->escapeHtml(__('Send')) ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+
+<div id='popup-notification' style="display:none">
+    <div id="notification-success"></div>
+</div>
+
+<script type="text/x-magento-init"><?php // @codingStandardsIgnoreLine?>
+    {
+        ".page-main": {
+            "Ecommage_BookingViewProduct/js/contact-phone": {
+                "contactPhone": "button[id='send-telephone']",
+                "title": "<?= $block->escapeHtml(__('Notification')) ?>",
+                "notificationEmpty": "<span> <?= $block->escapeHtml(__('This is a required field!')) ?> </span>",
+                "notificationSuccess":"<span><?= $block->escapeHtml(__('The system has received your information!')) ?></span>",
+                "notificationError": "<span> <?= $block->escapeHtml(__('We can\'t received your information! Try again!')) ?></span>",
+                "notificationInvalid": "<span> <?= $block->escapeHtml(__('Invalid phone number!')) ?></span>",
+                "id_product": "<?= $block->escapeHtmlAttr($id_product) ?>",
+                "url": "<?= $block->escapeUrl($block->getBaseUrl() . 'booking/booking/bookingproductajax') ?>"
+            }
+        }
+    }
+
+</script>
+

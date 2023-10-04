@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="widget_store_locator" class="Ecommage\WidgetStoreLocator\Block\Widget\StoreLocator">
+        <label translate="true">Widget Store Locator</label>
+        <description></description>
+        <parameters>
+            <parameter name="store_locator" xsi:type="multiselect" visible="true" source_model="Ecommage\WidgetStoreLocator\Model\Config\WidgetStoreLocator">
+                <label translate="true">Store Location</label>
+            </parameter>
+            <parameter name="show_all" xsi:type="select" required="false" source_model="Magento\Config\Model\Config\Source\Yesno" visible="true">
+                <label translate="true">Show All Showroom</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

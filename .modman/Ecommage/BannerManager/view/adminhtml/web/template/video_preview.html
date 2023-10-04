@@ -1,0 +1,19 @@
+<div class="file-uploader-summary" xmlns="http://www.w3.org/1999/html">
+    <div class="file-uploader-preview">
+        <video width="400" controls >
+            <source attr="src: $file.url" id="video_here">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="actions">
+            <button
+                type="button"
+                class="action-remove"
+                data-role="delete-button"
+                attr="title: $t('Delete video')"
+                click="$parent.removeFile.bind($parent, $file)">
+                <span translate="'Delete video'"/>
+            </button>
+        </div>
+    </div>
+    <div class="file-uploader-filename" text="$file.name"/>
+</div>

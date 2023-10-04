@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="banner_item_save_after">
+        <observer name="banner_item_set_position" instance="Ecommage\BannerManager\Observer\Banner\Item\SetPosition"/>
+    </event>
+</config>

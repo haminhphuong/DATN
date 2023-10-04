@@ -1,0 +1,122 @@
+& when (@media-common = true) {
+	.sms-account-verifyotplogin{
+		.page-title{
+			text-decoration-line: underline;
+			text-decoration-color: @color-main;
+			text-decoration-thickness: 3px;
+			border-bottom: 1px solid @color-gw-gray;
+			padding-bottom: 8px;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.block-content-otp{
+			box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+			padding: 40px;
+			.page-title-otp{
+				.lib-visually-hidden();
+			}
+		}
+	}
+	.block-content-otp{
+		margin: auto;
+		.page-title-otp{
+			margin-bottom: 20px;
+			span{
+				text-decoration-line: underline;
+				text-decoration-color: @color-main;
+				text-decoration-thickness: 3px;
+				padding-bottom: 8px;
+				text-align: center;
+				text-transform: uppercase;
+				display: block;
+				text-underline-offset: 10px;
+				font-weight: @font-weight__semibold;
+			}
+		}
+		.otp-login{
+			input{
+				height: 30px;
+				.border-radius(@button__border-radius);
+				background: @color-white;
+				border: 1px solid @color-gw-gray;
+			}
+			.label{
+				margin-bottom: 6px;
+			}
+			span{
+				font-size: 12px;
+				font-weight: @font-weight__heavier;
+			}
+		}
+	}
+	.block-content-otp,
+	.amsl-popup-block{
+		.amsl-login-success{
+			padding: 40px;
+		}
+		.actions-toolbar{
+			justify-content: center;
+			margin-top: 30px;
+			.action.send-otp.primary{
+				padding: 9px 69px;
+				background: @color-main;
+				color: @color-white;
+				border-color: @color-main;
+				height: 40px;
+				.border-radius(@button__border-radius);
+				border: none;
+			}
+		}
+	}
+	.amsl-popup-block{
+		.action.send-otp.primary{
+			span{
+				font-size: 14px;
+				font-weight: @font-weight__heavier;
+			}
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	.sms-account-verifyotplogin{
+		.page-title{
+			font-size: 14px;
+			text-underline-offset: 13px;
+		}
+		.block-content-otp{
+			margin-top: 10px;
+		}
+	}
+	.block-content-otp{
+		.page-title-otp{
+			font-size: 14px;
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+	.sms-account-verifyotplogin{
+		.page-title{
+			text-underline-offset: 16px;
+		}
+		.block-content-otp{
+			margin-top: 40px;
+		}
+	}
+	.sms-account-verifyotplogin{
+		.block-content-otp{
+			width: 440px;
+		}
+	}
+	.block-content-otp{
+		.page-title-otp{
+			font-size: 20px;
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl){
+	.sms-account-verifyotplogin{
+		.page-title{
+			margin: 0 -20px;
+		}
+	}
+}

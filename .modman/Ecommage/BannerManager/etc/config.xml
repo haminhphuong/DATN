@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Thomas Nguyen, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ecommage>
+            <banner>
+                <slider>homepage-banner</slider>
+                <brand>homepage-brand</brand>
+                <image_path>benefit/icon</image_path>
+                <options>
+                    <width>500</width>
+                    <height>300</height>
+                    <responsive>true</responsive>
+                    <aspectRatio>-1</aspectRatio>
+                    <imageScaleMode>cover</imageScaleMode>
+                    <centerImage>true</centerImage>
+                    <allowScaleUp>true</allowScaleUp>
+                    <autoHeight>false</autoHeight>
+                    <autoSlideSize>true</autoSlideSize>
+                    <startSlide>0</startSlide>
+                    <shuffle>false</shuffle>
+                    <orientation>horizontal</orientation>
+                    <forceSize>none</forceSize>
+                    <loop>true</loop>
+                    <slideDistance>10</slideDistance>
+                    <slideAnimationDuration>700</slideAnimationDuration>
+                    <heightAnimationDuration>700</heightAnimationDuration>
+                    <visibleSize>auto</visibleSize>
+                    <centerSelectedSlide>true</centerSelectedSlide>
+                    <rightToLeft>false</rightToLeft>
+                    <breakpoints>null</breakpoints>
+                    <fade>false</fade>
+                    <fadeOutPreviousSlide>true</fadeOutPreviousSlide>
+                    <fadeDuration>500</fadeDuration>
+                    <autoplay>true</autoplay>
+                    <autoplayDelay>5000</autoplayDelay>
+                    <autoplayDirection>normal</autoplayDirection>
+                    <autoplayOnHover>pause</autoplayOnHover>
+                    <arrows>false</arrows>
+                    <fadeArrows>true</fadeArrows>
+                    <buttons>true</buttons>
+                    <keyboard>true</keyboard>
+                    <keyboardOnlyOnFocus>false</keyboardOnlyOnFocus>
+                    <touchSwipe>true</touchSwipe>
+                    <touchSwipeThreshold>50</touchSwipeThreshold>
+                    <fadeCaption>true</fadeCaption>
+                    <captionFadeDuration>500</captionFadeDuration>
+                    <fullScreen>false</fullScreen>
+                    <fadeFullScreen>true</fadeFullScreen>
+                    <waitForLayers>false</waitForLayers>
+                    <autoScaleLayers>true</autoScaleLayers>
+                    <autoScaleReference>-1</autoScaleReference>
+                    <smallSize>480</smallSize>
+                    <mediumSize>768</mediumSize>
+                    <largeSize>1024</largeSize>
+                    <updateHash>false</updateHash>
+                    <reachVideoAction>none</reachVideoAction>
+                    <leaveVideoAction>pauseVideo</leaveVideoAction>
+                    <playVideoAction>stopAutoplay</playVideoAction>
+                    <pauseVideoAction>none</pauseVideoAction>
+                    <endVideoAction>none</endVideoAction>
+                    <thumbnailWidth>100</thumbnailWidth>
+                    <thumbnailHeight>80</thumbnailHeight>
+                    <thumbnailsPosition>bottom</thumbnailsPosition>
+                    <thumbnailPointer>false</thumbnailPointer>
+                    <thumbnailArrows>false</thumbnailArrows>
+                    <fadeThumbnailArrows>true</fadeThumbnailArrows>
+                    <thumbnailTouchSwipe>true</thumbnailTouchSwipe>
+                </options>
+            </banner>
+        </ecommage>
+    </default>
+</config>

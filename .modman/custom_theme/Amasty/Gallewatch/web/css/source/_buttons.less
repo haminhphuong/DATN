@@ -1,0 +1,86 @@
+//
+//  Buttons styles
+//  _____________________________________________
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    button:not(.primary) {
+        border-radius: @button__border-radius;
+    }
+
+    a.action.primary {
+        .lib-link-as-button();
+    }
+
+    .action.primary {
+        .lib-button-primary();
+        .border-radius(@button__border-radius);
+        text-transform: @button__text-style;
+    }
+
+    a.action.secondary {
+        .lib-button();
+
+        border-radius: @button__border-radius;
+    }
+
+    .action.outline {
+        .lib-button(
+            @_button-padding: @button-outline__padding,
+            @_button-color: @button-outline__color,
+            @_button-background: @button-outline__background,
+            @_button-border: @button-outline__border,
+            @_button-color-hover: @button-outline__hover__color,
+            @_button-background-hover: @button-outline__hover__background,
+            @_button-border-hover: @button-outline__hover__border,
+            @_button-color-active: @button-outline__color,
+            @_button-background-active: @button-outline__hover__background,
+            @_button-border-active: @button-outline__hover__border
+        );
+    }
+
+    button,
+    .action {
+        &.size-l {
+            .lib-button-l();
+        }
+
+        &.size-s {
+            .lib-button-s();
+        }
+
+        &.size-xl {
+            .lib-button-xl();
+        }
+
+        &.size-responsive {
+            .lib-button-responsive();
+        }
+    }
+
+    button,
+    .action.primary,
+    .action.outline {
+        letter-spacing: @button__letter-spacing;
+        font-style: @font-style__base;
+        transition: @button__transition;
+    }
+
+    button.-icon-action {
+        .lib-button-reset();
+
+        transition: none;
+    }
+
+    .button-as-link,
+    .button-as-link.action {
+        .lib-button-as-link();
+    }
+
+    .action.back {
+        .am-back-button();
+    }
+}

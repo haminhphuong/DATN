@@ -1,0 +1,11 @@
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<columns name="megamenu_columns">
+        <column name="store_id" class="Ecommage\CustomMegaMenu\Ui\Component\Listing\Columns\Store">
+            <settings>
+                <label translate="true">Store View</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+	</columns>
+</listing>

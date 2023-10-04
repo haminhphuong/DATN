@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <recommendation>
+            <product_page>
+                <enable>1</enable>
+                <number>20</number>
+                <similar_product>
+                    <scenarioIdSimilarProduct>LMqZNxTqaRRuGhqXYwbatZ</scenarioIdSimilarProduct>
+                    <titleSimilarProduct>Similar Product</titleSimilarProduct>
+                </similar_product>
+                <people_also_view>
+                    <scenarioIdPeopleAlsoView>BZ29M6XXJtdnuXxNisKQY7</scenarioIdPeopleAlsoView>
+                    <titlePeopleAlsoView>People Also Viewed</titlePeopleAlsoView>
+                </people_also_view>
+            </product_page>
+            <product_list>
+                <enable>1</enable>
+                <number>20</number>
+                <similar_to_your_recently>
+                    <scenarioIdSimilarRecently>Xe5a6HiEVEVSUkNUSqiS8D</scenarioIdSimilarRecently>
+                    <titleSimilarRecently>Similar To Your Recently Browsed Products</titleSimilarRecently>
+                </similar_to_your_recently>
+                <recommended_for_you>
+                    <scenarioIdRecommendedForYou>YMbRGLAcQ563nHeJLfJfao</scenarioIdRecommendedForYou>
+                    <titleRecommendedForYou>Recommended For You</titleRecommendedForYou>
+                </recommended_for_you>
+            </product_list>
+            <checkout>
+                <enable>1</enable>
+                <number>20</number>
+                <complementary_products>
+                    <scenarioIdComplementaryProducts>EEi4q9JPpAUMVHXVH94uKH</scenarioIdComplementaryProducts>
+                    <titleComplementaryProducts>Complementary Products</titleComplementaryProducts>
+                </complementary_products>
+            </checkout>
+            <checkout_success>
+                <enable>1</enable>
+                <number>20</number>
+                <recommended_for_you>
+                    <scenarioIdRecommendedForYou>icnVrSvvbULJBrL2MZqFLD</scenarioIdRecommendedForYou>
+                    <titleRecommendedForYou>Recommended For You</titleRecommendedForYou>
+                </recommended_for_you>
+            </checkout_success>
+        </recommendation>
+    </default>
+</config>

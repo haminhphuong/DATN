@@ -1,0 +1,191 @@
+& when (@media-common = true) {
+    // Remove tab content when page loading
+    #html-body div[data-content-type='tabs'] .tabs-content [data-content-type='tab-item']{
+        &:not([aria-expanded="true"]){
+            display: none;
+        }
+    }
+
+    // Custom Tab Default
+    div[data-content-type='tabs'] {
+        .tabs-content{
+            border: 0 !important;
+        }
+
+        .tabs-navigation {
+            .scrollbar();
+            white-space: nowrap;
+            overflow: auto;
+            padding-bottom: 10px;
+            margin: 0 -5px;
+
+            li.tab-header{
+                background: transparent !important;
+                border: 0 !important;
+                .px(5px);
+
+                a.tab-title{
+                    border: 1px solid @color-white;
+                    background: @color-white;
+                    color: @color-theme;
+                    text-transform: uppercase;
+                    padding: 7px 15px;
+                }
+
+                &.ui-state-active{
+                    a.tab-title{
+                        background: @color-theme;
+                        color: @color-white;
+                    }
+                }
+            }
+        }
+    }
+    // End Custom Tab Default
+
+    // Custom Product List Tab
+    div[data-content-type='tabs'] {
+        .product-item{
+            padding: 0 5px !important;
+
+            > .product-item-info{
+                background: transparent;
+                color: @color-white;
+
+                .product-item-photo{
+                    background: transparent;
+                }
+
+                .product-item-link{
+                    line-height: 1.2357;
+
+                    &,
+                    &:hover{
+                        color: @color-white;
+                    }
+                }
+
+                .product-contact {
+                    color: inherit;
+                }
+
+                .product-item-actions {
+                    .action.primary.buynow{
+                        .lib-button-ter();
+                        .mt(5px);
+                        padding: 7px 20px;
+                        width: auto;
+                        &:hover{
+                            span a{
+                                color: @color-white !important;
+                            }
+                        }
+                        a:not(:hover){
+                            color: @color-theme !important;
+                        }
+                    }
+                }
+            }
+
+            .price-box {
+                .price-container {
+                    .price{
+                        color: inherit;
+                        letter-spacing: 0.05em;
+                    }
+                }
+
+                .old-price {
+                    .price-container .price{
+                        .font(@light);
+                        letter-spacing: 0;
+
+                        &:before{
+                            background: @color-white;
+                        }
+                    }
+                }
+            }
+        }
+
+        .product-items{
+            margin: 0 5px !important;
+        }
+
+        .block.widget-product-grid{
+            .mt(20px);
+        }
+
+        .products-grid{
+            .mb(13px);
+
+            .product-item .product-item-info .product-photo-wrapper a.product-item-photo:before{
+                display: none;
+            }
+        }
+        .products-grid{
+            .price-to.sale-product{
+                > .price-container .price-label{
+                    color: @color-white;
+                }
+            }
+        }
+    }
+     
+    // End Custom Product List Tab
+
+    .row-home-product{
+        .py(40px);
+
+        div[data-content-type='tabs'] {
+            .pt(5px);
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    // Custom Tab Default
+    div[data-content-type='tabs'] {
+        .tabs-navigation {
+            li.tab-header{
+                a.tab-title{
+                    .size(10px);
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .row-home-product{
+        div[data-content-type='tabs'] {
+            .pt(15px);
+        }
+    }
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .row-home-product{
+        .py(60px, 57px);
+
+        div[data-content-type='tabs'] {
+            .pt(26px);
+        }
+    }
+
+    // Custom Tab Default
+    div[data-content-type='tabs'] {
+        .tabs-navigation {
+            .mx(-13px);
+
+            li.tab-header{
+                .px(13px);
+
+                a.tab-title{
+                    padding: 9px 30px;
+                }
+            }
+        }
+    }
+}

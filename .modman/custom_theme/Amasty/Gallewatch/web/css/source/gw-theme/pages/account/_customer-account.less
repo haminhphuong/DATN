@@ -1,0 +1,117 @@
+@color-text-custom: #4a4948;
+& when (@media-common = true) {
+	body{
+		.iti{
+			z-index: 1;
+		}
+		form .field{
+			z-index: 0;
+		}
+	}
+	.customer-account-create, .customer-account-login{
+		form .field{
+			position: initial;
+		}
+	}
+	.account{
+		.box-actions{
+			a{
+				font-weight: @font-weight__bold;
+				color: @color-text-custom;
+			}
+			.action.edit{
+				margin-right: 15px;
+			}
+		}
+		.amtheme-sidebar-block{
+			margin-bottom: 14px;
+			.amtheme-actions{
+				margin-top: 10px;
+				button.size-s{
+					padding: 5px 30px;
+				}
+			}
+		}
+		.sidebar .block.widget{
+			margin-bottom: 0;
+		}
+		.account-nav{
+			margin-bottom: 20px;
+		}
+		.account-nav-content .nav.item > .delimiter{
+			margin-bottom: 0;
+		}
+		&.page-layout-2columns-left .sidebar-main{
+			margin:0;
+		}
+		.product-item .price-box{
+			justify-content: left;
+			.old-price{
+				margin-right: 10px;
+				display: flex;
+				vertical-align: middle;
+				//padding-left: 10px;
+			}
+			.price-label{
+				text-transform: capitalize;
+				font-weight: @font-weight__regular;
+			}
+			.price-container{
+				flex-wrap: nowrap;
+			}
+		}
+		.amtheme-sidebar-block .amtheme-name:hover{
+			color: @color-main;
+		}
+	}
+	.form-wishlist-items .product-item .product-details{
+		.lib-visually-hidden();
+	}	
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+	.account{
+		.block-content{
+			.box-title{
+				font-size: 18px;
+				font-weight: @font-weight__semibold;
+			}
+			.box-content, .box-actions{
+				//padding: 0 20px;
+			}
+			// display: flex;
+			.box{
+				width: ~"calc((100% - 20px)/2)";
+			}
+		}
+		.amtheme-addresses-block{
+			.amtheme-heading{
+				.amtheme-title, .action.edit{
+					width: ~"calc((100% - 20px)/2)";
+				}
+			}
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	.account{
+		.box-information{
+			margin-bottom: 15px;
+		}
+	}
+}
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+	@media only screen and (min-width: @screen__m) and (max-width: (@screen__xl - 1)) {
+		.account{
+			.page-wrapper{
+				.page-main{
+					max-width: 100%;
+					.columns{
+						grid-template-columns: auto ~"calc(100% - 185px - 8%)";
+					}
+				}
+			}
+		}
+	}
+}
+
+

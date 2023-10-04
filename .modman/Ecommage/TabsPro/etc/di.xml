@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magezon\TabsPro\Block\ProductsList">
+        <plugin name="tabs_pro_block_products_list" type="Ecommage\TabsPro\Plugin\Block\ProductsList"/>
+    </type>
+    <type name="Magezon\TabsPro\Block\Widget\Tab">
+        <plugin name="tabs_pro_block_widget_tab" type="Ecommage\TabsPro\Plugin\Block\Widget\Tab"/>
+    </type>
+    <type name="Magezon\TabsPro\Block\Tab">
+        <plugin name="tabs_pro_block_tab" type="Ecommage\TabsPro\Plugin\Block\Tab"/>
+    </type>
+    <type name="Magezon\TabsPro\Block\Page\Tabs">
+        <plugin name="tabs_pro_block_page_tab" type="Ecommage\TabsPro\Plugin\Block\Page\Tabs"/>
+    </type>
+    <preference for="Magezon\TabsPro\Controller\Ajax\Tab" type="Ecommage\TabsPro\Controller\Ajax\Tab" />
+    <preference for="Magezon\TabsPro\Helper\ImageBuilder" type="Ecommage\TabsPro\Preference\Helper\ImageBuilder"/>
+</config>

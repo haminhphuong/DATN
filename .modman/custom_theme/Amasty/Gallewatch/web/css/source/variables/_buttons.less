@@ -1,0 +1,78 @@
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Buttons
+//  ---------------------------------------------
+
+//  Box model
+@button__padding: 9px 25px;
+
+//  Font style
+@button__font-size: 1.4rem;
+@button__font-weight: @font-weight__medium;
+@button__line-height: 20px;
+@button__letter-spacing: 0;
+@button__text-style: uppercase;
+
+//  Default = secondary button design
+@button__color: @color-black;
+@button__background: @color-white;
+@button__border: 1px solid @color-gw-gray;
+@button__border-radius: @amtheme__border-radius__s;
+
+@button__hover__color: @button__color;
+@button__hover__background: lighten(@button__background, 13%);
+@button__active__background: darken(@button__background, 6%);
+
+@button__transition: all @amtheme__transition__delay @amtheme__transition__func;
+
+//  Primary button
+@button-primary__font-size: @button__font-size;
+@button-primary__font-weight: @button__font-weight;
+@button-primary__line-height: 18px;
+@button-primary__letter-spacing: @button__letter-spacing;
+@button-primary__padding-top: 11px;
+@button-primary__padding: @button-primary__padding-top 15px;
+
+@button-primary__background: @color-main;
+@button-primary__border: 0;
+@button-primary__color: @color-white;
+
+@button-primary__hover__background: lighten(@button-primary__background, 13%);
+@button-primary__hover__border: @button-primary__border;
+@button-primary__active__background: darken(@button-primary__background, 6%);
+
+//  Outline button
+@button-outline__font-size: @button__font-size;
+@button-outline__line-height: @button__line-height;
+@button-outline__letter-spacing: @button__letter-spacing;
+@button-outline__padding: 15px 18px;
+
+@button-outline__background: @amtheme__background-primary__color;
+@button-outline__border: 1px solid @amtheme__outline__color;
+@button-outline__color: @amtheme__outline__color;
+
+@button-outline__hover__color: @button-outline__color;
+@button-outline__hover__background: fade(lighten(@button__background, 15%), 20%);
+@button-outline__hover__border: 1px solid @button__background;
+@button-outline__active__background: lighten(@button__background, 45%);
+
+//  Button with arrow
+@arrowed-button-arrow__size: 20px;
+
+//  Large button
+@button__font-size__l: @button__font-size;
+@button__line-height__l: @button__line-height;
+@button__padding__l: 18px 35px;
+
+//  Small button
+@button__font-size__s: @button__font-size;
+@button__line-height__s: @button__line-height;
+@button__padding__s: 12px 25px;
+
+//  Extra Large button
+@button__font-size__xl: @button-primary__font-size;
+@button__line-height__xl: @button-primary__line-height;
+@button__padding__xl: @indent__base @indent__xl;

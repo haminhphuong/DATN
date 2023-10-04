@@ -1,0 +1,18 @@
+{
+    "slider_collection": {
+        "column": {
+            "slider_id": true,
+            "title": true,
+            "subtitle": true,
+            "description": true,
+            "text_link": true,
+            "url_link": true,
+            "is_active": true,
+            "image": true,
+            "image_watch": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

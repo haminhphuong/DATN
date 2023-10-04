@@ -1,0 +1,43 @@
+<script type="text/javascript">
+    (function(){
+        let YouTubeContainers = document.querySelectorAll(".embed-youtube");
+
+        // Iterate over every YouTube container you may have
+        for (let i = 0; i < YouTubeContainers.length; i++) {
+            let container = YouTubeContainers[i];
+            let imageSource = "https://i3.ytimg.com/vi/"+ container.dataset.videoId +"/mqdefault.jpg";
+            let imageSourceWebp = "https://i3.ytimg.com/vi_webp/"+ container.dataset.videoId +"/mqdefault.webp";
+
+            // Load the Thumbnail Image asynchronously
+            let pcr = document.createElement("PICTURE");
+            let sc1 = document.createElement("SOURCE");
+            let sc2 = document.createElement("SOURCE");
+            let img = document.createElement("IMG");
+            sc1.srcset = imageSourceWebp;
+            sc1.type = "image/webp";
+            sc2.srcset = imageSource;
+            img.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=";
+            img.loading = "lazy";
+            img.alt = "";
+            pcr.appendChild(sc1);
+            pcr.appendChild(sc2);
+            pcr.appendChild(img);
+            container.appendChild(pcr);
+
+            // When the user clicks on the container, load the embedded YouTube video
+            container.addEventListener("click", function() {
+                let iframe = document.createElement( "iframe" );
+
+                iframe.setAttribute("frameborder", "0");
+                iframe.setAttribute("allowfullscreen", "");
+                iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+                // Important: add the autoplay GET parameter, otherwise the user would need to click over the YouTube video again to play it
+                iframe.setAttribute("src", "https://www.youtube.com/embed/"+ this.dataset.videoId +"?rel=0&showinfo=0&autoplay=1");
+
+                // Clear Thumbnail and load the YouTube iframe
+                this.innerHTML = "";
+                this.appendChild( iframe );
+            });
+        }
+    })();
+</script>

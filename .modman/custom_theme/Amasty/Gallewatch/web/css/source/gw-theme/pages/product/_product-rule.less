@@ -1,0 +1,52 @@
+& when (@media-common = true) {
+    .amtheme-product-wrap .amtheme-product-info .product-info-rule {
+        .rule__title-special-offer{
+            color: @color-galle-green1;
+        }
+
+        .special-offer-item{
+            color: @color-black;
+            line-height: 1.43;
+            a:hover{
+                    font-weight: @font-weight__semibold;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+
+}
+
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__l - 1)) {
+
+    }
+
+    @media only screen and (min-width: @screen__m) and (min-height: 600px){
+
+    }
+    @media only screen and (max-width: 375px){
+
+    }
+
+}
+
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+    @media only screen and (min-width: @screen__l) and (max-width: (@screen__xl - 1)) {
+
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl){
+
+}
+

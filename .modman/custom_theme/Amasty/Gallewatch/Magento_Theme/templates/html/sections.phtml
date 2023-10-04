@@ -1,0 +1,51 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+
+$group = $block->getGroupName();
+$groupCss = $block->getGroupCss();
+?>
+
+<?php if ($detailedInfoGroup = $block->getGroupChildNames($group, 'getChildHtml')):?>
+    <div class="sections <?= $block->escapeHtml($groupCss) ?>">
+        <?php $layout = $block->getLayout(); ?>
+        <div class="section-items <?= $block->escapeHtml($groupCss) ?>-items"
+             data-mage-init='{
+                 "collapsible": {
+                     "collapsible": true,
+                     "active": false,
+                     "animate":{ "duration": 200, "easing": "linear"}
+             }}'>
+            <?php foreach ($detailedInfoGroup as $name):?>
+                <?php $html = $layout->renderElement($name);
+                    if (!trim($html) && ($block->getUseForce() != true)) {
+                        continue;
+                    }
+                    $alias = $layout->getElementAlias($name);
+                    $label = $block->getChildData($alias, 'title');
+                    $cssClass = $block->getChildData($alias, 'css_class');
+                    $svgIcon = $block->getChildData($alias, 'svg_icon');
+                ?>
+                <?php if ($label):?>
+                    <div class="section-item-title -title <?= $block->escapeHtml($groupCss) ?>-item-title <?= $block->escapeHtml($cssClass) ?>"
+                         data-role="title">
+                        <?= /* @noEscape */ $svgIcon ?>
+                        <a class="<?= $block->escapeHtml($groupCss) ?>-item-switch"
+                           data-toggle="switch"
+                           href="#<?= $block->escapeHtml($alias) ?>"
+                           aria-label="<?= /* @noEscape */ $label ?>">
+                            <?= /* @noEscape */ $label ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
+                <div class="section-item-content <?= $block->escapeHtml($groupCss) ?>-item-content <?= $block->escapeHtml($cssClass) ?>"
+                     id="<?= $block->escapeHtml($alias) ?>"
+                     data-role="content">
+                    <?php if($alias == 'store.links'):?>
+                        <?= /* @noEscape */ $block->getBlockHtml('header.links') ?>
+                    <?php endif;?>
+                    <?= /* @noEscape */ $html ?>
+                </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+<?php endif; ?>

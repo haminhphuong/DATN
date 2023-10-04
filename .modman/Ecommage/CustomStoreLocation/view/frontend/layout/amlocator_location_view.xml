@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ecommage_CustomStoreLocation::css/swiper.min.css"/>
+    </head>
+    <body>
+        <referenceBlock name="location">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Ecommage_CustomStoreLocation::pages/location_view.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="location_model" xsi:type="object">Ecommage\CustomStoreLocation\ViewModel\LocationModel</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="amasty_store_locator_schedule">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Ecommage_CustomStoreLocation::schedule.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

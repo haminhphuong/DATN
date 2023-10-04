@@ -1,0 +1,251 @@
+//
+//  Block Search styles
+//  _____________________________________________
+
+//
+//  Variables
+//  ---------------------------------------------
+
+@search-block__background-color: transparent;
+@search-block__box-shadow: inset 0px -10px 0px 0px @search-block__background-color,
+    inset 0 12px 4px -10px rgba(71, 68, 63, .1),
+    inset 0 12px 8px -10px rgba(135, 135, 135, .2);
+@search-form-desktop__height: 40px;
+@search-form-mobile__height: 50px;
+@search-form-mobile__border-radius: @search-form-mobile__height;
+@search-form-mobile__offset-top: @indent__base;
+@search-form-mobile__padding-horizontal-xs: @layout__width-xs-indent;
+@search-form-mobile__padding-horizontal: @layout__width-m-indent;
+@search-form__border-radius: @search-form-desktop__height;
+@search-form__z-index: 12;
+@search-form__background-color: @amtheme__background-secondary__color;
+@search-reset-button__background: @amtheme__border__color;
+@search-action-button__z-index: 50;
+@search-close-button__z-index: @search-action-button__z-index;
+
+@amtheme__middle__header_background__color: @amtheme__background-primary__color;
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    .block-search {
+        & {
+            box-sizing: border-box;
+            margin-bottom: 0;
+            width: 100%;
+        }
+
+        > .block-title {
+            &:extend(.abs-visually-hidden);
+        }
+
+        > .block-content {
+            margin-bottom: 0;
+            height: @search-form-mobile__height;
+        }
+
+        .label {
+            &:extend(.abs-visually-hidden);
+        }
+
+        .form {
+            position: relative;
+            height: 100%;
+        }
+
+        .field,
+        .control {
+            width: 100%;
+            height: 100%;
+        }
+
+        .input-text {
+            & {
+                .amtheme-input-placeholder(
+                    @_input-placeholder-font-size: 1.4rem,
+                    @_input-placeholder-line-height: 2rem
+                );
+
+                position: relative;
+                z-index: @search-form__z-index;
+                display: flex;
+                align-items: center;
+                padding: @indent__s @indent__s @indent__s 50px;
+                height: 100%;
+                border: 0;
+                border-radius: @search-form-mobile__border-radius;
+                background: @search-form__background-color;
+                transition: box-shadow @amtheme__transition__delay @amtheme__transition__func;
+                -webkit-appearance: none;
+            }
+
+            &:hover,
+            &:active {
+                box-shadow: 0 2px 8px rgba(57, 56, 56, .25);
+            }
+        }
+
+        .input-text:focus,
+        .input-text:not([disabled]):focus {
+            & {
+                .amtheme-input-placeholder(
+                    @_input-placeholder-font-size: 1.4rem,
+                    @_input-placeholder-line-height: 2rem
+                );
+
+                box-shadow: 0 2px 8px rgba(57, 56, 56, .25);
+            }
+
+            // It need for keyfocus. The keyfocus add on body element.
+            ._keyfocus & {
+                box-shadow: 0 0 0 1px @focus__color;
+            }
+        }
+
+        .active .input-text {
+            box-shadow: 0 2px 8px rgba(57, 56, 56, .25);
+        }
+
+        .actions {
+            position: absolute;
+            left: @indent__xs;
+            display: inline-block;
+        }
+
+        .action {
+            & {
+                .lib-button-reset();
+
+                position: relative;
+                z-index: @search-form__z-index;
+                padding: @indent__s;
+                height: auto;
+                line-height: 1;
+            }
+
+            &:disabled {
+                opacity: 1;
+            }
+        }
+
+        .amtheme-reset {
+            .am-vertical-center();
+
+            position: absolute;
+            right: @indent__xs;
+            cursor: pointer;
+        }
+
+        .amtheme-icon {
+            width: 25px;
+            height: 25px;
+            vertical-align: top;
+        }
+
+        .amtheme-icon.-reset {
+            padding: @indent__xs;
+            background: @search-reset-button__background;
+        }
+
+        .amtheme-close {
+            & {
+                .am-vertical-center();
+
+                position: absolute;
+                left: @indent__xs;
+                z-index: @search-close-button__z-index;
+                display: inline-block;
+                padding: @indent__s;
+                border-radius: @search-form-mobile__border-radius;
+                background: @search-form__background-color;
+                cursor: pointer;
+                transition: none;
+            }
+
+            &:disabled {
+                opacity: 0;
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block-search {
+        &.-header > .block-content {
+            margin: 0 -@search-form-mobile__padding-horizontal;
+            padding: @search-form-mobile__offset-top @search-form-mobile__padding-horizontal;
+            border-bottom: 1px solid @amtheme__middle__header_background__color;
+            box-shadow: @search-block__box-shadow;
+        }
+
+        .actions {
+            position: absolute;
+            top: 50%;
+            z-index: @search-action-button__z-index;
+            transform: translateY(-50%);
+        }
+
+        // Mozilla placeholder vertical alignment fix
+        .input-text::-moz-placeholder {
+            line-height: @search-form-mobile__height - @indent__s * 2;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .block-search {
+        &.-header > .block-content {
+            margin: 0 -@search-form-mobile__padding-horizontal-xs;
+            padding: @search-form-mobile__offset-top @search-form-mobile__padding-horizontal-xs;
+        }
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block-search {
+        .block-content {
+            height: @search-form-desktop__height;
+        }
+
+        .input-text {
+            border-radius: @search-form__border-radius;
+        }
+
+        .actions {
+            top: 0;
+        }
+
+        .reset {
+            &:extend(.abs-visually-hidden-desktop all);
+        }
+
+        .amtheme-icon {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .page-header .block-search {
+        .am-margin-right(@indent__xl);
+
+        max-width: 340px;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .page-header .block-search {
+        max-width: 380px;
+    }
+}

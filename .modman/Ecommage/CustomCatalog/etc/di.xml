@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Block\Product\ProductList\Toolbar">
+        <plugin name="custom_block_toolbar" type="Ecommage\CustomCatalog\Plugin\Catalog\Block\Toolbar"/>
+    </type>
+    <type name="Magento\Catalog\Model\Config">
+        <plugin name="custom_catalog_model_config" type="Ecommage\CustomCatalog\Plugin\Catalog\Model\Config"/>
+    </type>
+    <preference for="Magento\Catalog\Block\Product\ProductList\Toolbar" type="Ecommage\CustomCatalog\Plugin\Catalog\Block\ProductListToolbar"/>
+    <type name="Magento\CatalogInventory\Model\Source\Stock">
+        <plugin name="Amasty_Sorting::quantity_and_stock_status" disabled="true"/>
+        <plugin name="Ecommage_CustomCatalog::quantity_and_stock_status" type="Ecommage\CustomCatalog\Plugin\Catalog\Model\Source\StockOr" />
+    </type>
+<!--    <type name="Magento\Framework\Console\CommandList">-->
+<!--        <arguments>-->
+<!--            <argument name="commands" xsi:type="array">-->
+<!--                <item name="automatically_update_stock_product" xsi:type="object">Ecommage\CustomCatalog\Command\UpdateStockStatus</item>-->
+<!--            </argument>-->
+<!--        </arguments>-->
+<!--    </type>-->
+</config>

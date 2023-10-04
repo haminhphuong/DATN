@@ -1,0 +1,185 @@
+@color-theme-main: #662d91;
+
+@font-weight__semibold: 600;
+
+@layout__width-xs-indent: 20px;
+
+.disable_slider(){
+    .swiper-wrapper{
+        transform: none !important;
+    }
+}
+
+.flex-center-center(){
+    .lib-vendor-prefix-display(flex);
+    align-items: center;
+    justify-content: center;
+}
+
+& when (@media-common = true) {
+    .video-wrapper{
+        position: relative;
+        .video{
+            display: block;
+        }
+        .playpause {
+            .flex-center-center();
+            background: rgba(0,0,0,.1);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            &::before{
+                background: url('@{baseDir}Ecommage_CustomerReview/images/icon-play.svg') no-repeat center center / 100%;
+                content: "";
+                display: block;
+                height: 60px;
+                width: 60px;
+            }
+        }
+    }
+    
+    .customer-review{
+        padding: 40px 0;
+        [data-content-type='row']{
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        .avatar-photo{
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .customer-name{
+            color: @color-theme-main;
+            .author-name{
+                font-weight: @font-weight__semibold;
+            }
+        }
+        .customer-review-item{
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        .customer-info{
+            display: flex;
+            align-items: flex-end;
+            width: 100%;
+            &:after{
+                background: url('@{baseDir}Ecommage_CustomerReview/images/icon-quote.svg') no-repeat center center / 100%;
+                content: "";
+                height: 37px;
+                width: 37px;
+                position: absolute;
+                right: 16px;
+            }
+        }
+        .about-customer{
+            font-size: 12px;
+            padding-bottom: 4px;
+        }
+        .customer-name{
+            margin-bottom: 2px;
+        }
+        .review_content{
+            padding: 0 15px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            -webkit-line-clamp: 4;
+            height: 78px;
+            line-height: 20px;
+            p{
+                margin-bottom: 0;;
+            }
+        }
+        .swiper-review-item{
+            padding-bottom: 15px;
+        }
+        .photo-review{
+            margin-bottom: 15px;
+        }
+        .block__content{
+            margin-left: -@layout__width-xs-indent;
+            margin-right: -@layout__width-xs-indent;
+        }
+        
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .customer-review{
+        .about-customer{
+            padding-left: 15px;
+            width: calc(~"100% - 70px");
+        }
+        .avatar-photo{
+            width: 70px;
+            height: 70px;
+        }
+        .customer-avatar {
+            width: 70px;
+        }
+        .customer-info{
+            padding: 20px 15px;
+            &:after{
+                .scale(0.7);
+                bottom: 70px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .customer-review{
+        .avatar-photo{
+            width: 100px;
+            height: 100px;
+        }
+        .customer-avatar {
+            width: 100px;
+        }
+        .about-customer{
+            padding-left: 20px;
+            width: calc(~"100% - 100px");
+        }
+        .customer-info{
+            bottom: -57px;
+            position: absolute;
+            padding-left: 15px;
+            left: 0;
+            &:after{
+                bottom: 75px;
+            }
+        }
+        .customer-review-item{
+            padding-bottom: 64px;
+        }
+        .swiper-review-item{
+            padding-bottom: 53px;
+        }
+        .swiper-container{
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .customer-review{
+        .disable_slider();
+        .about-customer{
+            font-size: 14px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl){
+    .customer-review{
+        .review_content{
+            padding: 0 35px 0 33px;
+        }
+        .customer-info{
+            padding-left: 49px;
+        } 
+    }
+}

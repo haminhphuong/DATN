@@ -1,0 +1,109 @@
+<?php
+$imagePath = 'ecommage/tmp/customer_review/images/';
+$videoPath = 'ecommage/tmp/customer_review/videos/';
+
+/** @var \Ecommage\CustomerReview\Block\Widget\Review $block */
+$collection = $block->getCollection();
+if ($collection && $collection->getSize()):
+    ?>
+    <div class="customer-review<?= $block->getShowPromoBanner()? ' review-wbanner' : ''?>">
+        <?php if ($block->getShowPromoBanner()): ?>
+            <?php $banner = $block->getBanner() ?>
+            <div class="banner__promo" data-banner-id="<?= /* @noEscape */
+            $banner->getId(); ?>">
+                <div>
+                    <?= /* @noEscape */
+                    $block->getBannerText() ?>
+                    <?= /* @noEscape */
+                    $block->getChildHtml('product_listing') ?>
+                </div>
+            </div>
+        <?php endif; ?>
+        <div class="container">
+            <h2 class="title__wrapper title__bbg title__center"><span class="text_line"><?= $block->escapeHtml(__('Reviews of customer')) ?></span></h2>
+            <div class="block__content">
+                <div class="customer__fb">
+                    <div class="box">
+                        <div class="customer_review swiper-container">
+                            <div class="customer_review_items swiper-wrapper">
+                                <?php foreach ($collection->getItems() as $item): ?>
+                                    <div class="swiper-slide swiper-review-item">
+                                        <div class="customer-review-item">
+                                            <div class="photo-review">
+                                                <?php if(!empty($item->getType()) && $item->getType() === 'video') : ?>
+                                                    <div class="review_video video-wrapper">
+                                                        <video class="video" controls="" playsinline="" muted="">
+                                                            <source src="<?= $block->escapeUrl($block->getFileInfo($item->getVideo(), $videoPath)); ?>">
+                                                        </video>
+                                                        <div class="playpause"></div>
+                                                    </div>
+                                                <?php else : ?>
+                                                    <div class="image">
+                                                        <img src="<?= $block->escapeUrl($block->getFileInfo($item->getImage(), $imagePath)); ?>" alt="<?= $block->escapeHtml(__('image review')) ?>">
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="review_content"><?=  /* @noEscape */ $item->getContent() ?></div>
+                                            <div class="customer-info">
+                                                <div class="customer-avatar">
+                                                    <img class="avatar-photo" src="<?= $block->escapeUrl($block->getFileInfo($item->getPicture(), $imagePath)); ?>" 
+                                                    alt="<?= $block->escapeHtml(__($item->getName())) ?>">
+                                                </div>
+                                                <div class="about-customer">
+                                                    <div class="customer-name">
+                                                        <span class="gender">
+                                                            <?= $block->escapeHtml(__($block->getGender($item->getGender()))) ?>
+                                                        </span>
+                                                        <span class="author-name">
+                                                            <?= $block->escapeHtml(__($item->getName())) ?>
+                                                        </span>
+                                                    </div>
+                                                    <div class="address"><?= $block->escapeHtml(__($block->getCity($item->getCityId()))) ?></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        require([
+            'jquery',
+            'swiper'
+        ], function ($, swiper) {
+            var mySwiper = new swiper('.customer_review.swiper-container', {
+                slidesPerView: 3,
+                spaceBetween: 30,
+                // loop: true,
+                // autoplay: {
+                //     delay: 5000
+                // },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1.4,
+                        spaceBetween: 20,
+                    },
+                    536: {
+                        slidesPerView: 2.5,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                },
+            });
+            $('.playpause').click(function () {
+                if($(this).prev(".video").get(0).paused){
+                    $(this).prev(".video").get(0).play();
+                    $(this).fadeOut();
+                }
+            });
+        });
+    </script>
+<?php endif; ?>

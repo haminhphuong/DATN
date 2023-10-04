@@ -1,0 +1,18 @@
+<!-- ko if: customer().fullname -->
+<p class="ammenu-menu-header"
+   data-bind="
+        style: {
+            background: color_settings.category_hover_color
+        },
+        scope: 'customer'">
+
+    <!-- ko if: customer().fullname -->
+        <span class="ammenu-message -welcome" data-bind="i18n: 'Welcome'"></span>
+        <span class="ammenu-name" data-bind="text: customer().fullname"></span>
+    <!-- /ko -->
+
+    <!-- ko ifnot: customer().fullname -->
+        <span class="ammenu-message" data-bind="i18n: $parent.welcome_message().message"></span>
+    <!-- /ko -->
+</p>
+<!-- /ko -->

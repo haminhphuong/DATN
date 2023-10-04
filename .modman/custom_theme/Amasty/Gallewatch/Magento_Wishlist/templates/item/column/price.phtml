@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Cart $block */
+$product = $block->getProductItem();
+$helper      = $this->helper(\Ecommage\CustomCatalog\Helper\Data::class); // @codingStandardsIgnoreLine
+$qtyAndStock = $helper->checkQtyAndStockOptionProduct($product);
+?>
+
+<?php foreach ($block->getChildNames() as $childName) : ?>
+    <?php if(!$qtyAndStock || !$product->isSalable()):?>
+        <div class="product-contact">
+            <?= $block->escapeHtml(__('Contact Price')); ?>
+        </div>
+    <?php else: ?>
+        <?= /* @noEscape */ $block->getLayout()->renderElement($childName, false) ?>
+    <?php endIf; ?>
+<?php endforeach;?>

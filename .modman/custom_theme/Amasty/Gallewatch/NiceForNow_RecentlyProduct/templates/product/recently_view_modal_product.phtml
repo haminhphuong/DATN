@@ -1,0 +1,431 @@
+<?php
+
+/** @var RecentlyViewProduct $block */
+$products = $block->createCollection();
+if (!count($products)) {
+    return;
+}
+$show_buttons  = explode(',', $block->getData('show_buttons'));
+$showAddToCart = in_array('add_to_cart', $show_buttons) ? true : false;
+$showWishlist  = in_array('add_to_wishlist', $show_buttons) ? true : false;
+$showCompare   = in_array('add_to_compare', $show_buttons) ? true : false;
+/** @codingStandardsIgnoreStart */
+/** @var Image $_imageHelper */
+$_imageHelper   = $this->helper('Magento\Catalog\Helper\Image');
+$postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+$compareHelper  = $this->helper('Magento\Catalog\Helper\Product\Compare');
+$wishlistHelper = $this->helper('Magento\Wishlist\Helper\Data');
+
+/** @codingStandardsIgnoreEnd */
+
+use Magento\Catalog\Helper\Image;
+use NiceForNow\RecentlyProduct\Block\RecentlyViewProduct;
+
+?>
+
+<div class="modal-recently modal-recently-small-container active">
+    <div class="modal-recently-wrap">
+        <div class="button-action">&nbsp</div>
+        <div class="modal-recently__title"><strong><?= $block->escapeHtml(__($block->getTitle())) ?></strong></div>
+        <div class="block-clear-all">
+            <a href="<?= $block->escapeUrl($block->getUrl('widget/clear/history')) ?>" class="clear-url-block">
+                <strong><?= $block->escapeHtml(__('Clear history')) ?></strong>
+            </a>
+        </div>
+        <div class="modal-recently__content">
+            <div class="modal-recently-small swiper-container">
+                <div class="recently-slide-vertical swiper-wrapper">
+                    <?php foreach ($products as $product) : ?>
+                        <div class="recently-item swiper-slide" style="height:90px;">
+                            <?php
+                            $productImage = $_imageHelper->init($product, 'category_page_list')->constrainOnly(false)->keepAspectRatio(true)->keepFrame(false)->resize(400)->getUrl();
+                            $productUrl   = $product->getUrlModel()->getUrl($product);
+                            ?>
+                            <div class="item product product-item">
+                                <div data-container="product-grid" class="product-item-info">
+                                    <a tabindex="-1" class="product photo product-item-photo" href="<?= /* @noEscape */
+                                    $productUrl; ?>">
+                                <span style="width:90px;" class="product-image-container">
+                                    <span style="padding-bottom: 100%;" class="product-image-wrapper">
+                                        <img width="90" height="90"
+                                             alt="<?= /* @noEscape */
+                                             $product->getName(); ?>"
+                                             src="<?= /* @noEscape */
+                                             $productImage; ?>"
+                                             class="product-image-photo"
+                                        />
+                                    </span>
+                                </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="recently-small-swiper-button-next">&nbsp;</div>
+                <div class="recently-small-swiper-button-prev">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-recently modal-recently-full-container desktop">
+    <div class="modal-recently-wrap">
+        <div class="modal-recently__title"><strong><?= $block->escapeHtml(__($block->getTitle())) ?></strong></div>
+        <div class="block-clear-all">
+            <a href="<?= $block->escapeUrl($block->getUrl('widget/clear/history')) ?>" class="clear-url-block">
+                <strong><?= $block->escapeHtml(__('Clear history')) ?></strong>
+            </a>
+        </div>
+        <div class="minimize-button">&nbsp</div>
+        <div class="modal-recently__content">
+            <div class="modal-recently-full swiper-container">
+                <div class="swiper-wrapper">
+                    <?php foreach ($products as $product) : ?>
+                        <div class="swiper-slide">
+                            <?php
+                            $productImage = $_imageHelper->init($product, 'category_page_list')->constrainOnly(false)->keepAspectRatio(true)->keepFrame(false)->resize(400)->getUrl();
+                            $productUrl   = $product->getUrlModel()->getUrl($product);
+                            ?>
+                            <div class="item product product-item">
+                                <div data-container="product-grid" class="product-item-info">
+                                    <a tabindex="-1" class="product photo product-item-photo" href="<?= /* @noEscape */
+                                    $productUrl; ?>">
+                                <span style="width:240px;" class="product-image-container">
+                                    <span style="padding-bottom: 100%;" class="product-image-wrapper">
+                                        <img width="240" height="300"
+                                             alt="<?= /* @noEscape */
+                                             $product->getName(); ?>"
+                                             src="<?= /* @noEscape */
+                                             $productImage; ?>"
+                                             class="product-image-photo"
+                                        />
+                                    </span>
+                                </span>
+                                    </a>
+                                    <div class="product details product-item-details">
+                                        <strong class="product name product-item-name">
+                                            <a href="<?= /* @noEscape */
+                                            $productUrl; ?>" class="product-item-link">
+                                                <?= /* @noEscape */
+                                                $product->getName(); ?>
+                                            </a>
+                                        </strong>
+                                        <div class="sku">
+                                        <?= /* @noEscape */
+                                                $product->getSku(); ?>
+                                        </div>
+                                        <?= /* @noEscape */
+                                        $block->getProductPrice($product); ?>
+                                        <div class="product-item-inner">
+                                            <div class="product actions product-item-actions">
+                                                <?php if ($showAddToCart) : ?>
+                                                    <div class="actions-primary">
+                                                        <?php if ($product->isSaleable()): ?>
+                                                            <?php if ($product->getTypeInstance()->hasRequiredOptions($product)): ?>
+                                                                <button class="action tocart primary"
+                                                                        data-mage-init='{"redirectUrl": {"url": "<?= /* @noEscape */
+                                                                        $block->getAddToCartUrl($product) ?>"}}' type="button"
+                                                                        title="<?= /* @noEscape */  __('View More') ?>">
+                                                                <span><?= /* @noEscape */__('View More') ?></span>
+                                                                </button>
+                                                            <?php else: ?>
+                                                                <?php
+                                                                $postData = $postDataHelper->getPostData($block->getAddToCartUrl($product), ['product' => $product->getEntityId()])
+                                                                ?>
+                                                                <button class="action tocart primary"
+                                                                        data-post='<?= /* @noEscape */
+                                                                        $postData; ?>'
+                                                                        type="button" title="<?= /* @noEscape */
+                                                                __('Add to Cart') ?>">
+                                                            <span><?= /* @noEscape */
+                                                                __('Add to Cart') ?></span>
+                                                                </button>
+                                                            <?php endif; ?>
+                                                        <?php else: ?>
+                                                            <?php if ($product->getIsSalable()): ?>
+                                                                <div class="stock available"><span><?= /* @noEscape */
+                                                                        __('In stock') ?></span></div>
+                                                            <?php else: ?>
+                                                                <div class="stock unavailable"><span><?= /* @noEscape */
+                                                                        __('Out of stock') ?></span></div>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <div class="actions-secondary" data-role="add-to-links">
+                                                    <?php if ($showWishlist || $showCompare): ?>
+                                                        <div class="secondary-addto-links actions-secondary"
+                                                             data-role="add-to-links">
+
+                                                            <?php if ($wishlistHelper->isAllow() && $showWishlist): ?>
+                                                                <a href="#" data-post='<?= /* @noEscape */
+                                                                $block->getAddToWishlistParams($product); ?>'
+                                                                   class="action towishlist" data-action="add-to-wishlist"
+                                                                   title="<?= /* @noEscape */
+                                                                   __('Add to Wish List') ?>">
+                                                            <span><?= /* @noEscape */
+                                                                __('Add to Wish List') ?></span>
+                                                                </a>
+                                                            <?php endif; ?>
+
+                                                            <?php if ($block->getAddToCompareUrl() && $showCompare): ?>
+                                                                <a href="#" class="action tocompare"
+                                                                   data-post='<?= /* @noEscape */
+                                                                   $compareHelper->getPostDataParams($product); ?>'
+                                                                   data-role="add-to-links"
+                                                                   title="<?= /* @noEscape */
+                                                                   __('Add to Compare'); ?>">
+                                                            <span><?= /* @noEscape */
+                                                                __('Add to Compare') ?></span>
+                                                                </a>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="recently-full-swiper-button-next">&nbsp;</div>
+                <div class="recently-full-swiper-button-prev">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-recently modal-recently-full-container mobile">
+    <div class="modal-recently-wrap">
+        <div class="modal-recently__title">
+            <strong><?= $block->escapeHtml(__($block->getTitle())) ?></strong>
+            <div class="close-popup">
+
+            </div>
+        </div>
+        <div class="action">
+        </div>
+        <div class="modal-recently__content">
+            <div class="modal-recently-full">
+                <div class="list-items">
+                    <?php foreach ($products as $product) : ?>
+                        <div class="block-item">
+                            <?php
+                            $productImage = $_imageHelper->init($product, 'category_page_list')->constrainOnly(false)->keepAspectRatio(true)->keepFrame(false)->resize(400)->getUrl();
+                            $productUrl   = $product->getUrlModel()->getUrl($product);
+                            ?>
+                            <div class="item product product-item">
+                                <div data-container="product-grid" class="product-item-info">
+                                    <a tabindex="-1" class="product photo product-item-photo" href="<?= /* @noEscape */
+                                    $productUrl; ?>">
+                                <span style="width:240px;" class="product-image-container">
+                                    <span style="padding-bottom: 100%;" class="product-image-wrapper">
+                                        <img width="240" height="300"
+                                             alt="<?= /* @noEscape */
+                                             $product->getName(); ?>"
+                                             src="<?= /* @noEscape */
+                                             $productImage; ?>"
+                                             class="product-image-photo"
+                                        />
+                                    </span>
+                                </span>
+                                    </a>
+                                    <div class="product details product-item-details">
+                                        <strong class="product name product-item-name">
+                                            <a href="<?= /* @noEscape */
+                                            $productUrl; ?>" class="product-item-link">
+                                                <?= /* @noEscape */
+                                                $product->getName(); ?>
+                                            </a>
+                                        </strong>
+                                        <div class="sku">
+                                        <?= /* @noEscape */
+                                                $product->getSku(); ?>
+                                        </div>
+                                        <?= /* @noEscape */
+                                        $block->getProductPrice($product); ?>
+                                        <div class="product-item-inner">
+                                            <div class="product actions product-item-actions">
+                                                <?php if ($showAddToCart) : ?>
+                                                    <div class="actions-primary">
+                                                        <?php if ($product->isSaleable()): ?>
+                                                            <?php if ($product->getTypeInstance()->hasRequiredOptions($product)): ?>
+                                                                <button class="action tocart primary"
+                                                                        data-mage-init='{"redirectUrl": {"url": "<?= /* @noEscape */
+                                                                        $block->getAddToCartUrl($product) ?>"}}' type="button"
+                                                                        title="<?= /* @noEscape */ __('View More') ?>">
+                                                                <span><?= /* @noEscape */ __('View More') ?></span>
+                                                                </button>
+                                                            <?php else: ?>
+                                                                <?php
+                                                                $postData = $postDataHelper->getPostData($block->getAddToCartUrl($product), ['product' => $product->getEntityId()])
+                                                                ?>
+                                                                <button class="action tocart primary"
+                                                                        data-post='<?= /* @noEscape */
+                                                                        $postData; ?>'
+                                                                        type="button" title="<?= /* @noEscape */
+                                                                __('Add to Cart') ?>">
+                                                            <span><?= /* @noEscape */
+                                                                __('Add to Cart') ?></span>
+                                                                </button>
+                                                            <?php endif; ?>
+                                                        <?php else: ?>
+                                                            <?php if ($product->getIsSalable()): ?>
+                                                                <div class="stock available"><span><?= /* @noEscape */
+                                                                        __('In stock') ?></span></div>
+                                                            <?php else: ?>
+                                                                <div class="stock unavailable"><span><?= /* @noEscape */
+                                                                        __('Out of stock') ?></span></div>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <div class="actions-secondary" data-role="add-to-links">
+                                                    <?php if ($showWishlist || $showCompare): ?>
+                                                        <div class="secondary-addto-links actions-secondary"
+                                                             data-role="add-to-links">
+
+                                                            <?php if ($wishlistHelper->isAllow() && $showWishlist): ?>
+                                                                <a href="#" data-post='<?= /* @noEscape */
+                                                                $block->getAddToWishlistParams($product); ?>'
+                                                                   class="action towishlist" data-action="add-to-wishlist"
+                                                                   title="<?= /* @noEscape */
+                                                                   __('Add to Wish List') ?>">
+                                                            <span><?= /* @noEscape */
+                                                                __('Add to Wish List') ?></span>
+                                                                </a>
+                                                            <?php endif; ?>
+
+                                                            <?php if ($block->getAddToCompareUrl() && $showCompare): ?>
+                                                                <a href="#" class="action tocompare"
+                                                                   data-post='<?= /* @noEscape */
+                                                                   $compareHelper->getPostDataParams($product); ?>'
+                                                                   data-role="add-to-links"
+                                                                   title="<?= /* @noEscape */
+                                                                   __('Add to Compare'); ?>">
+                                                            <span><?= /* @noEscape */
+                                                                __('Add to Compare') ?></span>
+                                                                </a>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="recently-full-swiper-button-next">&nbsp;</div>
+                <div class="recently-full-swiper-button-prev">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    require(['jquery', 'swiper94now'], function ($, Swiper) {
+        __heightSmallSwiperContainer = function (){
+            var $swiperSlide = $(".modal-recently-small-container .modal-recently__content .swiper-slide");
+            var $swiperSlideHeight = 90;
+            var $swiperContainerHeight = (90 + 20) * 3 - 3 ;
+            $swiperSlide.outerHeight(95.667);
+            $swiperSlide.parent().parent().height($swiperContainerHeight);
+        }
+
+        __activeShowFullContent = function (){
+            $('.button-action').click(function (){
+                $('.modal-recently-small-container').removeClass('active');
+                setTimeout(function(){$('.modal-recently-full-container').addClass('active');}, 400);
+            })
+        }
+
+        __activeShowSmallContent = function (){
+            $('.minimize-button').click(function (){
+                $('.modal-recently-full-container').removeClass('active');
+                setTimeout(function(){$('.modal-recently-small-container').addClass('active');}, 400);
+            })
+
+            $('body').keydown(function (e){
+                if(e.which == 27  &&  $('.modal-recently.desktop').hasClass('active')){
+                    $('.modal-recently-full-container').removeClass('active');
+                    setTimeout(function(){$('.modal-recently-small-container').addClass('active');}, 400);
+                }
+            })
+        }
+
+        __actionShowFullContentMobile =function (){
+            var $recentlyAction = $('.modal-recently .action');
+            var $recentlyMobile = $('.modal-recently.mobile');
+            $recentlyAction.click(function (){
+                $recentlyMobile.toggleClass('focus');
+            })
+
+            $('body').on('swipeleft', function (){
+                $recentlyMobile.addClass('focus');
+            })
+
+
+        }
+
+        __actionHideFullContentMobile = function (){
+            var $recentlyMobile = $('.modal-recently.mobile');
+            $recentlyMobile.on('swiperight', function (){
+                $(this).removeClass('focus');
+            })
+
+            $('.close-popup').click(function (){
+                $recentlyMobile.removeClass('focus');
+            })
+        }
+
+        __hideContentTouchOut =function () {
+            const $recentlyView = $('.modal-recently-wrap');
+            // const $recentlyViewContent = $('.modal-recently-wrap .modal-recently-wrap');
+
+            $(document).mouseup(e => {
+                if (!$recentlyView.is(e.target) && $recentlyView.has(e.target).length === 0) {
+                    if($recentlyView.hasClass('desktop')){
+                        $('.modal-recently-full-container').removeClass('active');
+                        setTimeout(function(){$('.modal-recently-small-container').addClass('active');}, 400);
+                    }else{
+                        $('.modal-recently-full-container').removeClass('focus');
+                    }
+                }
+            });
+        }
+        jQuery(document).ready(function () {
+            var swiper_small = new Swiper('.modal-recently-small', {
+                direction: 'vertical',
+                slidesPerView: 3,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '.recently-small-swiper-button-next',
+                    prevEl: '.recently-small-swiper-button-prev',
+                },
+            });
+            var swiper_full = new Swiper('.modal-recently-full', {
+                slidesPerView: 3,
+                spaceBetween: 0,
+                navigation: {
+                    nextEl: '.recently-full-swiper-button-next',
+                    prevEl: '.recently-full-swiper-button-prev',
+                },
+            });
+            __actionShowFullContentMobile();
+            __actionHideFullContentMobile();
+            __heightSmallSwiperContainer();
+            __activeShowFullContent();
+            __activeShowSmallContent();
+            __hideContentTouchOut();
+
+            $('.modal-recently').css('opacity','1');
+        });
+    });
+</script>

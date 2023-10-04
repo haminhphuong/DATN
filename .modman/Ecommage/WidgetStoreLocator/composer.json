@@ -1,0 +1,22 @@
+{
+  "name": "ecommage/widget-store-locator",
+  "version": "1.0.0",
+  "description": "N/A",
+  "type": "magento2-module",
+  "require": {
+    "magento/framework": "*",
+    "amasty/module-store-locator": "2.5.*",
+    "magento/module-widget": "101.2.*"
+  },
+  "license": [
+    ""
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Ecommage\\WidgetStoreLocator\\": ""
+    }
+  }
+}

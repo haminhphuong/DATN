@@ -1,0 +1,16 @@
+<if args="visible()">
+    <if args="pickupData().stores && pickupData().stores.length">
+        <form class="ampickup-store-container -checkout fieldset">
+            <each args="data:elems(), as: 'element'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </each>
+        </form>
+    </if>
+    <ifnot args="!pickupData().stores || pickupData().stores.length">
+        <div class="ampickup-nostores-message -background">
+            <p>
+                <span translate="'We regret to inform you that products you\'d like to buy can\'t be received at single pickup location. Please consider splitting your Order, using alternative shipping method (if available) or contacting store owner for negotiating other options'"></span>
+            </p>
+        </div>
+    </ifnot>
+</if>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Indexer\Model\Indexer">
+        <plugin name="Ecommage_Plugin_Indexer"
+                type="Ecommage\CustomAmastyXsearch\Plugin\Model\Indexer\Product\IsSale"
+                sortOrder="1"/>
+    </type>
+    <type name="Amasty\Xsearch\Block\Search\Tab">
+        <plugin name="search_tab" type="Ecommage\CustomAmastyXsearch\Plugin\Block\Search\Tab" sortOrder="10" disabled="false"  />
+    </type>
+    <preference for="Amasty\Blog\Model\ResourceModel\Posts\Collection" type="Ecommage\CustomAmastyXsearch\Model\ResourceModel\Posts\Collection"/>
+</config>

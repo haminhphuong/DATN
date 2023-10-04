@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">slider_category_collection_slider_form.slider_category_collection_slider_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Slider</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button class="Ecommage\SliderCategoryCollection\Block\Adminhtml\Slider\Edit\BackButton" name="back"/>
+            <button class="Ecommage\SliderCategoryCollection\Block\Adminhtml\Slider\Edit\DeleteButton" name="delete"/>
+            <button class="Ecommage\SliderCategoryCollection\Block\Adminhtml\Slider\Edit\SaveButton" name="save"/>
+            <button class="Ecommage\SliderCategoryCollection\Block\Adminhtml\Slider\Edit\SaveAndContinueButton" name="save_and_continue"/>
+        </buttons>
+        <layout>
+            <navContainerName>left</navContainerName>
+            <type>tabs</type>
+        </layout>
+        <namespace>slider_category_collection_slider_form</namespace>
+        <deps>
+            <dep>slider_category_collection_slider_form.slider_category_collection_slider_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="slider_category_collection_slider_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider class="Ecommage\SliderCategoryCollection\Model\Slider\DataProvider" name="slider_category_collection_slider_form_data_source">
+            <settings>
+                <requestFieldName>slider_ctg_id</requestFieldName>
+                <primaryFieldName>slider_ctg_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">General</label>
+            <dataScope>data</dataScope>
+        </settings>
+        <field name="image" sortOrder="10" formElement="imageUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">slider_category_collection</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Slider's Image</label>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <required>true</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="slider_category_collection/slider_image/image"/>
+                        </uploaderConfig>
+                        <previewTmpl>Ecommage_SliderCategoryCollection/image-preview</previewTmpl>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+        <field name="text_link" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">slider_category_collection</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Text Link</label>
+                <dataScope>text_link</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+</form>

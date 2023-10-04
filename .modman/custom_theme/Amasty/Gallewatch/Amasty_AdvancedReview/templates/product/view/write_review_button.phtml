@@ -1,0 +1,28 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_AdvancedReview
+ */
+?>
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Amasty\AdvancedReview\ViewModel\Reviews\Product\View\ListView\WriteReviewButton $viewModel
+ */
+
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($viewModel && $viewModel->isCanRender()): ?>
+    <div class="amreview-add-new">
+        <a href="<?= $escaper->escapeUrl($viewModel->getButtonUrl()) ?>"
+           title="<?= $escaper->escapeHtml(__('Write a review')) ?>"
+           id="amreview-toform"
+           data-amsl-scroll-to="#review-form"
+           class="btn__link amreview-button">
+            <?= $escaper->escapeHtml(__('Write a review'));?>
+        </a>
+    </div>
+<?php endif; ?>

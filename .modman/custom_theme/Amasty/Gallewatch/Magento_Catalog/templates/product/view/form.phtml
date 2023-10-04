@@ -1,0 +1,111 @@
+<?php
+/**
+ * @var Magento\Catalog\Block\Product\View $block
+ * @var Magento\Framework\Escaper $escaper
+ * @var Amasty\JetTheme\ViewModel\ProductCaret\ProductCaretConfigurationViewModel $viewModel
+ * @var Amasty\JetTheme\ViewModel\ProductPage\ProductPageViewModel $layoutViewModel
+ * @var Amasty\JetTheme\ViewModel\Catalog\Ajax $ajaxViewModel
+ */
+
+// phpcs:ignore
+$_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+$_product = $block->getProduct();
+$helperCatalog      = $this->helper(\Ecommage\CustomCatalog\Helper\Data::class); // @codingStandardsIgnoreLine
+$viewModel = $block->getViewModel();
+$ajaxViewModel = $block->getAjaxViewModel();
+$layoutViewModel = $block->getLayoutViewModel();
+
+$addToCartPosition = $layoutViewModel ? $layoutViewModel->getAddToCartPosition() : '';
+$stickyAddToCartView = $viewModel && $_product->isSaleable() ? $viewModel->isProductCaretEnabled() : null;
+
+$isAjaxAddToCartEnabled = $ajaxViewModel && $ajaxViewModel->isEnabledAjaxAddToCart();
+$ajaxAddToCartUrl = $isAjaxAddToCartEnabled ? $ajaxViewModel->getAjaxAddToCartUrl() : null;
+$stickyAuxiliary = $block->getLayout()->renderNonCachedElement('product.info.sticky.auxiliary');
+$qtyAndStock = $helperCatalog->checkQtyAndStockOptionProduct($_product);
+?>
+<?php if($qtyAndStock && $_product->isSalable()): ?>
+
+<div class="product-add-form"
+    <?php if ($stickyAddToCartView === 'horizontal'): ?>
+        data-mage-init='{"amStickyAddToCart":{
+            "isAjaxEnabled": "<?= /* @noEscape */ $isAjaxAddToCartEnabled ?>",
+            "ajaxAddToCartUrl": "<?= /* @noEscape */ $ajaxAddToCartUrl ?>",
+            "prices": {
+                "dataProductId": "<?= $escaper->escapeHtml($_product->getId()) ?>",
+                "priceConfig": <?= /* @noEscape */ $block->getJsonConfig() ?>
+            },
+            "selectors": {
+                 "productStickyParent": "#product-addtocart-button"
+            },
+            "customHtml": "<?= $escaper->escapeJs($stickyAuxiliary)?>"
+        }}'
+    <?php elseif ($stickyAddToCartView === 'sidebar'): ?>
+        data-mage-init='{"amProductCaret":{}}'
+    <?php endif; ?>>
+    <form data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+          data-amtheme-js="form"
+          action="<?= $escaper->escapeUrl($block->getSubmitUrl($_product)) ?>"
+          method="post"
+          id="product_addtocart_form"
+          class="amtheme-form-cart"
+        <?php if ($_product->getOptions()): ?>
+          enctype="multipart/form-data"
+        <?php endif; ?>>
+        <input type="hidden" name="product" value="<?= (int)$_product->getId() ?>" />
+        <input type="hidden" name="selected_configurable_option" value="" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <input type="hidden" name="item"  value="<?= (int)$block->getRequest()->getParam('id') ?>" />
+
+        <?= $block->getBlockHtml('formkey') ?>
+        <?= $block->getChildHtml('form_top') ?>
+          <div class="amtheme-add-form-bottom -<?= $escaper->escapeHtmlAttr($addToCartPosition) ?>">
+            <?= $block->getChildHtml('product_info_qty') ?>
+
+            <?php if ($addToCartPosition === 'on-line'): ?>
+                <?= $block->getChildHtml('add_to_cart_button') ?>
+            <?php endif; ?>
+
+            <?= $block->getChildHtml('form_bottom') ?>
+            <?= $block->getChildHtml('product-price-wrap') ?>
+
+            <?php if ($addToCartPosition === 'under'): ?>
+                <?= $block->getChildHtml('add_to_cart_button') ?>
+            <?php endif; ?>
+
+            <?= $block->getChildHtml('amtheme.product.payments') ?>
+            <?= $block->getChildHtml('amtheme.product.actions') ?>
+        </div>
+        <?php if (!$block->hasOptions()):?>
+            <?= $block->getChildHtml('product_info_form_content') ?>
+        <?php else:?>
+            <?php if ($_product->isSaleable() && $block->getOptionsContainer() == 'container1'):?>
+                <?= $block->getChildChildHtml('options_container') ?>
+            <?php endif;?>
+        <?php endif; ?>
+
+        <?php if ($_product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2'):?>
+            <?= $block->getChildChildHtml('options_container') ?>
+        <?php endif;?>
+
+
+
+        <?= $block->getChildHtml('amtheme.product.amazon') ?>
+    </form>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'priceBox'
+    ], function($){
+        var dataPriceBoxSelector = '[data-role="priceBox"]',
+            dataProductIdSelector = '[data-product-id="<?= $escaper->escapeHtml($_product->getId()) ?>"]',
+            priceBoxes = $(dataPriceBoxSelector + dataProductIdSelector);
+
+        priceBoxes = priceBoxes.filter(function(index, elem){
+            return !$(elem).find('.price-from').length;
+        });
+        priceBoxes.priceBox({'priceConfig': <?= /* @noEscape */ $block->getJsonConfig() ?>});
+    });
+</script>
+<?php endif;?>

@@ -1,0 +1,71 @@
+& when (@media-common = true) {
+    .wepb{
+        .page__lookbook{
+            .slick-slider{
+                button{
+                    &.slick-arrow{
+                        background-image: unset;
+                    }
+                }
+            }
+        }
+    }
+
+	.page__lookbook{
+        .slick-slider{
+            button{
+                &.slick-arrow{
+                    &::before{
+                        background-color: @color-theme;
+                        background-size: unset;
+                        background-position: unset;
+                        .w(14px);
+                        .h(14px);
+                    }
+
+                    &.slick-prev{
+                        &::before{
+                            transform: translate(-50%,-50%) rotate(-180deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        .slick-arrow{
+            .border-radius();
+            .box-shadow(0px 0px 10px rgba(0, 0, 0, 0.12));
+
+
+            &.slick-next{
+                &::before{
+                    .mask-image(icon-theme-arr-right-view,@color-theme);
+                }
+            }
+            
+            &.slick-prev{
+                &::before{
+                    .mask-image(icon-theme-arr-left-view,@color-theme);
+                }
+            }
+        }
+	}
+}
+
+& when (@media-target ='mobile'), (@media-target ='all') {
+   @media only screen and (max-width:(@screen__xl - 1)) {
+   		.cms-lookbook-detail{
+            .page.messages .messages{
+                margin-top: 10px;
+            }
+        }
+   }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .cms-lookbook-detail{
+        .page.messages .messages{
+            margin-top: 30px;
+        }
+    }
+}

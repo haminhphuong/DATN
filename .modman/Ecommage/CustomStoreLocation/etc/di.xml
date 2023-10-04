@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Storelocator\Model\Import\Location" type="Ecommage\CustomStoreLocation\Model\Import\Location"/>
+    <preference for="Amasty\Storelocator\Model\Import\Validator\Country" type="Ecommage\CustomStoreLocation\Model\Import\Validator\Country"/>
+    <preference for="Amasty\Storelocator\Model\ConfigHtmlConverter" type="Ecommage\CustomStoreLocation\Model\ConfigHtmlConverter"/>
+    <preference for="Amasty\Storelocator\Model\ImageProcessor" type="Ecommage\CustomStoreLocation\Model\ImageProcessor"/>
+    <preference for="Magento\Directory\Helper\Data" type="Ecommage\CustomStoreLocation\Plugin\Helper\RegionData"/>
+</config>

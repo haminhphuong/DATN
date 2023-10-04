@@ -1,0 +1,103 @@
+& when (@media-common = true) {
+    .modal-option-media{
+        &.modal-popup {
+            padding: 0;
+            display: block;
+            .action-close {
+                border: 1px solid @color-galle-boder;
+                .border-radius(4px);
+                top: 10px;
+                right: 10px;
+                padding: 0;
+                background: @color-white;
+                > span{
+                    .lib-visually-hidden-reset;
+                    line-height: 32px;
+                    margin-left: -5px;
+                    padding-right: 10px;
+                }
+            }
+        }
+        .modal-inner-wrap{
+            border-radius: 0;
+            min-height: 100vh;
+            width: calc(~"100vw - 40px");
+            background: transparent;
+        }
+        .modal-header{
+            min-height: 54px;
+        }
+        .modal-content{
+            padding: 10px;
+            img{
+                display: block;
+            }
+        }
+        iframe{
+            height: auto;
+            min-height: 300px;
+            width: 100%;
+        }
+    }
+    button.fancybox-arrow:hover{
+        background: none;
+        border: 0;
+        &:after{
+            background-color:@color-black;
+        }
+    }
+
+     .fancybox-container {
+        .fancybox-image{
+            .absolute-center;
+            max-width: 500px;
+            height: auto;
+        }
+    }
+   
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .modal-option-media{
+        &.modal-popup {
+            .action-close {
+                &::before{
+                    font-size: 3.2rem;
+                    line-height: 3.2rem;
+                }
+            }
+            .modal-inner-wrap{
+                left: 0;
+                right: 0;
+                max-width: 100vw;
+            }
+        }
+        .modal-content{
+            padding-top: 10px;
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .modal-option-media{
+        .modal-inner-wrap{
+            min-width: 100%;
+        }
+        #modal-option-gif{
+            display: flex;
+            margin: 0 -20px;
+            justify-content: center;
+            > center{
+                width: 50%;
+                padding: 0 20px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl){
+    .modal-option-media{
+        .modal-content{
+            padding: 20px 30px 30px;
+        }
+    }
+}

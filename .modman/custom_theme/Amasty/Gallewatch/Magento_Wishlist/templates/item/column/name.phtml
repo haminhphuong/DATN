@@ -1,0 +1,23 @@
+<?php
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Info $block */
+/** @var \Magento\Wishlist\Model\Item $item */
+
+$item = $block->getItem();
+$product = $item->getProduct();
+?>
+
+<strong class="product-item-name">
+    <a href="<?= $block->escapeUrl($block->getProductUrl($item)) ?>"
+       aria-label="<?= $block->escapeHtmlAttr($product->getName()) ?>"
+       title="<?= $block->escapeHtmlAttr($product->getName()) ?>"
+       class="product-item-link">
+        <?= $block->escapeHtml($product->getName()) ?>
+    </a>
+</strong>
+<?php if (!$product->isSaleable()): ?>
+    <?php if ($product->getIsSalable()): ?>
+        <p class="available stock amtheme-stock-visible" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
+            <?= $block->escapeHtml(__('In stock')) ?>
+        </p>
+    <?php endif; ?>
+<?php endif; ?>

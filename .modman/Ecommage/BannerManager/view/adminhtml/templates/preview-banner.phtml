@@ -1,0 +1,43 @@
+<?php
+
+/** @var $block \Magento\Framework\View\Element\Template */
+$bannerId = $block->getRequest()->getParam('banner_id');
+$previewUrl = $block->getUrl('banner/index/preview');
+?>
+<?php if ($bannerId): ?>
+    <?= $block->getLayout()->createBlock(
+        'Ecommage\BannerManager\Block\Banner',
+        'preview.banner',
+        [
+            'data' => [
+                'banner_id' => $bannerId
+            ]
+        ]
+    )->setData('area', 'frontend')
+              ->setTemplate('Ecommage_BannerManager::slider-pro.phtml')
+              ->toHtml(); ?>
+<?php else: ?>
+    <div id="modal-content" style="display: none;"></div>
+    <script>
+        require(['jquery', 'Magento_Ui/js/modal/modal', 'domReady!'], function ($, modal) {
+            $('body').on('click', 'button#preview', function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: '<?= $block->escapeJs($previewUrl) ?>',
+                    data: {form_key: window.FORM_KEY, banner_id: <?= $block->escapeHtml($bannerId) ?>},
+                    type: 'POST'
+                }).done(function (res) {
+                    $('#modal-content').html(res);
+                    var options = {
+                        type: 'popup', // popup hoặc slide
+                        responsive: true,
+                        title: '',
+                        buttons: []
+                    };
+                    var popup = modal(options, $('#modal-content'));
+                    $('#modal-content').modal('openModal');
+                });
+            });
+        });
+    </script>
+<?php endif; ?>

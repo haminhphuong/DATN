@@ -1,0 +1,30 @@
+<?php
+/**
+ * @var $block Magento\Customer\Block\Account\Customer
+ * @var $escaper Magento\Framework\Escaper
+ */
+?>
+
+<?php if ($block->customerLoggedIn()): ?>
+    <li class="amtheme-myaccount-link switcher">
+        <a href="<?= /* @noEscape */ $block->getUrl('customer/account/index'); ?>" rel="nofollow"><?= $escaper->escapeHtml(__('My Account')) ?></a>
+        <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "customer": {
+                            "component": "Magento_Customer/js/view/customer"
+                        }
+                    }
+                }
+            }
+        }
+        </script>
+        <?php if ($block->getChildHtml()): ?>
+            <div class="dropdown switcher-dropdown" data-target="dropdown">
+                <?= $block->getChildHtml() ?>
+            </div>
+        <?php endif; ?>
+    </li>
+<?php endif; ?>

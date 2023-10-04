@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ecommage_BannerManager::css/slider-pro.min.css" />
+    </head>
+    <referenceBlock name="content">
+        <block class="Magento\Framework\View\Element\Template" name="banner.preview.back" template="Ecommage_BannerManager::button-back.phtml"/>
+        <block class="Magento\Framework\View\Element\Template" name="banner.preview.template" template="Ecommage_BannerManager::preview-banner.phtml"/>
+    </referenceBlock>
+</page>

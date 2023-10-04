@@ -1,0 +1,39 @@
+@icon-rating-height: 20px;
+@button-info-width: calc(~"50% - 10px");
+@icon-star-empty: "\f006";
+@icon-star-full: "\f005";
+
+.rating-content-option(){
+	font-family: @font-awesome;
+    letter-spacing: 5px;
+	line-height: 1;
+}
+.rating-option(){
+    background: none;
+    color: @color-galle-yellow1;
+    font-size: 1.8rem;
+}
+.rating-option-lg(){
+    font-size: 2.4rem;
+}
+.rating-empty-content(){
+	.rating-content-option();
+	content: @icon-star-empty @icon-star-empty @icon-star-empty @icon-star-empty @icon-star-empty;
+}
+.rating-full-content(){
+	.rating-content-option();
+	content: @icon-star-full @icon-star-full @icon-star-full @icon-star-full @icon-star-full;
+}
+.rating-result(){
+    width: 105px;
+    &:before{
+        .rating-option();
+		.rating-empty-content();
+    }
+    > span:before{
+        .rating-option();
+		.rating-full-content();
+        overflow: hidden;
+    }
+}
+

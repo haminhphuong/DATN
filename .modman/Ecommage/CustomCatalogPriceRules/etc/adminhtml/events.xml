@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalogrule_rule_save_after">
+        <observer name="ecommage_customer_catalog_price_rules" instance="Ecommage\CustomCatalogPriceRules\Observer\UpdateAttributeCatalogRule" />
+    </event>
+    <event name="catalogrule_rule_save_before">
+        <observer name="ecommage_catalogrule_save" instance="Ecommage\CustomCatalogPriceRules\Observer\Controller\Adminhtml\Promo\Save" />
+    </event>
+</config>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="contact_custom_email_booking_email_template" label="Email Booking Template" file="booking_template.html" type="html" module="Ecommage_BookingViewProduct" area="frontend"/>
+    <template id="contact_custom_email_contact_email_template" label="Email Product Contact Template" file="product_contact_template.html" type="html" module="Ecommage_BookingViewProduct" area="frontend"/>
+</config>

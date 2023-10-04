@@ -1,0 +1,181 @@
+<?php
+
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+// @codingStandardsIgnoreStart
+$helper = $this->helper('Ecommage\CustomTheme\Helper\Data');
+?>
+<div class="customjs" data-mage-init='{"themeCustomJs":{}}'></div>
+<?php
+// @codingStandardsIgnoreStart
+?>
+<script src="<?= $block->escapeHtml($block->getViewFileUrl('Magento_Theme::js/utils/gw-svg-sprite.min.js')); ?>" async></script>
+<script src="<?= $block->escapeHtml($block->getViewFileUrl('Magento_Theme::js/utils/dhts-svg-sprite.min.js')); ?>" async></script>
+<script type="text/javascript">
+require(['jquery', 'swiper', 'mage/translate', 'Magento_Ui/js/modal/modal', 'domReady!'], function($, Swiper, $t,
+    modal) {
+
+    // Slider Brand Home page
+    var swiper1 = new Swiper('.swiper-brand', {
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        freeMode: true,
+        breakpoints: {
+            1280: {
+                slidesPerView: 6,
+                spaceBetween: 40,
+            },
+            768: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+            },
+            320: {
+                slidesPerView: 2.5,
+                spaceBetween: 10,
+            }
+        }
+    });
+    $('.sticky_footer li:nth-child(3)').click(function() {
+        $("html, body").animate({
+            scrollTop: $(document).height()
+        }, 1000);
+    })
+    $('.header__link-adress .footer__adress').click(function() {
+        $("html, body").animate({
+            scrollTop: $(document).height()
+        }, 1000);
+    })
+
+    // modal
+
+    var options1 = {
+        type: 'popup',
+        responsive: true,
+        title: '<?= $block->escapeHtml(__('User Manual')); ?>',
+        modalClass: "manual-userguide",
+        buttons: {}
+    };
+    // var popup1 = modal(options1, $('#popup-userManual'));
+    $(document).on('click', 'th.instructions', function() {
+        $('#popup-userManual').modal(options1).modal("openModal");
+        $(".page-header").css('z-index', '888');
+    })
+
+    var options = {
+        type: 'popup',
+        responsive: true,
+        title: '<?= $block->escapeHtml(__('Insurance')); ?>',
+        modalClass: "insurance",
+        buttons: {}
+    };
+    // var popup = modal(options, $('#popup-insurance'));
+
+    $(document).on('click', 'th.insurance', function() {
+        $("#popup-insurance").modal(options).modal("openModal");
+        $('.page-header').css('z-index', '888');
+    })
+
+    $(document).on('click', '#amreview-toform', function() {
+        $('.review-add.amtheme-popup-block').addClass('-amtheme-active');
+        $('body').addClass("-ampopup-opened");
+    })
+    $('body').on('click', '.amtheme-reviewform-block', function(e) {
+        if (!$(e.target).is($(this).find('*'), $(this)) ||
+            $(e.target).is($(this).find('.amtheme-button-close', '.amtheme-button-close *'))) {
+            $(this).removeClass('-amtheme-active');
+            $('body').removeClass("-ampopup-opened");
+        }
+    })
+
+    $('.cms-lookbook-detail .page-title-wrapper').appendTo('.cms-lookbook-detail .lookbook-detail-banner-main');
+
+    $('.amblog-index-post .mbt-table-of-content a').each(function(index) {
+        $(this).on('click', function(e) {
+            var heightHeader = $('.page-header').height();
+            var position = $($(this).attr('href')).offset().top;
+            var offsetTop = position - heightHeader;
+            // setTimeout(() => {
+                $("html, body").animate({ scrollTop: offsetTop}, "slow");
+                // window.scrollBy(0, );
+            // }, 1000);
+        });
+    });
+
+    $('.catalog-product-view .amtheme-actions-wrap .action.tocompare').on('click', function(e){
+        var ww = $(window).width();
+        if(ww < 1024){
+            setTimeout(() =>{
+                var offsetTop = $('.catalog-product-view .page.messages').offset().top;
+                $("html, body").animate({ scrollTop: offsetTop}, "slow");
+            },300);
+        }else{
+            setTimeout(() =>{
+                $("html, body").animate({ scrollTop: 0}, "slow");
+            },200);
+        }
+    })
+
+    $('.amblog-index-post .amblog-btn').on('click', function() {
+        $('.amblog-index-post .row-post-column').css('margin-top', '110px');
+        $('.amblog-index-post .amblog-comments-action').css('margin-bottom', '-30px');
+    })
+
+    $(document).ready(function() {
+        $('.cms-lookbook-detail .page-title-wrapper').appendTo(
+            '.cms-lookbook-detail .lookbook-detail-banner-main');
+        $('.cms-lookbook-detail .page-title-wrapper h1').css('display', 'block')
+    });
+
+    $(document).ready(function(){
+        var ww = $(window).width();
+        if(ww < 768){
+            if($('.page-products .category-txt').height() < 100){
+                $(this).next().css('box-shadow','none');
+            }
+        }else if(ww > 1023){
+            if($('.page-products .category-txt').height() < 120){
+                $(this).next().css('box-shadow','none');
+            }
+        }
+    });
+
+    $(".page-footer .widget-locator-store .store-heading").click(function () {
+        // $(this).next('.store-item-wrap').slideToggle(300);
+        $(this).toggleClass('active');
+    });
+
+    if(".amlocator-index-index .page-main .widget-locator-store .store-heading-amlocator"){
+        $(".amlocator-index-index .page-main .widget-locator-store .store-heading-amlocator").click(function () {
+            // $(this).next('.store-item-wrap').slideToggle(300);
+            $(this).toggleClass('active');
+        });
+    }
+    $(".amlocator-index-index .page-main .widget-locator-store .store-heading").removeClass('store-heading').addClass('store-heading-amlocator');
+
+});
+</script>
+<?php $scriptString = <<<script
+    require(['jquery'], function($){
+        $('body').on('click','.show-more',function(){
+            $(this).hide();
+            $(this).next().show();
+            $(this).parent().addClass('showmore');
+            $(this).parent().removeClass('showless');
+        });
+        $('body').on('click','.show-less',function(){
+            $(this).hide();
+            $(this).prev().show();
+            $(this).parent().addClass('showless');
+            $(this).parent().removeClass('showmore');
+        });
+        $('body').on('click','.amreview-showmore',function(){
+            $(this).toggleClass('active');
+            if(!$(this).hasClass('active')){
+                $(this).text('More info');
+            }else{
+                $(this).text('Less info');
+            }
+        });
+    });
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

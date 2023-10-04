@@ -1,0 +1,13 @@
+& when (@media-common = true){
+	.pagebuilder-button-link span {
+		border: 1px solid @color-main;
+	}
+	.showmore-info .pagebuilder-button-link span:before{
+		top: 50%;
+		transform: translateY(-50%) rotate(90deg);
+	}
+	.showmore-info.active .pagebuilder-button-link span:before{
+		transform: translateY(-50%) rotate(-90deg);
+	}
+
+}

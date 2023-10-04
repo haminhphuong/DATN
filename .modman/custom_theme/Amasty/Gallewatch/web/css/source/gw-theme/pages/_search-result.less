@@ -1,0 +1,83 @@
+& when (@media-common = true) {
+  .catalogsearch-result-index.page-layout-2columns-left .page-main{
+    >.columns{
+      //margin-top: 20px;
+      padding:0;
+      .column.main{
+        border-top: none;
+      }
+      .top-toolbar{
+        padding-bottom: 2px;
+        .toolbar-products{
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+  .amshopby-filter-current .amshopby-remove{
+    left: -15px;
+  }
+  .page-with-filter .search.results .toolbar-sorter .amtheme-select-block{
+    position: relative;
+    top: -20px;
+    margin: auto;
+  }
+  .catalogsearch-result-index.page-layout-2columns-left .page-main{
+    .toolbar.toolbar-products{
+      height: auto;
+      .toolbar-sorter{
+        margin-top: 20px;
+      }
+    }
+    .amtheme-select-block{
+      margin:0;
+    }
+    .category-view{
+      height: 0;
+    }
+  }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+  .catalogsearch-result-index.page-layout-2columns-left .page-main{
+    .columns{
+      margin-top: 0px;
+      padding:0;
+      .toolbar-products{
+        height: 50px;
+      }
+    }
+    .sidebar-main{
+      margin-top: 0;
+    }
+  }
+}
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+  @media only screen and (min-width: @screen__m) and (max-width: (@screen__l - 1)) {
+    .catalogsearch-result-index{
+      .page-main{
+        .breadcrumbs{
+          //display: block;
+          padding-left: 10px;
+        }
+      }
+      .top-toolbar{
+        .toolbar-sorter .amtheme-filter-wrap{
+          display: flex;
+        }
+        .amtheme-filter-button{
+          min-height: 40px;
+          margin: auto 0;
+        }
+      }
+    }
+  }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+  .catalogsearch-result-index.page-layout-2columns-left .page-main{
+    .columns{
+      margin-top: 20px;
+    }
+  }
+}

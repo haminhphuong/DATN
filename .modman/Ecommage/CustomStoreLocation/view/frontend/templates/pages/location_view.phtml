@@ -1,0 +1,132 @@
+<?php
+/** @var \Amasty\Storelocator\Model\Location $location */
+
+/** @var Location $block */
+
+/** @var LocationModel $viewModel */
+
+use Amasty\Storelocator\Block\View\Location;
+use Ecommage\CustomStoreLocation\ViewModel\LocationModel;
+
+$location = $block->getCurrentLocation();
+$location->setTemplatesHtml();
+$lat = $location->getLat();
+$lng = $location->getLng();
+
+$galleryImages = $block->getLocationGallery();
+$viewModel     = $block->getLocationModel();
+$cityName      = $viewModel->getCityName($location->getCityId());
+$stateName     = $viewModel->getStateName($location->getState());
+?>
+<div class="amlocator-location-main">
+    <div class="container">
+        <div class="row">
+            <div class="amlocator-block -map">
+                <?php foreach ($galleryImages as $image): ?>
+                    <?php if ($image['is_base'] == true): ?>
+                        <a target="_blank" href="<?= $block->escapeUrl($viewModel->getGoogleMapByLatLng($lat, $lng)) ?>"><img
+                                src="<?= $block->escapeUrl($image['path']) ?>"
+                                alt="<?= $block->escapeHtml($stateName) ?>"></a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+            <div class="map-direction-link">
+                <a target="_blank" href="<?= $block->escapeUrl($viewModel->getGoogleMapByLatLng($lat, $lng)) ?>"><?= $block->escapeHtml(__('View direction to this store')) ?></a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h3><?= $block->escapeHtml(__('Gallery & Details')) ?></h3>
+        <div class="row">
+            <div class="col-6">
+                <?php if (count($galleryImages)): ?>
+                    <div class="swiper-container">
+                        <ol class="post-items swiper-wrapper">
+                            <?php $iterator = 1; ?>
+                            <?php foreach ($galleryImages as $image): ?>
+                                <?php if ($image['is_base'] !== true): ?>
+                                    <?= /* @noEscape */
+                                    ($iterator++ == 1) ? '<li class="swiper-slide">' : '</li><li class="swiper-slide">' ?>
+                                    <div class="post-item-info">
+                                        <a class="amlocator-link"
+                                           href="<?= $block->escapeHtml($image['path']) ?>"
+                                           data-amlocator-js="location-image"
+                                           data-fancybox="gallery">
+                                            <img class="amlocator-image"
+                                                 title="<?= $block->escapeHtml($location->getName()) ?>"
+                                                 src="<?= $block->escapeHtml($image['path']) ?>"
+                                                 alt="<?= $block->escapeHtml($location->getName()) ?>"/>
+                                        </a>
+
+                                    </div>
+                                    <?= ($iterator == count($galleryImages) + 1) ? '</li>' : '' ?>
+                                <?php endif; ?>
+                            <?php endforeach ?>
+                        </ol>
+                        <div class="swiper-pagination"></div>
+
+                    </div>
+                <?php endif; ?>
+            </div>
+            <div class="col-6">
+                <?= $block->getChildBlock('amasty_store_location_page_attributes')
+                          ->setData('location', $location)
+                          ->toHtml();
+                ?>
+                <div class="amlocator-block">
+                    <span><?= $block->escapeHtml(__('Address | ')) ?></span>
+                    <span class="amlocator-text">
+                            <?= $block->escapeHtml($location->getAddress()) . ', ' . $block->escapeHtml($cityName) . ', ' . $block->escapeHtml($stateName) ?>
+                        </span>
+                </div>
+
+                <div class="amlocator-block">
+                    <?= $block->getChildBlock('amasty_store_locator_schedule')->setData('location', $location)->toHtml(); ?>
+                </div>
+
+                <?php if (!empty($location->getPhone())): ?>
+                    <div class="amlocator-block">
+                        <div class="amlocator-schedule-container">
+                            <div class="amlocator-blocks">
+                                <span class="amlocator-icon -phone"></span>
+                                <span class="amlocator-phone"><?= $block->escapeHtml(__('Phone number | ')); ?></span>
+                                <a href="tel:<?= $block->escapeHtml($location->getPhone()) ?>"
+                                   class="amlocator-link">
+                                    <strong><?= $block->escapeHtml($location->getPhone()) ?></strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <?php if (!empty($location->getLocationDescription())): ?>
+    <div class="container">
+            <div class="amlocator-description-grey">
+                <?= /** @escapeNotVerified */
+                $location->getLocationDescription() ?>
+            </div>
+    </div>
+    <?php endif; ?>
+</div>
+<script>
+    require([
+        'jquery',
+        'swiper',
+    ], function ($, swipeslider) {
+        var mySwiper = new swipeslider('.swiper-container', {
+            // Optional parameters
+            slidesPerView: 1,
+            centeredSlides: true,
+            loop: true,
+            slidesOffsetBefore: 0,
+            direction: 'horizontal',
+            dynamicBullets: true,
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        })
+    });
+</script>

@@ -1,0 +1,20 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Ecommage\BookingViewProduct\Model\ResourceModel\BookingView\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">booking_view_product</argument>
+            <argument name="eventPrefix" xsi:type="string">booking_view_product_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">booking_view_product_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Ecommage\BookingViewProduct\Model\ResourceModel\BookingView</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="manage_booking_product_listing_data_source" xsi:type="string">
+                    Ecommage\BookingViewProduct\Model\ResourceModel\BookingView\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

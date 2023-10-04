@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\Cart">
+        <plugin name="Ecommage_CustomCheckout::buynow_bundle" type="Ecommage\CustomCheckout\Plugin\Model\Cart"/>
+    </type>
+    <type name="Amasty\CheckoutCore\Controller\Index\Index">
+        <plugin name="Ecommage_CustomCheckout::checkoutOOS" type="Ecommage\CustomCheckout\Plugin\Controller\Index\CheckoutOOS"/>
+    </type>
+    <type name="Magento\Sales\Block\Items\AbstractItems">
+        <plugin name="Amasty_Delivarydate::OrderInfo" disabled="true"/>
+        <plugin name="Amasty_Delivarydate::OrderEmail" disabled="true"/>
+        <plugin name="Ecommage_CustomCheckout::fix_checkout_success" type="Ecommage\CustomCheckout\Plugin\Order\Info" />
+        <plugin name="Ecommage_CustomCheckout::fix_order_email" type="Ecommage\CustomCheckout\Plugin\Order\Email" />
+    </type>
+    <preference for="Ecommage\MomoWallet\Controller\Payment\ReturnAction" type="Ecommage\CustomCheckout\Controller\Payment\ReturnAction" />
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_JetTheme
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="sidebar.additional" remove="true"/>
+        <referenceBlock name="page.main.title" remove="true"/>
+        <move element="wrapper.description" destination="content" before="-" />
+        <move element="breadcrumbs" destination="product_list_toolbar" before="-"/>
+        <move element="category.view.container" destination="page.wrapper" before="category.related.slider.wrapper" />
+        <referenceContainer name="main.content">
+            <block class="Ecommage\Recommendation\Block\ProductList\Recommendation" name="recommendation.product.list" template="Ecommage_Recommendation::recommendation/product-list.phtml" after="-" ifconfig="recommendation/product_list/enable"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,7 @@
+<?php
+$helper = $this->helper('Ecommage\CustomTheme\Helper\Data'); // @codingStandardsIgnoreLine
+$script = $helper->getScriptAfterBody();
+?>
+<?php if($script): ?>
+    <?= /* @noEscape */ $script; ?>
+<?php endif; ?>

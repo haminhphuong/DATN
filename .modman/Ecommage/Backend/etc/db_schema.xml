@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="ecommage_schedule_update_product" resource="default" engine="innodb" comment="Schedule Update Product Table">
+        <column xsi:type="int" name="schedule_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Schedule Id"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Product Id"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Store Id"/>
+        <column xsi:type="text" name="info" nullable="false" comment="Data Update"/>
+        <column xsi:type="timestamp" name="schedule_date_end" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Time Update"/>
+        <column xsi:type="timestamp" name="schedule_date_start" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Time Update"/>
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false" identity="false" comment="Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="schedule_id"/>
+        </constraint>
+    </table>
+</schema>

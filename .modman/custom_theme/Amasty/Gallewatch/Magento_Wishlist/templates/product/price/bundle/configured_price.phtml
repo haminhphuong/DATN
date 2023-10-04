@@ -1,0 +1,65 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/** @var \Magento\Bundle\Pricing\Render\FinalPriceBox $block */
+/** @var \Magento\Bundle\Pricing\Price\FinalPrice $finalPriceModel */
+/** @var \Magento\Framework\Pricing\Price\PriceInterface $regularPriceModel */
+
+$schema = ($block->getZone() == 'item_view');
+$idSuffix = $block->getIdSuffix() ? $block->getIdSuffix() : '';
+$finalPriceModel = $block->getPrice();
+$minimalPrice = $finalPriceModel->getMinimalPrice();
+$regularPriceModel = $block->getPriceType('regular_price');
+$maximalRegularPrice = $regularPriceModel->getMaximalPrice();
+$regularPriceAttributes = [
+    'display_label'     => $block->escapeHtml(__('Regular Price')),
+    'price_id'          => $block->escapeHtml($block->getPriceId('old-price-' . $idSuffix)),
+    'price_type'        => 'oldPrice',
+    'include_container' => true,
+    'skip_adjustments'  => true,
+];
+
+?>
+<?php if ($block->hasSpecialPrice()): ?>
+    <p class="price-as-configured">
+        <span class="special-price">
+            <?= /* @noEscape */ $block->renderAmount(
+                $minimalPrice,
+                [
+                    'display_label'     => $block->escapeHtml(__('Special Price')),
+                    'price_id'          => $block->escapeHtml($block->getPriceId('product-price-' . $idSuffix)),
+                    'price_type'        => 'maxPrice',
+                    'include_container' => true,
+                    'schema' => $schema,
+                ]
+            ); ?>
+        </span>
+        <?php if ($minimalPrice < $maximalRegularPrice): ?>
+            <span class="old-price">
+                <?= /* @noEscape */ $block->renderAmount($maximalRegularPrice, $regularPriceAttributes); ?>
+            </span>
+        <?php endif ?>
+    </p>
+<?php else : ?>
+    <?php
+    $priceLabel = ($block->getPriceLabel() !== null)
+        ? $block->getPriceLabel()
+        : '';
+    ?>
+    <p class="price-as-configured">
+        <?= /* @noEscape */ $block->renderAmount(
+            $minimalPrice,
+            [
+                'display_label'     => $block->escapeHtml($priceLabel),
+                'price_id'          => $block->escapeHtml($block->getPriceId('product-price-' . $idSuffix)),
+                'price_type'        => 'finalPrice',
+                'include_container' => true,
+                'schema' => $schema,
+            ]
+        ); ?>
+    </p>
+<?php endif; ?>

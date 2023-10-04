@@ -1,0 +1,85 @@
+//
+//  Social icons styles
+//  _____________________________________________
+
+//
+//  Common
+//  ---------------------------------------------
+@color-theme-main: #662D91;
+
+& when (@media-common = true) {
+    .amtheme-socials-list {
+        & {
+            &:extend(.abs-reset-list all);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .amtheme-item {
+            margin-bottom: 0;
+            padding: 0 5px;
+        }
+
+        .amtheme-action {
+            & {
+                background: @color-theme-main;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+                padding: 5px;
+                width: @amtheme-social-icons__width;
+                height: @amtheme-social-icons__height;
+                border-radius: 50%;
+                vertical-align: top;
+                transition: all @amtheme__transition;
+            }
+
+            &:hover {
+                background: @amtheme-social-icons__hover__background;
+            }
+        }
+        .facebook{
+            img{
+                max-height: 16px;
+            }
+        }
+        .youtube{
+            img{
+                max-height: 12px;
+            }
+        }
+        .instagram{
+            img{
+                max-height: 14px;
+            }
+        }
+        .email{
+            img{
+                max-height: 12px;
+            }
+        }
+
+        .amtheme-icon:focus {
+            ._keyfocus &,
+            .ie11 ._keyfocus & {
+                border-radius: 50%;
+            }
+        }
+
+        .amtheme-action > svg {
+            max-height: 17px;
+        }
+
+        .amtheme-action path {
+            fill: @amtheme-social-icons__fill;
+        }
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {}

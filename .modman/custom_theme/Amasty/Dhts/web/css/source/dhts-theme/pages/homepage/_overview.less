@@ -1,0 +1,77 @@
+& when (@media-common = true) {
+    .heading-style{
+        color: @color-white;
+        position: relative;
+        text-transform: uppercase;
+    }
+
+    .cms-index-index{
+        .page-main-full-width{
+            .bg;
+            width:100%;
+        }
+        .page.messages{
+            position: relative;
+            z-index: 4;
+            width: 100%;
+        }
+    }
+}
+
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__xl - 1)) {
+        .cms-index-index{
+            .page-header{
+                .mb;
+                z-index: 900;
+            }
+            .page.messages{
+                top: 150px;
+            }
+        }
+    }
+}
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+    @media only screen and (min-width: @screen__xl) {
+        .cms-index-index{
+            .page.messages{
+                top: 170px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .heading-pr-xs{
+        .pr(85px);
+    }
+    .cms-index-index #maincontent{
+        .page.messages{
+            top: 100px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .heading-style{
+        width: max-content;
+        .mx(auto);
+
+        &::before,
+        &::after{
+            background-color: @color-white;
+            position: absolute;
+            content: "";
+            width: 120px;
+            height: 1px;
+            top: 50%;
+            .translate(100%,-50%);
+            right: -10px;
+        }
+        
+        &::before{
+            left: -10px;
+            .translate(-100%,-50%);
+        }
+    }
+}

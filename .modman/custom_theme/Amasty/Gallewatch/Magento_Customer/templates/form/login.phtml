@@ -1,0 +1,65 @@
+<?php
+/** @var \Magento\Customer\Block\Form\Login $block */
+?>
+<div class="block block-customer-login">
+    <div class="block-title">
+        <span id="block-customer-login-heading"
+              role="heading"
+              aria-level="2">
+            <?= $block->escapeHtml(__('Already Registered?')) ?>
+        </span>
+        <span class="block-subtitle">
+            <?= $block->escapeHtml(__('If you have an account, sign in with your email address.')) ?>
+        </span>
+    </div>
+    <div class="block-content" aria-labelledby="block-customer-login-heading">
+        <form class="form form-login oki"
+              action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
+              method="post"
+              id="login-form"
+              data-mage-init='{"validation":{}}'>
+            <?= $block->getBlockHtml('formkey') ?>
+            <fieldset class="fieldset login"
+                      data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+                <div class="field sparsh-user-name sparsh-mobile-number required">
+                    <label class="label" for="mobile_number"><span><?= $block->escapeHtml(__('Mobile Number')) ?></span></label>
+                    <div class="control">
+                        <input type="number"  name="login[username]" autocomplete="off" id="mobile_number" class="input-text"  title="<?= $block->escapeHtmlAttr(__('Mobile Number')) ?>" data-mage-init='{"mage/trim-input":{}}' data-validate="{required:true, 'validate-digits':true, 'validate-mobile-number':true}">
+                    </div>
+                </div>
+                <div class="field password required">
+                    <label class="label" for="pass"><?= $block->escapeHtml(__('Password')) ?></label>
+                    <div class="control">
+                        <input name="login[password]" type="password"
+                               <?php if ($block->isAutocompleteDisabled()): ?> autocomplete="off"<?php endif; ?>
+                               class="input-text"
+                               id="pass"
+                               title="<?= $block->escapeHtmlAttr(__('Password')) ?>"
+                               data-validate="{required:true}">
+                    </div>
+                </div>
+                <?= $block->getChildHtml('form_additional_info') ?>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button type="submit"
+                                class="action login primary"
+                                title="<?= $block->escapeHtml(__('Sign In')) ?>"
+                                aria-label="<?= $block->escapeHtml(__('Sign In')) ?>"
+                                name="send"
+                                id="send2">
+                            <?= $block->escapeHtml(__('Sign In')) ?>
+                        </button>
+                    </div>
+                    <div class="secondary">
+                        <a class="action remind"
+                           href="<?= $block->escapeUrl($block->getForgotPasswordUrl()) ?>"
+                           title="<?= $block->escapeHtml(__('Forgot Your Password?')) ?>"
+                           aria-label="<?= $block->escapeHtml(__('Forgot Your Password?')) ?>">
+                            <?= $block->escapeHtml(__('Forgot Your Password?')) ?>
+                        </a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="slider_category_collection" resource="default" engine="innodb"
+           comment="Slider Category Collection Table">
+        <column xsi:type="int" name="slider_ctg_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Slider Category ID"/>
+        <column xsi:type="text" name="text_link" nullable="false" comment="Text Link"/>
+        <column xsi:type="varchar" name="image" nullable="false" length="255" comment="Image"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="slider_ctg_id"/>
+        </constraint>
+    </table>
+</schema>

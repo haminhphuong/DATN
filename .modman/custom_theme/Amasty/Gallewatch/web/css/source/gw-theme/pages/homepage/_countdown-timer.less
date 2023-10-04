@@ -1,0 +1,161 @@
+@color-galle-custom: #B22E1C;
+& when (@media-common = true) {
+	.product-item .price-box{
+		.old-price-wrap{
+			justify-content: center;
+		}
+		.price-label{
+			// display: none;
+		}
+	}
+    #html-body [data-pb-style=G4EH7GA]{
+        justify-content:center;
+        display: flex;
+        padding: 0;
+        margin: -2px 0 0 0;
+    }
+    .pagebuilder-button-link{
+        .bt-all-link();
+    }
+     .row-countdown{
+        margin-bottom: -10px;
+        .col-countdown-timer{
+            flex-direction: row !important;
+            justify-content: flex-end !important;
+            align-items: center;
+        }
+        .countdown-text{
+            text-transform: uppercase;
+            font-weight: @font-weight__semibold;
+            // margin: auto 25px !important;
+            > p{
+                margin-bottom: 0 !important;
+            }
+        }
+        .countdown-time{
+            > p{
+                margin-bottom: 0;
+                letter-spacing: 0.05em;
+            }
+        }
+        .countdown-text-day{
+          display: flex;
+          align-items: center;
+          text-transform: capitalize;
+        }
+        .countdown-number{
+            .border-radius(5px);
+            background: @color-gray-fog;
+            color: @color-main;
+            font-weight: @font-weight__semibold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .countdown-wrap{
+            display: flex;
+            margin: 0 -5px;
+        }
+        .amcountdown-block-wrapper{
+            padding: 0;
+        }
+        .amcountdown-text{
+            .lib-visually-hidden();
+        }
+        .col-countdown-title{
+            > h2{
+                margin: 0;
+            }
+        }
+        .countdown-title{
+            position: relative;
+            font-style: italic;
+            text-transform: uppercase;
+            color: @color-galle-custom;
+            line-height: 36px;
+            h2{
+                letter-spacing: 0.05em;
+                // margin-top: 10px;
+            }
+            &:before{
+                content: "";
+                display: block;
+                position: absolute;
+                // width: 247px;
+                height: 3px;
+                background: @color-main;
+                // bottom: 8px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .row-countdown{
+        .col-countdown-timer, .col-countdown-title{
+            flex-basis: initial !important;
+        }
+        .col-countdown-timer{
+        	width: 30% !important;
+        }
+        .col-countdown-title{
+        	width: 70% !important;
+        }
+        .countdown-text-day{
+          font-size: 10px;
+        }
+        .countdown-number{
+             font-size: 14px;
+             height: 22px;
+             width: 22px;
+             padding: 0;
+             margin: 0 2px;
+        }
+        .countdown-title{
+        	h2{
+        		font-size: 16px;
+                margin-top: 0;
+        	}
+	        &:before{
+	        	width: 200px;
+                bottom: 12px;
+                height: 2px !important;
+	        }
+        }
+        .countdown-text{
+            .lib-visually-hidden();
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .row-countdown{
+        .countdown-number{
+            font-size: 18px;
+            height: 40px;
+            width: 40px;
+            margin: 0 5px;
+            padding: 3px;
+        }
+       	.countdown-title{
+            h2{
+                margin-top: 8px;
+            }
+            &:before{
+                width: 247px;
+                bottom: 11px;
+            }
+        }
+        .countdown-text{
+            margin: auto 15px !important;
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .row-countdown{
+        .countdown-text{
+            margin: auto 25px !important;
+            letter-spacing: 0.05em;
+        }
+    }
+}

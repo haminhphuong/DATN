@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="catalog_eav_attribute" resource="default" engine="innodb" comment="Catalog EAV Attribute Table">
+        <column xsi:type="int" name="position_compare" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Position Compare"/>
+        <column xsi:type="smallint" name="visual_swatch_in_filter" padding="5" unsigned="true" nullable="true" identity="false"
+                 comment="Use Visual Swatch In Filter"/>
+    </table>
+
+    <table name="amasty_amshopby_option_setting" resource="default">
+        <column xsi:type="text" name="user_manual" nullable="true" comment="Is User manual of brand"/>
+        <column xsi:type="text" name="insurance" nullable="true" comment="Is insurance of brand"/>
+    </table>
+</schema>

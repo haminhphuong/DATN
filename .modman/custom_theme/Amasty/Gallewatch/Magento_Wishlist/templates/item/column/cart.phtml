@@ -1,0 +1,135 @@
+<?php
+/**
+ * @var Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Cart $block
+ * @var Magento\Wishlist\Model\Item $item
+ * @var Magento\Wishlist\ViewModel\AllowedQuantity $viewModel
+ * @var Amasty\JetTheme\ViewModel\ProductPage\ProductPageViewModel $productViewModel
+ * @var Magento\Framework\Escaper $escaper
+ **/
+
+$item = $block->getItem();
+$product = $item->getProduct();
+$viewModel = $block->getData('allowedQuantityViewModel');
+$productViewModel = $block->getData('amProductViewModel');
+$dataPostParams = $block->getItemAddToCartParams($item);
+
+$qtyType = $productViewModel ? $productViewModel->getQuantitySelectorType() : 'round';
+$helper      = $this->helper(\Ecommage\CustomCatalog\Helper\Data::class); // @codingStandardsIgnoreLine
+$qtyAndStock = $helper->checkQtyAndStockOptionProduct($product);
+?>
+
+<?php foreach ($block->getChildNames() as $childName): ?>
+    <?php if ($childName !== 'customer.wishlist.item.remove'): ?>
+        <?= /* @noEscape */ $block->getLayout()->renderElement($childName, false) ?>
+    <?php endif; ?>
+<?php endforeach;?>
+
+<div class="box-tocart">
+    <fieldset class="fieldset">
+        <?php if ($item->canHaveQty() && $product->isVisibleInSiteVisibility()): ?>
+            <div class="field qty amtheme-qty-wrap <?= '-' . $escaper->escapeHtmlAttr($qtyType) ?>">
+                <label class="label amtheme-label" for="qty[<?= $block->escapeHtmlAttr($item->getId()) ?>]">
+                    <?= $escaper->escapeHtml(__('Qty')) ?>
+                </label>
+                <div class="control amtheme-qty-box" data-mage-init='{"amQty":{}}'>
+                    <div class="amtheme-minus"
+                         data-amtheme-js="qty-minus"
+                         tabindex="0"
+                         aria-label="<?= $escaper->escapeHtmlAttr(__('Minus')) ?>"
+                         title="<?= $escaper->escapeHtml(__('Minus')) ?>">
+                        <svg class="amtheme-icon">
+                            <use xlink:href="#icon-minus"/>
+                        </svg>
+                    </div>
+                    <div class="amtheme-plus"
+                         data-amtheme-js="qty-plus"
+                         tabindex="0"
+                         aria-label="<?= $escaper->escapeHtmlAttr(__('Plus')) ?>"
+                         title="<?= $escaper->escapeHtml(__('Plus')) ?>">
+                        <svg class="amtheme-icon">
+                            <use xlink:href="#icon-plus"/>
+                        </svg>
+                    </div>
+                    <input type="number"
+                           name="qty[<?= $escaper->escapeHtmlAttr($item->getId()) ?>]"
+                           id="qty[<?= $escaper->escapeHtmlAttr($item->getId()) ?>]"
+                           min="0"
+                           class="input-text qty amtheme-qty <?php if (!$product->isSaleable()) { echo 'qty-disabled'; } ?>"
+                           value="<?= /* @noEscape */ $block->getAddToCartQty($item) * 1 ?>"
+                           aria-label="<?= $escaper->escapeHtmlAttr(__('Qty')) ?>"
+                           title="<?= $escaper->escapeHtml(__('Qty')) ?>"
+                           tabindex="0"
+                           data-amtheme-js="qty-input"
+                           data-validate="{
+                           'required-number': true,
+                           'validate-greater-than-zero': true
+                           <?php if ($viewModel): ?>
+                           <?php $allowedQty = $viewModel->setItem($item)->getMinMaxQty(); ?>
+                           ,
+                           'validate-item-quantity': {
+                               'minAllowed': <?= /* @noEscape */ $allowedQty['minAllowed'] ?>,
+                               'maxAllowed': <?= /* @noEscape */ $allowedQty['maxAllowed'] ?>
+                               }
+                           <?php endif; ?>
+                           }"
+                           data-role="qty"
+                        <?php if (!$product->isSaleable()) { echo ' disabled="disabled"'; } ?>
+                    />
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if ($product->isSaleable()): ?>
+            <div class="product-item-actions">
+                <div class="delete">
+                    <?= /* @noEscape */ $block->getLayout()->renderElement('customer.wishlist.item.remove', false) ?>
+                </div>
+
+                <div class="actions-primary">
+                    <?php if(!$qtyAndStock): ?>
+                        <button type="button"
+                                title="<?= $block->escapeHtmlAttr(__('Detail')); ?>"
+                                class="action tocart secondary">
+                                <span class="product contact product-item-contact">
+                                    <a title="<?= $block->escapeHtmlAttr(__('Detail')); ?>"
+                                       href="<?= $block->escapeUrl($block->getProductUrl($product)) ?>"
+                                       class="product-item-link">
+                                        <?= $block->escapeHtmlAttr(__('Detail')); ?>
+                                    </a>
+                                </span>
+                        </button>
+                    <?php else: ?>
+                        <button type="button"
+                                data-post='<?= /* @noEscape */ $dataPostParams ?>'
+                                data-role="tocart"
+                                title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                data-item-id="<?= $escaper->escapeHtmlAttr($item->getId()) ?>"
+                                data-product-id="<?= $escaper->escapeHtmlAttr($product->getId()) ?>"
+                                class="action tocart secondary">
+                            <?= $escaper->escapeHtml(__('Add to Cart')) ?>
+                        </button>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php else:?>
+            <?php if ($product->getIsSalable()):?>
+                <div class="stock available"><?= $escaper->escapeHtml(__('In stock')) ?></div>
+            <?php else:?>
+                <div class="delete">
+                    <?= /* @noEscape */ $block->getLayout()->renderElement('customer.wishlist.item.remove', false) ?>
+                </div>
+                <button type="button"
+                        title="<?= $block->escapeHtmlAttr(__('Detail')); ?>"
+                        class="action tocart secondary">
+                        <span class="product contact product-item-contact">
+                            <a title="<?= $block->escapeHtmlAttr(__('Detail')); ?>"
+                               href="<?= $block->escapeUrl($block->getProductUrl($product)) ?>"
+                               class="product-item-link">
+                                <?= $block->escapeHtmlAttr(__('Detail')); ?>
+                            </a>
+                        </span>
+                </button>
+            <?php endif; ?>
+        <?php endif; ?>
+    </fieldset>
+</div>

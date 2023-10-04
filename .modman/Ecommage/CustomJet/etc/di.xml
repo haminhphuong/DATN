@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Laminas\Escaper\Escaper">
+        <plugin name="Ecommage_CustomJet::EscaperPlugin"
+                type="Ecommage\CustomJet\Plugin\EscaperPlugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Amasty\JetTheme\Model\ImageProcessor">
+        <plugin name="custom_resize_image"
+            type="Ecommage\CustomJet\Plugin\ImageProcessorPlugin"
+            sortOrder="10"/>
+    </type>
+</config>

@@ -1,0 +1,38 @@
+<?php
+/**
+ * @var $block Magento\Customer\Block\Account\AuthorizationLink
+ * @var $escaper Magento\Framework\Escaper
+ */
+
+$dataPostParam = '';
+$hrefAttr = $block->isLoggedIn() ? 'href="#"' : $block->getLinkAttributes();
+
+if ($block->isLoggedIn()) {
+    $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
+}
+?>
+<div class="account-icon amtheme-header-icon am-no-display-mobile <?= $block->isLoggedIn() ? ' switcher' : ''?>">
+    <?php if (!$block->isLoggedIn()): ?>
+        <a <?= /* @noEscape */ $block->getLinkAttributes() ?>
+            title="<?= $escaper->escapeHtmlAttr(__('Account')) ?>"
+            aria-label="<?= $escaper->escapeHtmlAttr(__('Account')) ?>">
+            <svg class="amtheme-icon">
+                <use xlink:href="#icon-account"/>
+            </svg>
+        </a>
+    <?php else: ?>
+        <span class="action toggle switcher-options"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              data-mage-init='{"dropdown":{}}'>
+            <svg class="amtheme-icon">
+                <use xlink:href="#icon-account"/>
+            </svg>
+        </span>
+        <?php if ($childBlock = $block->getLayout()->getBlock('top.links')): ?>
+            <div class="dropdown switcher-dropdown" data-target="dropdown">
+                <?= $childBlock->getChildHtml() ?>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>

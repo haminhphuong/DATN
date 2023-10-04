@@ -1,0 +1,164 @@
+& when (@media-common = true) {
+	.catalog-product_compare-index {
+		.amtheme-comparison-headings {
+			z-index: 80;
+		}
+		.amtheme-explore-link{
+			padding: 10px 25px;
+			text-align: center;
+		}
+		.amtheme-explore-link .action.tocart{
+			a{
+				color: @color-white;
+			}
+		}
+		.towishlist-wrap{
+			z-index: 85;
+			.amtheme-circle-icon .amtheme-icon{
+				fill: @color-main;
+				&:hover{
+					color: @color-main;
+				}
+			}
+		}
+	}
+
+	.amtheme-compare-products {
+		.product-item .product-item-link {
+			margin-bottom: 0;
+			min-height: 40px;
+		}
+	}
+
+	.amtheme-scroll-controller.-back {
+		left: 200px !important;
+	}
+
+	.amtheme-compare-header .page-title:after{
+		content: "";
+	}
+
+	.product-item.amtheme-compare-item{
+		.action.delete:before{
+			color: @color-main;
+		}
+		.amtheme-wrapper > .amtheme-photo{
+			width: 100%;
+			//.product-image-container{
+			//	width: 100% !important;
+			//}
+			.product-image-photo{
+				height: 100%;
+			}
+		}
+		.price-box{
+			display: flex;
+			.price-to,
+			.special-price{
+				padding-left: 10px;
+			}
+		}
+	}
+	.amtheme-product-attributes{
+		iframe{
+			max-width: 250px;
+		}
+		img{
+			max-width: 200px !important;
+			max-height: 200px !important;
+		}
+	}
+
+	.amtheme-compare-item .amtheme-wrapper{
+		margin: 0 auto;
+		.price, .price-wrapper{
+			margin: 0 auto;
+		}
+		.product-item .price-box .old-price .price-container .price{
+			font-size: 14px;
+		}
+		.link-stock-alert{
+			.lib-visually-hidden();
+		}
+	}
+
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+	.amtheme-product-attributes{
+		iframe{
+			max-width: 300px;
+		}
+		img{
+			max-width: 300px !important;
+			max-height: 300px !important;
+		}
+	}
+	.amtheme-scroll-controller > .amtheme-controller{
+		background: @color-white;
+		border-radius: 10px;
+		&:hover{
+			background: @color-white;
+		}
+		> .amtheme-icon{
+			fill: @color-main;
+		}
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+	.amtheme-compare-products{
+		.price-box .old-price .price{
+			font-size: 14px;
+		}
+	}
+}
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+	@media only screen and (min-width: @screen__m) and (max-width: (@screen__l - 1)){
+		.amtheme-comparsion-table .cell .attribute.label,
+		.amtheme-comparison-headings .cell .attribute.label{
+			width: 100px;
+		}
+		.amtheme-scroll-controller.-back {
+			left: 130px !important;
+		}
+		.amtheme-compare-products{
+			.action.tocart.primary{
+				font-size: 1.2rem;
+			}
+			.price-box .old-price .price{
+				font-size: 12px;
+			}
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	.amtheme-comparsion-table{
+		tr > th.cell.label.product.__web-inspector-hide-shortcut__{
+			display: none;
+		}
+	}
+	.amtheme-compare-products{
+		.product-item .product-item-link{
+			font-size: 1.1rem;
+		}
+		.action.tocart.primary{
+			font-size: 1.1rem;
+		}
+		.price-box{
+			.old-price{
+				.price{
+					font-size: 1.1rem;
+					line-height: 20px;
+				}
+			} 
+
+			.special-price{
+				.price{
+					font-size: 1.3rem;
+					line-height: 20px;
+				}
+			}
+		}
+	}
+}
+

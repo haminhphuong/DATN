@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="show_block_customer_review" class="Ecommage\CustomerReview\Block\Widget\Review">
+        <label translate="true">Block Customer Review</label>
+        <description> </description>
+        <parameters>
+            <parameter name="show_promo_banner" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Promo Banner</label>
+            </parameter>
+            <parameter name="choose_promo_banner" xsi:type="select" required="false" visible="true" source_model="Ecommage\CustomerReview\Model\Config\Source\PromoBanner">
+                <label translate="true">Choose Promo Banner</label>
+                <depends>
+                    <parameter name="show_promo_banner" value="1" />
+                </depends>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

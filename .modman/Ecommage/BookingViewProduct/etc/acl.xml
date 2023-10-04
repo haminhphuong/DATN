@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+                <resource id="Magento_Catalog::catalog">
+                    <resource id="Ecommage_BookingViewProduct::manage_booking" title="Manage Booking">
+                        <resource id="Ecommage_BookingViewProduct::manage_booking_product" title="Booking Product" sortOrder="10"/>
+                    </resource>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

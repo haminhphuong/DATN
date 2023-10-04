@@ -1,0 +1,99 @@
+<?php
+/** @var \Ecommage\BannerManager\Model\Banner\Item $item */
+
+/** @var \Ecommage\BannerManager\Block\Banner $block */
+$banner = $block->getBanner();
+if ($banner && $banner->getId() && $banner->getTypeId() == 1):
+    $items     = $block->getBannerItems();
+    $elementId = $block->getElementId();
+    $options   = $banner->getOptions();
+    $optionJson = str_replace('"', '', json_encode($options));
+    $width     = $options['width'] ?? 500;
+    $height    = $options['height'] ?? 300;
+    ?>
+    <div id="<?= $block->escapeHtmlAttr($elementId) ?>" class="slider-pro"
+         style="max-width: <?= $block->escapeHtml($width) ?>px;max-height: <?= $block->escapeHtml($height) ?>px;">
+        <div class="sp-slides">
+            <?php foreach ($items as $item): ?>
+                <div class="sp-slide">
+                    <?php if ($block->isVideo($item)): ?>
+                        <?php if($block->getVideoYoutube($item)): ?>
+                            <div class="sp-layer sp-static" data-horizontal="30" data-vertical="30">
+                                <div class="sp-video">
+                                    <?= /* @noEscape */ $block->getVideoYoutube($item); ?>
+                                </div>
+                            </div>
+                        <?php else:?>
+                            <div class="sp-layer sp-static" data-horizontal="30" data-vertical="30">
+                               <div class="sp-video">
+                                    <video style="object-fit: cover;" width="100%" height="100%" controls autoplay loop muted playsinline>
+                                      <source src="<?=  $block->escapeUrl($block->getBaseUrl() .'media/' . $block->getImageVideoPoster($item)) ?>" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <?php if($item->getLink() && !empty($item->getDisplayLink())):?>
+                            <a href="<?= $block->escapeUrl($item->getLink());?>">
+                        <?php endif; ?>
+                            <img class="sp-image"
+                                 src="<?= $block->escapeUrl($block->getgetViewFileUrl('Ecommage\BannerManager::images/blank.gif')) ?>"
+                                 data-src="<?= /* @noEscape */
+                                 $block->getImageDesktopUrl($item); ?>" alt="<?= /* @noEscape */
+                                $item->getTitle() ?>"
+                                 width="<?=  $block->escapeHtml($width) ?>" height="<?= $block->escapeHtml($height) ?>"
+                                 data-retina="<?= /* @noEscape */
+                                 $block->getImageMobileUrl($item); ?>"/>
+                        <?php if($item->getLink()):?>
+                            </a>
+                        <?php endif; ?>
+                    <?php endif; ?>
+
+                    <?php if (!empty($item->getOptions())): ?>
+                        <?php foreach ($item->getOptions() as $option): ?>
+                            <div
+                                <?php if (!empty($option['data_class'])): ?>
+                                    class="<?= $block->escapeHtmlAttr(implode(' ', $option['data_class'])) ?>"
+                                <?php endif; ?>
+                                <?php if (!empty($option['data_position'])): ?>
+                                    data-position="<?= $block->escapeHtmlAttr($option['data_position']) ?>"
+                                <?php endif; ?>
+                                <?php if (!empty($option['data_horizontal'])): ?>
+                                    data-horizontal="<?= $block->escapeHtmlAttr($option['data_horizontal']) ?>"
+                                <?php endif; ?>
+                                <?php if (!empty($option['data_vertical'])): ?>
+                                    data-vertical="<?= $block->escapeHtmlAttr($option['data_vertical']) ?>"
+                                <?php endif; ?>
+                                <?php if (!empty($option['data_width'])): ?>
+                                    data-width="<?= $block->escapeHtmlAttr($option['data_width']) ?>"
+                                <?php endif; ?>
+                            >
+                                <?php if (!empty($option['data_description'])): ?>
+                                    <p><?= /* @noEscape */  $option['data_description'] ?></p>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="sp-thumbnails">
+            <?php foreach ($items as $item): ?>
+                    <div class="sp-thumbnail">
+                        <div class="sp-thumbnail-title">
+                            <?= /* @noEscape */ $item->getTitle() ?>
+                        </div>
+                    </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <script>
+        require(['jquery', 'sliderPro','jquery/ui','domReady!'], function ($) {
+            $(document).ready(function ($) {
+                $('#<?= $block->escapeHtmlAttr($elementId) ?>').sliderPro(<?= /* @noEscape */ $optionJson; ?>);
+            });
+        });
+    </script>
+<?php endif; ?>
+

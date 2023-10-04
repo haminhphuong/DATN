@@ -1,0 +1,268 @@
+@color-custom-sale: #f6f6f6;
+.heading-underline(){
+    h2{
+        position: relative;
+        width: max-content;
+        padding-bottom: 10px;
+        margin-bottom: 0;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: @font-weight__semibold;
+
+        &::after{
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 3px;
+            bottom: -1px;
+            left: 0;
+            background-color: @color-main;
+        }
+    }
+}
+
+
+@color-bg-content:rgba(255, 255, 255, 0.8);
+& when (@media-common = true) {
+    .row-sale-promotion-brand div[data-content-type="text"] h2{
+        margin-top: 40px;
+    }
+    .row-outlet-promotion-brand div[data-content-type="text"] h2{
+        margin-top: 22px;
+    }
+    .row-outlet-promotion-brand,
+    .row-sale-promotion-brand{
+        .pagebuilder-column-group{
+            margin-bottom: 36px;
+        }
+
+        div[data-content-type="text"]{
+            .heading-underline();
+            margin-bottom: 40px;
+
+            h2{
+                font-size: 13px;
+                // line-height: 16px;
+            }
+        }
+
+        div[data-content-type="html"]{
+            width: 150px;
+            padding: 20px 15px;
+            background-color: @color-bg-content;
+            text-align: center;
+
+            img{
+                max-height: 67px;
+            }
+
+            h3{
+                color: @color-main;
+                font-weight: @font-weight__bold;
+                font-size: 12px;
+                line-height: 15px;
+                margin-bottom: 10px;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+            }
+
+            p{
+                font-weight: @font-weight__semibold;
+                font-size: 11px;
+                line-height: 13px;
+                margin-bottom: 0;
+            }
+
+            span{
+                font-size: 10px;
+                line-height: 12px;
+                font-weight: @font-weight__medium;
+                display: inline-block;
+                margin-bottom: 0;
+            }
+        }
+
+        div[data-content-type="button-item"]{
+            padding-bottom: 36px;
+        }
+
+        .pagebuilder-button-link{
+            background-color: @color-white;
+            line-height: 17px;
+            border-radius: @button__border-radius;
+            transition: all 0.25s;
+            border: 1px solid @color-galle-boder;
+            
+            &:hover{
+                background: @color-main;
+                color: @color-white;
+                border-color: @color-main;
+
+                span::before{
+                    background-color: @color-white;
+                }
+            }
+
+            span{
+                padding: 11.5px 50px 11.5px 20px;
+                border: 0;
+            }
+        }
+    }
+
+    .row-sale-brand-list{
+        padding-top: 40px;
+        background-color: @color-custom-sale;
+        border-radius: 20px;
+
+        .pagebuilder-column-group{
+            margin-bottom: 40px;
+            gap: 0 40px;
+
+            .pagebuilder-column{
+                flex-direction: column !important;
+                align-items: center;
+                gap: 5px 0;
+                padding: 0;
+            }
+
+            div[data-content-type="html"]{
+                span{
+                    display: inline-block;
+                    margin-right: 6px;
+                    font-size: 12px;
+                    line-height: 15px;
+                    color: @color-black;
+                }
+
+                strong{
+                    font-size: 11px;
+                    line-height: 13px;
+                    color: @color-main;
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .row-outlet-promotion-brand,
+    .row-sale-promotion-brand{
+        .pagebuilder-column{
+            align-items: center;
+            padding-top: 20px;
+            background-position: center;
+        }
+
+        div[data-content-type="html"]{
+            margin-bottom: 20px;
+        }
+    }
+
+    .row-outlet-promotion-brand{
+        .pagebuilder-column-group{
+            gap: 40px 0;
+        }
+    }
+
+    .row-sale-brand-list{
+        div[data-content-type="html"]{
+            width: 100%;    
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .row-outlet-promotion-brand,
+    .row-sale-promotion-brand{
+        div[data-content-type="text"]{
+            border-bottom: 1px solid @color-galle-boder;
+            h2{
+                font-size: 20px;
+                line-height: 36px;
+            }
+        }
+
+        .pagebuilder-column{
+            padding-left: 30px;
+        }
+
+        div[data-content-type="html"]{
+            width: 200px;
+            padding: 34.5px 38px;
+        }
+
+
+        .pagebuilder-column{
+            padding-right: 30px;
+            align-items: end;
+            justify-content: space-between !important;
+            flex-direction: row !important;
+        }
+    }
+
+    .row-outlet-promotion-brand{
+        .pagebuilder-column-group{
+            gap: 0 40px;
+        }
+
+        .pagebuilder-column{
+            background-position: center !important;
+            padding-right: 20px;
+        }
+
+        div[data-content-type="html"]{
+            width: 200px;
+            height: 100%;          
+            padding: 84.5px 38px;
+        }
+
+        div[data-content-type="button-item"]{
+            padding-bottom: 20px;
+        }
+    }
+
+    .row-sale-brand-list{
+        div[data-content-type="html"]{
+            max-width: 134px;
+            text-align: center;
+            margin-top: -4px;
+            margin-right: 4px;
+        }
+    }
+}
+
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (max-width: 768px){
+    }
+
+    @media only screen and (max-width: (@screen__l - 1)) {
+    }
+
+    @media only screen and (min-width:@screen__m)  and (max-width:(@screen__l)){
+
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .row-sale-promotion-brand{
+        .pagebuilder-column{
+            padding-left: 85px;
+        }
+    }
+
+    .row-outlet-promotion-brand{
+        .pagebuilder-column{
+            padding-left: 42px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = 1280px){
+    .row-outlet-promotion-brand,
+    .row-sale-promotion-brand{
+        .pagebuilder-column{
+            background-size: contain !important;
+        }
+    }
+}

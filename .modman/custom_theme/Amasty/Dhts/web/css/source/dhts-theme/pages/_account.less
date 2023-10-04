@@ -1,0 +1,35 @@
+& when (@media-common = true) {
+    //My returns
+    .amrma-chat-file.-preview{
+		&::before{
+			background: url("../images/attach-file-dhts.svg") center center / cover;
+		}
+	}
+
+	.amrma-chat-send{
+		.amrma-attach-file{
+			.amrma-label{
+				&::before{
+					background: url("../images/attach-file-dhts.svg") center center / cover;
+				}
+			}
+		}
+	}
+
+    .amrma-comment-block{
+		.amrma-chat-file{
+			&::before{
+				background: url("../images/attach-file-dhts.svg") center center / cover;
+			}
+		}
+	}
+    //End My returns
+
+	 body.account{
+		&.newsletter-manage-index{
+		  .actions-toolbar .primary:hover{
+			color: @color-black;
+		  }
+		}
+	  }
+}

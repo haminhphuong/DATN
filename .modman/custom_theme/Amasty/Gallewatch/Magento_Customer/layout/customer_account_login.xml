@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <container name="customer.login.am-social-below_login" htmlTag="div" htmlClass="amsl-login-page" after="-">
+                <block class="Amasty\SocialLogin\Block\Social"
+                       name="amsociallogin-social-below_login" template="Amasty_SocialLogin::social.phtml">
+                    <arguments>
+                        <argument name="cache_lifetime" xsi:type="number">86400</argument>
+                        <argument name="position"
+                                  xsi:type="const">Amasty\SocialLogin\Model\Source\LoginPosition::BELOW_LOGIN
+                        </argument>
+                    </arguments>
+                </block>
+            </container>
+            <container name="login.container.wrap" htmlClass="container-wrap" htmlTag="div" before="-">
+                <block class="Magento\Customer\Block\Form\Login" name="legend.text" template="Magento_Customer::legendtext.phtml" />
+            </container>
+        </referenceContainer>
+        <move element="customer.login.am-social-below_login" destination="customer.login.container" after="-"/>
+    </body>
+</page>

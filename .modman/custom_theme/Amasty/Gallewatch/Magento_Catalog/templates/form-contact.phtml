@@ -1,0 +1,95 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Ecommage\BookingViewProduct\Helper\Data $helper */
+$helper = $this->helper('Ecommage\BookingViewProduct\Helper\Data');// @codingStandardsIgnoreLine
+
+$helperCatalog      = $this->helper(\Ecommage\CustomCatalog\Helper\Data::class);// @codingStandardsIgnoreLine
+$_product = $helperCatalog->getCurrentProduct();
+$qtyAndStock = $helperCatalog->checkQtyAndStockOptionProduct($_product);
+?>
+<?php if(!$qtyAndStock || !$_product->isSaleable()): ?>
+<button class="action primary button-contact"><span><?= $block->escapeHtml(__('Contact')) ?></span></button>
+<div id="modal-contact" class="modal-booking-wrapper modal-hideon-loading">
+    <div class="modal-body-content">
+        <img class="modal-logo" alt="<?= $block->escapeHtml(__('logo image')) ?>" src="<?= $block->escapeUrl($block->getViewFileUrl("images/logo.svg"))?>"/>
+        <form action="<?= $block->escapeUrl('contact/contact/contactProduct')?>" id="form-validate-download" method="post"
+              class="form-default-gw form-booking-product"
+              enctype="multipart/form-data"
+              data-mage-init='{"validation":{}}'
+              data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+            <fieldset class="fieldset formRow">
+                <div class="field require first">
+                    <label for="fullname" class="label formRow--input-wrapper js-inputWrapper">
+                        <input class="formRow--input js-input" type="text" name="name" id="fullname" data-validate="{required:true}" aria-required="true" placeholder="<?= $block->escapeHtml(__('Full name:')) ?>" />
+                    </label>
+                </div>
+                <div class="field require">
+                    <label for="email" class="label formRow--input-wrapper js-inputWrapper">
+                        <input class="formRow--input js-input" type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="email" data-validate="{required:true}" aria-required="true" placeholder="<?= $block->escapeHtml(__('Email:')) ?>" />
+                    </label>
+                </div>
+                <div class="field require">
+                    <label for="contactphone" class="label formRow--input-wrapper js-inputWrapper">
+                        <input class="formRow--input js-input" type="number" pattern="[0-9]{10}" name="telephone" id="contactphone" data-validate="{required:true}" aria-required="true" placeholder="<?= $block->escapeHtml(__('Contact phone:')) ?>" />
+                    </label>
+                </div>
+                <div class="field">
+                    <label for="notes" class="label formRow--input-wrapper js-inputWrapper">
+                        <textarea class="formRow--input js-input" id="notes" name="notes" placeholder="<?= $block->escapeHtml(__('Notes:')) ?>"></textarea>
+                    </label>
+                </div>
+                <div class="field field-hidden">
+                    <label for="product_id" class="label">
+                        <input class="" type="hidden" name="product_id" id="product_id" value="<?= $block->escapeHtml($helper->getCurrentProduct()->getId());?>" placeholder="<?= $block->escapeHtml(__('')) ?>"/>
+                    </label>
+                </div>
+            </fieldset>
+            <div class="action-form">
+                <button class="action primary booking-now"><?= $block->escapeHtml(__('Contact now')) ?></button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/modal"
+    ],function($, modal) {
+        // Animate Form
+        var $inputItem = $(".js-inputWrapper");
+        $inputItem.length && $inputItem.each(function() {
+            var $this = $(this),
+                $input = $this.find(".formRow--input"),
+                placeholderTxt = $input.attr("placeholder"),
+                $placeholder;
+
+            $input.after('<span class="placeholder">' + placeholderTxt + "</span>"),
+                $input.attr("placeholder", ""),
+                $placeholder = $this.find(".placeholder"),
+
+                $input.val() ? $this.addClass("active") : $this.removeClass("active"),
+
+                $input.on("focusout", function() {
+                    $input.val() ? $this.addClass("active") : $this.removeClass("active");
+                }).on("focus", function() {
+                    $this.addClass("active");
+                });
+        });
+
+        var options = {
+            type: 'popup',
+            responsive: true,
+            modalClass: 'modal-default-gw booking-form-modal',
+            buttons: []
+        };
+        var popup = modal(options, $('#modal-contact'));
+        $(".button-contact").click(function() {
+            $('#modal-contact').modal('openModal');
+        });
+    });
+</script>
+<?php endif; ?>

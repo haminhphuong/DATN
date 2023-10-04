@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Widget\Model\Widget\Config">
+        <plugin name="ecommage_wysiwyg_config" type="Ecommage\Backend\Plugin\Model\Widget\ConfigWysiwyg"/>
+    </type>
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\Save">
+        <plugin name="Ecommage_Backend::schedule" type="Ecommage\Backend\Plugin\Controller\Adminhtml\Product\Save"/>
+    </type>
+    <preference for="Magento\ConfigurableProduct\Block\Adminhtml\Product\Edit\Button\Save" type="Ecommage\Backend\Preference\Block\Adminhtml\Product\Edit\Button\Save"/>
+</config>

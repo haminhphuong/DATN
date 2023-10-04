@@ -1,0 +1,14 @@
+<?php
+$helper = $this->helper('Ecommage\CustomMegaMenu\Helper\Data'); //@codingStandardsIgnoreLine
+$_disableDefaultMenu = $helper->getValue();
+$megaMenu = $helper->getMegaMenu();
+$widgetMega = $helper->getWidgetMegaMenu();
+$topMenu = $helper->getTopMenu();
+?>
+<?php if($_disableDefaultMenu): ?>
+	<nav class="cdz-navigation" data-action="navigation">
+	<?= $widgetMega->setMenu($megaMenu->getIdentifier())->toHtml(); ?>
+	</nav>
+<?php else: ?>
+	<?= $topMenu->setTemplate('Magento_Theme::html/topmenu.phtml')->toHtml(); ?>
+<?php endif ?>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="NiceForNow\RecentlyProduct\Block\RecentlyViewProduct">
+        <plugin name="add_attribute_brand_collection"
+                type="Ecommage\WidgetRecentlyView\Block\AfterGetCollection"
+                sortOrder="1" disabled="false"/>
+    </type>
+</config>

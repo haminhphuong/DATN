@@ -1,0 +1,14 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/* @var \Ecommage\CustomCatalog\Block\Customer\Wishlist\Item\Column\AddCompare $block */
+/** @var \Magento\Catalog\Helper\Product\Compare $helper */
+$helper = $this->helper("\Magento\Catalog\Helper\Product\Compare");// @codingStandardsIgnoreLine
+?>
+
+<a href="#" data-role="add-compare" data-post-compare='<?= /* @noEscape */ $helper->getPostDataParams($block->getItem()->getProduct()) ?>' title="<?= $block->escapeHtmlAttr(__('Add Compare')) ?>" class="btn-add-compare action compare">
+    <span><?= $block->escapeHtml(__('Add Compare')) ?></span>
+</a>

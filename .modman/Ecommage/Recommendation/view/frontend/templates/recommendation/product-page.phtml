@@ -1,0 +1,101 @@
+<?php
+/**
+ * Product list template
+ *
+ * @var $block \Ecommage\Recommendation\Block\ProductPage\Recommendation
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Ecommage\Recommendation\Helper\Data $helper
+ * @var \Ecommage\BookingViewProduct\Helper\Data $helperCatalog
+
+ */
+?>
+
+<?php
+$helper = $this->helper('Ecommage\Recommendation\Helper\Data'); // @codingStandardsIgnoreLine
+$helperCatalog = $this->helper('Ecommage\CustomCatalog\Helper\Data');// @codingStandardsIgnoreLine
+$num = $helper->numProductPage();
+$scenarioIdPeopleAlsoViewed = $helper->scenariaIdPeopleAlsoViewed();
+$scenarioIdSimilarProduct = $helper->scenariaIdSimilarProduct();
+$url = $helper->urlRecommendationProductPage();
+$product = $block->getProduct();
+$collections = $block->getCollection();
+$flag = $block->getFlag();
+$title = $helper->getTitle() ?: '';
+$typePeople = $block::PEOPLE_ALSO_VIEWED;
+$typeSimilar = $block::SIMILAR_PRODUCT;
+?>
+<?php if($collections): ?>
+    <div class="recommendation-slider block">
+        <div class="block-title title title__wrapper" title="<?= $escaper->escapeHtmlAttr($title) ?>">
+             <span class="text_line">
+                 <?= $block->escapeHtml($title) ?>
+             </span>
+        </div>
+        <div class="swiper-container product-items" id="<?= $block->escapeHtml($block->getCacheKey()) ?>">
+            <div class="swiper-wrapper">
+                <?php foreach ($collections as $product) : ?>
+                    <div class="swiper-slide">
+                        <div class="item product product-item">
+                            <div data-container="product-grid" class="product-item-info">
+                                <a tabindex="-1" class="product photo product-item-photo" href="<?= $block->escapeUrl($helper->getProductUrl($product->getId(),$block->getProductUrl($product))) ?>">
+                                    <?= $block->getImage($product, 'category_page_list')->toHtml() ?>
+                                </a>
+                                <div class="product details product-item-details">
+                                    <strong class="product name product-item-name">
+                                        <a href="<?= $block->escapeUrl($helper->getProductUrl($product->getId(),$block->getProductUrl($product))) ?>" class="product-item-link">
+                                            <?= $block->escapeHtml($product->getName()) ?>
+                                        </a>
+                                    </strong>
+                                    <?php
+                                    $qtyAndStock = $helperCatalog->checkQtyAndStockOptionProduct($product);
+                                    ?>
+                                    <?php if(!$qtyAndStock || !$product->isSalable()): ?>
+                                        <div class="product-contact">
+                                            <?= $block->escapeHtml(__('Contact Price')); ?>
+                                        </div>
+                                    <?php else: ?>
+                                    <div class="product-price">
+                                        <?= /* @noEscape */ $block->getProductPrice($product) ?>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next-<?= $block->escapeHtml($block->getCacheKey()) ?>"></div>
+            <div class="swiper-button-prev-<?= $block->escapeHtml($block->getCacheKey()) ?>"></div>
+        </div>
+    </div>
+    <script type="text/x-magento-init">
+    {
+        "#maincontent": {
+            "recommendationSlider": {
+                "cacheKey": "<?= $block->escapeHtml($block->getCacheKey()) ?>"
+            }
+        }
+    }
+    </script>
+<?php endif; ?>
+<?php if($flag): ?>
+<div class="recommendation-people-also-viewed page-products products products-grid amrelated-grid-wrapper"></div>
+<div class="recommendation-similar-product page-products products products-grid amrelated-grid-wrapper"></div>
+<script type="text/x-magento-init">
+    {
+        "#maincontent": {
+            "recommendationProductPage": {
+                "num": "<?= $escaper->escapeHtml($num); ?>",
+                "scenarioIdPeopleAlsoViewed": "<?= $escaper->escapeHtml($scenarioIdPeopleAlsoViewed) ?>",
+                "scenarioIdSimilarProduct": "<?= $escaper->escapeHtml($scenarioIdSimilarProduct) ?>",
+                "productId": "<?= $escaper->escapeHtml($product->getId()) ?>",
+                "url": "<?= $escaper->escapeUrl($url) ?>",
+                "typePeople": "<?= $escaper->escapeHtml($typePeople) ?>",
+                "typeSimilar": "<?= $escaper->escapeHtml($typeSimilar) ?>"
+            }
+        }
+    }
+</script>
+<?php endif; ?>
+

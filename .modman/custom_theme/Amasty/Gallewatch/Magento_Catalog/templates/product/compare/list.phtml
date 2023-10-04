@@ -1,0 +1,270 @@
+<?php
+/**
+ * @var $block \Magento\Catalog\Block\Product\Compare\ListCompare
+ * @var $escaper Magento\Framework\Escaper
+ */
+
+// phpcs:disable PSR2.ControlStructures.SwitchDeclaration
+?>
+<?php
+$total = $block->getItems()->getSize();
+// phpcs:ignore
+$helper = $this->helper(Magento\Catalog\Helper\Output::class);
+// phpcs:ignore
+$wishlistHelper = $this->helper(Magento\Wishlist\Helper\Data::class);
+// phpcs:ignore
+$compareHelper = $this->helper(Magento\Catalog\Helper\Product\Compare::class);
+$viewModel = $block->getViewModel();
+$isAjaxWishListEnabled = $viewModel ? $viewModel->isEnabledAjaxAddToWishlist() : false;
+
+$helperCatalog      = $this->helper(\Ecommage\CustomCatalog\Helper\Data::class); // @codingStandardsIgnoreLine
+
+?>
+<?php if ($total):?>
+    <div class="amtheme-compare-products">
+        <div class="amtheme-scroll-controller -back"
+             data-amtheme-compare="scroll-back-container">
+            <div class="amtheme-controller"
+                 data-amtheme-compare="scroll-back">
+                <svg class="amtheme-icon">
+                    <use xlink:href="#icon-arrow-left-min" />
+                </svg>
+            </div>
+        </div>
+        <div class="amtheme-scroll-controller -forward"
+             data-amtheme-compare="scroll-forward-container">
+            <div class="amtheme-controller"
+                 data-amtheme-compare="scroll-forward">
+                <svg class="amtheme-icon">
+                    <use xlink:href="#icon-arrow-right-min" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="amtheme-compare-sticky" data-amtheme-compare="sticky-products">
+            <div class="amtheme-compare-items">
+                <?php foreach ($block->getItems() as $item):?>
+                    <div class="amtheme-item product-item" data-amtheme-compare="sticky-product">
+                        <div class="amtheme-image">
+                            <?= $block->getImage($item, 'product_comparison_list')->toHtml() ?>
+                        </div>
+                        <span class="product-item-link">
+                            <?php // phpcs:ignore ?>
+                            <?= /* @noEscape */ $helper->productAttribute($item, $item->getName(), 'name') ?>
+                        </span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <div class="table-wrapper comparison amtheme-comparsion-wrapper am-custom-scrollbar"
+             data-amtheme-compare="container">
+            <table class="data table table-comparison amtheme-comparsion-table"
+                   id="product-comparison"
+                   data-amtheme-compare="compare-table"
+                   data-mage-init='{"amCompareList":{}}'>
+                <thead>
+                <tr>
+                    <?php $index = 0; ?>
+                    <?php /** @var $item \Magento\Catalog\Model\Product */ ?>
+                    <?php foreach ($block->getItems() as $item):?>
+                        <?php $qtyAndStock = $helperCatalog->checkQtyAndStockOptionProduct($item);?>
+
+                        <?php if ($index++ == 0):?>
+                            <th scope="row"
+                                class="cell label product"
+                                data-amtheme-compare="attrubute-label">
+                            </th>
+                        <?php endif; ?>
+                        <td class="cell product info amtheme-compare-item product-item"
+                            data-amtheme-compare="product"
+                            data-th="<?= $block->escapeHtml(__('Product')) ?>" >
+                            <div class="amtheme-wrapper">
+                                <button data-post='<?= /* @noEscape */ $compareHelper->getPostDataRemove($item) ?>'
+                                        class="action delete hidden-print button-as-link"
+                                        title="<?= $block->escapeHtml(__('Remove Product')) ?>"
+                                        aria-label="<?= $block->escapeHtml(__('Remove Product')) ?>">
+                                </button>
+                                <div class="amtheme-photo amtheme-photo-wrapper">
+                                    <a class="product-item-photo"
+                                       href="<?= $block->escapeUrl($block->getProductUrl($item)) ?>"
+                                       title="<?= /* @noEscape */ $block->stripTags($item->getName(), null, true) ?>"
+                                       aria-label="<?= /* @noEscape */ $block->stripTags($item->getName(), null, true) ?>"
+                                       target="_blank">
+                                        <?= $block->getImage($item, 'product_comparison_list')->toHtml() ?>
+                                    </a>
+                                    <?php
+                                    // phpcs:ignore
+                                    if ($wishlistHelper->isAllow()):?>
+                                        <div class="towishlist-wrap">
+                                            <a href="#"
+                                               data-post='<?= /* @noEscape */ $block->getAddToWishlistParams($item) ?>'
+                                                <?php if ($isAjaxWishListEnabled): ?>
+                                                    data-amtheme-js="ajax-wishlist"
+                                                <?php else: ?>
+                                                    data-action="add-to-wishlist"
+                                                <?php endif; ?>
+                                               class="action towishlist amtheme-circle-icon hidden-print"
+                                               title="<?= $escaper->escapeHtmlAttr(__('Add to Wishlist')) ?>"
+                                               aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Wishlist')) ?>">
+                                                <svg class="amtheme-icon -hover-bg">
+                                                    <use xlink:href="#icon-wishlist"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <a class="product-item-link"
+                                   href="<?= $block->escapeUrl($block->getProductUrl($item)) ?>"
+                                   title="<?= /* @noEscape */ $block->stripTags($item->getName(), null, true) ?>"
+                                   aria-label="<?= /* @noEscape */ $block->stripTags($item->getName(), null, true) ?>">
+                                    <?php // phpcs:ignore ?>
+                                    <?= /* @noEscape */ $helper->productAttribute($item, $item->getName(), 'name') ?>
+                                </a>
+                                <?php if(!$qtyAndStock || !$item->isSalable()): ?>
+                                    <div class="product-contact">
+                                        <?= $block->escapeHtml(__('Contact Price')); ?>
+                                    </div>
+                                <?php else: ?>
+                                    <?= /* @noEscape */ $block->getProductPrice($item, '-compare-list-top') ?>
+                                <?php endif; ?>
+
+                            </div>
+                        </td>
+                    <?php endforeach; ?>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <?php $index = 0; ?>
+                    <?php foreach ($block->getItems() as $item):?>
+                        <?php $qtyAndStock = $helperCatalog->checkQtyAndStockOptionProduct($item);?>
+                        <?php if ($index++ == 0):?>
+                            <th></th> <!-- Skip header cell -->
+                        <?php endif; ?>
+                        <td class="amtheme-explore-link hidden-print">
+                            <?php if(!$qtyAndStock): ?>
+                                <button type="button"
+                                        title="<?= $block->escapeHtmlAttr(__('Detail')); ?>"
+                                        class="action tocart primary">
+                                        <span class="amtheme-title">
+                                            <a title="<?= $block->escapeHtmlAttr(__('Detail')); ?>"
+                                               href="<?= $block->escapeUrl($block->getProductUrl($item)) ?>"
+                                               class="product-item-link">
+                                                <?= $block->escapeHtmlAttr(__('Detail')); ?>
+                                            </a>
+                                        </span>
+                                </button>
+                            <?php else: ?>
+                                <?php if ($item->isSaleable() && $qtyAndStock):?>
+                                    <form data-role="tocart-form"
+                                          action="<?= $escaper->escapeUrl($compareHelper->getAddToCartUrl($item)) ?>"
+                                          data-amtheme-js="ajax-tocart"
+                                          method="post">
+                                        <?= $block->getBlockHtml('formkey') ?>
+                                        <input type="hidden"
+                                               name="product"
+                                               value="<?= /* @noEscape */ $item->getId() ?>">
+                                        <button type="submit" class="action tocart primary">
+                                            <span class="amtheme-title"><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
+                                        </button>
+                                    </form>
+                                <?php else:?>
+                                    <?php if ($item->getIsSalable() && $qtyAndStock):?>
+                                        <div class="stock available"><?= $escaper->escapeHtml(__('In stock')) ?></div>
+                                    <?php else:?>
+                                        <button type="button"
+                                                title="<?= $block->escapeHtmlAttr(__('Detail')); ?>"
+                                                class="action tocart primary">
+                                        <span class="amtheme-title">
+                                            <a title="<?= $block->escapeHtmlAttr(__('Detail')); ?>"
+                                               href="<?= $block->escapeUrl($block->getProductUrl($item)) ?>"
+                                               class="product-item-link">
+                                                <?= $block->escapeHtmlAttr(__('Detail')); ?>
+                                            </a>
+                                        </span>
+                                        </button>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </td>
+                    <?php endforeach; ?>
+                </tr>
+                </tbody>
+                <tbody class="amtheme-product-attributes">
+                <?php foreach ($block->getAttributes() as $attribute):?>
+                    <?php $index = 0; ?>
+                    <?php if ($block->hasAttributeValueForProducts($attribute)):?>
+                        <tr>
+                            <?php foreach ($block->getItems() as $item):?>
+                                <?php if ($index++ == 0):?>
+                                    <th scope="row" class="cell label">
+                                        <span class="attribute label">
+                                            <?= $block->escapeHtml($attribute->getStoreLabel() ? $attribute->getStoreLabel() : __($attribute->getFrontendLabel())) ?>
+                                        </span>
+                                    </th>
+                                <?php endif; ?>
+                                <td class="cell product attribute">
+                                    <div class="attribute value">
+                                        <?php switch ($attribute->getAttributeCode()) {
+                                            case "price":
+                                                ?><?= /* @noEscape */ $block->getProductPrice($item, '-compare-list-' . $attribute->getCode()) ?><?php
+                                                break;
+                                            case "small_image":
+                                                ?><?= $block->getImage($item, 'product_small_image')->toHtml() ?><?php
+                                                break;
+                                            default:
+                                                if (is_string($block->getProductAttributeValue($item, $attribute))):
+                                                    // phpcs:ignore
+                                                    ?><?= /* @noEscape */ $helper->productAttribute($item, $block->getProductAttributeValue($item, $attribute), $attribute->getAttributeCode()) ?><?php
+                                                endif;
+                                                break;
+                                        } ?>
+                                    </div>
+                                </td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <?php if ($isAjaxWishListEnabled):?>
+        <script type="text/x-magento-init">
+            {
+                "[data-amtheme-js=ajax-wishlist]": {
+                    "amAjaxWishlist": {
+                        "actionUrl": "<?= /* @noEscape */ $viewModel->getAjaxAddToWishlist(); ?>"
+                    }
+                }
+            }
+        </script>
+    <?php endif; ?>
+    <?php if ($viewModel && $viewModel->isEnabledAjaxAddToCart()):?>
+        <script type="text/x-magento-init">
+        {
+            "[data-amtheme-js=ajax-tocart]": {
+                "amAjaxCart": {
+                    "actionUrl": "<?= /* @noEscape */ $viewModel->getAjaxAddToCartUrl()?>",
+                    "classes":{
+                        "addToCartButtonDisable": "disabled"
+                    }
+                }
+            }
+        }
+        </script>
+    <?php elseif (!$block->isRedirectToCartEnabled()): ?>
+        <script type="text/x-magento-init">
+            {
+                "[data-role=tocart-form]": {
+                    "catalogAddToCart": {
+                        "addToCartButtonDisabledClass": "disabled"
+                    }
+                }
+            }
+        </script>
+    <?php endif; ?>
+<?php else:?>
+    <div class="message info empty"><div><?= $block->escapeHtml(__('You have no items to compare.')) ?></div></div>
+<?php endif; ?>

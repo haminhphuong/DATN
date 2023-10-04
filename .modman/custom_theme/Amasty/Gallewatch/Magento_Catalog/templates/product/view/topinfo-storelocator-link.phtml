@@ -1,0 +1,231 @@
+<?php
+/** @var \Ecommage\CustomStoreLocation\Block\Location $block */
+
+if ($block->getProduct()) {
+    $locationCollection = $block->getLocationCollection();
+}
+// @codingStandardsIgnoreFile
+$_helper = $this->helper(\Ecommage\CustomStoreLocation\Helper\Data::class);
+/** @var \Ecommage\CustomStoreLocation\ViewModel\LocationModel $viewModel */
+$viewModel     = $block->getLocationModel();
+$_selectRegion = 'All Region';
+$_selectCity   = 'All District';
+?>
+<?php if (count($locationCollection) > 0 && $block->isNeedToShowLink($locationCollection, $block->getProduct())) : ?>
+    <div data-block="dropdown-action-link-container" class="block-filter-storelocator">
+    </div>
+    <div class="top-storelocator filter-locator" data-mage-init='{
+        "dropdownDialog": {
+            "appendTo": "[data-block=dropdown-action-link-container]",
+            "triggerTarget":"[data-trigger=storelocator-link-trigger]",
+            "timeout": 0,
+            "closeOnMouseLeave": false,
+            "closeOnEscape": true,
+            "autoOpen": false,
+            "triggerClass": "active",
+            "parentClass": "active",
+            "buttons": []
+        }
+    }'>
+        <div class="amlocator-wrapper amlocator-all-store">
+            <div class="amlocator__content">
+                <div class="amlocator-filter">
+                    <div class="field country required hidden">
+                        <div class="control">
+                            <?= $viewModel->getCountryHtmlSelect() ?>
+                        </div>
+                    </div>
+                    <div class="field region required">
+                        <div class="control">
+                            <select id="region_id" name="region_id"
+                                    title="<?= /* @noEscape */
+                                    __("State/Region") ?>"
+                                    class="validate-select region_id">
+                                <option value="0"><?= /* @noEscape */
+                                    __($_selectRegion) ?></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field region required">
+                        <div class="control">
+                            <select id="city_id" name="city_id"
+                                    title="<?= /* @noEscape */
+                                    __("District") ?>"
+                                    class="validate-select city_id">
+                                <option value="0"><?= /* @noEscape */
+                                    __($_selectCity) ?></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown-address"></div>
+
+                <div class="amlocator-stores-wrapper">
+                    <p class="locator-title">
+                        <?= /* @noEscape */
+                        __("List of stores in stock") ?>
+                    </p>
+                    <div class="amlocator-store-filter">
+                        <?php foreach ($locationCollection as $location):
+                            ?>
+                            <div class="amlocator-store-desc" name="leftLocation"
+                                 data-mapid="<?= /* @noEscape */
+                                 $block->escapeHtml($block->getMapId()); ?>"
+                                 data-amid="<?= /* @noEscape */
+                                 (int)$location['id']; ?>">
+                                <div class="amlocator-block" >
+                                    <div class="amlocator-store-information"><?= $location->getStoreListHtml() ?>
+
+                                        <div style="display: none;" class="amasty_distance"
+                                             id="amasty_distance_<?= (int)$location['id'] ?>"><?= /* @noEscape */
+                                            $block->escapeHtml(__('Distance:')) ?>
+                                            <span class="amasty_distance_number"></span>
+                                        </div>
+                                    </div>
+                                    <p class="tooltip-locator" style="display:none">
+                                        <?= $location->getAddress()? $block->escapeHtml(__($location->getAddress())).' -' : ''; ?>
+                                        <?= $block->escapeHtml(__($location->getName())); ?> -
+                                        <?= $location->getPhone() ? $block->escapeHtml(__($location->getPhone())):''; ?>
+                                    </p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- <div class="load_more btn_load_more">
+                            <a href="javascript:void(0)"><?= $block->escapeHtml(__('Load More')) ?></a>
+                        </div> -->
+                </div>
+            </div>
+
+            <script type="text/x-magento-init">
+                {
+                    "#country": {
+                        "regionUpdater": {
+                            "optionalRegionAllowed": <?= /* @noEscape */ 'false' ?>,
+                            "optionalCityAllowed": <?= /* @noEscape */ 'false' ?>,
+                            "regionListId": "#region_id",
+                            "cityListId": "#city_id",
+                            "regionInputId": "",
+                            "postcodeId": "",
+                            "form": "",
+                            "regionJson": <?= /* @noEscape */ $viewModel->dataGetRegionJson($locationCollection) ?>,
+                            "defaultRegion": "0",
+                            "currentRegion": "0",
+                            "countriesWithOptionalZip": <?= /* @noEscape */ $viewModel->dataGetCountriesWithOptionalZip(true) ?>
+                        }
+                    }
+                }
+                </script>
+                <script>
+                    require(['jquery'],function($){
+                         $(document).ready(function(){
+                            $('body').on({
+                              mouseenter: function() {
+                                if($(window).width() > 1023){
+                                    let location = $(this).position().top;
+                                    let bottom = $(this).closest('.amlocator-stores-wrapper').height() - location;
+                                     $(this).parent().css('overflow','unset');
+                                     $(this).css('overflow','unset');
+                                     $(this).find('.tooltip-locator').fadeIn();
+                                     // if(bottom <  $(this).find('.tooltip-locator').height()){
+                                     //    $(this).find('.tooltip-locator').css({'bottom':bottom,'top':'unset'});
+                                     // }else{
+                                        $(this).find('.tooltip-locator').css({'bottom':'unset','top':location});   
+                                     // }
+                                     
+
+                                }
+                              },
+                              mouseleave: function() {
+                                if($(window).width() > 1023){
+
+                                     $(this).parent().css('overflow','');
+                                     $(this).css('overflow','');
+                                     $(this).find('.tooltip-locator').fadeOut();
+                                     // $(this).closest('.amlocator-store-filter').css({'overflow-y':'auto','overflow-x':'auto'});
+                                 }
+                              }
+                            }, '.amlocator-block');
+                        })
+
+                        $('body').on('click','.amlocator-store-information',function(e){
+                            if($(window).width() < 1024 && !$(e.target).is('.amlocator-link-phone')){
+                                $('.amlocator-store-information').removeClass('open-all');
+                                $(this).toggleClass('open-all');
+
+                            }
+                        })
+                    })
+                </script>
+<!--            --><?php //if ($pager = $block->getPagerHtml()): ?>
+<!--                <div class="amlocator-pager-container">--><?//= /** @escapeNotVerified */
+//                    $pager; ?><!--</div>-->
+<!--            --><?php //endif; ?>
+        </div>
+    </div>
+    <script>
+        require([
+            'jquery',
+            'select2',
+            'Ecommage_CustomStoreLocation/js/search',
+            'domReady!'
+        ], function ($) {
+            $('#region_id').select2({
+                dropdownParent: $('#region_id').parent(),
+                language: {
+                    noResults: function () {
+                        return "<?= $block->escapeHtml(__('No results found')) ?>";
+                    }
+                }
+            }).on('select2:opening', function () {
+                $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', "<?= $block->escapeHtml(__('Please select a region')); ?>")
+            });
+
+            $('#city_id').select2({
+                dropdownParent: $('#city_id').parent(),
+                language: {
+                    noResults: function () {
+                        return "<?= $block->escapeHtml(__('No results found')) ?>";
+                    }
+                }
+            }).on('select2:opening', function () {
+                $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', "<?= $block->escapeHtml(__('Please select a city')); ?>")
+            });
+
+            $(".amlocator-filter").amSearchLocator({
+                ajaxCallUrl: "<?= $block->escapeHtml($viewModel->getAmStoreSearchUrl()); ?>",
+                region: "#region_id",
+                country: "#country",
+                city: "#city_id",
+                product_id: <?= $block->escapeHtml($block->getProduct()->getId()); ?> ,
+                button: ".button-search",
+                per_address: "<?= $block->escapeHtml($_helper->getPerAddress()); ?>",
+                mainContainer: ".amlocator-stores-wrapper"
+            });
+
+            // Click event jquery
+            /*$(document).on('click','.productinfo-toplink-storelocator', function (event) {
+                event.stopPropagation();
+                //event.preventDefault();
+                //$('.productinfo-toplink-storelocator').siblings('.top-storelocator').toggle();
+                //$('.productinfo-toplink-storelocator').siblings('.top-storelocator').find('.locator-title.find-store').remove();
+
+                // $('#region_id').select2('open');
+                // $('.select2-search__field').trigger('focus');
+            });*/
+            // hover locator show tooltip
+
+
+        });
+    </script>
+
+<?php endif; ?>
+<?php if($block->getProduct()->getTypeId() == 'bundle'): ?>
+<style type="text/css">
+    .product-info-main .price-box.price-final_price{
+        flex-direction: column-reverse;
+    }    
+</style>
+<?php endif; ?>

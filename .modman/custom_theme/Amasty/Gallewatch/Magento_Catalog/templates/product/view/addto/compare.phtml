@@ -1,0 +1,48 @@
+<?php
+/**
+ * @var $block Magento\Catalog\Block\Product\View\Addto\Compare
+ * @var $amLayoutViewModel Amasty\JetTheme\ViewModel\ProductPage\ProductPageViewModel
+ * @var $escaper Magento\Framework\Escaper
+ */
+
+$viewModel = $block->getData('addToCompareViewModel');
+$checkAvailableCompare = method_exists($viewModel, 'isAvailableForCompare');
+$availableCompareProduct = $checkAvailableCompare ? $viewModel->isAvailableForCompare($block->getProduct()) : true;
+$amViewModel = $block->getData('amAjaxViewModel');
+$isAjaxCompareEnable = $amViewModel ? $amViewModel->isEnabledAjaxAddToCompare() : false;
+$dataPost = $block->getPostDataParams();
+$amLayoutViewModel = $block->getData('amLayoutViewModel');
+$isAddToCompareVisible = $amLayoutViewModel->showAddToCompare();
+?>
+
+<?php if ($availableCompareProduct && $isAddToCompareVisible): ?>
+    <a href="#"
+       data-post='<?= /* @noEscape */ $dataPost ?>'
+       <?php if ($isAjaxCompareEnable): ?>
+            data-amtheme-js="ajax-compare"
+       <?php endif; ?>
+       data-role="add-to-links"
+       class="action tocompare"
+       title="<?= $escaper->escapeHtml(__('Add to Compare')) ?>"
+       aria-label="<?= $escaper->escapeHtml(__('Add to Compare')) ?>" rel="nofollow">
+        <span class="amtheme-circle-icon">
+            <svg class="amtheme-icon -hover-bg">
+                <use xlink:href="#icon-compare"/>
+            </svg>
+        </span>
+        <span class="amtheme-title">
+            <?= $escaper->escapeHtml(__('Add to Compare')) ?>
+        </span>
+    </a>
+    <?php if ($isAjaxCompareEnable): ?>
+        <script type="text/x-magento-init">
+            {
+                "[data-amtheme-js=ajax-compare]": {
+                    "amAjaxCompare": {
+                        "actionUrl": "<?= /* @noEscape */ $amViewModel->getAjaxAddToCompare()?>"
+                    }
+                }
+            }
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

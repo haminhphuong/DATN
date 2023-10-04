@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="slider_collection" resource="default" engine="innodb"
+            comment="Slider Collection Table">
+        <column xsi:type="int" name="slider_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Slider ID"/>
+        <column xsi:type="int" name="store_id" padding="10" unsigned="true" nullable="true" identity="false" comment="Store Id"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+        <column xsi:type="varchar" name="subtitle" nullable="true" length="255" comment="Subtitle"/>
+        <column xsi:type="text" name="description" nullable="false" comment="Description"/>
+        <column xsi:type="text" name="text_link" nullable="false" comment="Text Link"/>
+        <column xsi:type="text" name="url_link" nullable="false" comment="Url"/>
+        <column xsi:type="int" name="is_active" nullable="false" unsigned="true" default="0" comment="Is Active"/>
+        <column xsi:type="varchar" name="image" nullable="false" length="255" comment="Image"/>
+        <column xsi:type="varchar" name="image_watch" nullable="false" length="255" comment="Image Watch"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="slider_id"/>
+        </constraint>
+    </table>
+</schema>

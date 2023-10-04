@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
+ */
+// @codingStandardsIgnoreLine
+?>
+<?php if ($block->getCollection()->getSize()) :?>
+
+    <?php $widget = $this->helper(\Magento\Framework\Json\Helper\Data::class)->jsonDecode($block->getWidgetOptionsJson()); // @codingStandardsIgnoreLine
+        $widgetOptions = $this->helper(\Magento\Framework\Json\Helper\Data::class)->jsonEncode($widget['productListToolbarForm']); // @codingStandardsIgnoreLine
+    ?>
+    <div class="toolbar toolbar-products" data-mage-init='{"productListToolbarForm":<?= /* @noEscape */ $widgetOptions ?>}'>
+        <?= /* @noEscape */ $block->getChildHtml('breadcrumbs'); ?>
+        <?php if ($block->getIsBottom()): ?>
+            <?= $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/limiter.phtml')); // @codingStandardsIgnoreLine?>
+            <?= $block->getPagerHtml() ?>
+        <?php else: ?>
+            <?php if ($block->isExpanded()): ?>
+                <?= $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/viewmode.phtml')); // @codingStandardsIgnoreLine?>
+            <?php endif ?>
+            <?= $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/amount.phtml')); // @codingStandardsIgnoreLine?>
+            <?php if ($block->isExpanded()): ?>
+                <?= $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/sorter.phtml')); // @codingStandardsIgnoreLine?>
+            <?php endif ?>
+        <?php endif ?>
+    </div>
+<?php endif ?>

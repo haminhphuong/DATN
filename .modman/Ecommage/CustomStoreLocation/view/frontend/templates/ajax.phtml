@@ -1,0 +1,50 @@
+<?php
+
+$viewModel = $block->getLocationModel();
+$locations = $viewModel->searchByColletion();
+?>
+<?php if ($locations->getSize()): ?>
+    <p class="locator-title">
+        <?= /* @noEscape */
+        __("There are %1 stores found", $locations->getSize()) ?>
+    </p>
+    <div class="amlocator-store-filter">
+        <?php foreach ($locations->getData() as $data): ?>
+            <?php
+                $location = $locations->getNewEmptyItem();
+                $location->setData($data);
+                $location->setTemplatesHtml();
+            ?>
+            <div class="amlocator-store-desc" name="leftLocation"
+                 data-mapid="<?= /* @noEscape */
+                 $block->escapeHtml($block->getMapId()); ?>"
+                 data-amid="<?= /* @noEscape */
+                 (int)$location['id']; ?>">
+                <div class="amlocator-block">
+                    <div class="amlocator-store-information"><?= $location->getStoreListHtml() ?>
+                        <a target="_blank" href="<?= /* @noEscape */
+                        $viewModel->getGoogleMapByLatLng($location->getLat(), $location->getLng()); ?>"
+                           class="find_store"><?= /* @noEscape */
+                            __('Find your way to this store'); ?></a>
+                        <div style="display: none;" class="amasty_distance"
+                             id="amasty_distance_<?= (int)$location['id'] ?>"><?= /* @noEscape */
+                            $block->escapeHtml(__('Distance:')) ?>
+                            <span class="amasty_distance_number"></span>
+                        </div>
+                    </div>
+                    <p class="tooltip-locator" style="display:none">
+                        <?= $location->getAddress()? $block->escapeHtml(__($location->getAddress())).' -' : ''; ?>
+                        <?= $block->escapeHtml(__($location->getName())); ?> -
+                        <?= $location->getPhone() ? $block->escapeHtml(__($location->getPhone())):''; ?>
+                    </p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="load_more btn_load_more">
+        <a href="javascript:void(0)"><?= $block->escapeHtml(__('Load More')) ?></a>
+    </div>
+<?php else: ?>
+    <p class="no-location"><?= /* @noEscape */
+        __("Dont have any location") ?></p>
+<?php endif ?>

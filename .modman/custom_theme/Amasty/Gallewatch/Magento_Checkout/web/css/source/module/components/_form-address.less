@@ -1,0 +1,172 @@
+//
+//  Shipping address styles
+//  _____________________________________________
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    .amtheme-form-address .field.street {
+        & {
+            margin: 0;
+        }
+
+        > .label {
+            .am-padding(0);
+
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        &.required > .label:after {
+            color: @amtheme__error-text__color;
+            content: '*';
+            vertical-align: top;
+            text-align: right;
+            font-size: 1.3rem;
+        }
+
+        > .control > .field > .label {
+            display: none;
+        }
+    }
+
+    .amtheme-form-address .field.choice {
+        & {
+            .am-padding(12px);
+            .am-margin(28px 0 0);
+
+            box-sizing: border-box;
+            width: 100%;
+            border-radius: @amtheme__border-radius__s;
+            background: @amtheme__background-secondary__color;
+        }
+
+        > .label {
+            margin: 0;
+        }
+    }
+
+    .new-address-popup + .opc-new-shipping-address {
+        margin-top: 35px;
+    }
+
+    .amtheme-address-toolbar {
+        & {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        > .action-cancel {
+            & {
+                .lib-button-reset();
+                .am-margin-right(@indent__sm);
+                .am-padding(@indent__sm);
+
+                color: @amtheme__text-secondary__color;
+                font-weight: @font-weight__bold;
+                font-size: 1.6rem;
+                line-height: 2rem;
+                transition: color @amtheme__transition;
+            }
+
+            &:hover {
+                color: @amtheme__text-primary__color;
+            }
+        }
+    }
+
+    .amtheme-form-address {
+        & > .step-title {
+            margin-bottom: 25px;
+        }
+
+        .amtheme-select-block {
+            width: 100%;
+        }
+
+        .amtheme-select-block .amtheme-placeholder {
+            font-size: 1.2rem;
+        }
+
+        .amtheme-select-block[disabled] {
+            opacity: .5;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .field._error .amtheme-select-block .amtheme-placeholder {
+            border-color: @amtheme__error-text__color;
+        }
+    }
+}
+
+//
+//  Mobile
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .amtheme-shipping-wrap {
+        .am-margin(0 -@checkout-page__padding_s);
+        .am-padding(25px @checkout-page__padding_s 20px);
+
+        background: @amtheme__background-secondary__color;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .amtheme-shipping-wrap {
+        .am-margin(0 -@layout__width-m-indent);
+        .am-padding(25px @layout__width-m-indent 20px);
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .amtheme-shipping-wrap {
+        .am-margin(0 -@layout__width-xs-indent);
+        .am-padding(25px @layout__width-xs-indent 20px);
+    }
+}
+
+//
+//  Desktop
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amtheme-form-address {
+        & > .step-title {
+            margin-bottom: 35px;
+        }
+
+        > .fieldset.address {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    .amtheme-form-address .field {
+        &[name$='prefix'],
+        &[name$='firstname'],
+        &[name$='middlename'],
+        &[name$='lastname'],
+        &[name$='suffix'],
+        &[name$='region_id'],
+        &[name$='region'],
+        &[name$='postcode'],
+        &[name$='country_id'],
+        &[name$='telephone'],
+        &[name$='fax'] {
+            display: inline-block;
+            max-width: 290px;
+            width: 48%;
+        }
+
+        &[name$='company'],
+        &[name$='city'],
+        &.street {
+            width: 100%;
+        }
+    }
+}

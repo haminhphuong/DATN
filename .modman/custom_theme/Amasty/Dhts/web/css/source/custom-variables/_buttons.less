@@ -1,0 +1,69 @@
+// Button default theme DHTS
+@color-hover-button: lighten(@color-theme, 20%);
+@button__border-radius: 0;
+@button__font-weight: @font-weight__semibold;
+
+//  Button secondary button
+@button-second__color: @color-white;
+@button-second__background: @color-theme;
+@button-second__border: 1px solid @color-white;
+@button-second__border-radius: @button__border-radius;
+@button-second__font-w: @font-weight__semibold;
+@button-second__min-h: 40px;
+@button-second__p: 9px 30px;
+@button-second__text-transform: uppercase;
+@button-second__cursor: pointer;
+@button-second__transition: .3s all ease;
+
+@button-second__hover__color: @color-theme;
+@button-second__hover__background: @color-white;
+@button-second__hover__border: 1px solid @color-theme;
+
+// Button bg white custom
+@button-ter__color: @color-theme;
+@button-ter__bg: @color-white;
+@button-ter__border: 1px solid @color-white;
+
+@button-ter__hover__color: @color-white;
+@button-ter__hover__bg: @color-theme;
+@button-ter__hover__border: 1px solid @color-white;
+
+.lib-button-second(){
+    .lib-css(border-radius, @button-second__border-radius);
+    .lib-css(cursor, @button-second__cursor);
+    .lib-css(font-weight, @button-second__font-w);
+    .lib-css(padding, @button-second__p);
+    .lib-css(min-height, @button-second__min-h);
+    .transition(@button-second__transition);
+    .lib-css(text-transform, @button-second__text-transform);
+
+    &,
+    &:focus,
+    &:active{
+        .lib-css(background, @button-second__background);
+        .lib-css(border, @button-second__border);
+        .lib-css(color, @button-second__color);        
+    }
+
+    &:hover{
+        .lib-css(background, @button-second__hover__background);
+        .lib-css(border, @button-second__hover__border);
+        .lib-css(color, @button-second__hover__color);
+    }  
+}
+
+.lib-button-ter(){
+    &,
+    &:focus,
+    &:active{
+        .lib-css(background, @button-ter__bg);
+        .lib-css(border, @button-ter__border);
+        .lib-css(color, @button-ter__color);
+    }
+
+    &:hover{
+        .lib-css(background, @button-ter__hover__bg);
+        .lib-css(border, @button-ter__hover__border);
+        .lib-css(color, @button-ter__hover__color);
+    }  
+}

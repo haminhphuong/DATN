@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="widget_catalog_price_rule" class="Ecommage\WidgetCatalogPriceRule\Block\Widget\CatalogPriceRule">
+        <label translate="true">Category Product Sale</label>
+        <description>List Product Sale</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Select Title</label>
+            </parameter>
+            <parameter name="show_all" xsi:type="multiselect" source_model="Ecommage\WidgetCatalogPriceRule\Model\Config\WidgetListCatalog" visible="true">
+                <label translate="true">Select Category</label>
+                <description translate="true">select category to show product in frontend</description>
+            </parameter>
+            <parameter name="number_product_show" xsi:type="select" required="false" visible="true">
+                <label translate="true">Product Number Show</label>
+                <description translate="true">set number of products displayed in frontend</description>
+                <options>
+                    <option name="8" value="8" selected="true">
+                        <label translate="true">8</label>
+                    </option>
+                    <option name="12" value="12">
+                        <label translate="true">12</label>
+                    </option>
+                    <option name="16" value="16">
+                        <label translate="true">16</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

@@ -1,0 +1,29 @@
+<?php
+/**
+ * @var Form $block
+ */
+
+use Ecommmage\Testimonials\Block\Post\Form; ?>
+<form id="contact-form" class="form contact" action="<?= $block->escapeUrl($block->getUrl('testimonial/post/save')) ?>"
+      method="post" enctype="multipart/form-data" data-mage-init='{"validation":{}}'>
+    <label class="label" for="description"><span><?= $block->escapeHtml(__('Description')) ?></span></label>
+    <input name="description" id="description" title="<?= $block->escapeHtmlAttr(__('Image')) ?>" class="input-file"
+           type="text"/>
+    <fieldset class="fieldset">
+        <div class="field image">
+            <label class="label" for="image"><span><?= $block->escapeHtml(__('File Image')) ?></span></label>
+            <div class="control">
+                <input name="image" id="image" title="<?= $block->escapeHtmlAttr(__('Image')) ?>" class="input-file"
+                     alt=""  type="file"/>
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <input type="hidden" name="hideit" id="hideit" value=""/>
+            <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="action submit primary">
+                <span><?= $block->escapeHtml(__('Submit')) ?></span></button>
+        </div>
+    </div>
+</form>
+

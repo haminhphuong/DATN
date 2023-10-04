@@ -1,0 +1,89 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ * @var $helper \Ecommage\RelatedCategory\Helper\Data
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+// phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
+// phpcs:disable Magento2.Security.LanguageConstruct.DirectOutput
+?>
+<?php
+// phpcs:disable
+$helper = $this->helper(\Ecommage\RelatedCategory\Helper\Data::class); // @codingStandardsIgnoreLine
+// phpcs:enable
+
+$_category  = $block->getCurrentCategory();
+if ($_category) {
+    $listImage = $block->getRelatedImage()->getListImage($_category->getId());
+}
+?>
+<?php if (!empty($listImage) && is_array($listImage)): ?>
+    <div class="related-category-slider">
+        <div class="swiper-container" id="swiper_container_related_category">
+            <div class="swiper-wrapper">
+                <?php foreach ($listImage as $item): ?>
+                    <div class="swiper-slide">
+                        <div class="related-category-item">
+                            <a tabindex="-1" class="related-category-item-photo" href="<?= $block->escapeUrl($item['href']) ?>">
+                                <img  alt="<?= $block->escapeHtml($item['name']) ?>" src="<?= $block->escapeUrl(/* @noEscape */ $helper->getBaseUrlMedia().$item['name']) ?>"/>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-prev-related-category swiper-button-black"></div>
+        <div class="swiper-button-next-related-category swiper-button-black"></div>
+    </div>
+    <script>
+        require(['jquery', 'swiper_slider'], function ($, Swiper) {
+            jQuery(document).ready(function () {
+                var swiper = new Swiper('#swiper_container_related_category', {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                    effect: 'fadeIn',
+                    loop: true,
+                    autoplay: true,
+                    // {
+                    //     delay: 5000,
+                    //     disableOnInteraction: true,
+                    // },
+                    pagination: {
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: ".swiper-button-next-related-category ",
+                        prevEl: ".swiper-button-prev-related-category",
+                    },
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
+                        767: {
+                            slidesPerView: 2,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                            spaceBetween: 10,
+                        },
+                        1279: {
+                            slidesPerView: 4,
+                            spaceBetween: 20,
+                        },
+                    }
+                });
+            });
+        });
+    </script>
+<?php endif; ?>

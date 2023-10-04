@@ -1,0 +1,44 @@
+& when (@media-common =true) {
+    .amlocator-index-index{
+        .column.main{
+            padding-bottom: 0;
+        }
+        .page-main{
+			padding: 0;
+		}
+		.page-title{
+			//margin: 10px 0 0 30px;
+			text-transform: uppercase;
+		}
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	.amlocator-index-index{
+		.page-title{
+			margin: 10px 0 0 20px;
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .amlocator-index-index{
+        .page-main{
+            margin-bottom: 10px;
+        }
+    }
+}
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+	@media only screen and (min-width: @screen__m) and (max-width: (@screen__l - 1)){
+        .amlocator-index-index {
+            .page-title {
+                margin: 10px 0 0 15px;
+            }
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .amlocator-index-index{
+		.page-title{
+			margin: 10px 0 0 30px;
+		}
+	}
+}

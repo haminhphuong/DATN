@@ -1,0 +1,71 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $helper \Magento\Search\Helper\Data */
+// phpcs:ignore
+$helper = $this->helper(\Magento\Search\Helper\Data::class);
+?>
+
+<div class="block block-search -header" data-amtheme-js="search">
+    <div class="block block-title"><?= $block->escapeHtml(__('Search')) ?></div>
+    <div class="block block-content">
+        <form class="form minisearch"
+              id="search_mini_form"
+              action="<?= $block->escapeUrl($helper->getResultUrl()) ?>"
+              data-amtheme-js="form-minisearch"
+              method="get">
+            <div class="field search">
+                <label class="label" for="search" data-role="minisearch-label">
+                    <?= $block->escapeHtml(__('Search')) ?>
+                </label>
+                <div class="control">
+                    <input id="search"
+                           data-mage-init='{"quickSearch":{"formSelector":"#search_mini_form","url":"<?= $block->escapeUrl($helper->getSuggestUrl())?>","destinationSelector":"#search_autocomplete"} }'
+                           type="text"
+                           name="<?= $block->escapeHtml($helper->getQueryParamName()) ?>"
+                           value="<?= $block->escapeHtml($helper->getEscapedQueryText()) ?>"
+                           placeholder="<?= $block->escapeHtml(__('Search entire store here...')) ?>"
+                           class="input-text"
+                           maxlength="<?= $block->escapeHtml($helper->getMaxQueryLength()) ?>"
+                           role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           autocomplete="off"
+                           aria-expanded="false"
+                           data-amtheme-js="search-input" />
+                    <div id="search_autocomplete" class="search-autocomplete"></div>
+                    <?= $block->getChildHtml() ?>
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit"
+                    title="<?= $block->escapeHtml(__('Search')) ?>"
+                    class="action search"
+                    aria-label="<?= $block->escapeHtml(__('Search')) ?>"
+                    data-amtheme-js="search-btn" >
+                    <img src="<?= $block->escapeUrl($block->getViewFileUrl("images/icon-search.svg")) ?>" alt="<?= $block->escapeHtml(__('Search')) ?>">
+                    <svg class="amtheme-icon">
+                        <use xlink:href="#icon-search" />
+                    </svg>
+                </button>
+            </div>
+            <button type="button"
+                    title="<?= $block->escapeHtml(__('Reset')) ?>"
+                    class="action amtheme-reset am-opacity-clear  am-no-display-desktop"
+                    aria-label="<?= $block->escapeHtml(__('Reset')) ?>"
+                    data-amtheme-js="search-reset" >
+                <svg class="amtheme-icon -circle -reset">
+                    <use xlink:href="#icon-close" />
+                </svg>
+            </button>
+            <button type="reset"
+                    title="<?= $block->escapeHtml(__('Close')) ?>"
+                    class="action amtheme-close am-opacity-clear am-no-display-desktop"
+                    aria-label="<?= $block->escapeHtml(__('Close')) ?>"
+                    data-amtheme-js="search-close" >
+                <svg class="amtheme-icon">
+                    <use xlink:href="#icon-arrow-left-min" />
+                </svg>
+            </button>
+        </form>
+    </div>
+</div>

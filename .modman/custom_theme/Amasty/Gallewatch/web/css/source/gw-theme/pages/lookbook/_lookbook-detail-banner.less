@@ -1,0 +1,165 @@
+@color-bg-gradient: linear-gradient(360deg, rgba(0, 0, 0, 0.9) 11.17%, rgba(0, 0, 0, 0) 83.92%);
+& when (@media-common = true) {
+    .cms-lookbook-detail{
+        h1{
+            display: none;
+        }
+    }
+    .row-lookbook-detail-banner{
+        margin-bottom: 40px;
+
+        h1{
+            font-size: 24px;
+            line-height: 36px;
+            text-transform: uppercase;
+            font-weight: @font-weight__semibold;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            z-index: 3;
+        }
+        
+        div[data-content-type="text"]{
+            z-index: 3;
+            max-width: 847px;
+            margin-inline: auto;
+        }
+
+        p{
+            margin-bottom: 0;
+        }
+
+        figure[data-content-type="image"]{
+            margin: 0 auto;
+        }
+
+        .lookbook-detail-banner-main{
+            color: @color-white;
+            padding-top: 40px ;
+            padding-bottom: 102px;
+            text-align: center;
+            position: relative;
+
+            figure[data-content-type="image"]{
+                order: 1;
+            }
+
+            .page-title-wrapper {
+                order: 2;
+                z-index: 3;
+            }
+
+            div[data-content-type="text"]{
+                order: 3;
+            }
+
+            &::before{
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: @color-bg-gradient;
+            }
+
+            figure[data-content-type="image"]{
+                margin-bottom: 60px;
+                z-index: 3;
+            }
+        }
+
+        .pagebuilder-column-group:last-child{
+            margin-top: -56px;
+            z-index: 5;
+            position: relative;
+
+            .pagebuilder-column{
+                > div[data-content-type="text"]{
+                    max-width: 720px;
+                    width: 100%;
+                }
+            }
+        }
+        
+        .lookbook-detail-play{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        .widget-video{
+            .sp-video{
+                .border-radius(20px);
+            }
+
+            video{
+                position: absolute;
+                margin-top: -56.25%;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .row-lookbook-detail-banner{
+        .lookbook-detail-banner-main{
+            figure[data-content-type="image"]{
+                margin-bottom: 40px !important;
+
+                img{
+                    max-height: 80px !important;
+                }
+            }
+        }
+
+        .pagebuilder-column-group:last-child,
+        div[data-content-type="text"]{
+            padding: 0 @layout__width-xs-indent;
+        }
+        
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .row-lookbook-detail-banner{
+        margin-bottom: 20px;
+
+        h1{
+            font-size: 30px;
+        }
+
+        .lookbook-detail-banner-main{
+            padding-top: 116px;
+
+            figure[data-content-type="image"]{
+                margin-bottom: 96px;
+            }
+        }
+
+        .widget-video{
+            video{
+                min-width: 720px;
+                min-height: 400px;
+            }
+        }
+    }
+}
+
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (min-width: @screen__m) and (max-width: (@screen__l - 1)) {
+        .row-lookbook-detail-banner{
+            .lookbook-detail-banner-main{
+                padding-inline: 40px;
+            }
+
+            .pagebuilder-column-group:last-child{
+                figure[data-content-type="image"]:not(.lookbook-detail-play){
+                    img{
+                        max-width: 600px !important; 
+                    }
+                }
+            }
+        }
+    }
+}

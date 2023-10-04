@@ -1,0 +1,36 @@
+//
+//  Copyright styles
+//  _____________________________________________
+
+//
+//  Variables
+//  ---------------------------------------------
+
+@amtheme-copyright__padding: @indent__base @indent__m;
+@amtheme-copyright-desktop__padding: 15px 0;
+@amtheme-copyright__background: @color-main;
+@amtheme-copyright__color: rgba(255,255,255,.6);
+
+//
+//  Common
+//  ---------------------------------------------
+& when (@media-common = true) {
+    .copyright {
+        display: block;
+        padding: 15px 20px;
+        background: @amtheme-copyright__background;
+        color: @amtheme-copyright__color;
+        text-align: center;
+        line-height: 1.4rem;
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .copyright {
+        padding: 20px;
+    }
+}

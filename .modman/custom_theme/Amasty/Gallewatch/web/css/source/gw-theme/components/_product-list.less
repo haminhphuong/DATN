@@ -1,0 +1,140 @@
+& when (@media-common = true) {
+
+    .product-item{
+        .product-item-details{
+            .price-to{
+                .price-container{
+                    align-items: center;
+                }
+            }
+            .price-from{
+                .price-container{
+                    &:after{
+                        content: '-';
+                        margin: 0 5px;
+                        display: inline-flex;
+                    }
+                }
+            }
+            .price-box .old-price-wrap{
+                align-items: center;
+                flex-wrap: wrap;
+
+                > .old-price:last-of-type:before{
+                    z-index: 1;
+                    background: @color-white;
+                }
+
+                .old-price + .old-price{
+                    margin-left: -10px;
+                    margin-right: 0;
+                }
+
+            }
+            .price-final_price .old-price .tax.weee .price-wrapper{
+                margin-left: 0;
+            }   
+        }
+       .product-item-info{
+            .product-item-actions .action.primary.buynow span > a{
+                color: @color-white;
+            }
+            .product-photo-wrapper{
+                .product-image-photo{
+                  .transition(0); 
+                }
+                .product-image-wrapper{
+                    .scale(.98);
+                    .transition(.3);
+                }
+            }
+            &:hover{
+                .product-photo-wrapper{
+                    .product-image-photo{
+                        .scale(1);
+                    }
+                    .product-image-wrapper{
+                        .scale(1);
+                    }
+                }  
+            }
+        }
+    }
+
+    .am-widget .details .product-details-action .price-box .price-container{
+        padding-inline-end: 0;
+    }
+
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .products{
+        .product-item{
+            margin-bottom: 20px !important;
+            .product-item-link{
+                font-size: 1.1rem;
+                text-transform: none;
+                max-height: 31px;
+            }
+            .product-details-sku-brand{
+                font-size: 1rem;
+                font-weight: normal;
+            }
+            .product-item-actions{
+                .lib-visually-hidden();
+            }
+            .amtheme-icons-position{
+                .lib-visually-hidden();
+            }
+            .amlabel-position-wrapper{
+                .scale(.65);
+                &[class^=amlabel-position-top-left-]{
+                    transform-origin: top left;
+                }
+                &[class^=amlabel-position-top-right-]{
+                    transform-origin: top right;
+                }
+                &[class^=amlabel-position-bottom-left-]{
+                    transform-origin: bottom left;
+                }
+                // &[class^=amlabel-position-bottom-right-]{
+                //     transform-origin: bottom right;
+                // }
+            }
+            .product-details-brand:before{
+                height: 10px;
+                top: 3px;
+            }
+            .product.product-item-name{
+                display: block;
+                height: auto;
+                min-height: 0;
+            }
+        }
+        .product-items {
+            .product-item {
+                .price-box {
+                    .price-container {
+                        .price{
+                            display: block;
+                            font-size: 1.3rem;
+                            line-height: 16px;
+                        }
+                    }
+                    .old-price {
+                        // margin-right: 10px;
+                        .price-container {
+                            .price{
+                                font-size: 1.1rem;
+                                line-height: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){}

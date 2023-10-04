@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <referenceContainer name="amtheme.product.info.wrap" remove="true"/>
+    <referenceContainer name="product.info.details.wrapper" remove="true"/>
+
+    <referenceContainer name="columns">
+        <container name="amtheme.product.info.details.wrapper"
+                   htmlTag="div"
+                   htmlClass="amtheme-productinfo-wrap"
+                   after="column.main"/>
+    </referenceContainer>
+    <referenceContainer name="product.info.details.after.wrapper.main" htmlClass="amtheme-productaside-wrap">
+        <container name="amtheme.full.width.product.info.description" htmlTag="div" htmlClass="product-full-width-section left" before="-">
+            <container name="product.full.width.section.title" htmlClass="product-full-width-section-title" htmlTag="div" before="-">
+              <block class="Magento\Cms\Block\Block" name="title-description">
+                  <arguments>
+                      <argument name="block_id" xsi:type="string">title-description</argument>
+                  </arguments>
+              </block>
+          </container>
+          <container name="product.actions.info" htmlTag="div" htmlClass="product-actions">
+              <block class="Magento\Framework\View\Element\Template" name="product.info.action.info" before="-" template="Magento_Catalog::product-info-action.phtml" />
+              <block class="Magento\Framework\View\Element\Template" name="cta.booking.info" template="Magento_Catalog::form-booking.phtml" before="product.booking.buynow.info"/>
+              <container name="product.booking.buynow.info" htmlTag="div" htmlClass="product-group-action" after="-">
+                  <block name="product.info.additional.buynow.info" as="info_additional_buynow" template="Magento_Catalog::product/view/buynow.phtml"/>
+                  <block class="Magento\Framework\View\Element\Template" name="cta.contact.info" template="Magento_Catalog::form-contact.phtml"/>
+              </container>
+          </container>
+        </container>
+    </referenceContainer>
+   <!--  <move element="cta.booking.info" destination="product.info.action.info" before="-"/> -->
+    <move element="product.attributes.wrapper" destination="product.info.details.after.wrapper.main" before="-"/>
+    <move element="product.info.details.after.wrapper.main" destination="amtheme.product.info.details.wrapper" before="-"/>
+    <move element="product.info.description" destination="amtheme.full.width.product.info.description" before="product.actions.info" />
+</layout>

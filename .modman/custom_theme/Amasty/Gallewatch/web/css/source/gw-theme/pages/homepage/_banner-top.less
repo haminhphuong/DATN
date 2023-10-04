@@ -1,0 +1,237 @@
+& when (@media-common = true) {
+    #html-body .homepage-banner-img .banner-video .pagebuilder-video-wrapper{
+        padding-bottom:0;
+    }
+    .pagebuilder-column.homepage-banner-left p{
+        margin: 0;
+    }
+    .product-list.nicefornow-recently-viewed-product{
+        .amlabel-position-wrapper{
+            display: none !important;
+        }
+    }
+    .homepage__banner-top{
+        .homepage-banner-img{
+            &.has-video{
+                flex-wrap:wrap;
+                .banner-video{
+                    video{
+                        object-fit:cover;
+                    }
+                }
+            }
+        }
+        max-width: @layout__max-width;
+        .sp-thumbnails-container{
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+        }
+        .sp-thumbnail{
+            display: none;
+        }
+        .sp-thumbnail-container{
+            display: block;
+        }
+        .sp-slides-container{
+            .sp-slides{
+                display: block;
+            }
+        }
+        .sp-slides{
+            display: none;
+        }
+        .sp-layer{
+            left: 0 !important;
+            top: 0 !important;
+        }
+        .sp-layer, .sp-video, .sp-video video{
+            width: 100%;
+            height: 100%;
+        }
+        .sp-thumbnail-container{
+            position: relative;
+            margin: 0 !important;
+            &:after{
+                content: "";
+                display: block;
+                position: absolute;
+                width: 1px;
+                height: 30px;
+                background: @color-galle-boder;
+                right: 0;
+                top: 9px;
+            }
+            &:last-child:after{
+                display: none;
+            }
+        }
+        .sp-selected-thumbnail:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 6px;
+            height: 100%;
+            background: @color-white;
+            left: -2px;
+            top: 0;
+            z-index: 1;
+        }
+        .sp-bottom-thumbnails{
+            margin-top: 0;
+            .sp-thumbnail{
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+            .sp-thumbnail-title{
+                text-align: center;
+                font-size: 12px;
+                padding: 0 14px;
+                line-height: 15px;
+                font-weight: 400;
+                width: 100%;
+            }
+        }
+        .sp-selected-thumbnail{
+            border-top: 4px solid @color-main;
+            overflow: visible;
+            box-shadow: none;
+            .sp-thumbnail{
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+                z-index: 2;
+                position: relative;
+            }
+            .sp-thumbnail-title{
+                color: @color-main;
+                font-weight: @font-weight__semibold;
+            }
+            &:after{
+                display: none;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    // Sidebar Banner
+    .banner-no-mb-xs{
+        .widget-video{
+            margin-bottom: 0;
+        }
+    }
+
+  .homepage__banner-top{
+        margin: 0 auto;
+        .homepage-banner-img{
+            // display: none !important;
+            flex-direction: row !important;
+            padding-left: 0 !important;
+            padding-top: 5px;
+            padding-bottom: 15px;
+            gap: 0 5px;
+            
+            > *{
+                width: ~"calc(50% - 2.5px)";
+                padding-bottom: 0 !important;
+
+                img{
+                    width: 100%;
+                    height: 100% !important;
+                    object-fit: cover;
+                }
+            }
+            .pagebuilder-video-wrapper{
+                padding-bottom: 0;
+            }
+            .banner-video.first *{
+                height:100%;
+            }
+        }
+        
+        .sp-buttons{
+            position: absolute;
+            bottom: 0;
+        }
+        .sp-button{
+            background:#9b91a5;
+            width: 8px;
+            height: 8px;
+            border: 1px solid transparent;
+            &.sp-selected-button{
+                background: @color-main;
+            }
+        }
+        .sp-thumbnails-container{
+            display: none !important;
+        }
+    }
+}
+
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (min-width: @screen__m) and (max-width: (@screen__l - 1)){
+        .homepage-banner-left{
+            width: 64.5% !important;
+        }
+        .homepage-banner-img{
+            width: 35.5% !important;
+            .banner-video.first{
+                margin-bottom: 20px;
+                .pagebuilder-video-container{
+                    height:170px;
+                }
+            }
+        }
+    }
+    @media only screen and (min-width: @screen__l) and (max-width: 1279px){
+        .homepage-banner-left{
+            width: 66% !important;
+        }
+        .homepage-banner-img{
+            width: 34% !important;
+            .banner-video.first{
+                margin-bottom: 20px;
+                .pagebuilder-video-container{
+                    height: 227px;
+                }
+            }
+        }
+    }
+}
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+    @media only screen and (min-width: @screen__lg){
+        .homepage-banner-img{
+            .banner-video.first{
+                .pagebuilder-video-container{
+                    height: 227px;
+                }
+            }
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .homepage__banner-top{
+        margin: 13px auto 16px;
+        .homepage-banner-img{
+            padding-left: 20px;
+            .banner-video{
+               margin-bottom: 20px;
+            }
+        }
+        padding: 0 22px;
+        .sp-buttons{
+            display: none;
+        }
+    }
+
+    // Sidebar Banner
+    .group-sidebar-banner{
+        .widget-video{
+            margin-bottom: 20px;
+        }
+    }
+
+    .banner-no-mb{
+        .widget-video{
+            margin-bottom: 0;
+        }
+    }
+}

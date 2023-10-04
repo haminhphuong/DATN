@@ -1,0 +1,54 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Xsearch
+ */
+?>
+<?php
+// @codingStandardsIgnoreFile
+
+/** @var \Amasty\Xsearch\Block\Search\AbstractSearch $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$results = $block->getResults();
+$helper = $this->helper('\Ecommage\CustomAmastyXsearch\Helper\BlogData');// @codingStandardsIgnoreLine
+?>
+
+<div class="content-flex">
+    <?php if (count($results)) : ?>
+        <?php foreach ($results as $item) :
+            /** @var array $item  = ['title' => string, 'name' => string, 'description' => string, 'url' => string, 'num_results' => string] */ ?>
+            <div class="amsearch-item" data-search-block-type="<?= /* @escapeNotVerified */ $block->getBlockType();?>">
+                <?php if (!empty($item['full_path'])) : ?>
+                    <?= $item['full_path'] ?>
+                <?php else : ?>
+                    <?php
+                    $urlKey = $helper->getPostUrlKey($item['url']);
+                    $imgSrc = $helper->getPostListImgSrcByUrlKey($urlKey);
+                    if ($imgSrc) :
+                        ?>
+                        <a href="<?= $escaper->escapeUrl($helper->getUrlBlog($item['url'])) ?>">
+                            <img src="<?= $escaper->escapeUrl($imgSrc) ?>" alt="<?= $escaper->escapeHtml($block->stripTags($item['title'])) ?>">
+                        </a>
+                    <?php endif; ?>
+                    <a href="<?= $escaper->escapeUrl($helper->getUrlBlog($item['url'])) ?>"
+                       title="<?= /* @escapeNotVerified */ $block->stripTags($item['title']); ?>"
+                       class="item-name" >
+                        <?= /* @escapeNotVerified */ $block->stripTags($item['title']); ?>
+                    </a>
+                    <?php if (isset($item['num_results'] )) :?>
+                        <span class="amasty-xsearch-num-results"><?= $item['num_results'] ?></span>
+                    <?php endif ?>
+                <?php endif; ?>
+            </div>
+        <?php endforeach;?>
+    <?php else : ?>
+        <div class="message notice">
+            <div>
+                <?= /* @escapeNotVerified */ __('Your search returned no results.') ?>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>
+

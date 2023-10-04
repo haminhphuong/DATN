@@ -1,0 +1,213 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_AdvancedReview
+ */
+?>
+<?php
+//rewrite file Magento_Review::product/view/list.phtml
+// phpcs:ignoreFile
+
+/** @var Magento\Review\Block\Product\View\ListView $block */
+$displayedCollection = $block->getReviewsCollection();
+$_items = $displayedCollection->getItems();
+$format = $block->getDateFormat() ?: \IntlDateFormatter::MEDIUM;
+
+/** @var \Amasty\AdvancedReview\Helper\BlockHelper $advancedHelper */
+$advancedHelper = $block->getData('advanced-review-helper');
+$isFilterApplied = $displayedCollection->getFlag(\Amasty\AdvancedReview\Model\Toolbar\Applier::COLLECTION_FLAG);
+?>
+<?php
+/**
+ * @var \Ecommage\ViewProduct\Helper\ImageReview $helper;
+ */
+$helper = $this->helper('Ecommage\ViewProduct\Helper\ImageReview');
+$collectionImage = $helper->getReviewProduct();
+?>
+<?php if (count($_items) || $isFilterApplied) : ?>
+<div class="block review-list amreview__list" id="customer-reviews">
+    <h3 class="title__wrapper title__bbg amreview-customer-review pages">
+        <span>
+            <?= /* @noEscape */  __('Product Reviews')?>
+        </span>
+    </h3>
+    <div class="amreview-info-wrapper" data-amreview-js="review-container">
+        <div class="amreview-info-summary">
+            <?= /* @noEscape */ $advancedHelper->getReviewsSummaryHtml($block->getProduct(), $displayedCollection) ?>
+            <?= $block->getChildHtml('amasty.reviews.write_review_button') ?>
+        </div>
+        <?php if (!empty($collectionImage)) : ?>
+        <div class="amreview-summary-image">
+            <h4 class="customer-image"><?= $block->escapeHtml(__("Customer's photo")) ?></h4>
+            <div class="summary-image-list swiper-container">
+                <div class="amreview-slider-item swiper-wrapper" data-amreview-js="slider-item">
+                    <?php foreach ($collectionImage->getData() as $item) : ?>
+                        <div class="summary-image-item swiper-slide">
+                            <a href="<?= $block->escapeHtml($helper->getFullPath($item['image_path'])) ?>"
+                            class="amreview-image-link fancybox"
+                            data-fancybox="amreview-image-group-<?= /* @noEscape */ $helper->getCurrentProduct() ?>">
+                                <img class="amreview-image"
+                                    src="<?= /* @noEscape */ $helper->getResizedImagePath($item['image_path']);?>"
+                                    title="<?= $block->escapeHtml(__('Review image')); ?>"
+                                    alt="<?= $block->escapeHtml(__('Review image')); ?>"
+                                />
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+    </div>
+    <?= /* @noEscape */ $advancedHelper->getReviewToolbarHtml($displayedCollection); ?>
+    <div class="amrev-items-block block-content" data-amload-js="container">
+        <?php if (count($_items)): ?>
+            <ol class="items amreview-review-items"
+                data-mage-init='{
+                    "amReview": {
+                        "slidesToShow": <?= (int)$advancedHelper->getSlidesToShow(); ?>,
+                        "slidesToScroll": 1
+                    }
+                }'>
+                <?php foreach ($_items as $review) : ?>
+                    <li class="item review-item amreview-review-wrapper"
+                        data-amreview-js="review-entity"
+                        data-amreview-id="<?= (int)$review->getId() ?>"
+                        itemscope itemprop="review"
+                        itemtype="http://schema.org/Review">
+                        <div class="review-details amreview-author-details">
+                            <div class="amreview-wrap">
+                                <p class="amreview-author" itemprop="author">
+                                    <?= $block->escapeHtml($review->getNickname()) ?>
+                                </p>
+                                <?= $advancedHelper->getVerifiedBuyerHtml($review) ?>
+                                <?= $advancedHelper->getRecommendedHtml($review) ?>
+                            </div>
+                        </div>
+                        <div class="amreview-description-wrap" data-amreview-js="description-wrap">
+                            <?php if (count($review->getRatingVotes())) : ?>
+                                <?php foreach ($review->getRatingVotes() as $_vote) : ?>
+                                    <div class="amstars-rating-container -small"
+                                         <?php $stars = $_vote->getValue(); ?>
+                                         title="<?= $block->escapeHtml($stars > 1 ? __('%1 stars', $stars) : __('%1 star', $stars)) ?>"
+                                         itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                                        <meta itemprop="worstRating" content="1"/>
+                                        <meta itemprop="bestRating" content="100"/>
+                                        <p class="amstars-stars"
+                                           style="width:<?= $block->escapeHtml($_vote->getPercent()) ?>%">
+                                                <span itemprop="ratingValue" class="hidden">
+                                                    <?= $block->escapeHtml($_vote->getPercent()) ?>%
+                                                </span>
+                                        </p>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            <div class="amreview-description amshowmore-container"
+                                 data-mage-init='{"Amasty_AdvancedReview/js/components/am-show-more": {"maxCharaters": 500}}'
+                                 itemprop="description">
+                                <p class="amreview-text amshowmore-text" data-amshowmore-js="text"><?= $block->escapeHtml($review->getDetail()); ?></p>
+                                <?= /* @noEscape */ $advancedHelper->getReviewImagesHtml($review->getId()) ?>
+                            </div>
+
+                            <?php $answer = $advancedHelper->getReviewAnswerHtml($review); ?>
+                            <?php if ($answer) : ?>
+                                <div class="amreview-adminanswer-block">
+                                    <p class="amreview-title">
+                                        <?= $block->escapeHtml(__('Response from store')); ?>
+                                    </p>
+                                    <div class="amreview-text review-details">
+                                        <?= /* @noEscape */ nl2br($block->escapeHtml($answer)); ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <div class="amrev-comment-toolbar <?= !$advancedHelper->isCommentsAllowed() ? '-nocomments' : '' ?>">
+                                <?= $advancedHelper->getHelpfulHtml($review) ?>
+                                <?php if ($advancedHelper->isCommentsAllowed()) : ?>
+                                    <div class="amrev-reply">
+                                        <button class="amrev-repbtn" data-amreview-js="reply">
+                                            <?= $block->escapeHtml(__('Reply')); ?>
+                                        </button>
+                                    </div>
+                                    <div class="amrev-comment">
+                                        <button class="amrev-combtn" data-amreview-js="comments">
+                                            <span data-review-js="comment-qty">0</span>
+                                            <?= $block->escapeHtml(__('comments')); ?>
+                                        </button>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+                            <?php $like = $review->getData('like_about'); ?>
+                            <?php $disLike = $review->getData('not_like_about'); ?>
+                            <?php if ($advancedHelper->isProsConsEnabled() && ($like || $disLike)) : ?>
+                                <div class="amreview-proscons-container">
+                                    <?php if ($like) : ?>
+                                        <p class="amreview-proscons -like">
+                                            <?= /* @noEscape */ nl2br($block->escapeHtml($like)); ?>
+                                        </p>
+                                    <?php endif; ?>
+                                    <?php if ($disLike) : ?>
+                                        <p class="amreview-proscons -dislike">
+                                            <?= /* @noEscape */ nl2br($block->escapeHtml($disLike)); ?>
+                                        </p>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="amrev-comment-block"
+                                 data-amreview-js="comment-block-review-id-<?= (int)$review->getId() ?>">
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+            <div class="toolbar review-toolbar amreview-toolbar-wrap">
+                <?= $block->getChildHtml('toolbar') ?>
+            </div>
+        <?php else : ?>
+            <p class="amreview-review-list -empty">
+                <strong><?= $block->escapeHtml(__('No reviews')); ?></strong>
+            </p>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif; ?>
+
+<!-- Amasty JetTheme Compatibility -->
+<script type="text/x-magento-init">
+    {
+        ".amasty-jet-theme .amtheme-reviewform-block": {
+            "amPopup": {
+                "trigger": "<?= $block->escapeHtml('#amreview-toform') ?>"
+            }
+        }
+    }
+</script>
+
+<script>
+    require(['jquery', 'swiper'] , function ($, Swiper) {
+      var swiper = new Swiper(".summary-image-list", {
+        slidesPerView: 7,
+        spaceBetween: 10,
+        breakpoints: {
+          320: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          1024: {
+            slidesPerView: 6,
+            spaceBetween: 10,
+          },
+          1280: {
+            slidesPerView: 7,
+            spaceBetween: 10,
+          },
+        },
+      });
+    });
+</script>

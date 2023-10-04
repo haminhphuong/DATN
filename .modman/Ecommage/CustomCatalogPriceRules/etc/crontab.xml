@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job instance="Ecommage\CustomCatalogPriceRules\Cron\CronUpdateDiscountPriceProduct" method="execute" name="ecommage_catalog_price_sale_cron">
+            <schedule>0 */2 * * *</schedule>
+        </job>
+        <job instance="Ecommage\CustomCatalogPriceRules\Cron\CronUpdateCatalogRule" method="execute" name="ecommage_catalog_rules_cron">
+            <schedule>0 7 * * *</schedule>
+        </job>
+    </group>
+</config>

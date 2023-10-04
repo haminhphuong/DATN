@@ -1,0 +1,79 @@
+<?php
+/**
+ * @var $block Magento\Checkout\Block\Cart\Sidebar
+ * @var $viewModel Amasty\JetTheme\ViewModel\Checkout\MinicartViewModel
+ * @var $escaper Magento\Framework\Escaper
+ */
+
+$viewModel = $block->getViewModel();
+$isStickyMinicartEnabled = $viewModel ? $viewModel->isStickyMinicartEnabled() : '';
+$qtyType = $viewModel ? $viewModel->getQuantitySelectorType() : 'round';
+?>
+
+<div data-block="minicart" class="minicart-wrapper amtheme-header-icon" data-amtheme-js="minicart">
+    <a  class="action showcart"
+        data-bind="scope: 'minicart_content'"
+        aria-label="<?= $escaper->escapeHtmlAttr(__('My Cart')) ?>"
+        title="<?= $escaper->escapeHtmlAttr(__('My Cart')) ?>"
+        rel="nofollow">
+        <img class="minicart-img" src="<?= $block->escapeUrl($block->getViewFileUrl("images/minicart.svg")) ?>" alt="<?= $escaper->escapeHtmlAttr(__('My Cart')) ?>">
+        <img class="minicart-img has-fixed" src="<?= $block->escapeUrl($block->getViewFileUrl("images/minicart-dark.svg")) ?>" alt="<?= $escaper->escapeHtmlAttr(__('My Cart')) ?>">
+        <svg class="amtheme-icon -hover-bg" focusable="false">
+            <use xlink:href="#icon-cart" />
+        </svg>
+        <span class="counter qty empty"
+              data-bind="css: {
+                        empty: !!getCartParam('summary_count') == false && !isLoading()
+                    },
+                    blockLoader: isLoading">
+            <span class="counter-number">
+                <!-- ko text: getCartParam('summary_count') --><!-- /ko -->
+            </span>
+            <span class="counter-label">
+                <!-- ko if: getCartParam('summary_count') -->
+                <!-- ko text: getCartParam('summary_count') --><!-- /ko -->
+                <!-- ko i18n: 'items' --><!-- /ko -->
+                <!-- /ko -->
+            </span>
+        </span>
+    </a>
+    <?php if ($block->getIsNeedToDisplaySideBar()): ?>
+        <div class="block block-minicart <?= $isStickyMinicartEnabled ? ' -sticky-minicart' : ''?>"
+             data-role="dropdownDialog"
+             data-mage-init='{"dropdownDialog":{
+                "appendTo":"[data-block=minicart]",
+                "triggerTarget":".showcart",
+                "timeout": "2000",
+                "closeOnMouseLeave": false,
+                "closeOnEscape": true,
+                "triggerClass":"active",
+                "parentClass":"active",
+                "buttons":[]}}'>
+            <div id="minicart-content-wrapper"
+                 class="amtheme-minicart-content <?= 'qty-' . $escaper->escapeHtmlAttr($qtyType) ?>"
+                 data-bind="scope: 'minicart_content'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <?= $block->getChildHtml('minicart.addons') ?>
+            </div>
+        </div>
+    <?php endif ?>
+    <script>
+        window.checkout = <?= /* @noEscape */ $block->getSerializedConfig() ?>;
+    </script>
+    <script type="text/x-magento-init">
+        {
+            "[data-block='minicart']": {
+                "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+            },
+            "*": {
+                <?php if (!$block->getIsNeedToDisplaySideBar()): ?>
+                    "Magento_Checkout/js/action-no-sidebar": {},
+                <?php endif ?>
+                "Magento_Ui/js/block-loader": "<?= $escaper->escapeJs(
+            $escaper->escapeUrl($block->getViewFileUrl('images/loader-1.gif'))
+        ) ?>"
+            }
+        }
+    </script>
+
+</div>

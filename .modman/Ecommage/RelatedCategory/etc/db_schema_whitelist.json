@@ -1,0 +1,12 @@
+{
+    "category_assign_slider": {
+        "column": {
+            "id": true,
+            "slider_ctg_id": true,
+            "category_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

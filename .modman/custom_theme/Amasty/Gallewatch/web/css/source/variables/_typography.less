@@ -1,0 +1,54 @@
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Typography
+//  ---------------------------------------------
+
+//  Font property
+@font-size-ratio__base: 1.4;
+@line-height__base: 1.4285;
+@font-weight__medium: 500;
+@font-weight__semibold: 600;
+@font-weight__bold: 700;
+
+//  Headings
+@heading__font-weight__base: @font-weight__semibold;
+
+@h1__font-size: 2rem; // 22px
+@h1__font-weight: @heading__font-weight__base;
+@h1__line-height: 1.8; // 23px
+@h1__line-height-desktop: @h1__line-height;
+@h1__font-size-desktop: @h1__font-size;
+@h1__margin-bottom__desktop: 0;
+
+@h2__font-size: 2rem;
+@h2__font-weight: @heading__font-weight__base;
+@h2__line-height: 1.8;
+
+@h3__font-size: 1.8rem;
+@h3__font-weight: @heading__font-weight__base;
+@h3__line-height: 2rem;
+
+//Price
+@price__font-weight: @font-weight__bold;
+@price__font-size: 2.6rem;
+@price__letter-spacing: .01em;
+
+//  Links
+@link__color: @color-black;
+@link__visited__color: @link__color;
+@link__hover__color: lighten(@link__color, 13%);
+@link__hover__text-decoration: none;
+@link__active__color: darken(@link__color, 6%);
+@link__active__text-decoration: none;
+
+//  Focus
+@focus__color: @color-black;
+@focus__box-shadow: 0 0 0 3px @color-white, 0 0 0 4px @focus__color;
+@focus-ie__box-shadow: 0 0 0 1px @focus__color;
+@focus__border-radius: 2px;
+
+//  Colors
+@text__color: @amtheme__text-primary__color;

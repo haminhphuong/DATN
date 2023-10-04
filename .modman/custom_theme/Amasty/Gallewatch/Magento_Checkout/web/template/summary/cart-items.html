@@ -1,0 +1,18 @@
+<div class="block items-in-cart">
+    <div class="content minicart-items">
+        <div class="minicart-items-wrapper overflowed">
+            <ol class="minicart-items">
+                <each args="items()">
+                    <li class="product-item">
+                        <div class="product">
+                            <each args="$parent.elems()" render=""/>
+                        </div>
+                    </li>
+                </each>
+            </ol>
+        </div>
+        <div class="amtheme-estimated-total">
+            <span class="estimated-price" data-bind="text: $parent.getEstimateTotal(), attr: {'title': $t('Estimated Total')}"></span>
+        </div>
+    </div>
+</div>

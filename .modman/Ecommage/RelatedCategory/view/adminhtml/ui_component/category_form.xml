@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <settings>
+        <buttons>
+            <button name="save" class="Magento\Catalog\Block\Adminhtml\Category\Edit\SaveButton"/>
+            <button name="delete" class="Magento\Catalog\Block\Adminhtml\Category\Edit\DeleteButton"/>
+        </buttons>
+        <namespace>category_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>category_form.category_form_data_source</dep>
+        </deps>
+    </settings>
+    <fieldset name="assign_slider_grid">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Related Slider</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </argument>
+        <container name="assign_slider_container" >
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sortOrder" xsi:type="number">170</item>
+            </item>
+        </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Ecommage\RelatedCategory\Block\Adminhtml\AssignSlider</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

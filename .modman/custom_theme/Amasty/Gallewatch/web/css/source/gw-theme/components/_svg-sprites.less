@@ -1,0 +1,38 @@
+@urlSprites: "@{baseDir}svg/svg-sprites.svg";
+.mask-image(@x, @y: @color-base){
+  mask-image: url("@{urlSprites}#@{x}");
+  -webkit-mask-image: url("@{urlSprites}#@{x}");
+  background: @y;
+}
+.fill-bg(@x){
+  background-color: @x;
+}
+.mask-size(@x, @y: @x){
+  -webkit-mask-size: @x @y;
+  mask-size: @x @y;
+}
+.mask-repeat(@y: no-repeat){
+  -webkit-mask-repeat: @y;
+  mask-repeat: @y;
+}
+.mask-position(@z: center){
+  -webkit-mask-position: @z;
+  mask-position: @z;
+}
+.mask-option(@x, @t: @x, @y: no-repeat, @z: center){
+  .mask-size(@x, @t);
+  .mask-repeat(@y);
+  .mask-position(@z);
+}
+.bg-svg(@x){
+  background: url("@{urlSprites}#@{x}");
+}
+
+& when (@media-common = true) {
+  svg{
+    fill: currentColor;
+  }
+  .theme-icon{
+    color: @color-main;
+  }
+}

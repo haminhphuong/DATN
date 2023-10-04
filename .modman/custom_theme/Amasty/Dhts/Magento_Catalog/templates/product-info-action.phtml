@@ -1,0 +1,63 @@
+<?php
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundHelper
+
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $escaper Magento\Framework\Escaper */
+$helper      = $this->helper(\Ecommage\CustomCatalog\Helper\Data::class); // @codingStandardsIgnoreLine
+$_product = $helper->getCurrentProduct();
+$formId      = $helper->getAddToCartFormId();
+$installmentPurchase = __('Installment Purchase 0%');
+$freeConsultation = __('Free Consultation');
+$qtyAndStock = $helper->checkQtyAndStockOptionProduct($_product);
+$buttonTitle = __('Installment Purchase FUNDIIN');
+?>
+
+<div class="btn-action-info" >
+<?php if(!$qtyAndStock || !$_product->isSalable()): ?>
+    <script type="text/javascript">
+        require(['jquery'],function($){
+            $('.amtheme-product-info .product-info-main').hide();
+            $('.amtheme-short-info').css('margin-bottom','22px');
+            $('body').addClass('dhts-product-contact');
+        });
+    </script>
+<?php else: ?>
+    <?php if ($_product->isSaleable() && $qtyAndStock):?>
+        <button type="submit"
+                class="pbtn__action pbtn__link"
+                title="<?= $block->escapeHtmlAttr($installmentPurchase) ?>"
+                data-mage-init='
+                {
+                    "Ecommage_CustomCatalog/js/buynow": {
+                        "form": "#<?= /* @noEscape */
+                $formId; ?>",
+                        "addToCartUrl": "<?= /* @noEscape */
+                $block->getUrl('checkout/cart/add'); ?>",
+                        "buyNowCartUrl": "<?= /* @noEscape */
+                $block->getUrl('buynow/cart/add'); ?>"
+                    }
+                }
+                '>
+            <span><?= $block->escapeHtml($installmentPurchase) ?></span>
+        </button>
+          <button type="submit"
+                class="pbtn__action pbtn__link pbtn__fundin"
+                title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                data-mage-init='
+                {
+                    "Ecommage_CustomCatalog/js/buynow": {
+                        "form": "#<?= /* @noEscape */
+                $formId; ?>",
+                        "addToCartUrl": "<?= /* @noEscape */
+                $block->getUrl('checkout/cart/add'); ?>",
+                        "buyNowCartUrl": "<?= /* @noEscape */
+                $block->getUrl('buynow/cart/add'); ?>"
+                    }
+                }
+                '>
+            <span><?= $block->escapeHtml($buttonTitle) ?></span>
+        </button>
+    <?php endif;?>
+<?php endif;?>
+</div>
+

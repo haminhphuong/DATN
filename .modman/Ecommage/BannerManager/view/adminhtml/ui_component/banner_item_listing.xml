@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">banner_item_listing.banner_item_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>banner_item_listing_columns</spinner>
+        <deps>
+            <dep>banner_item_listing.banner_item_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="banner_item_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <filterUrlParams>
+                <param name="id">*</param>
+            </filterUrlParams>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Ecommage_BannerManager::banner</aclResource>
+        <dataProvider class="Ecommage\BannerManager\Ui\Component\DataProvider" name="banner_item_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+<!--    <listingToolbar name="listing_top">-->
+<!--        <bookmark name="bookmarks"/>-->
+<!--        <columnsControls name="columns_controls"/>-->
+<!--        <filterSearch name="fulltext"/>-->
+<!--        <filters name="listing_filters" component="Ecommage_BannerManager/js/grid/filters/filters">-->
+<!--            <settings>-->
+<!--                <storageConfig>-->
+<!--                    <param name="provider" xsi:type="string">banner_item_listing.banner_item_listing.listing_top.bookmarks</param>-->
+<!--                    <param name="namespace" xsi:type="string">current.filters</param>-->
+<!--                </storageConfig>-->
+<!--                <childDefaults>-->
+<!--                    <param name="provider" xsi:type="string">banner_item_listing.banner_item_listing.listing_top.listing_filters</param>-->
+<!--                    <param name="imports" xsi:type="array">-->
+<!--                        <item name="visible" xsi:type="string">banner_item_listing.banner_item_listing.listing_top.bookmarks:current.columns.${ $.index }.visible</item>-->
+<!--                    </param>-->
+<!--                </childDefaults>-->
+<!--            </settings>-->
+<!--        </filters>-->
+<!--        <massaction name="listing_massaction" component="Ecommage_BannerManager/js/grid/massactions">-->
+<!--            <action name="delete">-->
+<!--                <argument name="data" xsi:type="array">-->
+<!--                    <item name="config" xsi:type="array">-->
+<!--                        <item name="isAjax" xsi:type="boolean">true</item>-->
+<!--                    </item>-->
+<!--                </argument>-->
+<!--                <settings>-->
+<!--                    <url path="banner/item/massDelete"/>-->
+<!--                    <type>delete</type>-->
+<!--                    <label translate="true">Delete</label>-->
+<!--                    <confirm>-->
+<!--                        <message translate="true">Are you sure to delete selected banner?</message>-->
+<!--                        <title translate="true">Delete items</title>-->
+<!--                    </confirm>-->
+<!--                </settings>-->
+<!--            </action>-->
+<!--        </massaction>-->
+<!--        <paging name="listing_paging"/>-->
+<!--    </listingToolbar>-->
+    <columns name="banner_item_listing_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <visible>false</visible>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="position">
+            <settings>
+                <sorting>asc</sorting>
+                <visible>false</visible>
+                <label translate="true">Position</label>
+            </settings>
+        </column>
+        <column name="entity_id">
+            <settings>
+                <visible>false</visible>
+                <sortable>false</sortable>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="image_desktop" class="Ecommage\BannerManager\Ui\Component\Listing\Column\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="20">
+            <settings>
+                <altField>title</altField>
+                <hasPreview>1</hasPreview>
+                <label translate="true">Thumbnail</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="title">
+            <settings>
+                <filter>text</filter>
+                <sortable>false</sortable>
+                <label translate="true">Title</label>
+            </settings>
+        </column>
+        <column name="media_type" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Ecommage\BannerManager\Model\System\Config\MediaType"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Media Type</label>
+            </settings>
+        </column>
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Ecommage\BannerManager\Model\System\Config\Status"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="start_date" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <dataType>date</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Start Date</label>
+            </settings>
+        </column>
+        <column name="end_date" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <dataType>date</dataType>
+                <sortable>false</sortable>
+                <label translate="true">End Date</label>
+            </settings>
+        </column>
+        <column name="update_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <dataType>date</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Modified</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Ecommage\BannerManager\Ui\Component\Listing\Column\Banner\Item\ItemActions" component="Ecommage_BannerManager/js/grid/columns/actions">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

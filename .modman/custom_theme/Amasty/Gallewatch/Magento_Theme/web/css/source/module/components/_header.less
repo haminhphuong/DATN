@@ -1,0 +1,260 @@
+//
+//  Header styles
+//  _____________________________________________
+
+//
+//  Variables
+//  ---------------------------------------------
+
+@header-mobile-all-icons__width:  calc(~'@{amasty-nav-icon-item__width} * 3 + 64px');
+
+@amtheme__header__menu__background__color: @amtheme__background-primary__color;
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    .page-header {
+        > .content {
+            display: flex;
+            align-items: center;
+            flex: 1 0 0;
+            justify-content: space-between;
+            padding: 19px @layout__width-m-indent @indent__base;
+            background: @header__background-color;
+
+            .logo-image {
+                display: block;
+            }
+        }
+
+        .amtheme-header-icon:not(:last-child) {
+            .am-margin-right(22px);
+        }
+
+        .amtheme-navigation-icon .amtheme-icon {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+        }
+
+        .amtheme-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .panel.wrapper,
+        .header.content {
+            box-sizing: border-box;
+            margin: 0 auto;
+            width: 100%;
+        }
+    }
+
+    .page-header.-sticky-header {
+        & {
+            position: fixed;
+            top: -450px;
+            right: 0;
+            left: 0;
+            z-index: 60;
+            background: @header__background-color;
+            box-shadow: @header__box-shadow;
+            transition: top @amtheme__transition;
+        }
+
+        &.-show {
+            top: 0;
+            transition: top @amtheme__transition;
+        }
+
+        &:not(.-show) .mage-dropdown-dialog {
+            display: none;
+        }
+
+        > .panel.wrapper {
+            display: none;
+        }
+
+        > .header.content {
+            padding: 10px 30px;
+        }
+
+        > .sections.nav-sections {
+            margin: 0;
+            background: @amtheme__header__menu__background__color;
+        }
+
+        .navigation,
+        .amtheme-menu-block {
+            background-color: @amtheme__header__menu__background__color;
+            color: @amtheme__text-primary__color;
+        }
+
+        .navigation > ul {
+            border-top: 2px solid @amtheme__header__menu__background__color;
+            border-bottom: none;
+        }
+
+        .navigation li.level0 > a {
+            padding: @indent__s 0;
+        }
+    }
+}
+
+//
+//  Mobile
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-header.-sticky-header {
+        .block-search.-header > .block-content {
+            padding: @indent__s 35px 0;
+            border-bottom: none;
+        }
+    }
+
+    .page-header {
+        > .content {
+            flex-wrap: wrap;
+        }
+
+        .block-search {
+            margin-top: 19px;
+            background: @search-block__background-color;
+        }
+
+        .search-autocomplete {
+            margin-top: @search-autocomplete-mobile__offset-top + @search-autocomplete-mobile__border-width;
+            padding-top: @indent__m;
+        }
+
+        .logo {
+            margin: 0 auto;
+            max-width: calc(~'100% - @{header-mobile-all-icons__width}');
+        }
+
+        .amtheme-navigation-icon{
+            &::before{
+                top: 50%;
+                .translateY(-50%);
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-header {
+        > .content {
+            & {
+                position: relative;
+                padding: @indent__xl @layout__width-m-indent @indent__xl;
+            }
+
+            // &:before,
+            // &:after {
+            //     position: absolute;
+            //     top: 0;
+            //     bottom: 0;
+            //     display: block;
+            //     width: 1000%;
+            //     background: @header__background-color;
+            //     content: '';
+            // }
+
+            &:before {
+                right: 100%;
+            }
+
+            &:after {
+                left: 100%;
+            }
+        }
+
+        .logo {
+            .am-margin-right(auto);
+        }
+
+        .amtheme-icons-container {
+            order: 1;
+        }
+
+        .block-search {
+            .am-margin-right(@indent__l);
+            max-width: 320px;
+            transition: all @amtheme__transition__delay @amtheme__transition__func;
+        }
+
+        .amtheme-navigation-icon {
+            display: none;
+            cursor: pointer;
+        }
+
+        .amtheme-icons-container .account-icon .amtheme-icon {
+            width: @amtheme-icon__width;
+            height: @amtheme-icon__width;
+        }
+
+        .amtheme-icons-container .account-icon {
+            display: none;
+            .am-margin-right(@indent__s);
+        }
+    }
+
+    .page-header.-desktop-navigation-toggle {
+        .sections.nav-sections {
+            display: none;
+        }
+
+        .amtheme-navigation-icon {
+            display: block;
+        }
+    }
+
+    .nav-before-open.nav-open .page-header.-desktop-navigation-toggle {
+        .sections.nav-sections {
+            display: block;
+        }
+    }
+
+    .page-header.-sticky-header {
+        .nav-sections-item-content > .navigation {
+            padding: 10px 30px 0;
+        }
+
+        .navigation li.level0 > a {
+            padding: @indent__s 0;
+        }
+
+        .amtheme-navigation-icon {
+            .am-margin-right(40px);
+        }
+
+        .logo {
+            max-width: 60px;
+        }
+
+        .amtheme-header-icon:not(:last-child) {
+            .am-margin-right(@indent__s);
+        }
+
+        .amtheme-icons-container .account-icon {
+            display: block;
+        }
+    }
+
+    .amtheme-header-icon {
+        .amtheme-link {
+            display: inline-block;
+        }
+
+        &:not(:last-child) {
+            .am-margin-right(@indent__base);
+        }
+    }
+}

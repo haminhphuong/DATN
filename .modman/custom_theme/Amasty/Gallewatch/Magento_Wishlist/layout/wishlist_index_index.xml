@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceContainer name="content">
+<!--            <block class="Magento\LayeredNavigation\Block\Navigation\Category" name="catalog.leftnav.wishlist" before="customer.wishlist" template="layer/view.phtml">-->
+<!--                <block class="Magento\LayeredNavigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />-->
+<!--                <block class="Magento\LayeredNavigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer" template="layer/filter.phtml"/>-->
+<!--            </block>-->
+            <block class="Amasty\Mostviewed\Block\Widget\Related"
+                   template="Amasty_Mostviewed::content/grid.phtml"
+                   name="amasty.mostviewed.products.6" after="-">
+                <arguments>
+                    <argument name="group_id" xsi:type="string">6</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="customer.wishlist.item.actions">
+            <block
+                class="Ecommage\CustomCatalog\Block\Customer\Wishlist\Item\Column\AddCompare"
+                name="product.add.compare"
+                as="add_compare"
+                template="Magento_Wishlist::item/column/addcompare.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="wishlist_sidebar" remove="true"/>
+        <referenceBlock name="customer.wishlist.item.comment" remove="true"/>
+        <referenceBlock name="customer.wishlist.button.update" remove="true"/>
+        <referenceBlock name="customer.wishlist.item.actions" remove="true"/>
+    </body>
+</page>

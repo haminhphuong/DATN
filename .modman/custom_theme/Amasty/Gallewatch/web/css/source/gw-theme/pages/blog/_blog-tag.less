@@ -1,0 +1,66 @@
+& when (@media-common = true) {
+	body.amblog-index-tag {
+		
+		.amblog-title{
+			padding:0;
+		}
+		&.page-layout-2columns-right {
+			.page-main > .columns{
+				display: block;
+			}
+			.page-title{
+				font-size: 26px;
+			}
+		}
+
+		.blog_sidebar{
+			.amblog-list{
+				flex-wrap: wrap;
+			}
+		}
+		
+		.amblog-container-list .amblog-post-container {
+			.amblog-wrapper a{
+			    display: flex;
+			    height: 100%;
+			    align-items: center;
+			}
+			.amblog-content{
+			    display: flex;
+			    align-items: stretch;
+			    flex-direction: column;
+			    justify-content: flex-start;
+			}
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+	body.amblog-index-tag.page-layout-2columns-right {
+		
+		.post-video-link{
+			height:200px;
+			> *{
+				height:100%;
+			}				
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl){}
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__l - 1)) {
+        body.amblog-index-tag.page-layout-2columns-right {
+			.post-video-link{
+				height:220px;
+				> *{
+					height:100%;
+				}			
+			}
+		}
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	
+}

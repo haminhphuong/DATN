@@ -1,0 +1,47 @@
+& when (@media-common = true) {
+	.am-shopby-form {
+		.swatch-attribute {
+			.swatch-option {
+				&:not(.text) {
+					width: 40px;
+					height: 10px;
+					border-radius: 0;
+					&:before {
+						width: 40px;
+						border-radius: 0;
+						transform: scale(1.1);
+						border-color: @color-galle-boder;
+					}
+					&:hover {
+						&:before {
+							border-color: @color-galle-boder;
+						}
+					}
+				}
+				&:not(.text).selected {
+					&:before {
+						border-color: @color-galle-boder;
+					}
+				}
+			}
+		}
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	.filter-options-content {
+		.am-shopby-form {
+			.swatch-attribute {
+				.swatch-option {
+					&:not(.text) {
+						min-height: 20px;
+						height: 20px;
+						&:before {
+							height: 20px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

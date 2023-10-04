@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Ecommage\CustomerReview\Model\ImageUpload">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">ecommage/tmp/customer_review/images</argument>
+            <argument name="basePath" xsi:type="string">ecommage/customer_review/images</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Ecommage\CustomerReview\Controller\Adminhtml\Review\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Ecommage\CustomerReview\Model\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Ecommage\CustomerReview\Model\FileUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">ecommage/tmp/customer_review/videos</argument>
+            <argument name="basePath" xsi:type="string">ecommage/customer_review/videos</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="mp4" xsi:type="string">mp4</item>
+                <item name="mov" xsi:type="string">mov</item>
+                <item name="wmv" xsi:type="string">wmv</item>
+                <item name="flv" xsi:type="string">flv</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="mp4" xsi:type="string">video/mp4</item>
+                <item name="mov" xsi:type="string">video/mov</item>
+                <item name="wmv" xsi:type="string">video/wmv</item>
+                <item name="flv" xsi:type="string">video/flv</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Ecommage\CustomerReview\Controller\Adminhtml\Review\Upload">
+        <arguments>
+            <argument name="videoUploader" xsi:type="object">Ecommage\CustomerReview\Model\FileUploader</argument>
+        </arguments>
+    </type>
+</config>

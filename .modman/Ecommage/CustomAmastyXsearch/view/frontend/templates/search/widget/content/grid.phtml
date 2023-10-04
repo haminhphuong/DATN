@@ -1,0 +1,69 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\Framework\App\Action\Action;
+
+/** @var \Ecommage\CustomAmastyXsearch\Block\MostSearched\ListKeySearch $block */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundHelper
+$items = $block->getCollectionMostKeySearch();
+?>
+<?php if (count($items)) : ?>
+    <div class="block widget block-most-search">
+        <div class="container">
+            <?php if ($block->getTitle()) : ?>
+                <div class="title-wrapper">
+                    <h2 class="pages-title"><?= $block->escapeHtml(__($block->getTitle() ? $block->getTitle() : 'Most Wanted Search Terms')) ?></h2>
+                </div>
+            <?php endif ?>
+            <div class="block-content">
+                <div class="most-search">
+                    <div class="swiper-container slider-most-search">
+                        <ul class="swiper-wrapper most-search">
+                            <?php foreach ($items as $_item) : ?>
+                                <li class="key-search-info swiper-slide">
+                                    <?php foreach ($_item as $value): ?>
+                                        <?php $queryText = isset($value['query_text']) ? $value['query_text'] : '' ?>
+                                        <div class="key-search"><a href="<?= /**@no-escape*/ $block->getUrl('catalogsearch/result', ['q' => $queryText]) ?>"><?= /**@no-escape*/ $queryText ?></a></div>
+                                    <?php endforeach; ?>
+                                </li>
+                            <?php endforeach ?>
+                        </ul>
+                        <div class="swiper-button-next">&nbsp</div>
+                        <div class="swiper-button-prev">nbsp</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif;?>
+<script>
+    require(['jquery', 'swiper'] , function ($, Swiper) {
+        var swiper = new Swiper('.swiper-container.slider-most-search', {
+            slidesPerView: 5,
+            spaceBetween: 10,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 2,
+                },
+                640: {
+                    slidesPerView: 3,
+                },
+                1024: {
+                    slidesPerView: 4,
+                },
+            }
+        });
+    });
+</script>

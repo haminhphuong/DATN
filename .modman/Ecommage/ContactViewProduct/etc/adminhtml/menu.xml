@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ecommage_ContactViewProduct::manage_contact"
+             title="Manage Contact"
+             module="Ecommage_ContactViewProduct"
+             sortOrder="130"
+             parent="Magento_Catalog::catalog"
+             resource="Ecommage_ContactViewProduct::manage_contact"/>
+        <add id="Ecommage_ContactViewProduct::manage_contact_product"
+             title="Manage Contact Product"
+             module="Ecommage_ContactViewProduct"
+             sortOrder="20"
+             dependsOnModule="Magento_Catalog"
+             parent="Ecommage_ContactViewProduct::manage_contact"
+             action="manage_contact/product/index"
+             resource="Ecommage_ContactViewProduct::manage_contact_product"/>
+    </menu>
+</config>

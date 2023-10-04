@@ -1,0 +1,175 @@
+<?php
+
+// @codingStandardsIgnoreFile
+$_helper = $this->helper(\Ecommage\CustomStoreLocation\Helper\Data::class);
+$viewModel     = $block->getLocationModel();
+$locations     = $block->getLocationCollection();
+$_selectRegion = 'All Region';
+$_selectCity   = 'All District';
+?>
+<?php if ($viewModel->isUseGoogleMap()): ?>
+    <?= /* @noEscape */
+    $viewModel->renderGoogleMap(); ?>
+<?php else: ?>
+    <div class="amlocator-wrapper amlocator-all-store">
+        <p class="locator-title find-store">
+            <?= /* @noEscape */
+            __("Find store") ?>
+        </p>
+        <div class="amlocator__content">
+            <div class="amlocator-filter">
+                <div class="field country required hidden">
+                    <label class="label" for="country">
+                        <span><?= /* @noEscape */
+                            __("Country") ?></span>
+                    </label>
+                    <div class="control">
+                        <?= $viewModel->getCountryHtmlSelect() ?>
+                    </div>
+                </div>
+                <div class="field region required">
+                    <label class="label" for="region_id">
+                        <span><?= /* @noEscape */
+                            __("State/Region") ?></span>
+                    </label>
+                    <div class="control">
+                        <select id="region_id" name="region_id"
+                                title="<?= /* @noEscape */
+                                __("State/Region") ?>"
+                                class="validate-select region_id">
+                            <option value="0"><?= /* @noEscape */
+                                __($_selectRegion) ?></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field region required">
+                    <label class="label" for="city_id">
+                        <span><?= /* @noEscape */
+                            __("District") ?></span>
+                    </label>
+                    <div class="control">
+                        <select id="city_id" name="city_id"
+                                title="<?= /* @noEscape */
+                                __("District") ?>"
+                                class="validate-select city_id">
+                            <option value="0"><?= /* @noEscape */
+                                __($_selectCity) ?></option>
+                        </select>
+                    </div>
+                </div>
+                <!--                <div class="field text-search">-->
+                <!--                    <div class="control">-->
+                <!--                        <input type="text" id="text_search" name="text_search" placeholder="-->
+                <? //= /* @noEscape */
+                //                        __('Enter the name of the State/Region, or District') ?><!--"/>-->
+                <!--                    </div>-->
+                <!--                    <div class="field button">-->
+                <!--                        <button class="button-search" type="button">-->
+                <!--                        <span>--><? //= /* @noEscape */
+                //                            __("Search") ?><!--</span></button>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+            </div>
+
+            <div class="dropdown-address"></div>
+
+            <div class="amlocator-stores-wrapper">
+                <p class="locator-title">
+                    <?= /* @noEscape */
+                    __("List store") ?>
+                </p>
+                <?php foreach ($locations as $location):
+                    ?>
+                    <div class="amlocator-store-desc" name="leftLocation"
+                         data-mapid="<?= /* @noEscape */
+                         $block->escapeHtml($block->getMapId()); ?>"
+                         data-amid="<?= /* @noEscape */
+                         (int)$location['id']; ?>">
+                        <div class="amlocator-block">
+                            <div class="amlocator-store-information"><?= $location->getStoreListHtml() ?>
+                                <a target="_blank" href="<?= /* @noEscape */
+                                $viewModel->getGoogleMapByLatLng($location->getLat(), $location->getLng()); ?>"
+                                   class="find_store"><?= /* @noEscape */
+                                    __('Find your way to this store'); ?></a>
+                                <div style="display: none;" class="amasty_distance"
+                                     id="amasty_distance_<?= (int)$location['id'] ?>"><?= /* @noEscape */
+                                    $block->escapeHtml(__('Distance:')) ?>
+                                    <span class="amasty_distance_number"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <div class="load_more btn_load_more">
+                    <a href="javascript:void(0)"><?= $block->escapeHtml(__('Load More')) ?></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="amlocator-stores-hotline">
+            <p class="locator-title">
+                <?= /* @noEscape */
+                __("OR CALL HOTLINE <a class='call' href='tel: %1'>%1</a> FOR SUPPORT", $_helper->getHotline()) ?>
+            </p>
+        </div>
+
+        <script type="text/x-magento-init">
+                {
+                    "#country": {
+                        "regionUpdater": {
+                            "optionalRegionAllowed": <?= /* @noEscape */
+            'false' ?>,
+                            "optionalCityAllowed": <?= /* @noEscape */
+            'false' ?>,
+                            "regionListId": "#region_id",
+                            "cityListId": "#city_id",
+                            "regionInputId": "",
+                            "postcodeId": "",
+                            "form": "",
+                            "regionJson": <?= /* @noEscape */
+            $viewModel->dataGetRegionJson() ?>,
+                            "defaultRegion": "0",
+                            "currentRegion": "0",
+                            "countriesWithOptionalZip": <?= /* @noEscape */
+            $viewModel->dataGetCountriesWithOptionalZip(true) ?>
+                        }
+                    }
+                }
+        </script>
+        <script>
+            require([
+                'jquery',
+                'Ecommage_CustomStoreLocation/js/search',
+                'domReady!',
+                'select2'
+            ], function ($) {
+                $('#region_id').select2({language: {noResults: function () {
+                        return "<?= $block->escapeHtml(__('No results found')) ?>";
+                    }}}).on('select2:opening', function () {
+                    $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', "<?= $block->escapeHtml(__('Please select a region')); ?>")
+                });
+                $('#city_id').select2({language: {noResults: function () {
+                            return "<?= $block->escapeHtml(__('No results found')) ?>";
+                        }}}).on('select2:opening', function () {
+                    $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', "<?= $block->escapeHtml(__('Please select a city')); ?>")
+                });
+                $(".amlocator-filter").amSearchLocator({
+                    ajaxCallUrl: "<?= $block->escapeHtml($viewModel->getAmStoreSearchUrl()); ?>",
+                    region: "#region_id",
+                    country: "#country",
+                    city: "#city_id",
+                    button: ".button-search",
+                    // text_search: "#text_search",
+                    per_address: "<?= $block->escapeHtml($_helper->getPerAddress()); ?>",
+                    mainContainer: ".amlocator-stores-wrapper"
+                });
+            });
+        </script>
+
+
+        <?php if ($pager = $block->getPagerHtml()): ?>
+            <div class="amlocator-pager-container"><?= /** @escapeNotVerified */
+                $pager; ?></div>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

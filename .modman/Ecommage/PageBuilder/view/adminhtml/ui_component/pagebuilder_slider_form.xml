@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Thomas Nguyen, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd" extends="pagebuilder_base_form_with_background_video">
+    <fieldset name="settings" sortOrder="20">
+        <field name="slides_to_show" sortOrder="1112" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Slides To Show</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-number-range" xsi:type="string">1-100</rule>
+                </validation>
+                <dataType>text</dataType>
+                <dataScope>slides_to_show</dataScope>
+                <notice translate="true">Number of slides to show (slides visible at the same time on slider's container). Please enter a number from 1 - 100</notice>
+            </settings>
+        </field>
+        <field name="slides_to_scroll" sortOrder="1603" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Slides To Scroll</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-number-range" xsi:type="string">1-100</rule>
+                </validation>
+                <dataType>text</dataType>
+                <dataScope>slides_to_scroll</dataScope>
+                <notice translate="true">Please enter a number from 1 - 100</notice>
+            </settings>
+        </field>
+    </fieldset>
+</form>

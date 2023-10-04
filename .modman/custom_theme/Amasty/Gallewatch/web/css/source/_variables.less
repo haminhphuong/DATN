@@ -1,0 +1,139 @@
+//
+//  Amasty theme variables
+//  _____________________________________________
+
+//
+//  Colors variables
+//  ---------------------------------------------
+
+//  Colors theme base
+@import 'variables/_colors-base';
+
+//  Color variables custom theme
+@import 'variables/_colors-system';
+
+//
+//  Utils
+//  ---------------------------------------------
+
+@amtheme__transition__func: ease-in-out;
+@amtheme__transition__delay: .4s;
+@amtheme__transition__fast__delay: .2s;
+@amtheme__transition: @amtheme__transition__delay @amtheme__transition__func;
+@amtheme__fast__transition: @amtheme__transition__fast__delay @amtheme__transition__func;
+
+@amtheme-scrollbar__size: 4px;
+
+@amtheme__border__width: 1px;
+@amtheme__border: @amtheme__border__width solid @color-galle-boder;
+@amtheme__border-radius__s: 20px;
+@amtheme__border-radius__m: 6px;
+
+//
+//  Inline select
+//  ---------------------------------------------
+
+@amtheme-select-inline__background: @amtheme__background-primary__color url('../svg/@{amtheme__icons__color-mode-prefix}/@{amtheme__icons__mode}/arrow-bottom.svg') no-repeat 100% center/25px;
+@amtheme-select-inline__padding: 0 25px 0 0;
+@amtheme-select-inline__color: @text__color;
+@amtheme-select-inline__font-weight: @font-weight__bold;
+
+//
+//  Typography
+//  ---------------------------------------------
+
+//  Font properties
+@letter-spacing__base: 0;
+
+//  Headings
+@heading__font-weight__base:@font-weight__regular;
+
+@h1__letter-spacing: 0;
+@h1__font-weight-desktop: @heading__font-weight__base;
+@h1__letter-spacing-desktop: 0;
+
+@h3__letter-spacing: 0;
+
+//  Links
+@link__font-weight: @font-weight__bold;
+
+// 2.3.0 compatibility font-face mixin
+.am-lib-font-face(
+    @family-name,
+    @font-path,
+    @font-weight: normal,
+    @font-style: normal,
+    @font-display: auto
+) {
+    @font-face {
+        font-weight: @font-weight;
+        font-style: @font-style;
+        font-family: @family-name;
+        src: url('@{font-path}.woff2') format('woff2'), url('@{font-path}.woff') format('woff');
+        font-display: @font-display;
+    }
+}
+
+//
+//  Sections variables
+//  ---------------------------------------------
+
+//  Tabs
+@tab-content__border-top-status: true;
+
+//  Sidebar
+@sidebar__background-color: @color-white-smoke;
+
+//
+//  Emoji variables
+//  ---------------------------------------------
+
+@am-emoji__round-pushpin: '📍'; // round pushpin is here;
+@am-emoji__thumbs-up: '👍'; // thumbs up is here
+@am-emoji__cross-mark: '❌'; // cross mark is here
+@am-emoji__construction: '🚧'; // construction is here
+@am-emoji__triangular_flag: '🚩'; // triangular flag is here
+@am-emoji__slightly-smiling-face: '🙂'; // slightly smiling face is here
+@am-emoji__ok-hand: '👌'; // ok hand is here
+@am-emoji__search: '🔎'; // search icon is here
+
+//
+//  Messages
+//  ---------------------------------------------
+
+@message-icon__width: 20px;
+@message-icon__text-align: right;
+@message__text-margin-left: 5px;
+
+//
+//  Indents
+//  ---------------------------------------------
+
+@indent__sm: @indent__base * .75; // 15px
+
+//
+//  Tables
+//  ---------------------------------------------
+
+//  Lib tables variables
+@table-cell__padding-horizontal: 15px;
+@table-cell__padding-vertical: 10px;
+@table-responsive-cell__padding: 10px 20px;
+
+//  JetTheme tables variables
+@table-th__padding: @indent__m @table-cell__padding-horizontal @table-cell__padding-vertical;
+@table-th__color: @amtheme__text-secondary__color;
+@table-th__font-size: 1.2rem;
+@table-responsive-row__border-radius: @amtheme__border-radius__s;
+@table-responsive-cell-label__width: 35%;
+
+//
+//  Spinner
+//  ---------------------------------------------
+
+@spinner__size: 25px;
+@spinner__border-width: 4px;
+@spinner__margin: 0 10px 0 0;
+@spinner__border-color: @color-white;
+@spinner__background: @amtheme__primary__color;
+

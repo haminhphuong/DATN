@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_JetTheme
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script async="" src="js/modernizr.js"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    </head>
+    <body>
+        <referenceContainer name="footer">
+            <container name="footer.info.top" htmlTag="div" htmlClass="footer-section-top" before="-" />
+        </referenceContainer>
+        <move element="footer.logo" destination="footer.info.top" before="-" />
+        <move element="footer.social" destination="footer.info.top" after="-" />
+
+        <referenceBlock name="back-to-top" remove="true"/>
+        <referenceBlock name="brands-link" remove="true"/>
+        <referenceBlock name="amblog_toolbar_link" remove="true"/>
+        <referenceBlock name="amfaq_top_link" remove="true"/>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Js\Components" name="theme.custom.js" as="themecustomjs"
+                template="Magento_Theme::js/gw-js.phtml" after="-" />
+                <block class="Magento\Framework\View\Element\Js\Components" name="theme.customdhts.js" as="themecustomdhtsjs"
+                template="Magento_Theme::js/dhts-js.phtml" after="-" />
+        </referenceContainer>
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Framework\View\Element\Js\Components" name="theme.script" as="script"
+                   template="Magento_Theme::js/script.phtml" before="-" />
+        </referenceContainer>
+        <!--  -->
+        <move element="my.account" destination="header.icons" before="-"/>
+        <move element="header.links" destination="my.account"/>
+        <move element="top.search" destination="header.right.wraper" before="-"/>
+        <move element="header.icons" destination="header.right.wraper" after="-"/>
+        <!--  -->
+        <referenceBlock name="catalog.compare.link" remove="true"/>
+        <referenceBlock name="header" remove="true" />
+        <!-- header wraper -->
+        <referenceContainer name="header-wrapper">
+                <container name="my.account" htmlClass="my-account" htmlTag="div" after="-" >
+                    <block class="Magento\Framework\View\Element\Template" name="block.user" template="Magento_Theme::block-user.phtml"/>
+                </container>
+            <container name="header.adress" htmlClass="header-adress" htmlTag="div" before="logo">
+                <block class="Magento\Cms\Block\Block" name="header-adress" before="-">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">header-adress</argument>
+                    </arguments>
+                </block>
+            </container>
+            <container name="header.right.wraper" htmlClass="header-right-wrapper" htmlTag="div"  after="logo">
+
+            </container>
+        </referenceContainer>
+        <referenceContainer name="header.panel">
+         <container name="header.top.exp" htmlClass="header-top-exp" htmlTag="div" after="header.adress">
+               <block class="Magento\Cms\Block\Block" name="header-top-exp" before="-">
+                    <arguments>
+                      <argument name="block_id" xsi:type="string">header-top-exp</argument>
+                   </arguments>
+              </block>
+         </container>
+        </referenceContainer>
+    </body>
+</page>

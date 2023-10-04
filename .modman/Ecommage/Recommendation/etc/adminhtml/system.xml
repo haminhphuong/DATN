@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+   <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+        <system>
+            <section id="recommendation" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Recommendation</label>
+                <tab>ecommage</tab>
+                <class>separator-top</class>
+				<resource>Ecommage_Recommendation::config</resource>
+				<group id="product_page" showInDefault="1" sortOrder="1" showInStore="1" showInWebsite="1">
+					<label>Product Page</label>
+					<field id="enable" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+						<label>Enable</label>
+						<source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+				    </field>
+                    <field id="number" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Number</label>
+                        <validate>required-entry validate-length</validate>
+                    </field>
+                    <group id="people_also_view" showInDefault="1" sortOrder="2" showInStore="1" showInWebsite="1">
+                        <label>People Also Viewed</label>
+                        <field id="titlePeopleAlsoView" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                            <validate>required-entry</validate>
+                        </field>
+                        <field id="scenarioIdPeopleAlsoView" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Scenario Id</label>
+                            <validate>required-entry</validate>
+                        </field>
+                    </group>
+                    <group id="similar_product" showInDefault="1" sortOrder="3" showInStore="1" showInWebsite="1">
+                        <label>Similar Products</label>
+                        <field id="titleSimilarProduct" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                            <validate>required-entry</validate>
+                        </field>
+                        <field id="scenarioIdSimilarProduct" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Scenario Id</label>
+                            <validate>required-entry</validate>
+                        </field>
+                    </group>
+			    </group>
+                <group id="product_list" showInDefault="1" sortOrder="2" showInStore="1" showInWebsite="1">
+                    <label>Product List</label>
+                    <field id="enable" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    </field>
+                    <field id="number" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Number</label>
+                        <validate>required-entry validate-length</validate>
+                    </field>
+                    <group id="recommended_for_you" showInDefault="1" sortOrder="2" showInStore="1" showInWebsite="1">
+                        <label>Recommended For You</label>
+                        <field id="titleRecommendedForYou" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                            <validate>required-entry</validate>
+                        </field>
+                        <field id="scenarioIdRecommendedForYou" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Scenario Id</label>
+                            <validate>required-entry</validate>
+                        </field>
+                    </group>
+                    <group id="similar_to_your_recently" showInDefault="1" sortOrder="3" showInStore="1" showInWebsite="1">
+                        <label>Similar To Your Recently</label>
+                        <field id="titleSimilarRecently" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                            <validate>required-entry</validate>
+                        </field>
+                        <field id="scenarioIdSimilarRecently" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Scenario Id</label>
+                            <validate>required-entry</validate>
+                        </field>
+                    </group>
+                </group>
+                <group id="checkout" showInDefault="1" sortOrder="2" showInStore="1" showInWebsite="1">
+                    <label>Product Checkout</label>
+                    <field id="enable" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    </field>
+                    <field id="number" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Number</label>
+                        <validate>required-entry validate-length</validate>
+                    </field>
+                    <group id="complementary_products" showInDefault="1" sortOrder="2" showInStore="1" showInWebsite="1">
+                        <label>Complementary Products</label>
+                        <field id="titleComplementaryProducts" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                            <validate>required-entry</validate>
+                        </field>
+                        <field id="scenarioIdComplementaryProducts" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Scenario Id</label>
+                            <validate>required-entry</validate>
+                        </field>
+                    </group>
+                </group>
+                <group id="checkout_success" showInDefault="1" sortOrder="3" showInStore="1" showInWebsite="1">
+                    <label>Product Checkout Success</label>
+                    <field id="enable" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    </field>
+                    <field id="number" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Number</label>
+                        <validate>required-entry validate-length</validate>
+                    </field>
+                    <group id="recommended_for_you" showInDefault="1" sortOrder="2" showInStore="1" showInWebsite="1">
+                        <label>Recommended For You</label>
+                        <field id="titleRecommendedForYou" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                            <validate>required-entry</validate>
+                        </field>
+                        <field id="scenarioIdRecommendedForYou" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Scenario Id</label>
+                            <validate>required-entry</validate>
+                        </field>
+                    </group>
+                </group>
+            </section>
+        </system>
+    </config>

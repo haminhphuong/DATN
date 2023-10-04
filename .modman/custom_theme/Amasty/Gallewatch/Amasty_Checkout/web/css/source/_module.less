@@ -1,0 +1,29 @@
+@color-white: #FFFFFF;
+@color-theme-main: #662d91;
+@color-galle-gray1:#909090;
+
+@font-weight__medium: 500;
+
+.button-action(){
+    border-radius: 20px;
+    height: 40px;
+    font-size: 1.4rem;
+    font-weight: @font-weight__medium;
+    text-transform: uppercase;
+    padding: 7px 20px;
+    &,
+    &:hover{
+        .lib-css(background, @color-theme-main);
+        border: 0;
+        color: @color-white;
+    }
+}
+.button-action-xs(){
+    height: 30px;
+    font-size: 12px;
+    padding: 5px 15px;
+}
+
+@import "module/_helpers";
+@import "module/_classic";
+@import "module/_modern";

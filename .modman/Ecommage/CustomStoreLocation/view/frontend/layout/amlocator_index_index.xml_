@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="main">
+            <block before="main.content" class="Amasty\PromoBanners\Block\Container"
+                    name="promo.category" after="amasty.locator.center" template="Ecommage_CustomPromoBanners::container.phtml">
+                <action method="setPosition">
+                    <argument name="position" xsi:type="string">19</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

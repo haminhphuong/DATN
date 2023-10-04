@@ -1,0 +1,62 @@
+<!--
+/**
+ * Copyright © Thomas Nguyen, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!-- ko if: ($file.type == 'video/mp4' || $file.type == 'video/ogg' || $file.type == 'video/webm') -->
+<div class="file-uploader-summary" xmlns="http://www.w3.org/1999/html">
+    <div class="file-uploader-preview">
+        <video width="400" controls >
+            <source attr="src: $file.url" id="video_here">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="actions">
+            <button
+                type="button"
+                class="action-remove"
+                data-role="delete-button"
+                attr="title: $t('Delete video')"
+                click="$parent.removeFile.bind($parent, $file)">
+                <span translate="'Delete video'"/>
+            </button>
+        </div>
+    </div>
+    <div class="file-uploader-filename" text="$file.name"/>
+</div>
+<!-- /ko -->
+<!-- ko if: ($file.type == 'image/jpg' || $file.type == 'image/jpeg' || $file.type == 'image/png' || $file.type == 'image/gif') -->
+<div class="file-uploader-summary">
+    <div class="file-uploader-preview image-uploader-preview">
+        <a class="image-uploader-preview-link" attr="href: $parent.getFilePreview($file)" target="_blank">
+            <div class="file-uploader-spinner image-uploader-spinner" />
+            <img
+                class="preview-image"
+                tabindex="0"
+                event="load: $parent.onPreviewLoad.bind($parent)"
+                attr="
+                    src: $parent.getFilePreview($file),
+                    alt: $file.name,
+                    title: $file.name">
+        </a>
+
+        <div class="actions">
+            <button
+                type="button"
+                class="action-remove"
+                data-role="delete-button"
+                attr="title: $t('Delete image')"
+                disable="$parent.disabled"
+                click="$parent.removeFile.bind($parent, $file)">
+                <span translate="'Delete image'"/>
+            </button>
+        </div>
+    </div>
+
+    <div class="file-uploader-filename" text="$file.name"/>
+    <div class="file-uploader-meta">
+        <text args="$file.previewWidth"/>x<text args="$file.previewHeight"/>,
+        <text args="$parent.formatSize($file.size)"/>
+    </div>
+</div>
+<!-- /ko -->

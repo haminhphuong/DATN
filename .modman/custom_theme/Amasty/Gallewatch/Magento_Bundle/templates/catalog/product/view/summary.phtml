@@ -1,0 +1,7 @@
+<?php $_product = $block->getProduct(); ?>
+
+<?php if ($_product->isSaleable()): ?>
+    <div class="bundle-summary">
+        <?= $block->getChildHtml('', true) ?>
+    </div>
+<?php endif; ?>

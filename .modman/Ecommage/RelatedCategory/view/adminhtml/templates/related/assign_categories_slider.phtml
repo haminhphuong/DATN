@@ -1,0 +1,24 @@
+<?php
+/**
+ * Created By : RH
+ */
+?>
+<?php
+$blockGrid = $block->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+?>
+<?= $block->getGridHtml() ?>
+<input type="hidden" name="rh_categories_slider" data-form-part="category_form" id="rh_categories_slider" value=""  />
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Ecommage_RelatedCategory/js/assign-slider": {
+                "selectedSlider":  <?= /* @escapeNotVerified */ $block->getSliderJson() ?>,
+                "gridJsObjectName": <?= /* @escapeNotVerified */ '"' . $gridJsObjectName . '"' ?: '{}' ?>
+            }
+        }
+    }
+</script>
+<script>
+    require('mage/apply/main').apply();
+</script>

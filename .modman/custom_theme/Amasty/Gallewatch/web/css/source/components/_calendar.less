@@ -1,0 +1,169 @@
+//
+// Calendar
+// _________________________________________
+
+//
+//  Variables
+//  ----------------------------------------
+
+@amtheme-calendar__box-shadow: 0 4px 8px fade(#393838, 30%);
+@amtheme-calendar-cell__padding: 8px 10px;
+@amtheme-calendar-mobile-cell__width: calc(~'100% / 8');
+@amtheme-calendar-mobile-cell__height: 25px;
+@amtheme-calendar-arrows__size: 20px;
+@amtheme-calendar-arrows__prev__background: ~'url("../svg/@{amtheme__icons__color-mode-prefix}/@{amtheme__icons__mode}/arrow-left-min.svg") no-repeat center';
+@amtheme-calendar-arrows__next__background: ~'url("../svg/@{amtheme__icons__color-mode-prefix}/@{amtheme__icons__mode}/arrow-right-min.svg") no-repeat center';
+
+//
+//  Common
+//  ----------------------------------------
+
+& when (@media-common = true) {
+    .ui-slider-handle{
+        background: @color-main;
+    }
+    .ui-widget.ui-datepicker {
+        & {
+            z-index: 101 !important; // override default magento datepicker style
+            border: @amtheme__border__width solid @color-black;
+            border-radius: @amtheme__border-radius__s;
+            background: @amtheme__background-primary__color;
+            box-shadow: @amtheme-calendar__box-shadow;
+        }
+
+        .ui-datepicker-header {
+            margin-bottom: 10px;
+            padding-bottom: 0;
+        }
+
+        .ui-datepicker-prev {
+            background: @amtheme-calendar-arrows__prev__background;
+        }
+
+        .ui-datepicker-next {
+            background: @amtheme-calendar-arrows__next__background;
+        }
+
+        .ui-datepicker-buttonpane {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            .ui-datepicker-current {
+                background: @color-main;
+                border-color: @color-main;
+                color: @color-white;
+                margin-right: @indent__base;
+                //margin-bottom: 10px;
+            }
+        }
+    }
+
+    .ui-widget.ui-datepicker .ui-datepicker-prev,
+    .ui-widget.ui-datepicker .ui-datepicker-next {
+        & {
+            .am-vertical-center;
+
+            width: @amtheme-calendar-arrows__size;
+            height: @amtheme-calendar-arrows__size;
+            opacity: .8;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &.ui-state-disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        span {
+            display: none;
+        }
+    }
+
+    .ui-widget.ui-datepicker .ui-datepicker-title > select {
+        display: inline-block;
+        padding-right: 30px;
+    }
+
+    .ui-widget.ui-datepicker .ui-datepicker-calendar {
+        th {
+            padding: @amtheme-calendar-cell__padding;
+            border: @amtheme__border__width solid #000;
+            background: @color-black;
+            color: @color-white;
+            text-transform: capitalize;
+        }
+
+        td {
+            padding: 0;
+        }
+
+        td a,
+        td span {
+            padding: @amtheme-calendar-cell__padding;
+        }
+
+        td .ui-state-hover:not(.ui-state-active) {
+            background: fade(@color-main, 30%);
+        }
+
+        .ui-state-active {
+            background: @color-main;
+            color: @color-white;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .ui-widget.ui-datepicker {
+        & {
+            width: calc(~'100% - @{layout__width-xs-indent} * 2');
+        }
+
+        .ui-datepicker-title {
+            margin: 0 2em;
+        }
+
+        .ui-datepicker-title > select {
+            padding: @indent__xs 30px @indent__xs 15px;
+            height: 30px;
+        }
+
+        .ui-datepicker-week-col {
+            color: @color-gray-dark;
+            font-size: 1rem;
+        }
+    }
+
+    .ui-widget.ui-datepicker .ui-datepicker-calendar {
+        thead > tr > th,
+        tbody > tr > td {
+            padding: inherit;
+            width: @amtheme-calendar-mobile-cell__width;
+            height: @amtheme-calendar-mobile-cell__height;
+            vertical-align: middle;
+            text-align: center;
+            font-weight: @font-weight__regular;
+        }
+
+        thead > tr > th {
+            font-size: 1rem;
+        }
+
+        tbody > tr > td > a,
+        tbody > tr > td > span {
+            box-sizing: border-box;
+            padding: 2px 5px 0;
+            width: 100%;
+            height: 100%;
+            font-size: 1.2rem;
+            line-height: 2.2rem;
+        }
+    }
+}

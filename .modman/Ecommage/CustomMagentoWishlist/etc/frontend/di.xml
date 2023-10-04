@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Wishlist\Controller\Index\Add">
+        <plugin name="Ecommage_CustomMagentoWishlist" type="Ecommage\CustomMagentoWishlist\Plugin\Controller\Index\Add" sortOrder="1" />
+    </type>
+    <type name="Magento\Wishlist\Controller\Index\Cart">
+        <plugin name="Ecommage_CustomMagentoWishlist::addCart" type="Ecommage\CustomMagentoWishlist\Plugin\Controller\Index\Cart" />
+    </type>
+    <type name="Magento\Wishlist\Model\ItemCarrier">
+        <plugin name="Ecommage_CustomMagentoWishlist::moveAllCart" type="Ecommage\CustomMagentoWishlist\Plugin\Model\ItemCarrier" />
+    </type>
+</config>

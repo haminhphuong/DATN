@@ -1,0 +1,9 @@
+@urlSpritesdhts: "@{baseDir}svg/svg-sprites_dhts.svg";
+.mask-image-dhts(@x, @y: @color-base){
+  mask-image: url("@{urlSpritesdhts}#@{x}");
+  -webkit-mask-image: url("@{urlSpritesdhts}#@{x}");
+  background: @y;
+}
+.bg-svg-dhts(@x){
+  background: url("@{urlSpritesdhts}#@{x}");
+}

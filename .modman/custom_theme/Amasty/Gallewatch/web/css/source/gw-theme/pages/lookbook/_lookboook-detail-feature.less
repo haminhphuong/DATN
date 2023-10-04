@@ -1,0 +1,14 @@
+
+& when (@media-common = true) {
+    .row-lookbook-detail-feature{
+        margin-bottom: 44px;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .row-lookbook-detail-feature{}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .row-lookbook-detail-feature{}
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="page.wrapper">
+            <container name="category.related.slider.wrapper" htmlTag="div" htmlClass="category-related-slider-wrapper" before="main.content">
+                <block class="Magento\Catalog\Block\Category\View" name="category.related_category" after="-" template="Ecommage_RelatedCategory::category/related_category.phtml">
+                    <arguments>
+                        <argument name="related_image" xsi:type="object">Ecommage\RelatedCategory\ViewModel\Category\RelatedImage</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+        <move element="category.related_category" destination="category.related.slider.wrapper" after="-" />
+    </body>
+</page>

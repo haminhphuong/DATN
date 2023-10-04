@@ -1,0 +1,102 @@
+.lib-group-overflow(@x: 20px){
+    .scrollbar();
+    flex-wrap: nowrap;
+    .mx(-10px, -20px);
+    overflow: auto;
+    padding-bottom: 15px;
+
+    .pagebuilder-column{
+        .px(10px);
+    }
+
+    & when (@media-target = 'mobile'), (@media-target = 'all') {
+        @media only screen and (max-width: (@screen__l - 1)) {
+            .pagebuilder-column{
+                &:last-of-type{
+                    padding-right: 20px;
+                }
+            }
+        }
+
+        @media only screen and (min-width: @screen__l) {
+            .mx(~"-@{x}");
+
+            .pagebuilder-column{
+                .px(@x);
+            }
+        }
+    }
+}
+
+& when (@media-common = true) {
+    .row-core-value{
+
+        .pagebuilder-column-group{
+            .lib-group-overflow();
+
+            .pagebuilder-column{
+                align-items: center;
+                flex-direction: row !important;
+                flex: 1 0 220px;
+                .px(10px);
+            }
+        } 
+
+        [data-content-type='image']{
+            flex-shrink: 0;
+            margin-right: 10px;
+
+            img{
+                display: block;
+                max-height: 30px;
+            }
+        }
+
+        [data-content-type='text']{
+            text-transform: uppercase;
+            font-weight: @font-weight__bold;
+            line-height: 1.8;
+
+            > *:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    .row-core-value{
+        .py(20px, 10px);
+
+        .row-full-width-inner{
+            .pagebuilder-column-group{
+                padding-bottom: 10px;
+            }
+        }
+
+        &[data-content-type='row'][data-appearance='full-width'] > .row-full-width-inner{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        [data-content-type=text]{
+            font-size: 9px;
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .row-core-value{
+        .py(30px, 15px);
+         [data-content-type=text]{
+            font-size: 10px;
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .row-core-value{
+        .pagebuilder-column-group{
+            .pagebuilder-column{
+                flex: 1 0 20%;
+            }
+        } 
+    }       
+}

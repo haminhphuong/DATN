@@ -1,0 +1,58 @@
+& when (@media-common = true) {
+	.formRow--input:-webkit-autofill,
+	.formRow--input:-webkit-autofill:hover, 
+	.formRow--input:-webkit-autofill:focus, 
+	.formRow--input:-webkit-autofill:active{
+	   -webkit-box-shadow: 0 0 0 30px @color-white inset !important;
+	}
+	.formRow--input:-webkit-autofill{
+	   -webkit-text-fill-color: @color-black !important;
+	}
+	.formRow {
+		margin-bottom: 10px;
+	    position: relative;
+	    width: 100%;
+	    .formRow--input{
+			background-position: right center;
+		    .transition(all .2s ease);
+			border-color: @color-black;
+			border-width: 0 0 1px;
+			border-radius: 0;
+			padding: 0;
+		    &:focus{
+		    	box-shadow: none;
+		    }
+	    }
+		.formRow--select{
+			padding-right: 25px;
+		}
+	    .placeholder {
+	    	.transition(.2s all ease);
+			font-weight: @font-weight__medium;
+		    pointer-events: none;
+		    position: absolute;
+		    top: 25px;
+		    left: 0;
+		}
+	    .formRow--input-wrapper{
+	    	position: relative;
+			margin: 0;
+			padding-top: 15px;
+			width: 100%;
+		    &.active{
+		    	.placeholder{
+		    		color: @color-gray-dark;
+		    		top: 0;
+		    	}
+		    }
+	    }
+		._has-datepicker ~ .ui-datepicker-trigger{
+			top: 10px;
+			width: 20px;
+		}
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){}

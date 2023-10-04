@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+                <resource id="Magento_Catalog::catalog">
+                    <resource id="Ecommage_ContactViewProduct::manage_contact" title="Manage Contact">
+                        <resource id="Ecommage_ContactViewProduct::manage_contact_product" title="Contact Product" sortOrder="10"/>
+                    </resource>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

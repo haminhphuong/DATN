@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_amlocator_location" resource="default" engine="innodb" comment="Amasty Locations Table">
+        <column xsi:type="varchar" name="store_code" nullable="false"  length="255" comment="Store Code"/>
+    </table>
+</schema>

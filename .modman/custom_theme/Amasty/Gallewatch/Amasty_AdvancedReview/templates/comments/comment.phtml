@@ -1,0 +1,14 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_AdvancedReview
+ */
+?>
+<?php /** @var $block \Amasty\AdvancedReview\Block\Comment\Comment */ ?>
+<li class="amrev-comment" data-amreview-js="comment">
+    <p class="amrev-name">
+        <b class="amrev-firstname"><?= $block->escapeHtml($block->getComment()->getNickname()) ?></b>
+    </p>
+    <span class="amreview-text"><?= $block->escapeHtml($block->getComment()->getMessage()) ?></span>
+</li>

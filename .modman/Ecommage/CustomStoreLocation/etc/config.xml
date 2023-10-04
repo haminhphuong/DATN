@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amlocator>
+            <general>
+                <use_google_map>1</use_google_map>
+                <per_address>5</per_address>
+                <store_list_template>
+                    <![CDATA[
+                    {{name}}
+                    ]]>
+                </store_list_template>
+            </general>
+        </amlocator>
+        <ecommage>
+            <general>
+                <hotline>1900.8079</hotline>
+            </general>
+        </ecommage>
+        <contact>
+            <contact>
+                <hotline>1900.8079</hotline>
+                <time_contact>8:00 - 17:00 thứ 2-thứ 6</time_contact>
+                <street_address_north_office>Tầng 17 tòa nhà Viwaseen, 48 Phố Tố Hữu, Trung Văn, Nam Từ Liêm, Hà Nội.</street_address_north_office>
+                <street_address_south_office>Lô III.25, Đường 19/5A, Nhóm CN III, Khu Công Nghiệp Tân Bình, P. Tây Thạnh, Q. Tân Phú, HCM.</street_address_south_office>
+            </contact>
+        </contact>
+    </default>
+</config>

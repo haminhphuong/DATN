@@ -1,0 +1,31 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_JetTheme
+ */
+?>
+<?php
+/**
+ * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
+ */
+
+$availableLimit = $block->getAvailableLimit();
+//@codingStandardsIgnoreLine
+?>
+
+<div class="field limiter">
+    <div class="control">
+        <div >
+            <?php foreach ($availableLimit as $key => $limit): ?>
+                <?php if ($block->isLimitCurrent($key)):  ?>
+                    <?php if((int)$block->getTotalNum() >= (int)$limit ):   ?>
+                        <span class="amtheme-title"><?= $block->escapeHtml(__('%1 of %2 product', $limit, $block->getTotalNum())); ?></span>
+                    <?php else: ?>
+                        <span class="amtheme-title"><?= $block->escapeHtml(__('%1 product',$block->getTotalNum())); ?></span>
+                    <?php endif ?>
+                <?php endif ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>

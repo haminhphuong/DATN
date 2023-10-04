@@ -1,0 +1,22 @@
+{
+    "name": "ecommage/module-shopby",
+    "description": "Ecommage Shopby",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Hiepnv",
+            "email": "hiepnv@ecommage.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ecommage\\Shopby\\": ""
+        }
+    }
+}

@@ -1,0 +1,448 @@
+//
+//  Product item secondary styles
+//  _____________________________________________
+
+//
+//  Variables
+//  ---------------------------------------------
+
+@list-item__transition__duration: .1s;
+@list-item__image__background-color: @amtheme__background-secondary__color;
+@list-item__image__gradient__background: linear-gradient(360deg, @amtheme__background-primary__color 7.57%, fade(@amtheme__background-primary__color, 60%) 91.89%);
+@list-item__desktop__width: 210px;
+@list-item__mobile__width: 160px;
+@list-item__button__gap__m: 70px;
+@list-item__button__gap__s: 60px;
+
+@widget-list-item__desktop__width: 215px;
+@widget-list-item__mobile__width: 175px;
+@widget-list-item__gap__l: 25px;
+@widget-list-item__gap__m: 20px;
+@widget-list-item__image__background-color: @amtheme__background-primary__color;
+
+@widget-slider-button__font-size: 1.6rem;
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    .products-grid.products > .amtheme-products-secondary {
+        & {
+            flex-wrap: wrap;
+            justify-content: unset;
+            padding: 0;
+        }
+
+        .product-item-name {
+            .am-ellipsis(2);
+
+            height: @indent__xl;
+        }
+
+        .product-item-name:not(.-amtheme-name) {
+            margin: 0;
+        }
+
+        .product-item-link {
+            & {
+                .am-word-break;
+            }
+
+            &:hover {
+                color: @color-main;
+            }
+
+            ._keyfocus &:focus {
+                box-shadow: none;
+                color: @amtheme__link__color;
+            }
+        }
+
+        .product-item-info {
+            padding: 0;
+        }
+
+        .price-container .weee:before {
+            white-space: nowrap;
+        }
+
+        .product-item .action.tocart {
+            width: 100%;
+            font-size: @widget-slider-button__font-size;
+        }
+    }
+
+    .amtheme-products-secondary.-in-widget {
+        & {
+            &:extend(.products-grid.products > .amtheme-products-secondary all);
+
+            max-width: 100%;
+        }
+
+        .product-item {
+            margin: 0 @widget-list-item__gap__m 0 0;
+            width: @widget-list-item__mobile__width;
+            background: @widget-list-item__image__background-color;
+        }
+
+        .swatch-wrapper,
+        .product-reviews-summary,
+        .product-item-inner .actions-secondary,
+        .product-item-actions .actions-secondary,
+        .action.tocompare,
+        .action.towishlist {
+            display: none;
+        }
+
+        .product-item-inner {
+            position: static;
+            padding: 0;
+            max-height: inherit;
+            width: auto;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            opacity: 1;
+        }
+
+        .action.tocart {
+            .lib-button();
+            .lib-button-s();
+
+            width: 100%;
+            border-radius: @button__border-radius;
+            font-size: 1.6rem;
+        }
+    }
+
+    .amtheme-products-grid .widget.block-static-block .block.block-products-list .product-items,
+    .widget.block-static-block .amtheme-products-grid .block.block-products-list .product-items { // Override Magento
+        &:extend(.amtheme-products-secondary.-in-widget all);
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .products-grid.products > .amtheme-products-secondary:not(.-full-width) {
+        &:not(.slick-slider) {
+            margin: 0 -@layout__width-xs-indent;
+            padding: 0 @layout__width-xs-indent;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block .block-title {
+        margin-bottom: @indent__base;
+        letter-spacing: @h1__letter-spacing;
+        font-weight: @font-weight__bold;
+        font-size: @h1__font-size;
+    }
+
+    .block:not(.am-widget) .amtheme-products-secondary {
+        &.slick-slider .product-item-info {
+            margin: 0 @indent__s;
+        }
+
+        &:not(.slick-slider) {
+            & {
+                &:extend(.am-custom-scrollbar all);
+
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                margin: 0 -@layout__width-m-indent;
+                padding: 0 @layout__width-m-indent;
+            }
+
+            &:after {
+                min-width: 1px;
+                height: 1px;
+                content: '';
+            }
+        }
+
+        &:not(.slick-slider) > .product-item:last-of-type {
+            .am-margin-right(@layout__width-m-indent);
+        }
+
+        .item.product-item {
+            & {
+                width: @list-item__mobile__width;
+                background: transparent;
+            }
+
+            &,
+            &:nth-child(n) {
+                margin: 0 @indent__base @indent__base 0;
+            }
+
+            &:last-of-type {
+                margin-right: @layout__width-m-indent;
+            }
+        }
+    }
+
+    .products-grid.products > .amtheme-products-secondary {
+        &.slick-slider .product-item-info {
+            margin: 0 @indent__s;
+        }
+
+        .product-item-photo {
+            padding: @indent__sm;
+            background: @list-item__image__background-color;
+        }
+
+        .product-item-details {
+            margin-top: @indent__s;
+        }
+
+        .product-item-details > * {
+            margin-bottom: @indent__s;
+        }
+
+        .product-image-container {
+            margin: 0 auto;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            line-height: 2.6rem;
+        }
+
+        .price-including-tax + .price-excluding-tax:before {
+            line-height: 2.6rem;
+        }
+
+        .price-box > .minimal-price-link .price-container {
+            align-items: baseline;
+        }
+
+        .special-price .price-wrapper:not(.price-including-tax) .price {
+            .am-margin-right(0);
+        }
+
+        .minimal-price {
+            flex-direction: column;
+        }
+
+        .amtheme-price-component.-small,
+        .price-to .price,
+        .map-show-info,
+        .old-price .price,
+        .price-box .price-label,
+        .price-including-tax + .price-excluding-tax,
+        .price-including-tax + .price-excluding-tax .price {
+            font-size: 1.2rem;
+        }
+    }
+
+    .amtheme-products-grid .widget.block-static-block .block.block-products-list .product-items,
+    .widget.block-static-block .amtheme-products-grid .block.block-products-list .product-items { // Override Magento
+        .product-photo-wrapper {
+            display: block;
+        }
+
+        .price-box {
+            margin-top: 0;
+        }
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block .block-title {
+        margin-bottom: @indent__m;
+        letter-spacing: @h1__letter-spacing-desktop;
+        font-size: @h1__font-size-desktop;
+    }
+
+    .block:not(.am-widget) .amtheme-products-secondary .product-item {
+        & {
+            max-width: @list-item__desktop__width;
+            width: @list-item__desktop__width;
+        }
+
+        &,
+        &:nth-child(n) {
+            margin: 0 calc(~'@{indent__m} / 2') @indent__m;
+        }
+    }
+
+    .-amcaret-enabled .amtheme-productinfo-wrap .products-grid.products > .amtheme-products-secondary:not(.-full-width) {
+        max-width: calc(~'@{list-item__desktop__width} * 3 + @{indent__base} * 3');
+    }
+
+    .products-grid.products > .amtheme-products-secondary {
+        .product-item-info {
+            & {
+                overflow: hidden;
+                padding: @indent__sm (@indent__sm - 3px);
+            }
+
+            &:after {
+                display: none;
+            }
+        }
+
+        .product-item-info:hover,
+        .product-item-info.-hover {
+            & {
+                border-color: transparent;
+            }
+
+            .product-item-photo:after {
+                opacity: 1;
+            }
+
+            .product-item-details {
+                transform: translateY(0);
+            }
+        }
+
+        .product-item-photo {
+            & {
+                position: relative;
+                margin-bottom: -@list-item__button__gap__m;
+            }
+
+            &:after {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 1;
+                background: @list-item__image__gradient__background;
+                content: '';
+                opacity: 0;
+                transition: opacity @list-item__transition__duration @amtheme__transition__func;
+            }
+        }
+
+        .product-image-container {
+            margin: 0 auto;
+        }
+
+        .product-item-details {
+            z-index: 2;
+            transition: transform @list-item__transition__duration @amtheme__transition__func;
+            transform: translateY(@list-item__button__gap__m);
+        }
+
+        .product-item-details > .price-box {
+            & {
+                .am-overflow-fade;
+
+                overflow: hidden;
+            }
+        }
+
+        .details.product-item-details > .price-box:after {
+            right: 0;
+            left: inherit;
+            width: 20px;
+        }
+
+        .price-box {
+            white-space: nowrap;
+        }
+
+        .price-including-tax {
+            margin-right: @indent__s;
+        }
+
+        .price-box .price-container {
+            margin: 0;
+        }
+
+        .price-box .price-from > .price-container {
+            padding-right: 2px;
+        }
+
+        .price-container .price-excluding-tax:before {
+            .am-margin-left(0);
+        }
+
+        .price-box .price-label {
+            line-height: 25px;
+        }
+
+        .price-box {
+            padding: 0;
+            min-height: auto;
+        }
+
+        .price-box.price-final_price > .price-box {
+            padding: 0;
+        }
+
+        .minimal-price-link {
+            margin: 0 5px;
+            font-size: 1.4rem;
+        }
+
+        .minimal-price-link > .price-container {
+            align-items: center;
+        }
+    }
+
+    .amtheme-products-secondary.-in-widget {
+        & {
+            &:extend(.products-grid.products > .amtheme-products-secondary all);
+
+            max-width: 100%;
+        }
+
+        .product-item {
+            max-width: calc(~'@{widget-list-item__desktop__width} - 10px');
+            width: calc(~'@{widget-list-item__desktop__width} - 10px');
+        }
+
+        .product-item,
+        .product-item:nth-child(n) {
+            margin: 0 calc(~'@{widget-list-item__gap__l} / 2') @widget-list-item__gap__l;
+        }
+
+        .product-item-details {
+            transform: translateY(@list-item__button__gap__s);
+        }
+
+        .stock.unavailable {
+            display: flex;
+            align-items: flex-end;
+            min-height: 44px;
+        }
+    }
+
+    .amtheme-products-grid .widget.block-static-block .block.block-products-list .product-items,
+    .widget.block-static-block .amtheme-products-grid .block.block-products-list .product-items { // Override Magento
+        &:extend(.amtheme-products-secondary.-in-widget all);
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .products-grid.products > .amtheme-products-secondary {
+        .product-item-info {
+            padding: @indent__sm;
+        }
+    }
+
+    .amtheme-products-secondary.-in-widget {
+        & {
+            &:extend(.products-grid.products > .amtheme-products-secondary all);
+        }
+
+        .product-item {
+            max-width: @widget-list-item__desktop__width;
+            width: @widget-list-item__desktop__width;
+        }
+    }
+
+    .amtheme-products-grid .widget.block-static-block .block.block-products-list .product-items,
+    .widget.block-static-block .amtheme-products-grid .block.block-products-list .product-items { // Override Magento
+        &:extend(.amtheme-products-secondary.-in-widget all);
+    }
+}

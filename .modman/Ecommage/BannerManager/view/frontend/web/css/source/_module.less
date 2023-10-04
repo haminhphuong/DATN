@@ -1,0 +1,73 @@
+@background_color_1: #000;
+@background_color_2: #333;
+@background_color_3: #f00;
+@border_color_1: transparent transparent transparent #fff;
+
+.embed-youtube {
+    background-color: @background_color_1;
+    // margin-bottom: 30px;
+    position: relative;
+    // padding-top: 56.25%;
+    // overflow: hidden;
+    height:100%;
+    cursor: pointer;
+    img {
+        width: 100%;
+        // top: -16.84%;
+        // left: 0;
+        // opacity: 0.7;
+        cursor: pointer;
+        // position: absolute;
+        height: 100%;
+    }
+    .embed-youtube-play {
+        width: 60px;
+        height: 48px;
+        background-color: @color-black;
+        box-shadow: 0 0 30px rgba( 0,0,0,0.6 );
+        z-index: 1;
+        opacity: 0.8;
+        border-radius: ~"50% / 5%";
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d( -50%, -50%, 0 );
+        &:before {
+            content: "";
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: @border_color_1;
+            position: absolute;
+            top: 50%;
+            left: 53%;
+            transform: translate3d( -50%, -50%, 0 );
+        }
+        &:after{
+            content: '';
+            position: absolute;
+            top: 2.5px;
+            right: 0;
+            left: -4px;
+            right: -4px;
+            bottom: 2.5px;
+            background: @color-black;
+            z-index: -1;
+            border-radius: ~"5% / 50%";
+        }
+        &:hover {
+            background-color: @background_color_3;
+            opacity: 1;
+            &:after{
+                background-color:@background_color_3;
+            }
+        }
+    }
+    iframe {
+        // position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+}

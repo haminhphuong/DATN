@@ -1,0 +1,83 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/**
+ * @var $_helper \Ecommage\AddGif360\Helper\Data
+ * @var $blockProduct \Magento\Catalog\Block\Product\View\Attributes
+ */
+$_helper = $this->helper(Ecommage\AddGif360\Helper\Data::class); // @codingStandardsIgnoreLine
+$_product = $_helper->getProductAttributes();
+$helperData = $this->helper(\Ecommage\CustomAmastyBlog\Helper\Data::class); //@codingStandardsIgnoreLine
+
+?>
+<ul class="media__option">
+    <li class="option-item option-view" data-type="modal-option-view">
+        <div class="gallery-placeholder2" data-gallery-role="gallery-placeholder2">
+            <div id="amasty-gallery2" data-role="amasty-gallery2">
+                <div id="amasty-main-container2" data-gallery-role="amasty-main-container2">
+                    <span id="amasty-main-image2" ><?= /** @noEscape */ $block->escapeHtml(__('View photos')) ?></span>
+                </div>
+                <script type="text/x-magento-init">
+                    {
+                        "[data-role=amasty-gallery2]": {
+                            "Ecommage_AddGif360/js/amzoomer360": {
+                                "data": <?= /* @noEscape */ $_helper->getGalleryImagesJson() ?>,
+                                "options":<?= /* @noEscape */ $_helper->getGalleryOptionJson() ?>
+                            }
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </li>
+    <?php if (!empty($_product->getCustomAttribute('gif_360')) || $helperData->getVideoYoutube($_product)):  ?>
+        <li class="option-item option-gif" data-type="modal-option-gif"><?= /** @noEscape */ $block->escapeHtml(__('Video 360')) ?></li>
+    <?php endif; ?>
+    <?php /* @noEscape */ if($_helper->getVideoReview()): ?>
+    <li class="option-item option-video" data-type="modal-option-video"><?= /** @noEscape */ $block->escapeHtml(__('Video review')) ?></li>
+    <?php endif; ?>
+</ul>
+
+<div id="modal-option-gif" class="modal-media-option modal-hideon-loading">
+    <?php if (!empty($_product->getCustomAttribute('gif_360')) || $helperData->getVideoYoutube($_product)):  ?>
+        <?php $extension = $_helper->checkExtensionFileVideo360($_product->getData('gif_360')); ?>
+        <?php if($extension == $_helper::TPYE_VIDEO): ?>
+            <center>
+                <video controls >
+                    <source src="<?= /** @noEscape */ $block->escapeUrl($_helper->getProductImageGifUrl($_product->getGif360())) ?>">
+                </video>
+            </center>
+        <?php endif; ?>
+        <?php if($helperData->getVideoYoutube($_product)): ?>
+            <center><?= /* @noEscape */ $helperData->getVideoYoutube($_product) ?></center>
+        <?php endif; ?>
+        <?php if($extension == $_helper::TPYE_IMAGE): ?>
+            <center><img src="<?= /** @noEscape */ $block->escapeUrl($_helper->getProductImageGifUrl($_product->getGif360())) ?>" alt="<?= /** @noEscape */ $block->escapeUrl($_helper->getProductImageGifUrl($_product->getGif360())) ?>"></center>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>
+<div id="modal-option-video" class="modal-media-option modal-hideon-loading">
+   <?= /* @noEscape */ $_helper->getVideoReview(); ?>
+</div>
+<script>
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/modal"
+    ],function($, modal) {
+        var options = {
+            type: 'popup',
+            responsive: true,
+            modalClass: 'modal-option-media modal-popup-lg',
+            buttons: []
+        };
+        var popup2 = modal(options, $('#modal-option-gif'));
+        var popup3 = modal(options, $('#modal-option-video'));
+        $(".option-item").click(function() {
+            var curentItem = $(this).attr("data-type");
+            $("#" + curentItem).modal('openModal');
+        });
+    });
+</script>
+

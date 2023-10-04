@@ -1,0 +1,105 @@
+<?php
+/**
+ * @var \Ecommage\WidgetStoreLocator\Block\Widget\StoreLocator $block
+ */
+$provinces = $block->getProvincesToShow();
+$allStores = $block->getAllStores();
+$serviceCenters = $block->getServiceCenter();
+
+?>
+<div class="widget-locator-store widget-locator-wrapper" data-mage-init='{"ecoToggleClass": {}}'>
+    <ul class="locator-tablist">
+        <?php if($this->getData('show_all')): ?>
+        <li class="locator-tabitem locator-tabfirst"><a data-toggle="trigger" href="#locator-all"><?= /** @noEscape */
+                __('All showrooms'); ?></a></li>
+        <?php endif; ?>
+        <li class="locator-tabitem"><a data-toggle="trigger" href="#locator-ttbh"><?= /** @noEscape */
+                __('Service Center'); ?></a></li>
+        <?php foreach ($provinces as $province): ?>
+            <li class="locator-tabitem"><a data-toggle="trigger" href="#locator-<?= /** @noEscape */
+                $province['zipcode']; ?>"><?= /** @noEscape */
+                    $province['name']; ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+    <div class="locator-tabcontent">
+        <?php if($this->getData('show_all')): ?>
+            <div class="store__item" id="locator-all">
+                <p class="store-heading" data-toggle="trigger"><?= /** @noEscape */
+                    __('All showrooms'); ?></p>
+                <div class="store-item-wrap">
+                <?php foreach ($allStores as $allStore): ?>
+                    <div class="store-item-detail">
+                        <p class="store__name"><?= /** @noEscape */
+                            $allStore->getData('name'); ?></p>
+                        <ul class="store__contact">
+                            <li class="store-contact-item store-add">
+                                <span class="store-contact-detail"><?= /** @noEscape */
+                                $allStore->getData('address'); ?></span>
+                            </li>
+                            <li class="store-contact-item store-phone">
+                                <a class="store-contact-detail" href="tel:<?= /** @noEscape */
+                                $allStore->getData('phone'); ?>"><?= /** @noEscape */
+                                $allStore->getData('phone'); ?></a>
+                            </li>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+        <div class="store__item" id="locator-ttbh">
+            <p class="store-heading" data-toggle="trigger" ><?= /** @noEscape */
+                __('Service Center'); ?></p>
+            <div class="store-item-wrap">
+            <?php foreach ($serviceCenters as $serviceCenter): ?>
+                <div class="store-item-detail">
+                    <p class="store__name"><?= /** @noEscape */
+                        $serviceCenter->getData('name'); ?></p>
+                    <ul class="store__contact">
+                        <li class="store-contact-item store-add">
+                            <span class="store-contact-detail">
+                                <?= /** @noEscape */
+                                $serviceCenter->getData('address'); ?>
+                            </span>
+                        </li>
+                        <li class="store-contact-item store-phone">
+                            <a class="store-contact-detail" href="tel:<?= /** @noEscape */
+                            $serviceCenter->getData('phone'); ?>"><?= /** @noEscape */
+                            $serviceCenter->getData('phone'); ?></a>
+                        </li>
+                    </ul>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+        <?php foreach ($provinces as $province): ?>
+            <?php $stores = $block->getStoresLocator($province['zipcode']); ?>
+            <div class="store__item" id="locator-<?= /** @noEscape */
+            $province['zipcode']; ?>">
+                <p class="store-heading" data-toggle="trigger"><?= /** @noEscape */
+                    $province['name']; ?></p>
+                <div class="store-item-wrap">
+                <?php foreach ($stores as $store): ?>
+                    <div class="store-item-detail">
+                        <p class="store__name"><?= /** @noEscape */
+                            $store['name']; ?></p>
+                        <ul class="store__contact">
+                            <li class="store-contact-item store-add">
+                                <span class="store-contact-detail">
+                                    <?= /** @noEscape */
+                                    $store->getData('address'); ?>
+                                </span>
+                            </li>
+                            <li class="store-contact-item store-phone">
+                                <a class="store-contact-detail" href="tel:<?= /** @noEscape */
+                                $store->getData('phone'); ?>"><?= /** @noEscape */
+                                $store->getData('phone'); ?></a>
+                            </li>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>

@@ -1,0 +1,270 @@
+<?php
+
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Ecommage\WidgetCatalogPriceRule\Block\Widget\CatalogPriceRule $block ;
+ */
+
+$numberLoad = $block->getData("number_product_show");
+$products = $block->getLimitedProduct();
+$countProduct = $block->countProduct();
+
+if (!count($products)) {
+    return;
+}
+$show_buttons = ['add_to_cart'];
+$showAddToCart = true;
+$showWishlist = true;
+$showCompare = true;
+/** @codingStandardsIgnoreStart */
+/** @var Image $_imageHelper */
+$helper = $this->helper('Ecommage\CustomCatalog\Helper\Data');
+$_imageHelper = $this->helper('Magento\Catalog\Helper\Image');
+$postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+$compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+$wishlistHelper = $this->helper('Magento\Wishlist\Helper\Data');
+$type = 'widget-product-grid';
+$mode = 'grid';
+$image = 'new_products_content_widget_grid';
+$description = false;
+/** @codingStandardsIgnoreEnd */
+
+?>
+<?php $iterator = 1;
+$type = 'widget-product-grid';
+$buttonDetail = __('Detail');
+?>
+<?php if ($products && count($products)) : ?>
+<?php $modelProduct = $helper->getModelProduct(); ?>
+<div class="content-heading">
+    <h2 class="title"><strong><?= $block->escapeHtml(__($block->getTitle())) ?></strong></h2>
+</div>
+<div class="swiper-container" id="swiper_container_recently_view_products">
+    <div class="swiper-wrapper product-items product-get-more">
+        <?php foreach ($products as $product) : ?>
+            <?php $qtyAndStock = $helper->checkQtyAndStockOptionProduct($product);?>
+            <?php if($qtyAndStock && $product->isSalable()): ?>
+                <?= /* @noEscape */
+                    ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
+
+            <div class="product-item-info ">
+                <div class="product-photo-wrapper">
+                    <a href="<?= $escaper->escapeUrl($block->getProductUrl($product)) ?>"
+                       class="product photo product-item-photo"
+                       title="<?= $escaper->escapeHtml($product->getName()) ?>"
+                       aria-label="<?= $escaper->escapeHtml($product->getName()) ?>">
+                        <?= /* @noEscape */ $block->getImage($product, $image)->toHtml() ?>
+                    </a>
+
+                    <div class="amtheme-icons-position -top-right">
+                            <?php if ($showWishlist || $showCompare): ?>
+                                <div class="amtheme-icon-wrapper">
+                                    <?php if ($wishlistHelper->isAllow() && $showWishlist): ?>
+                                        <a href="#"
+                                           data-post='<?= /* @noEscape */
+                                           $block->getAddToWishlistParams($product) ?>'
+                                           class="action towishlist amtheme-circle-icon"
+                                           title="<?= $escaper->escapeHtmlAttr(__('Add to Wishlist')) ?>"
+                                           aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Wishlist')) ?>"
+                                           data-action="add-to-wishlist"
+                                           role="button">
+                                            <svg class="amtheme-icon -hover-bg">
+                                                <use xlink:href="#icon-wishlist"/>
+                                            </svg>
+                                        </a>
+                                    <?php endif; ?>
+
+                                    <?php if ($block->getAddToCompareUrl() && $showCompare): ?>
+                                        <a href="#"
+                                           data-post='<?= /* @noEscape */
+                                           $compareHelper->getPostDataParams($product) ?>'
+                                           class="action tocompare amtheme-circle-icon"
+                                           title="<?= $escaper->escapeHtmlAttr(__('Add to Compare')) ?>"
+                                           aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Compare')) ?>"
+                                           data-action="add-to-compare"
+                                           role="button">
+                                            <svg class="amtheme-icon -hover-bg">
+                                                <use xlink:href="#icon-compare"/>
+                                            </svg>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                </div>
+                <div class="product-item-details">
+                    <strong class="product-item-name">
+                        <a title="<?= $block->escapeHtmlAttr($product->getName()) ?>"
+                            href="<?= $block->escapeUrl($block->getProductUrl($product)) ?>" class="product-item-link">
+                            <?= $block->escapeHtml($product->getName()) ?>
+                        </a>
+                    </strong>
+                    <div class="product-details-sku-brand">
+                        <span
+                            class="product-details-brand"><?= $block->escapeHtml(__($product->getAttributeText('brand'))) ?></span>
+                        <span class="product-details-sku"><?= $block->escapeHtml(__($product->getSku())) ?></span>
+                    </div>
+
+                    <?php if(!$qtyAndStock || !$product->isSalable()): ?>
+                        <div class="product-contact">
+                            <?= $block->escapeHtml(__('Contact Price')); ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="product-details-action">
+                            <?= /* @noEscape */ $block->getProductPriceHtml($product, $type); ?>
+                        </div>
+                    <?php endif; ?>
+                    <div class="product-item-inner">
+                        <div class="product actions product-item-actions">
+                            <?php if ($showAddToCart) : ?>
+                            <?php if ($product->isSaleable()): ?>
+                                <?php $postParams = $block->getAddToCartPostParams($product); ?>
+                                <form data-role="tocart-form"
+                                      id="product_add_tocart_form<?= $escaper->escapeHtmlAttr($product->getId()) ?>"
+                                      data-product-sku="<?= $escaper->escapeHtmlAttr($product->getSku()) ?>"
+                                      action="<?= isset($postParams['action']) ? $escaper->escapeUrl($postParams['action']) : $escaper->escapeUrl($block->getAddToCartUrl($product)) ?>"
+                                      method="post">
+                                    <input type="hidden" name="product"
+                                           value="<?= $escaper->escapeHtmlAttr($postParams['data']['product']) ?>">
+
+                                    <input name="form_key"
+                                           type="hidden"
+                                           value="<?= $escaper->escapeHtml($block->getFormKey()) ?>"/>
+                                    <button type="submit"
+                                            title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                            class="action tocart primary">
+                                        <?= $escaper->escapeHtml(__('Add to Cart')) ?>
+                                    </button>
+                                    <?php
+                                    $buttonTitle = __('Add to Cart');
+                                    ?>
+                                    <?php if (!$qtyAndStock): ?>
+                                        <button type="button"
+                                                title="<?= $block->escapeHtmlAttr($buttonDetail); ?>"
+                                                class="action primary buynow">
+                                                            <span class="product contact product-item-contact">
+                                                                <a title="<?= $block->escapeHtmlAttr($buttonDetail); ?>"
+                                                                   href="<?= $block->escapeUrl($block->getProductUrl($product)) ?>"
+                                                                   class="product-item-link">
+                                                                    <?= $block->escapeHtmlAttr($buttonDetail); ?>
+                                                                </a>
+                                                            </span>
+                                        </button>
+                                    <?php else: ?>
+                                        <button type="submit"
+                                                title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                                                class="action primary buynow"
+                                                data-mage-init='
+                                                            {
+                                                                "Ecommage_CustomCatalog/js/addToCart": {
+                                                                    "form": "#<?= /* @noEscape */
+                                                __('product_add_tocart_form' . $product->getId()); ?>",
+                                                                    "addToCartUrl": "<?= /* @noEscape */
+                                                $block->getUrl('checkout/cart/add'); ?>",
+                                                                    "buyNowCartUrl": "<?= /* @noEscape */
+                                                $block->getUrl('buynow/cart/add'); ?>"
+                                                                }
+                                                            }
+                                                            '
+                                                id="product-buynow-button<?= /* @noEscape */
+                                                $product->getId() ?>">
+                                            <span><?= $block->escapeHtml($buttonTitle) ?></span>
+                                        </button>
+                                    <?php endif; ?>
+
+                                </form>
+
+                            <?php else: ?>
+                                <?php if ($product->isAvailable()): ?>
+                                    <div
+                                        class="stock available"><?= $escaper->escapeHtml(__('In stock')) ?></div>
+                                <?php elseif (!$qtyAndStock): ?>
+                                    <button type="button"
+                                            title="<?= $block->escapeHtmlAttr($buttonDetail); ?>"
+                                            class="action primary buynow">
+                                                            <span class="product contact product-item-contact">
+                                                                <a title="<?= $block->escapeHtmlAttr($buttonDetail); ?>"
+                                                                   href="<?= $block->escapeUrl($block->getProductUrl($product)) ?>"
+                                                                   class="product-item-link">
+                                                                    <?= $block->escapeHtmlAttr($buttonDetail); ?>
+                                                                </a>
+                                                            </span>
+                                    </button>
+                                <?php else: ?>
+                                    <button type="button"
+                                            title="<?= $block->escapeHtmlAttr($buttonDetail); ?>"
+                                            class="action primary buynow">
+                                                            <span class="product contact product-item-contact">
+                                                                <a title="<?= $block->escapeHtmlAttr($buttonDetail); ?>"
+                                                                   href="<?= $block->escapeUrl($block->getProductUrl($product)) ?>"
+                                                                   class="product-item-link">
+                                                                    <?= $block->escapeHtmlAttr($buttonDetail); ?>
+                                                                </a>
+                                                            </span>
+                                    </button>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?= ($iterator == count($products) + 1) ? '</li>' : '' ?>
+        <?php endif; ?>
+            <script type="text/x-magento-init">
+            {
+                "[data-role=tocart-form], .form.map.checkout": {
+                    "catalogAddToCart": {
+                        "product_sku": "<?= $escaper->escapeJs($product->getSku()) ?>"
+                    }
+                }
+            }
+            </script>
+        <?php endforeach; ?>
+
+    </div>
+</div>
+<?php endif; ?>
+<div class="load-more">
+    <input hidden="hidden" name="page_size" value="<?= $block->escapeHtml($numberLoad) ?>">
+    <a class="show-more-product-link" href="javascript:void(0)"
+        data-load-page="1"><?= $block->escapeHtml(__("View More Products")); ?></a>
+</div>
+<script type="text/javascript">
+require(['jquery', 'domReady!'], function($) {
+    var loadPage = 1;
+    var countPost = <?= $block->escapeHtmlAttr($numberLoad); ?> * loadPage;
+    $('body').on('click', '.show-more-product-link', function(event) {
+        const $loadMoreLink = $(this);
+        const loadPage = $loadMoreLink.data('load-page') + 1;
+        const href =
+            "<?= $block->escapeUrl($block->getUrl("catalog_price_rule/show/product") . '?current_page='); ?>" +
+            loadPage;
+        let countPost = <?= $block->escapeHtmlAttr($numberLoad); ?> * loadPage;
+        $.ajax({
+            url: href,
+            dataType: 'JSON',
+            data: {
+                page_size: <?= $block->escapeHtmlAttr($numberLoad); ?>,
+                current_page: loadPage,
+                show_all: '<?= $this->getShowAll() ?>'
+            },
+            showLoader: true,
+            type: 'POST',
+            success: function(response) {
+                $loadMoreLink.data('load-page', loadPage);
+                $('.product-get-more').append(response.html);
+                $('body').click();
+                if (countPost >= <?= $block->escapeHtmlAttr($countProduct); ?>) {
+                    $('.load-more').hide();
+                }
+            }.bind(this)
+        });
+    });
+    if (countPost >= <?= $block->escapeHtmlAttr($countProduct); ?>) {
+        $('.load-more').hide();
+    }
+
+});
+</script>

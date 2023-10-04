@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @var \Ecommage\ProductSaleRule\Block\RuleData $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+// print current product data
+$rules = $block->getRulesProduct();
+if (!empty($rules['special_offer'])) :
+    $rules = array_values($rules['special_offer']);
+    ?>
+    <div class="product-info-rule">
+        <div class="product-rule-title">
+            <p class="rule__title rule__title-special-offer"><?= $escaper->escapeHtml(__('SPECIAL OFFERS')) ?></p>
+        </div>
+        <ul class="product-rule-list">
+            <?php foreach ($rules as $rule) : ?>
+                <!--special offer-->
+                <li class="special-offer-item">
+                    <a href="<?= isset($rule['link']) ? $escaper->escapeUrl($rule['link']) : '#' ?>">
+                        <?= $escaper->escapeHtml(__($rule['name'])) ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

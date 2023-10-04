@@ -1,0 +1,17 @@
+{
+    "customer_review": {
+        "column": {
+            "review_id": true,
+            "name": true,
+            "picture": true,
+            "video": true,
+            "city_id": true,
+            "gender": true,
+            "content": true,
+            "is_active": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

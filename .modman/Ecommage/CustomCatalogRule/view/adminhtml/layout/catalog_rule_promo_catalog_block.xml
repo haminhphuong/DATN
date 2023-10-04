@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="adminhtml.promo.catalog.grid.container">
+            <referenceBlock name="promo.catalog.grid">
+                <block class="Magento\Backend\Block\Widget\Grid\Massaction" name="catalogrule.grid.massaction" as="grid.massaction">
+                    <arguments>
+                        <argument name="massaction_id_field" xsi:type="string">rule_id</argument>
+                        <argument name="form_field_name" xsi:type="string">ids</argument>
+                        <argument name="use_select_all" xsi:type="string">1</argument>
+                        <argument name="options" xsi:type="array">
+                            <item name="delete" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Delete</item>
+                                <item name="url" xsi:type="string">custom_catalog_rule/promo_catalog/massDelete</item>
+                            </item>
+                            <item name="massEnable" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Enable</item>
+                                <item name="url" xsi:type="url" path="custom_catalog_rule/promo_catalog/massStatus">
+                                    <param name="status">1</param>
+                                </item>
+                            </item>
+                            <item name="massDisable" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Disable</item>
+                                <item name="url" xsi:type="url" path="custom_catalog_rule/promo_catalog/massStatus">
+                                    <param name="status">0</param>
+                                </item>
+                            </item>
+                            <item name="massTopPriority" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Top Priority</item>
+                                <item name="url" xsi:type="url" path="custom_catalog_rule/promo_catalog/massPriority">
+                                    <param name="priority">top</param>
+                                </item>
+                            </item>
+                            <item name="massLowPriority" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Lowest Priority</item>
+                                <item name="url" xsi:type="url" path="custom_catalog_rule/promo_catalog/massPriority">
+                                    <param name="priority">low</param>
+                                </item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+
+                <referenceBlock name="promo.catalog.grid.columnSet">
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="promo.catalog.grid.columnSet.sort_order" as="sort_order">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Priority</argument>
+                            <argument name="index" xsi:type="string">sort_order</argument>
+                        </arguments>
+                    </block>
+
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="promo.catalog.grid.columnSet.action">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Action</argument>
+                            <argument name="type" xsi:type="string">action</argument>
+                            <argument name="filter" xsi:type="string">0</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="is_system" xsi:type="string">1</argument>
+                            <argument name="getter" xsi:type="string">getRuleId</argument>
+                            <argument name="actions" xsi:type="array">
+                                <item name="duplicate" xsi:type="array">
+                                    <item name="caption" xsi:type="string" translate="true">Duplicate</item>
+                                    <item name="url" xsi:type="array">
+                                        <item name="base" xsi:type="string">custom_catalog_rule/promo_catalog/duplicate</item>
+                                    </item>
+                                    <item name="field" xsi:type="string">id</item>
+                                </item>
+                            </argument>
+                        </arguments>
+                    </block>
+                </referenceBlock>
+            </referenceBlock>
+        </referenceBlock>
+    </body>
+</page>

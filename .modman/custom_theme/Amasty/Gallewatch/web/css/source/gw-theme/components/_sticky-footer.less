@@ -1,0 +1,88 @@
+& when (@media-common = true) {
+    .page-footer{
+        & ~ .widget.block-static-block{
+            margin: 0;
+        }
+    }
+    .sticky_footer{
+        .box-shadow(0px 0px 10px rgba(0, 0, 0, 0.1));
+        background: @color-white;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0;
+        z-index: 21;
+        width: 100%;
+        ul{
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin: 0 auto;
+            padding: 0;
+            max-width: 375px;
+            width: 100%;
+            li{
+                list-style: none;
+                margin: 0;
+                padding: 10px;
+                font-size: 1rem;
+                text-align: center;
+                white-space: nowrap;
+                .sticky-home:before{
+                    .mask-image(icon-sticky-home-view, @color-main);
+                    height: 24px;
+                    width: 24px;
+                    display: block;
+                    margin: 0 auto 5px;
+                    content: "";
+                }
+                .sticky-call:before{
+                    .mask-image(icon-header-phone-view, @color-main);
+                    height: 24px;
+                    width: 24px;
+                    display: block;
+                    margin: 0 auto 5px;
+                    content: "";
+                }
+                .sticky-location:before{
+                    .mask-image(icon-header-location-view, @color-main);
+                    height: 24px;
+                    width: 24px;
+                    display: block;
+                    margin: 0 auto 5px;
+                    content: "";
+                }
+                .sticky-heart:before{
+                    .mask-image(icon-header-wishlist-view, @color-main);
+                    height: 24px;
+                    width: 24px;
+                    display: block;
+                    margin: 0 auto 5px;
+                    content: "";
+                }
+                .sticky-chat:before{
+                    .mask-image(icon-sticky-mess-view, @color-main);
+                    height: 24px;
+                    width: 24px;
+                    display: block;
+                    margin: 0 auto 5px;
+                    content: "";
+                }
+            }
+        }
+    }
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .page-footer{
+        & ~  .widget.block-static-block{
+            .lib-visually-hidden();
+        }
+    }
+
+    .sticky_footer{
+        display: none;
+    }
+}

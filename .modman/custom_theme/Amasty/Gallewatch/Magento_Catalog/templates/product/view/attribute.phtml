@@ -1,0 +1,70 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Description
+ */
+?>
+<?php
+$_helper = $this->helper('Magento\Catalog\Helper\Output');// @codingStandardsIgnoreLine
+$_product = $block->getProduct();
+$_productName = $_product->getName();
+if (!$_product instanceof \Magento\Catalog\Model\Product) {
+    return;
+}
+
+$_call = $block->getAtCall();
+$_code = $block->getAtCode();
+$_className = $block->getCssClass();
+$_attributeLabel = $block->getAtLabel();
+$_attributeType = $block->getAtType();
+$_attributeAddAttribute = $block->getAddAttribute();
+
+$renderLabel = true;
+// if defined as 'none' in layout, do not render
+if ($_attributeLabel == 'none') {
+    $renderLabel = false;
+}
+
+if ($_attributeLabel && $_attributeLabel == 'default') {
+    $_attributeLabel = $_product->getResource()->getAttribute($_code)->getStoreLabel();
+}
+if ($_attributeType && $_attributeType == 'text') {
+    $_attributeValue = ($_helper->productAttribute($_product, $_product->$_call(), $_code))
+        ? $_product->getAttributeText($_code)
+        : '';
+} else {
+    $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
+}
+$checkContainer = '';
+if($_attributeValue){
+    $checkContainer =  strpos($_productName,$_productName);
+}
+?>
+
+<?php if ($_attributeValue) :?>
+    <?php if(!($_className == 'sku' && ($checkContainer >= 0))): ?>
+        <div class="product attribute <?= $block->escapeHtmlAttr($_className) ?>">
+            <?php if ($renderLabel) :?>
+                <strong class="type"><?= $block->escapeHtml($_attributeLabel) ?></strong>
+            <?php endif; ?>
+            <div class="value" <?= /* @noEscape */ $_attributeAddAttribute ?>><?= /* @noEscape */ $_attributeValue ?></div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<?php if ($_product->getAttributeText('brand') && $_className != 'description') :?>
+    <?php if(!($_className == 'sku' && ($checkContainer >= 0))): ?>
+        <div class="product attribute brand ">
+            <strong class="brand-name"><?= $block->escapeHtmlAttr($_product->getAttributeText('brand')) ?></strong>
+        </div>
+    <?php else: ?>
+        <div class="product attribute brand no-border">
+            <strong class="brand-name"><?= $block->escapeHtmlAttr($_product->getAttributeText('brand')) ?></strong>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

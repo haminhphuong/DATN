@@ -1,0 +1,188 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_JetTheme
+ */
+?>
+<?php
+/**
+ * Pager template
+ *
+ * @var $block Magento\Theme\Block\Html\Pager
+ * @var $escaper Magento\Framework\Escaper
+ */
+?>
+
+<?php if ($block->getCollection()->getSize()): ?>
+    <?php if ($block->getUseContainer()): ?>
+        <div class="pager">
+    <?php endif ?>
+
+    <?php if ($block->getShowAmounts()): ?>
+        <p class="toolbar-amount">
+            <span class="toolbar-number">
+                <?php if ($block->getTotalNum() > 1): ?>
+                    <?= $escaper->escapeHtml(__('%1 Items', $block->getTotalNum())) ?>
+                <?php else: ?>
+                    <?= $escaper->escapeHtml(__('%1 Item', $block->getTotalNum())) ?>
+                <?php endif; ?>
+            </span>
+        </p>
+    <?php endif ?>
+
+    <?php if ($block->getLastPageNum() > 1): ?>
+        <nav class="pages" aria-label="<?= $escaper->escapeHtml(__('Pagination')) ?>">
+            <?php if (!$block->isFirstPage()): ?>
+                <?php $text = $block->getAnchorTextForPrevious() ? $block->getAnchorTextForPrevious(): '' ?>
+                <a class="<?= $escaper->escapeHtmlAttr($text ? 'link ' : 'action ') ?> previous"
+                   href="<?= $escaper->escapeUrl($block->getPreviousPageUrl()) ?>"
+                   title="<?= $escaper->escapeHtmlAttr($text ? $text : __('Previous')) ?>"
+                   aria-label="<?= $escaper->escapeHtmlAttr($text ? $text : __('Previous')) ?>">
+
+                    <span class="label"><?= $escaper->escapeHtml(__('Page')) ?></span>
+                    <span><?= $escaper->escapeHtml($text ? $text : __('Previous')) ?></span>
+                </a>
+            <?php endif; ?>
+            <ul class="items pages-items">
+                <?php if ($block->canShowFirst()): ?>
+                    <li class="item">
+                        <a class="page first"
+                           href="<?= $escaper->escapeUrl($block->getFirstPageUrl()) ?>"
+                           title="<?= $escaper->escapeHtmlAttr(__('Page')) ?> 1"
+                           aria-label="<?= $escaper->escapeHtmlAttr(__('Page')) ?> 1">
+                            <span class="label"><?= $escaper->escapeHtml(__('Page')) ?></span>
+                            1
+                        </a>
+                    </li>
+                <?php endif;?>
+
+                <?php if ($block->canShowPreviousJump()): ?>
+                    <li class="item jump">
+                        <a class="page previous"
+                           href="<?= $escaper->escapeUrl($block->getPreviousJumpUrl()) ?>"
+                           title="..."
+                           aria-label="...">
+                            ...
+                        </a>
+                    </li>
+                <?php endif;?>
+
+                <?php foreach ($block->getFramePages() as $_page): ?>
+                    <?php if ($block->isPageCurrent($_page)): ?>
+                        <li class="item current">
+                            <strong class="page">
+                                <span class="label"><?= $escaper->escapeHtml(__('You\'re currently reading page')) ?></span>
+                                <?= $escaper->escapeHtml($_page) ?>
+                            </strong>
+                        </li>
+                    <?php else: ?>
+                        <li class="item">
+                            <a href="<?= $escaper->escapeUrl($block->getPageUrl($_page)) ?>"
+                               class="page"
+                               title="<?= $escaper->escapeHtmlAttr(__('Page')).' '.$escaper->escapeHtml($_page) ?>"
+                               aria-label="<?= $escaper->escapeHtmlAttr(__('Page')).' '.$escaper->escapeHtml($_page) ?>">
+                                <span class="label"><?= $escaper->escapeHtml(__('Page')) ?></span>
+                                <?= $escaper->escapeHtml($_page) ?>
+                            </a>
+                        </li>
+                    <?php endif;?>
+                <?php endforeach;?>
+
+                <?php if ($block->canShowNextJump()): ?>
+                    <li class="item jump ">
+                        <a class="page next"
+                           href="<?= $escaper->escapeUrl($block->getNextJumpUrl()) ?>"
+                           title="..."
+                           aria-label="...">
+                            ...
+                        </a>
+                    </li>
+                <?php endif;?>
+
+                <?php if ($block->canShowLast()): ?>
+                    <li class="item">
+                        <a class="page last"
+                           href="<?= $escaper->escapeUrl($block->getLastPageUrl()) ?>"
+                           title="<?= $escaper->escapeHtmlAttr(__('Page')).' '.$escaper->escapeHtml($block->getLastPageNum()) ?>"
+                           aria-label="<?= $escaper->escapeHtmlAttr(__('Page')).' '.$escaper->escapeHtml($block->getLastPageNum()) ?>">
+                            <span class="label"><?= $escaper->escapeHtml(__('Page')) ?></span>
+                            <?= $escaper->escapeHtml($block->getLastPageNum()) ?>
+                        </a>
+                    </li>
+                <?php endif;?>
+            </ul>
+            <?php if (!$block->isLastPage()): ?>
+                <?php $text = $block->getAnchorTextForNext() ? $block->getAnchorTextForNext(): '' ?>
+                <a class="<?= /* @noEscape */ $text ? 'link ' : 'action ' ?> next"
+                   href="<?= $escaper->escapeUrl($block->getNextPageUrl()) ?>"
+                   title="<?= $escaper->escapeHtmlAttr($text ? $text : __('Next')) ?>"
+                   aria-label="<?= $escaper->escapeHtmlAttr($text ? $text : __('Next')) ?>">
+                    <span class="label"><?= $escaper->escapeHtml(__('Page')) ?></span>
+                    <span><?= $escaper->escapeHtml($text ? $text : __('Next')) ?></span>
+
+                </a>
+            <?php endif; ?>
+
+        </nav>
+    <?php endif; ?>
+
+    <?php if ($block->isShowPerPage()): ?>
+        <div class="field limiter">
+            <label class="label" for="limiter">
+                <?= $escaper->escapeHtml(__('Display')) ?>
+            </label>
+            <div class="control">
+                <select id="limiter"
+                        data-role="limiter"
+                        class="limiter-options amtheme-select"
+                        tabindex="-1">
+                    <?php foreach ($block->getAvailableLimit() as $_key => $_limit): ?>
+                        <option value="<?= $escaper->escapeHtmlAttr($block->getLimitUrl($_key)) ?>"
+                            <?php if ($block->isLimitCurrent($_key)): ?>
+                                selected="selected"
+                            <?php endif ?>>
+                            <?= $escaper->escapeHtml($_limit) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <div class="amtheme-select-block -no-border"
+                     data-mage-init='{"amSelect": {"selectId": "limiter", "hrefTargetEngine": true}}'
+                     data-amselect-js="select">
+                    <span role="button"
+                          tabindex="0"
+                          class="amtheme-placeholder"
+                          data-amselect-js="placeholder">
+                        <span class="amtheme-content">
+                            <?= $escaper->escapeHtml($block->getLimit()) ?>
+                        </span>
+                    </span>
+                    <ul role="list"
+                        class="amtheme-select-options"
+                        data-amselect-js="options">
+                        <?php foreach ($block->getAvailableLimit() as $_key => $_limit): ?>
+                            <li class="amtheme-option"
+                                tabindex="0"
+                                data-amselect-js="item"
+                                data-amselect-value="<?= $escaper->escapeHtmlAttr($_key) ?>"
+                                <?php if ($block->isLimitCurrent($_key)): ?>
+                                    selected="selected"
+                                <?php endif ?>>
+                               <span class="amtheme-title"
+                                     data-amselect-js="target"
+                                     data-amselect-target="<?= $escaper->escapeHtmlAttr($block->getLimitUrl($_key)) ?>">
+                                    <?= $escaper->escapeHtml($_limit) ?>
+                                </span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+            <span class="limiter-text"><?= $escaper->escapeHtml(__('per page')) ?></span>
+        </div>
+    <?php endif ?>
+
+    <?php if ($block->getUseContainer()): ?>
+        </div>
+    <?php endif ?>
+<?php endif ?>

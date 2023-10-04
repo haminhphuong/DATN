@@ -1,0 +1,33 @@
+& when (@media-common = true) {
+    .nav-slider{
+        .slick-arrow {
+            .drop-shadow(0, 0, 5px, 0, 0.1);
+            .border-radius(10px);
+            width: 30px;
+            height: 30px;
+            background-color: @color-white;
+            opacity: 1;
+            visibility: visible;
+            top: unset;
+            transform: translate(0);
+
+            // &:before {
+            //     display: none !important;
+            // }
+
+            // &.slick-prev {
+            //     transform: rotate(180deg) !important;
+            // }
+
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){}
+
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__m - 1)) {
+    }
+}

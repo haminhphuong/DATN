@@ -1,0 +1,23 @@
+<?php
+/**
+ * @var $block Magento\Customer\Block\Account\AuthorizationLink
+ * @var $escaper Magento\Framework\Escaper
+ */
+
+$dataPostParam = '';
+if ($block->isLoggedIn()) {
+    $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
+}
+?>
+
+<li class="authorization-link <?= $block->isLoggedIn() ? '-logged-in' : ''?>"
+    data-label="<?= $escaper->escapeHtmlAttr(__('or')) ?>"
+    title="<?= $escaper->escapeHtmlAttr($block->getLabel()) ?>"
+    aria-label="<?= $escaper->escapeHtmlAttr($block->getLabel()) ?>">
+    <a <?= /* @noEscape */ $block->getLinkAttributes() ?>
+        <?= /* @noEscape */ $dataPostParam ?>
+        title="<?= $escaper->escapeHtmlAttr($block->getLabel()) ?>"
+        aria-label="<?= $escaper->escapeHtmlAttr($block->getLabel()) ?>" rel="nofollow">
+        <?= $escaper->escapeHtml($block->getLabel()) ?>
+    </a>
+</li>

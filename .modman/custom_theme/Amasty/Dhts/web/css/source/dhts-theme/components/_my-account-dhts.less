@@ -1,0 +1,104 @@
+
+& when (@media-common = true) {
+	.account{
+		.amtheme-heading{
+			.action:not(.edit){
+				font-size: 12px !important;
+				text-underline-position: from-font;
+				text-decoration: underline !important;
+				text-transform: unset !important;
+				font-weight: @font-weight__semibold !important;
+				margin: auto 0;
+			}
+		}
+		button, select,
+		input[type='tel'],input[type='text'], input[type='email'], input[type='password'],
+		.ui-widget.ui-datepicker{
+			border-radius: 0;
+		}
+		.iti--allow-dropdown{
+			width: 100%;
+		}
+		.fieldset.password{
+			.iti__selected-flag{
+				height: 40px;
+			}
+			.password-strength-meter{
+				border-radius: 0;
+			}
+		}
+		.actions-toolbar .action.primary{
+			background: @color-main;
+			color: @color-white;
+			&:hover{
+				background: @color-white;
+				color: @color-white;
+			}
+		}
+
+		input[type='checkbox']:checked + label::after{
+			background-color: @color-main;
+		}
+	}
+	
+	body .form-wishlist-items .actions-toolbar .action.tocart{
+		background: @color-main;
+		color: @color-white;
+		&:hover{
+			color: @color-main;
+			background: @color-white;
+		}
+	}
+	.amsl-login-content .block.block-customer-login .block-content .actions-toolbar .action.primary{
+		&:hover, &:focus{
+	    	color: @color-main;
+	    }
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	.account{
+		.amtheme-dashboard-orders{
+			table tr:not(:last-child){
+				margin-bottom: 20px;
+			}
+		}
+		.amtheme-heading{
+			.amtheme-title{
+				font-size: 16px;
+			}
+			.action{
+				font-size: 12px !important;
+				text-underline-position: from-font;
+				text-decoration: underline !important;
+				text-transform: unset !important;
+				font-weight: @font-weight__semibold !important;
+				margin: auto 0;
+			}
+		}
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+	.account{
+		.amtheme-card-block{
+			.action{
+				font-size: 12px !important;
+				text-underline-position: from-font;
+				text-decoration: underline !important;
+				text-transform: unset !important;
+				font-weight: @font-weight__semibold !important;
+				margin: auto 0;
+			}
+		}
+	}
+}
+
+//.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl){
+//	.account{
+//		.page-main{
+//			margin-top: 40px;
+//		}
+//	}
+//}
+

@@ -1,0 +1,60 @@
+<?php
+/**
+ * @var \Ecommage\SliderCollection\Block\Widget\SliderCollection $block
+ */
+?>
+<?php
+$sliders = $block->getCollection();
+?>
+<?php if(count($sliders)) :?>
+    <div class="collection-section ">
+        <ul class="amtheme-images-carousel amtheme-slick-slider slider-collection"
+            data-mage-init='{"slickSlider":{
+        "sliderOptions": {
+            "slidesToShow": 1,
+            "slidesToScroll": 1,
+            "infinite": true,
+            "dots": true,
+            "arrows": false,
+            "appendArrows":".nav-slider",
+            "speed":1500,
+            "autoplay":true,
+            "autoplaySpeed":3000
+        }
+    }}'>
+            <?php foreach ($sliders as $slider): ?>
+                <li class="amtheme-slide slider-collection">
+                    <div class="container">
+                        <div class="slider-content__wrap">
+                            <div class="slider-left">
+                                <div class="slider-left__detail">
+                                    <p class="title-silder"><?= $block->escapeHtmlAttr($slider['title']) ?></p>
+                                    <?php if($slider['subtitle']):?>
+                                        <p class="subtitle-silder"><?= $block->escapeHtmlAttr($slider['subtitle']) ?></p>
+                                    <?php endif; ?>
+                                    <p class="collection-des"><?= $block->escapeHtmlAttr($slider['description']) ?></p>
+
+                                    <a class="view-detail" href="<?= $block->escapeUrl($slider['url_link']) ?>">
+                                        <?= $block->escapeHtmlAttr($slider['text_link']) ?>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="watch-image">
+                                <img class="amtheme-image slider-collection"
+                                     src="<?= $block->escapeUrl($block->getImage($slider['image_watch'])) ?>"
+                                     alt="<?= $block->escapeHtmlAttr($slider['title']) ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-right">
+                        <img class="amtheme-image slider-collection"
+                             src="<?= $block->escapeUrl($block->getImage($slider['image'])) ?>"
+                             alt="<?= $block->escapeHtmlAttr($slider['title']) ?>">
+                    </div>
+                </li>
+            <?php endforeach; ?>
+
+        </ul>
+        <div class="nav-slider">&nbsp;</div>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="sales_email_cancel_order_template" label="Cancel Order" file="cancel_order.html" type="html" module="Ecommage_CustomSales" area="frontend"/>
+    <template id="sales_email_cancel_order_guest_template" label="Cancel Order for Guest" file="cancel_order_guest.html" type="html" module="Ecommage_CustomSales" area="frontend"/>
+</config>

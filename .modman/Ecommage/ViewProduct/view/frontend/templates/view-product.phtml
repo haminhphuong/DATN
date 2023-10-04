@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var $block \Magento\Catalog\Block\Product\AbstractProduct;
+ * @var $helper = $this->helper('Ecommage\ViewProduct\Helper\Data')
+ */
+?>
+<?php
+$_product = $block->getProduct();
+$helper = $this->helper('Ecommage\ViewProduct\Helper\Data');// @codingStandardsIgnoreLine
+?>
+
+<?php if($helper->getProductCount($_product->getId())) : ?>
+    <div class="product-info-social-wrap">
+        <div class="viewProduct" title="<?= $block->escapeHtmlAttr(__('Views')) ?>">
+            <span>
+                <?= $block->escapeHtml(__($helper->getProductCount($_product->getId()) . ' ' . $block->escapeHtmlAttr(__(' Views')))) ?>
+            </span>
+        </div>
+        <div class="social-container" title="<?= $block->escapeHtmlAttr(__('Share Facebook')) ?>">
+            <a class="social-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= /** @noEscape */ urlencode($_product->getProductUrl());?>&t=<?= /** @noEscape */ urlencode($_product->getName())?>">
+                <span class="label-share">
+                    <?= $block->escapeHtmlAttr(__('Share')) ?>
+                </span>
+            </a>
+        </div>
+    </div>
+<?php endif; ?>

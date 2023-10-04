@@ -1,0 +1,28 @@
+{
+  "name": "ecommage/module-banner-manage",
+  "description": "banner module for magento 2 with different versions for each jquery slider library\n\n",
+  "require": {
+    "php": "~5.5.22|~5.6.0|~7.0.0"
+  },
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Nguyen Van Thanh",
+      "email": "thanhext@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "files": [
+        "registration.php"
+    ],
+    "psr-4": {
+      "Ecommage\\BannerManager\\": ""
+    }
+  }
+}

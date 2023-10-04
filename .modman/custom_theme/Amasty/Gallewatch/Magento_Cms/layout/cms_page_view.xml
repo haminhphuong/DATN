@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="css/views/cms-pages.css" />
+    </head>
+    <body>
+        <referenceContainer name="root">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="page.compare.link.sticky"
+                   template="Magento_Catalog::product/compare/sticky-link.phtml" >
+                <arguments>
+                    <argument name="sticky_header_view_model" xsi:type="object">Amasty\JetTheme\ViewModel\StickyHeaderViewModel</argument>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="compareProducts" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Catalog/js/view/compare-products</item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * @var $block      \Magento\Catalog\Block\Product\View\AbstractView
+ * @var $helper     \Ecommage\ViewProduct\Helper\Data
+ * @var $escaper    \Magento\Framework\Escaper
+ * @var $label      \Amasty\Label\Api\Data\LabelInterface
+ */
+
+?>
+<?php
+$_product = $block->getProduct();
+$helper = $this->Helper(\Ecommage\ViewProduct\Helper\Data::class); //@codingStandardsIgnoreLine
+$label = $helper->getLabelProductPage($_product);
+$helperCatalog = $this->helper(\Ecommage\CustomCatalog\Helper\Data::class); // @codingStandardsIgnoreLine
+$qtyAndStock = $helperCatalog->checkQtyAndStockOptionProduct($_product);
+?>
+
+<?php if ($block->displayProductStockStatus()) :?>
+    <?php if ($_product->isAvailable() && $qtyAndStock):?>
+        <div class="stock available" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
+            <span><?= $block->escapeHtml(__('In stock')) ?></span>
+        </div>
+    <?php else: ?>
+        <div class="stock unavailable" title="<?= $block->escapeHtmlAttr(__('Contact Price')) ?>">
+            <span><?= $block->escapeHtml(__('Contact Price')) ?></span>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+
+<?php if($label): ?>
+    <div class="amlabel-wrapper">
+        <div class="amlabel-item">
+            <?= /* @noEscape */ $label;?>
+        </div>
+    </div>
+<?php endif; ?>

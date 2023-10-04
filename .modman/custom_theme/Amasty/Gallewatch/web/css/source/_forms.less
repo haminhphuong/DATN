@@ -1,0 +1,664 @@
+//
+//  Forms styles
+//  _____________________________________________
+
+//
+//  Helpers
+//  ---------------------------------------------
+._am-form-divider {
+    > .fieldset:not(:first-of-type) {
+        margin-top: @form__gap__m;
+        padding-top: @form__gap__l;
+        border-top: @amtheme__border;
+    }
+}
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    input[type='checkbox'],
+    input[type='radio'] {
+        & {
+            .am-visually-hidden;
+
+            position: absolute;
+        }
+
+        & + label,
+        label > & + span:first-of-type {
+            .am-word-break;
+
+            position: relative;
+            display: block;
+            .am-padding(0 0 0 @form-element-choice__padding-left);
+            min-height: @form-element-choice__height;
+            line-height: @form-element-choice__line-height;
+            cursor: pointer;
+        }
+
+        & + label:before,
+        & + label:after,
+        label > & + span:first-of-type:before,
+        label > & + span:first-of-type:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-block;
+            box-sizing: border-box;
+            margin: 2px 0;
+            width: @form-element-choice__width;
+            height: @form-element-choice__height;
+            content: '';
+        }
+
+        & + label:before,
+        label > & + span:first-of-type:before {
+            border: @form-element-choice__border;
+            background: @form-element-choice__background;
+        }
+
+        & + label:after,
+        label > & + span:first-of-type:after {
+            content: none;
+        }
+
+        & + label:hover:before,
+        &:checked + label:before,
+        label > & + span:first-of-type:hover:before,
+        label > &:checked + span:first-of-type:before {
+            border-color: @color-main;
+        }
+
+        &:checked + label:after,
+        label > &:checked + span:first-of-type:after {
+            content: '';
+        }
+
+        &:focus + label:before,
+        label > &:focus + span:first-of-type:before {
+            ._keyfocus &,
+            & {
+                border-color: @color-main;
+            }
+        }
+
+        &:not(:checked).mage-error + label:before,
+        label > &:not(:checked).mage-error + span:first-of-type:before {
+            border-color: @form__color__error;
+        }
+    }
+
+    input[type='checkbox'] {
+        & + label:before,
+        & + label:after,
+        label > & + span:first-of-type:before,
+        label > & + span:first-of-type:after {
+            border-radius: @form-element-checkbox__border-radius;
+        }
+
+        & + label:after,
+        label > & + span:first-of-type:after {
+            background: @color-main @form-element-checkbox__checked__background-image center/@form-element-checkbox-icon__height no-repeat;
+        }
+    }
+
+    input[type='radio'] {
+        & + label:before,
+        & + label:after,
+        label > & + span:first-of-type:before,
+        label > & + span:first-of-type:after {
+            border-radius: 50%;
+        }
+
+        & + label:after,
+        label > & + span:first-of-type:after {
+            top: @form-element-radio-after__active__top;
+            left: @form-element-radio-after__active__left;
+            width: @form-element-radio-after__active__width;
+            height: @form-element-radio-after__active__height;
+        }
+
+        &:checked + label:before,
+        label > &:checked + span:first-of-type:before {
+            background: @form-element-radio-before__active__left;
+        }
+
+        &:checked + label:after,
+        label > &:checked + span:first-of-type:after {
+            background: @form-element-radio-after__active__background;
+        }
+    }
+
+    input[type='text'],
+    input[type='password'],
+    input[type='url'],
+    input[type='tel'],
+    input[type='search'],
+    input[type='number'],
+    input[type='datetime'],
+    input[type='email'],
+    textarea,
+    select {
+        & {
+            .amtheme-input-placeholder(
+                @_input-placeholder-color: @color-galle-gray1,
+                @_input-placeholder-font-size: 1.2rem
+            );
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+
+            display: block;
+            padding: @form-element-input__padding;
+            height: @form-element-input__height;
+            border: @amtheme__border;
+            border-radius: @form-element-input__border-radius;
+            background: @form-element-input__background;
+            color: @amtheme__text-primary__color;
+            font-style: @font-style__base;
+        }
+
+        &::-ms-clear {
+            display: none;
+        }
+
+        &:not([disabled]):focus,
+        &:not([disabled]):active {
+            .amtheme-input-placeholder(
+                @_input-placeholder-color: @amtheme__border__color,
+                @_input-placeholder-font-size: 1.4rem
+            );
+
+            border-color: @amtheme__border__active__color;
+            box-shadow: none;
+        }
+
+        &.mage-error {
+            border-color: @form__color__error;
+        }
+    }
+
+    textarea {
+        min-height: @form-element-input__height;
+        height: auto;
+    }
+
+    select {
+        & {
+            .lib-vendor-prefix-appearance();
+
+            padding: @form-element-input-select__padding;
+            background: @form-element-input-select__background;
+            background-color: @form-element-input__background;
+            // background-position: calc(~'100% - @{indent__sm}') 50%;
+            color: @amtheme__text-primary__color;
+            cursor: pointer;
+        }
+
+        &::-ms-expand {
+            display: none;
+        }
+    }
+
+    form {
+        fieldset {
+            margin: 0;
+            padding: 0;
+            min-width: 0; // fieldset max-width 100% fix
+            border: none;
+        }
+
+        legend {
+            display: none;
+        }
+
+        .field {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            z-index: 1;
+            &:not(:last-child){
+                margin-bottom: @form__gap__m;
+            }
+            &.field-hidden{
+                height: 0;
+            }
+        }
+
+        .field.choice {
+            margin-bottom: 0;
+        }
+
+        // Override Magento
+        .field.choice .field-tooltip {
+            top: 0;
+            transform: translateY(0);
+        }
+        // (END) Override Magento
+
+        .control {
+            width: 100%;
+        }
+
+        .control > .nested:not(.options-list) {
+            margin-top: @form__gap__m;
+        }
+
+        .nested .field:last-of-type {
+            margin-bottom: 0;
+        }
+
+        label.label {
+            display: inline-block;
+            margin-bottom: @indent__s;
+        }
+
+        div.mage-error[generated] {
+            order: 3;
+            margin: @indent__xs 0 0;
+            text-align: left;
+        }
+
+        .note {
+            margin: 10px 0 0;
+            color: @amtheme__text-secondary__color;
+            letter-spacing: @letter-spacing__base;
+            font-size: 1.4rem;
+        }
+
+        .note.mage-error > .character-counter {
+            color: @form__color__error;
+        }
+
+        .label > .label-addon {
+            .am-text-uppercase;
+
+            color: @color-gray;
+            vertical-align: text-top;
+        }
+    }
+
+    .field-error {
+        margin: @indent__xs 0 0;
+        color: @color-red-error;
+        letter-spacing: @letter-spacing__base;
+        font-size: 1.2rem;
+        font-weight: @font-weight__medium;
+    }
+
+    .fieldset-product-options-inner {
+        & {
+            max-width: 100%;
+        }
+
+        .control {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .datetime-picker {
+            & {
+                margin-bottom: 5px;
+            }
+
+            &:nth-of-type(3n) {
+                .am-margin-right(5px);
+            }
+
+            & + .mage-error {
+                display: none !important; // Override magento
+            }
+        }
+
+        input[name^='validate_datetime_'] + .mage-error {
+            width: 100%;
+        }
+    }
+
+    .field.required:not(.choice) > label:after,
+    .field._required:not(.choice) > label:after,
+    .fieldset > p.required {
+        color: @amtheme__error-text__color;
+        text-align: right;
+    }
+
+    .field {
+        &.file .control {
+            position: relative;
+        }
+
+        &.required:not(.choice) > label:after,
+        &._required:not(.choice) > label:after {
+            content: '*';
+            vertical-align: top;
+            font-size: 1.3rem;
+        }
+    }
+
+    .field.choice {
+        & {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        &.required,
+        &._required {
+            &:after {
+                .am-margin-left(2px);
+                color: @amtheme__error-text__color;
+                content: '*';
+                vertical-align: top;
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    .amtheme-select,
+    .amtheme-select[multiple],
+    .amtheme-file {
+        .am-visually-hidden;
+
+        min-height: 0;
+    }
+
+    .field.file {
+        .amtheme-file {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .control {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .action.outline {
+            display: inline-flex;
+            align-items: center;
+            .am-margin(0 15px 0 0);
+            padding: 10px 15px;
+            height: 40px;
+            border-radius: @button__border-radius;
+            letter-spacing: @letter-spacing__base;
+            font-size: 1.6rem;
+        }
+
+        .action > .amtheme-icon {
+            width: 20px;
+            height: 20px;
+            fill: @button-outline__color;
+        }
+    }
+
+    .amtheme-file-output {
+        & {
+            .am-word-break;
+
+            display: inline-flex;
+            align-items: center;
+            margin: 8px 0 0;
+            color: @amtheme__text-secondary__color;
+            font-weight: @font-weight__bold;
+        }
+
+        > .-has-content + .amtheme-clear-input {
+            display: inline-flex;
+            .am-margin(0 0 0 10px);
+        }
+
+        > .amtheme-nofile {
+            font-weight: @font-weight__regular;
+        }
+    }
+
+    .amtheme-clear-input {
+        & {
+            display: none;
+        }
+
+        > .amtheme-icon {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    .field.date > .control {
+        position: relative;
+    }
+
+    ._has-datepicker {
+        ~ .ui-datepicker-trigger {
+            & {
+                .lib-button-reset();
+
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: @form-element-datepicker__size;
+                height: @form-element-datepicker__size;
+                background: @form-element-datepicker__trigger__background;
+                opacity: .7;
+                transition: opacity @amtheme__transition__fast__delay @amtheme__transition__func;
+            }
+
+            &:hover {
+                background: @form-element-datepicker__trigger__background;
+                opacity: 1;
+            }
+
+            &:focus {
+                outline: 0;
+                background: @form-element-datepicker__trigger__background;
+                box-shadow: none;
+            }
+        }
+
+        &:focus ~ .ui-datepicker-trigger {
+            opacity: 1;
+        }
+
+        ~ .ui-datepicker-trigger > span {
+            display: none;
+        }
+    }
+
+    .field.choice.-as-link {
+        input:focus + label {
+            color: @link__hover__color;
+        }
+
+        label {
+            & {
+                .am-text-uppercase;
+
+                margin: 0;
+                padding: 0;
+                color: @link__color;
+                transition: color @amtheme__transition;
+            }
+
+            &:hover,
+            &:active {
+                color: @link__hover__color;
+            }
+
+            &:before,
+            &:after {
+                display: none;
+            }
+        }
+    }
+
+    form .fields.-am-block {
+        & {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -@layout__width-m-indent;
+            padding: 20px @layout__width-m-indent;
+            background: @amtheme__background-secondary__color;
+        }
+
+        .field {
+            & {
+                width: 100%;
+            }
+
+            &:not(:last-of-type) {
+                margin-bottom: 20px;
+            }
+        }
+
+        .label {
+            & {
+                margin: 0;
+            }
+
+            &:before {
+                background: @amtheme__background-primary__color;
+            }
+        }
+    }
+
+    form .fields.range {
+        & {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        > .field {
+            margin: 0;
+            max-width: calc(~'50% - @{form-range-divider__width} / 2 - @{form-range-divider__gap}');
+            width: 100%;
+        }
+
+        > .field:first-of-type > .control {
+            position: relative;
+        }
+
+        > .field:first-of-type > .control:after {
+            position: absolute;
+            top: calc(~'@{form-element-input__height} / 2 - @{form-range-divider__height} / 2');
+            left: calc(~'100% + @{form-range-divider__gap}');
+            display: block;
+            width: @form-range-divider__width;
+            height: @form-range-divider__height;
+            background: @amtheme__border__color;
+            content: '';
+        }
+    }
+
+    .fieldset-product-options-inner {
+        > .legend {
+            & {
+                &:extend(form label.label);
+
+                display: block;
+                padding: 0;
+            }
+
+            .ie11 & {
+                max-width: 100%;
+            }
+        }
+
+        .price-notice {
+            .am-padding-left(5px);
+        }
+
+        &.required > .legend {
+            & {
+                position: relative;
+            }
+
+            &:after {
+                &:extend(.field.required:not(.choice) > label:after);
+            }
+        }
+    }
+
+    .label,
+    .legend {
+        .price-notice {
+            display: inline-flex;
+            align-items: center;
+            line-height: 2.5rem;
+        }
+
+        .price-including-tax + .price-excluding-tax .price {
+            .am-margin-right(0);
+        }
+    }
+
+    /* Change Autocomplete styles in Chrome */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        -webkit-text-fill-color: contrast(@amtheme__background-primary__color);
+        -webkit-box-shadow: 0 0 0 1000px rgba(232, 240, 254, .32) inset; // Standard google autofill background with opacity
+        transition: background-color 5000s ease-in-out 0s;
+    }
+}
+
+//
+//  Tablet -
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+    form .fields.-double {
+        &:not(.-block) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        &:not(.-block) > .field {
+            max-width: calc(~'50% - @{form__gap__m} / 2');
+            width: 100%;
+        }
+
+        > .field.fullname {
+            margin: 0;
+            max-width: 100%;
+        }
+    }
+
+    .fieldset.fieldset-fullname > .fields {
+        &:extend(form .fields.-double all);
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    form .fields.-am-block {
+        & {
+            align-items: flex-start;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            margin: 0;
+            padding: 20px;
+            border-radius: @amtheme__border-radius__s;
+        }
+
+        .message,
+        .field:nth-of-type(n) {
+            margin: 0;
+            width: auto;
+        }
+    }
+}

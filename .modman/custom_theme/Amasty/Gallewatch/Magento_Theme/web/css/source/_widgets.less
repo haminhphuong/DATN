@@ -1,0 +1,167 @@
+//
+//  Variables
+//  _____________________________________________
+
+@amtheme-small-circle-icon__size: 34px;
+@amtheme-small-split-icon__size: 68px;
+@amtheme-small-icon__size: calc(~'@{amtheme-small-circle-icon__size} / 1.5');
+@amtheme-widgets-grid-item__margin: 0 calc(~'@{indent__m} / 2') @indent__sm;
+
+//
+//  Amasty Tabs Widget
+//  --------------------------------------------
+
+@am-tabs-widget__buttons-active-background: @amtheme__secondary__color;
+@am-tabs-widget__buttons-hover-background: fade(lighten(@am-tabs-widget__buttons-active-background, 13%), 20%);
+
+//
+//  Default Widgets styles
+//  ---------------------------------------------
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+     .block.am-widget {
+        & {
+            margin: 40px auto 0;
+        }
+        .product-item-photo {
+            max-width: 100%;
+        }
+        .product.item.product-item {
+            max-width: 100%;
+        }
+    }
+
+    .am-widget .details .product-details-action,
+    .widget .details .product-details-action {
+        & {
+            margin-top: auto;
+        }
+
+        &,
+        .amtheme-icon-wrapper {
+            &:extend(.am-widget.block-new-products.list .product-item-actions all);
+        }
+
+        .price-box .price-container {
+            .am-padding-right(@indent__s);
+        }
+
+        .amtheme-circle-icon {
+            & {
+                width: @amtheme-small-circle-icon__size;
+                height: @amtheme-small-circle-icon__size;
+            }
+
+            &:not(:last-child) {
+                .am-margin-right(@indent__xs);
+            }
+        }
+
+        .amtheme-icon {
+            width: @amtheme-small-icon__size;
+            height: @amtheme-small-icon__size;
+        }
+    }
+     .page-with-filter.-filter-inactive .am-widget {
+        .grid .products .product.item:nth-child(n),
+        .products-grid .products .product.item:nth-child(n) {
+            margin: @amtheme-widgets-grid-item__margin;
+        }
+    }
+}
+
+//
+//  Mobile
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .block.am-widget .list .items .item.product-item:nth-child(n),
+    .block.am-widget .grid .items .item.product-item:nth-child(n),
+    .block.am-widget .products-grid .items .item.product-item:nth-child(n) {
+        padding: 0 5px;
+        margin: 0 0 15px 0;
+        width: 50%;
+    }
+
+    .block.widget.block-products-list .products-grid.grid {
+        .product-item-photo {
+            width: 100%;
+        }
+
+        .product-item-photo .product-image-container {
+            margin: auto;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block.am-widget {
+        & {
+            margin: 20px auto 0;
+        }
+
+        .product .product-item-info {
+            padding: 0;
+        }
+
+        .product .product-item-photo {
+            padding: 0;
+            max-width: 100%;
+            width: 100%;
+            background:@color-white;
+        }
+
+        .swatch-wrapper {
+            display: block;
+        }
+    }
+
+    .block.am-widget .grid .product-item {
+        background: transparent;
+    }
+}
+
+//
+//  Tablet
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .content-heading .title {
+        line-height: 1;
+    }
+    .block.am-widget {
+        & {
+           margin: 20px auto 0;
+        }
+        &:not(.list) .action.tocart,
+        &:not(.list) .stock {
+            display: block;
+            font-size: 1.6rem;
+            opacity: 0;
+            transition: opacity @amtheme__transition;
+        }
+
+        &.list .item.product.product-item {
+            width: 100%;
+        }
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .block.am-widget.list .products .item.product.product-item {
+        width: 100%;
+    }
+    .block.am-widget{
+        & {
+           margin: 40px auto 0;
+        }
+    }
+}

@@ -1,0 +1,171 @@
+& when (@media-common = true) {
+    .homepage__tabs-pro{
+        margin-top: 15px;
+
+        .tabspro-ajax-loading{
+            .tabspro-fade-loading{
+                i{
+                    background: none repeat scroll 0 0 @color-white;
+                }
+            }
+        }
+
+        .tabspro-tabs-nav{
+            text-align: center;
+
+            .item.title{
+                font-weight: @semibold;
+                
+                &:first-child{
+                    margin-left: 0;
+                }
+
+                &:last-child{
+                    margin-right: 0;
+                }
+            }
+        }
+
+        .tabspro-tabs-content{
+            .product-item{
+                background: @color-main;
+
+                .product-item-info{
+                    background: transparent;
+
+                    a:hover{
+                        color: @color-white;
+                    }
+                }
+
+                .product-item-link{
+                    color: @color-white;
+                }
+
+                .special-price,
+                .old-price{
+                    .price-label{
+                        color: @color-white;        
+                    }
+                    .price{
+                        color: @color-white;
+                    }
+                }
+
+                .product-contact{
+                    color: @color-white;
+                }
+
+                .action.primary{
+                    background: @color-white;
+                    color: @color-main;
+                    border: 1px solid @color-white;
+
+                    &:hover{
+                        background: @color-main;
+                        color: @color-white;
+                    }
+                }
+            }
+        }
+
+        .old-price{
+            .price-container{
+                &::after{
+                    background: @color-white;
+                }
+            }
+        }
+
+        .product-item{
+            .product-item-info{
+                .product-item-actions{
+                    .action.primary.buynow{
+                        span > a{
+                            color: @color-main !important;
+                        }
+
+                        &:hover{
+                            span > a{
+                                color: @color-white !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }  
+    }
+
+    .tabspro-tabs-nav{
+        .item.title{
+            border-radius: 0;
+            border: 0.8px solid @color-white;
+            background: @color-white;
+            color: @color-main;
+
+            &.active{
+                background: @color-main;
+                color: @color-white;
+            }
+
+            a{
+                padding: 7px 15px;
+            }
+        }
+    }
+
+    .tabspro-tabs-content{
+        .product-item{
+            .price-box{
+                .price-container{
+                    .price{
+                        color: @color-white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+& when (@media-target ='mobile'), (@media-target ='all') {
+    @media only screen and (max-width:(@screen__m)) {
+    }
+
+    @media only screen and (max-width:(1024px)) {
+    }
+}
+
+& when (@media-target ='desktop'), (@media-target ='all') {
+    @media only screen and (min-width:(@screen__m)) {
+        .tabspro-tabs-nav{
+            .item.title{
+                font-size: 14px;
+                line-height: 14px;
+            }
+        }
+    }
+
+    @media only screen and (min-width:(1024px)) {
+        .homepage__tabs-pro{
+            margin-top: 27px;
+
+            .tabspro-tabs-nav{
+                .item.title{
+                    margin: 0 13px;
+                }
+            }
+        }
+
+        .tabspro-tabs-nav{
+            .item.title{
+                a{
+                    padding: 13px 30px;
+                }
+            }
+        } 
+    }
+
+    @media only screen and (min-width:(1280px)) {
+
+    }
+}

@@ -1,0 +1,155 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Ecommage\BookingViewProduct\Helper\Data $helper */
+$helper = $this->helper('Ecommage\BookingViewProduct\Helper\Data'); // @codingStandardsIgnoreLine
+$helperLocation = $this->helper('Ecommage\CustomStoreLocation\Helper\Data'); // @codingStandardsIgnoreLine
+$locationCollection = $helperLocation->createLocation();
+$product = $helper->getCurrentProduct();
+?>
+<button class="action primary button-booking"><span><?= $block->escapeHtml(__('Booking')) ?></span></button>
+<div id="modal-booking" class="modal-booking-wrapper modal-hideon-loading">
+    <div class="modal-body-content">
+        <img class="modal-logo" alt="<?= $block->escapeHtml(__('logo image')) ?>"  src="<?= $block->escapeUrl($block->getViewFileUrl("images/logo.svg")) ?>" />
+        <form action="<?= $block->escapeUrl('booking/booking/bookingProduct') ?>" id="form-validate-download"
+              method="post" class="form-default-gw form-booking-product" enctype="multipart/form-data"
+              data-mage-init='{"validation":{}}'
+              data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+
+            <fieldset class="fieldset formRow">
+                <div class="field require first">
+                    <label for="fullname" class="label formRow--input-wrapper js-inputWrapper">
+                        <input class="formRow--input js-input" type="text" name="name" id="fullname"
+                               data-validate="{required:true}" aria-required="true"
+                               placeholder="<?= $block->escapeHtml(__('Full name:')) ?>" />
+                    </label>
+                </div>
+                <div class="field">
+                    <label for="email" class="label formRow--input-wrapper js-inputWrapper">
+                        <input class="formRow--input js-input" type="email" name="email"
+                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="email" aria-required="true"
+                               placeholder="<?= $block->escapeHtml(__('Email:')) ?>" />
+                    </label>
+                </div>
+                <div class="field require">
+                    <label for="contactphone" class="label formRow--input-wrapper js-inputWrapper">
+                        <input class="formRow--input js-input" type="number" pattern="[0-9]{10}" name="telephone"
+                               id="contactphone" data-validate="{required:true}" aria-required="true"
+                               placeholder="<?= $block->escapeHtml(__('Contact phone:')) ?>" />
+                    </label>
+                </div>
+                <div class="field require">
+                    <label for="time" class="label formRow--input-wrapper js-inputWrapper">
+                        <input class="formRow--input js-input" type="text" name="time" id="time"
+                               data-validate="{required:true}" aria-required="true"
+                               placeholder="<?= $block->escapeHtml(__('Time:')) ?>" />
+                    </label>
+                </div>
+                <script>
+                    require([
+                        'jquery',
+                        'mage/translate',
+                        'mage/calendar'
+                    ], function($, $t) {
+                        $('#time').calendar({
+                            changeMonth: true,
+                            changeYear: true,
+                            minDate: new Date(),
+                            dateFormat: 'yy-mm-dd',
+                            showButtonPanel: true,
+                            hideIfNoPrevNext: true,
+                            currentText: $t('Go Today'),
+                            closeText: $t('Close'),
+                            showWeek: false,
+                            showOn: "both",
+                            showsTime: true
+                        });
+                    })
+                </script>
+
+                <div class="field require">
+                    <label for="showroom" class="label formRow--input-wrapper js-inputWrapper">
+                        <select class="formRow--input js-input formRow--select" name="location_id"
+                                placeholder="<?= $block->escapeHtml(__('Showroom')) ?>">
+                            <?php $options = $helperLocation->getFilterbyProduct($locationCollection,$product->getId());?>
+                            <?php if (count($options) > 0) : ?>
+                                <?php foreach ($options as $option) : ?>
+                                    <option value="<?= $block->escapeHtmlAttr($option->getId()) ?>">
+                                        <?= $block->escapeHtml(__($option->getName())) ?></option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                    </label>
+                </div>
+                <div class="field require">
+                    <label for="chooseoption" class="label formRow--input-wrapper js-inputWrapper">
+                        <select class="formRow--input js-input formRow--select" name="booking_type"
+                                placeholder="<?= $block->escapeHtml(__('Choose a option')) ?>">
+                            <option value="0"><?= $block->escapeHtml(__('See in store')) ?></option>
+                            <option value="1"><?= $block->escapeHtml(__('Online consultation')) ?></option>
+                        </select>
+                    </label>
+                </div>
+                <div class="field">
+                    <label for="notes" class="label formRow--input-wrapper js-inputWrapper">
+                        <textarea class="formRow--input js-input" id="notes" name="notes"
+                                  placeholder="<?= $block->escapeHtml(__('Notes:')) ?>"></textarea>
+                    </label>
+                </div>
+                <div class="field field-hidden">
+                    <label for="product_id" class="label">
+                        <input class="" type="hidden" name="product_id" id="product_id"
+                               value="<?= $block->escapeHtml($helper->getCurrentProduct()->getId()); ?>"
+                               placeholder="<?= $block->escapeHtml(__('')) ?>" />
+                    </label>
+                </div>
+            </fieldset>
+            <div class="action-form">
+                <button class="action primary booking-now"><?= $block->escapeHtml(__('Booking now')) ?></button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/modal"
+    ], function($, modal) {
+        // Animate Form
+        var $inputItem = $(".js-inputWrapper");
+        $inputItem.length && $inputItem.each(function() {
+            var $this = $(this),
+                $input = $this.find(".formRow--input"),
+                placeholderTxt = $input.attr("placeholder"),
+                $placeholder;
+
+            $input.after('<span class="placeholder">' + placeholderTxt + "</span>"),
+                $input.attr("placeholder", ""),
+                $placeholder = $this.find(".placeholder"),
+
+                $input.val() ? $this.addClass("active") : $this.removeClass("active"),
+
+                $input.on("focusout", function() {
+                    $input.val() ? $this.addClass("active") : $this.removeClass("active");
+                }).on("focus", function() {
+                    $this.addClass("active");
+                });
+        });
+
+        var options = {
+            type: 'popup',
+            responsive: true,
+            modalClass: 'modal-default-gw booking-form-modal',
+            buttons: []
+        };
+        var popup = modal(options, $('#modal-booking'));
+        $(".button-booking").click(function() {
+            $('#modal-booking').modal('openModal');
+            $('.page-header').css('z-index', '888');
+        });
+    });
+</script>
